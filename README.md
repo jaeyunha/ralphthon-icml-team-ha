@@ -60,6 +60,16 @@ sac, pc, validators/*), `shared/` (common policy + rubric), `packages/`
 (contracts, schemas, db), `scripts/`, `runs/`, `migrations/`, `tests/`.
 Bun workspaces; Python via uv for science tooling.
 
+## Local validation
+
+Install the workspace dependencies and run the test suite from the repository
+root:
+
+```bash
+bun install
+bun test
+```
+
 ## Prior work
 
 - Full V2 implementation: git tag `v2-archive`.
