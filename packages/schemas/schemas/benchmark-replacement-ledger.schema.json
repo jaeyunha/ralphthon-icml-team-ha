@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/benchmark-replacement-ledger.schema.json",
+  "title": "BenchmarkReplacementLedger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "campaign_id", "source_universe_hash", "allocations", "exhausted_slots", "allocation_hash"],
+  "properties": {
+    "version": {"const": 1},
+    "campaign_id": {"type": "string", "minLength": 1},
+    "source_universe_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "allocations": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["slot_id", "intended_forum_id", "replacement_forum_id", "stratum", "replacement_sort_hash", "consume_order"],
+        "properties": {
+          "slot_id": {"type": "string", "pattern": "^S[1-7]$"},
+          "intended_forum_id": {"type": "string", "minLength": 1},
+          "replacement_forum_id": {"type": "string", "minLength": 1},
+          "stratum": {"type": "string", "minLength": 1},
+          "replacement_sort_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+          "consume_order": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "exhausted_slots": {"type": "array", "items": {"type": "string", "pattern": "^S[1-7]$"}},
+    "allocation_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

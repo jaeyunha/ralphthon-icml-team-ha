@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/math-claim-inventory.schema.json",
+  "title": "MathematicalClaimInventory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "submission_id", "claims", "counts"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "submission_id": {"type": "string", "minLength": 1},
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "anchor_id", "statement"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^(?:CLAIM|EQ|THEOREM|THM|LEMMA)-[A-Za-z0-9][A-Za-z0-9._-]*$"},
+          "anchor_id": {"type": "string", "pattern": "^[A-Z][A-Z0-9_-]*$"},
+          "statement": {"type": "string", "minLength": 1},
+          "page": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claims", "equations", "theorems"],
+      "properties": {
+        "claims": {"type": "integer", "minimum": 0},
+        "equations": {"type": "integer", "minimum": 0},
+        "theorems": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/benchmark-broker-snapshot.schema.json",
+  "title": "BenchmarkBrokerSnapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["implementation_hash", "config_hash", "index_hash", "cutoff", "manifest_hash"],
+  "properties": {
+    "implementation_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "config_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "index_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "cutoff": {"const": "2026-01-28T23:59:59-12:00"},
+    "manifest_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

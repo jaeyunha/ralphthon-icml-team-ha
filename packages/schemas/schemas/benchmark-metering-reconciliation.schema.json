@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/benchmark-metering-reconciliation.schema.json",
+  "title": "BenchmarkMeteringReconciliation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ledger_totals", "total_tokens", "total_usd", "total_job_hours", "provider_record_hashes", "job_interval_hashes", "provider_reconciliation_hash", "job_reconciliation_hash", "cap_status", "reconciliation_hash"],
+  "properties": {
+    "ledger_totals": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["assignment", "tokens", "usd", "job_hours"],
+        "properties": {
+          "assignment": {"type": "string", "pattern": "^(paper:[^:]+:[^:]+:[^:]+|arm:[^:]+:reserve)$"},
+          "tokens": {"type": "integer", "minimum": 0},
+          "usd": {"type": "string", "pattern": "^[0-9]+(?:\\.[0-9]+)?$"},
+          "job_hours": {"type": "string", "pattern": "^[0-9]+(?:\\.[0-9]+)?$"}
+        }
+      }
+    },
+    "total_tokens": {"type": "integer", "minimum": 0},
+    "total_usd": {"type": "string", "pattern": "^[0-9]+(?:\\.[0-9]+)?$"},
+    "total_job_hours": {"type": "string", "pattern": "^[0-9]+(?:\\.[0-9]+)?$"},
+    "provider_record_hashes": {"type": "array", "items": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}},
+    "job_interval_hashes": {"type": "array", "items": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}},
+    "provider_reconciliation_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "job_reconciliation_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "cap_status": {"const": "within_caps"},
+    "reconciliation_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

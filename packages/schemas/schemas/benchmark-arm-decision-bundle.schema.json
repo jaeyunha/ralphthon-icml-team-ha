@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/benchmark-arm-decision-bundle.schema.json",
+  "title": "BenchmarkArmDecisionBundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "campaign_id", "arm_cohort_id", "pc_id", "status", "decisions", "sac_bundle_hash", "sac_action_history_ref", "paper_ledger_hashes", "runtime_evidence_roots", "reconciliation_roots", "finalized_at", "bundle_hash"],
+  "properties": {
+    "version": {"const": 1},
+    "campaign_id": {"type": "string", "minLength": 1},
+    "arm_cohort_id": {"type": "string", "minLength": 1},
+    "pc_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["finalized", "failed"]},
+    "decisions": {"type": "array", "minItems": 7, "maxItems": 7, "items": {"$ref": "benchmark-pc-decision.schema.json"}},
+    "sac_bundle_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "sac_action_history_ref": {"type": "string", "minLength": 1},
+    "paper_ledger_hashes": {"type": "array", "minItems": 7, "maxItems": 7, "items": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}},
+    "runtime_evidence_roots": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["broker_snapshot_hash", "runtime_packet_ledger_root"],
+      "properties": {
+        "broker_snapshot_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+        "runtime_packet_ledger_root": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+      }
+    },
+    "reconciliation_roots": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provenance", "custody", "metering"],
+      "properties": {
+        "provenance": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+        "custody": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+        "metering": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+      }
+    },
+    "finalized_at": {"type": "string", "format": "date-time"},
+    "bundle_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/calibration-official-review-v2.schema.json",
+  "title": "CalibrationOfficialReviewV2",
+  "description": "Additive calibration-profile V2 official review. Historical official-review v1 remains unchanged.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "profile_id", "reviewer_id", "summary", "strengths", "weaknesses", "scores", "overall_judgment", "key_questions", "limitations", "confidence", "ethical_concerns", "evidence_refs"],
+  "properties": {
+    "version": {"const": 2},
+    "profile_id": {"const": "v2"},
+    "reviewer_id": {"type": "string", "minLength": 1},
+    "summary": {"type": "string", "minLength": 1},
+    "strengths": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text", "anchors"],
+        "properties": {
+          "text": {"type": "string", "minLength": 1},
+          "anchors": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+        }
+      }
+    },
+    "weaknesses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "text", "severity", "affected_claims", "anchors"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "text": {"type": "string", "minLength": 1},
+          "severity": {"enum": ["minor", "major", "critical"]},
+          "affected_claims": {"type": "array", "items": {"type": "string"}},
+          "anchors": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+        }
+      }
+    },
+    "scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["soundness", "presentation", "significance", "originality", "overall"],
+      "properties": {
+        "soundness": {"type": "integer", "minimum": 1, "maximum": 4},
+        "presentation": {"type": "integer", "minimum": 1, "maximum": 4},
+        "significance": {"type": "integer", "minimum": 1, "maximum": 4},
+        "originality": {"type": "integer", "minimum": 1, "maximum": 4},
+        "overall": {"type": "integer", "minimum": 1, "maximum": 6}
+      }
+    },
+    "overall_judgment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["acceptance_case", "rejection_case", "dominant_case", "dominance_rationale", "significance_basis"],
+      "properties": {
+        "acceptance_case": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["text", "anchors"],
+          "properties": {
+            "text": {"type": "string", "minLength": 1},
+            "anchors": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+          }
+        },
+        "rejection_case": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["text", "anchors"],
+          "properties": {
+            "text": {"type": "string", "minLength": 1},
+            "anchors": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+          }
+        },
+        "dominant_case": {"enum": ["acceptance", "rejection"]},
+        "dominance_rationale": {"type": "string", "minLength": 1},
+        "significance_basis": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["text", "anchors"],
+          "properties": {
+            "text": {"type": "string", "minLength": 1},
+            "anchors": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+          }
+        }
+      }
+    },
+    "key_questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "question", "possible_score_impact"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "question": {"type": "string", "minLength": 1},
+          "possible_score_impact": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "limitations": {"type": "string"},
+    "confidence": {"type": "integer", "minimum": 1, "maximum": 5},
+    "ethical_concerns": {"type": "array", "items": {"type": "string"}},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}}
+  }
+}

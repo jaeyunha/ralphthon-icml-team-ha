@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/benchmark-pc-decision.schema.json",
+  "title": "BenchmarkPcDecision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "campaign_id", "arm_cohort_id", "paper_slot", "paper_id", "pc_id", "outcome", "reason", "evidence_refs", "meta_review_ref", "sac_ref", "terminal_failure_code", "unresolved_dissent", "finalized_at", "decision_hash"],
+  "properties": {
+    "version": {"const": 1},
+    "campaign_id": {"type": "string", "minLength": 1},
+    "arm_cohort_id": {"type": "string", "minLength": 1},
+    "paper_slot": {"type": "integer", "minimum": 1, "maximum": 7},
+    "paper_id": {"type": "string", "minLength": 1},
+    "pc_id": {"type": "string", "minLength": 1},
+    "outcome": {"enum": ["accept", "reject", "failed"]},
+    "reason": {"type": "string", "minLength": 1},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "meta_review_ref": {"type": ["string", "null"]},
+    "sac_ref": {"type": "string", "minLength": 1},
+    "terminal_failure_code": {"type": ["string", "null"]},
+    "unresolved_dissent": {"type": "array", "items": {"type": "string"}},
+    "finalized_at": {"type": "string", "format": "date-time"},
+    "decision_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"outcome": {"const": "failed"}}, "required": ["outcome"]},
+      "then": {"properties": {"terminal_failure_code": {"type": "string", "minLength": 1}, "meta_review_ref": {"type": "null"}}}
+    },
+    {
+      "if": {"properties": {"outcome": {"enum": ["accept", "reject"]}}, "required": ["outcome"]},
+      "then": {"properties": {"terminal_failure_code": {"type": "null"}, "meta_review_ref": {"type": "string", "minLength": 1}}}
+    }
+  ]
+}

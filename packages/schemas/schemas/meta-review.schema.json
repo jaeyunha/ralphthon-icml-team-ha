@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/meta-review.schema.json",
+  "title": "MetaReview",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "ac_id", "main_contribution", "agreed_strengths", "decisive_concerns", "rebuttal_effect", "remaining_issues", "reviewer_disagreement", "validation_evidence", "recommendation", "confidence", "constructive_next_steps", "evidence_refs", "published_at"],
+  "properties": {
+    "version": {"const": 1},
+    "ac_id": {"type": "string"},
+    "main_contribution": {"type": "string"},
+    "agreed_strengths": {"type": "array", "items": {"type": "string"}},
+    "decisive_concerns": {"type": "array", "items": {"type": "string"}},
+    "rebuttal_effect": {"type": "string"},
+    "remaining_issues": {"type": "array", "items": {"type": "string"}},
+    "reviewer_disagreement": {"type": "string"},
+    "validation_evidence": {"type": "string"},
+    "recommendation": {"enum": ["accept", "reject"]},
+    "confidence": {"type": "integer", "minimum": 1, "maximum": 5},
+    "constructive_next_steps": {"type": "array", "items": {"type": "string"}},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "published_at": {"type": "string", "format": "date-time"}
+  }
+}

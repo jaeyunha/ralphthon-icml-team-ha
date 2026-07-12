@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/official-review.schema.json",
+  "title": "OfficialReview",
+  "description": "Immutable official review version. The §25 example predates the explicit version field, so omitted version means version 1.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["reviewer_id", "summary", "strengths", "weaknesses", "scores", "key_questions", "limitations", "confidence", "ethical_concerns", "evidence_refs"],
+  "properties": {
+    "version": {"const": 1, "default": 1},
+    "reviewer_id": {"type": "string", "minLength": 1},
+    "summary": {"type": "string"},
+    "strengths": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["text", "anchors"], "properties": {"text": {"type": "string"}, "anchors": {"type": "array", "items": {"type": "string"}}}}},
+    "weaknesses": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["id", "text", "severity", "affected_claims", "anchors"], "properties": {"id": {"type": "string"}, "text": {"type": "string"}, "severity": {"enum": ["minor", "major", "critical"]}, "affected_claims": {"type": "array", "items": {"type": "string"}}, "anchors": {"type": "array", "items": {"type": "string"}}}}},
+    "scores": {"type": "object", "additionalProperties": false, "required": ["soundness", "presentation", "significance", "originality", "overall"], "properties": {"soundness": {"type": "integer", "minimum": 1, "maximum": 4}, "presentation": {"type": "integer", "minimum": 1, "maximum": 4}, "significance": {"type": "integer", "minimum": 1, "maximum": 4}, "originality": {"type": "integer", "minimum": 1, "maximum": 4}, "overall": {"type": "integer", "minimum": 1, "maximum": 6}}},
+    "key_questions": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["id", "question", "possible_score_impact"], "properties": {"id": {"type": "string"}, "question": {"type": "string"}, "possible_score_impact": {"type": "string"}}}},
+    "limitations": {"type": "string"},
+    "confidence": {"type": "integer", "minimum": 1, "maximum": 5},
+    "ethical_concerns": {"type": "array", "items": {"type": "string"}},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}}
+  }
+}

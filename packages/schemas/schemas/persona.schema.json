@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/persona.schema.json",
+  "title": "Persona",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["reviewer_id", "primary_expertise", "secondary_expertise", "familiarity", "likely_deep_dive_areas", "known_blind_spots", "confidence_policy", "decision_bias", "communication_style"],
+  "properties": {
+    "persona_version": {"const": 1},
+    "reviewer_id": {"type": "string", "minLength": 1},
+    "primary_expertise": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true},
+    "secondary_expertise": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "familiarity": {"type": "object", "additionalProperties": {"enum": ["none", "low", "medium", "high", "very_high"]}},
+    "likely_deep_dive_areas": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "known_blind_spots": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "confidence_policy": {"type": "string", "minLength": 1},
+    "decision_bias": {"const": "neutral"},
+    "communication_style": {"type": "string", "minLength": 1}
+  }
+}

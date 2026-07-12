@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/question-ledger.schema.json",
+  "title": "QuestionLedger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ledger_version", "reviewer_id", "questions"],
+  "properties": {
+    "ledger_version": {"type": "integer", "minimum": 1},
+    "reviewer_id": {"type": "string", "minLength": 1},
+    "questions": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["id", "question", "status", "possible_score_impact"], "properties": {"id": {"type": "string"}, "question": {"type": "string"}, "status": {"enum": ["open", "answered", "partially_answered", "unresolved", "withdrawn"]}, "possible_score_impact": {"type": "string"}, "answer_refs": {"type": "array", "items": {"type": "string"}}}}}
+  }
+}

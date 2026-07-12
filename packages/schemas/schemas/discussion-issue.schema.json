@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/discussion-issue.schema.json",
+  "title": "DiscussionIssue",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["issue_id", "topic", "status", "decisive", "ac_question", "expected_respondents", "positions", "resolution"],
+  "properties": {
+    "issue_id": {"type": "string"},
+    "topic": {"type": "string"},
+    "status": {"enum": ["open", "closed", "irreducibly_disputed"]},
+    "decisive": {"type": "boolean"},
+    "ac_question": {"type": "string"},
+    "expected_respondents": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "positions": {"type": "array", "items": {"type": "object"}},
+    "resolution": {"type": ["string", "null"]}
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/literature-registry.schema.json",
+  "title": "LiteratureRegistry",
+  "description": "Persistent role-level registry of brokered literature queries and their verified results.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "agent_id", "version", "entries"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "agent_id": {"type": "string", "minLength": 1},
+    "version": {"type": "integer", "minimum": 1},
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["query_id", "query", "status", "results"],
+        "properties": {
+          "query_id": {"type": "string", "minLength": 1},
+          "query": {"type": "string", "minLength": 1},
+          "reason": {"type": "string", "minLength": 1},
+          "status": {"enum": ["pending", "running", "completed", "failed"]},
+          "requested_at": {"type": "string", "format": "date-time"},
+          "completed_at": {"type": ["string", "null"], "format": "date-time"},
+          "failure_reason": {"type": ["string", "null"]},
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["source_id", "title", "canonical_uri"],
+              "properties": {
+                "source_id": {"type": "string", "minLength": 1},
+                "title": {"type": "string", "minLength": 1},
+                "canonical_uri": {"type": "string", "minLength": 1},
+                "first_public_date": {"type": "string", "format": "date"},
+                "content_hash": {"type": ["string", "null"], "pattern": "^sha256:[a-f0-9]{64}$"},
+                "admissibility": {"enum": ["admissible_prior_work", "admissible_background", "inadmissible_post_cutoff", "quarantined_target_duplicate", "unverified"]},
+                "verification_status": {"enum": ["metadata_only", "abstract_checked", "full_text_checked", "source_inaccessible"]},
+                "evidence_packet_path": {"type": ["string", "null"]}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

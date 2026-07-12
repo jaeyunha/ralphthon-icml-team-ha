@@ -1,0 +1,18 @@
+{
+  "name": "@ralph-review/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "check": "bun test && tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.18",
+    "typescript": "^5.9.2"
+  }
+}

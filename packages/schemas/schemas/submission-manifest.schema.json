@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/submission-manifest.schema.json",
+  "title": "SubmissionManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["submission_id", "title", "venue", "year", "track", "authors_visible", "paper_path", "supplement_paths", "repository", "review_mode", "consent_to_process"],
+  "properties": {
+    "submission_id": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "venue": {"type": "string", "minLength": 1},
+    "year": {"type": "integer", "minimum": 2000},
+    "track": {"type": "string", "minLength": 1},
+    "authors_visible": {"type": "boolean"},
+    "paper_path": {"type": "string", "minLength": 1},
+    "supplement_paths": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "commit", "officiality"],
+      "properties": {
+        "url": {"type": ["string", "null"]},
+        "commit": {"type": ["string", "null"]},
+        "officiality": {"enum": ["official", "unofficial", "unknown"]}
+      }
+    },
+    "review_mode": {"enum": ["historical_blind", "current_blind_submission", "live_submission", "batch_conference"]},
+    "consent_to_process": {"type": "boolean", "const": true}
+  }
+}

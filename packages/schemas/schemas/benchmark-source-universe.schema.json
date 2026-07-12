@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/benchmark-source-universe.schema.json",
+  "title": "BenchmarkSourceUniverse",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "cutoff", "intended_slots", "candidates", "manifest_hash"],
+  "properties": {
+    "version": {"const": 1},
+    "cutoff": {"const": "2026-01-28T23:59:59-12:00"},
+    "intended_slots": {
+      "type": "array", "minItems": 7, "maxItems": 7,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["slot_id", "forum_id", "submission_number", "stratum"],
+        "properties": {
+          "slot_id": {"type": "string", "pattern": "^S[1-7]$"},
+          "forum_id": {"type": "string", "minLength": 1},
+          "submission_number": {"type": "integer", "minimum": 1},
+          "stratum": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["forum_id", "submission_number", "stratum", "original_pdf", "artifacts", "eligibility_reason", "eligible"],
+        "properties": {
+          "forum_id": {"type": "string", "minLength": 1},
+          "submission_number": {"type": "integer", "minimum": 1},
+          "stratum": {"type": "string", "minLength": 1},
+          "original_pdf": {"$ref": "benchmark-artifact-provenance.schema.json"},
+          "artifacts": {"type": "array", "items": {"$ref": "benchmark-artifact-provenance.schema.json"}},
+          "eligibility_reason": {"type": "string", "minLength": 1},
+          "eligible": {"type": "boolean"}
+        }
+      }
+    },
+    "manifest_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

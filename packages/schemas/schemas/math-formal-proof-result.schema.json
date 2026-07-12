@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/math-formal-proof-result.schema.json",
+  "title": "MathematicalFormalProofResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["claim_id", "paper_anchors", "formalization_sha256", "toolchain_image", "toolchain_version", "statement_alignment_checked", "statement_alignment", "statement_alignment_evidence", "proof_attempted", "proof_compiled", "proof_validity", "formalization_fidelity", "compiler_stdout", "compiler_stderr", "compiler_exit_code", "protocol_note"],
+  "properties": {
+    "claim_id": {"type": "string", "minLength": 1},
+    "paper_anchors": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1, "uniqueItems": true},
+    "formalization_sha256": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "toolchain_image": {"type": "string", "pattern": "^[A-Za-z0-9._/-]+@sha256:[a-f0-9]{64}$"},
+    "toolchain_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "statement_alignment_checked": {"const": true},
+    "statement_alignment": {"enum": ["aligned", "mismatch"]},
+    "statement_alignment_evidence": {"type": "string", "minLength": 1},
+    "proof_attempted": {"type": "boolean"},
+    "proof_compiled": {"type": "boolean"},
+    "proof_validity": {"enum": ["accepted", "rejected", "inconclusive", "tool_unsupported"]},
+    "formalization_fidelity": {"enum": ["aligned", "mismatch", "not_assessed"]},
+    "compiler_stdout": {"type": "string"},
+    "compiler_stderr": {"type": "string"},
+    "compiler_exit_code": {"type": ["integer", "null"]},
+    "protocol_note": {"const": "Lean proof accepted does not imply that the paper theorem was verified."}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"proof_validity": {"const": "accepted"}}, "required": ["proof_validity"]},
+      "then": {"properties": {"proof_attempted": {"const": true}, "proof_compiled": {"const": true}, "compiler_exit_code": {"const": 0}}}
+    },
+    {
+      "if": {"properties": {"proof_validity": {"const": "tool_unsupported"}}, "required": ["proof_validity"]},
+      "then": {"properties": {"proof_compiled": {"const": false}, "compiler_exit_code": {"const": null}}}
+    },
+    {
+      "if": {"properties": {"statement_alignment": {"const": "mismatch"}}, "required": ["statement_alignment"]},
+      "then": {"properties": {"formalization_fidelity": {"const": "mismatch"}}}
+    }
+  ]
+}

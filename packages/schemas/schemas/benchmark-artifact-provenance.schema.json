@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/benchmark-artifact-provenance.schema.json",
+  "title": "BenchmarkArtifactProvenance",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["kind", "source_uri", "sha256", "size_bytes", "first_public_at", "cutoff", "status", "revision"],
+  "properties": {
+    "kind": {"enum": ["original_pdf", "supplement", "attachment", "code_archive", "repository_commit", "repository_tree", "data", "checkpoint", "ever_packet", "human_thread"]},
+    "source_uri": {"type": "string", "minLength": 1},
+    "sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "size_bytes": {"type": "integer", "minimum": 0},
+    "first_public_at": {"type": "string", "format": "date-time"},
+    "cutoff": {"const": "2026-01-28T23:59:59-12:00"},
+    "status": {"enum": ["eligible", "ineligible", "current_snapshot_only", "missing"]},
+    "revision": {"type": ["string", "null"]}
+  }
+}

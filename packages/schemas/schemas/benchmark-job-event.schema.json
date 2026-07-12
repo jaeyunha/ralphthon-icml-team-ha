@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/benchmark-job-event.schema.json",
+  "title": "BenchmarkJobEvent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["job_id", "sequence", "kind", "monotonic_ns", "assignment", "previous_event_hash", "closed_at_ns", "event_hash"],
+  "properties": {
+    "job_id": {"type": "string", "minLength": 1},
+    "sequence": {"type": "integer", "minimum": 0},
+    "kind": {"enum": ["start", "heartbeat", "stop", "expired"]},
+    "monotonic_ns": {"type": "integer", "minimum": 0},
+    "assignment": {"type": "string", "pattern": "^(paper:[^:]+:[^:]+:[^:]+|arm:[^:]+:reserve)$"},
+    "previous_event_hash": {"type": ["string", "null"], "pattern": "^sha256:[0-9a-f]{64}$"},
+    "closed_at_ns": {"type": ["integer", "null"], "minimum": 0},
+    "event_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

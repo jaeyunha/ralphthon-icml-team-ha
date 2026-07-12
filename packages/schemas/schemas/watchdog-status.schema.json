@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/watchdog-status.schema.json",
+  "title": "WatchdogStatus",
+  "description": "Durable top-level status for one watchdog-supervised run.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["status", "run_state", "reason", "started_at"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "status": {"enum": ["RUNNING", "SUCCESS", "INCOMPLETE", "STALLED", "BLOCKED", "FAILED", "TIME_EXHAUSTED", "BUDGET_EXHAUSTED", "POLICY_BLOCKED"]},
+    "run_state": {"enum": ["CREATED", "INGESTING", "DOSSIER", "PERSONA_ASSIGNMENT", "PRELIMINARY_REVIEW", "VALIDATION", "OFFICIAL_REVIEW", "AUTHOR_REBUTTAL", "REVIEWER_FOLLOWUP", "AUTHOR_FINAL", "INTERNAL_DISCUSSION", "AC_META_REVIEW", "SAC_CALIBRATION", "PC_FINALIZATION", "COMPLETE", "AGENT_FAILED", "STALLED", "TIME_EXHAUSTED", "BUDGET_EXHAUSTED", "POLICY_BLOCKED"]},
+    "reason": {"type": ["string", "null"]},
+    "started_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "resumed_at": {"type": "string", "format": "date-time"},
+    "watchdog_pid": {"type": "integer", "minimum": 1},
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "deadline_at": {"type": "string", "format": "date-time"},
+        "spent_usd": {"type": "number", "minimum": 0},
+        "max_budget_usd": {"type": "number", "minimum": 0},
+        "restart_count": {"type": "integer", "minimum": 0},
+        "no_progress_count": {"type": "integer", "minimum": 0},
+        "discussion_rounds": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

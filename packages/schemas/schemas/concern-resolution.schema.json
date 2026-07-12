@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/concern-resolution.schema.json",
+  "title": "ConcernResolution",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["concern_id", "resolution", "response_evidence", "remaining_gap", "score_effect"],
+  "properties": {
+    "concern_id": {"type": "string", "minLength": 1},
+    "resolution": {"enum": ["resolved", "partially_resolved", "unresolved", "invalidated_by_response"]},
+    "response_evidence": {"type": "array", "items": {"type": "string"}},
+    "remaining_gap": {"type": ["string", "null"]},
+    "score_effect": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^(unchanged|[1-6]_to_[1-6])$"}}
+  }
+}

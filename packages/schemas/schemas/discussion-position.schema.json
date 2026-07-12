@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/discussion-position.schema.json",
+  "title": "DiscussionPosition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["position_id", "issue_id", "reviewer_id", "round", "position", "evidence_refs", "score_effect", "published_at"],
+  "properties": {
+    "position_id": {"type": "string"},
+    "issue_id": {"type": "string"},
+    "reviewer_id": {"type": "string"},
+    "round": {"type": "integer", "minimum": 1},
+    "position": {"type": "string", "minLength": 1},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "score_effect": {"enum": ["unchanged", "raised", "lowered", "pending"]},
+    "published_at": {"type": "string", "format": "date-time"}
+  }
+}

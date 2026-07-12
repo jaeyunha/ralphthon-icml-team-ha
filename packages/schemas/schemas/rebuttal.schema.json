@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/rebuttal.schema.json",
+  "title": "Rebuttal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "reviewer_id", "official_review_version", "responses", "evidence_refs", "commitments", "limitations_acknowledged", "published_at"],
+  "properties": {
+    "version": {"const": 1},
+    "reviewer_id": {"type": "string"},
+    "official_review_version": {"const": 1},
+    "responses": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["concern_id", "response_label", "response", "evidence_refs"], "properties": {"concern_id": {"type": "string"}, "response_label": {"enum": ["already_in_paper", "clarification", "submitted_additional_evidence", "limitation_acknowledged", "planned_revision", "cannot_answer_without_new_research"]}, "response": {"type": "string"}, "evidence_refs": {"type": "array", "items": {"type": "string"}}}}},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "commitments": {"type": "array", "items": {"type": "string"}},
+    "limitations_acknowledged": {"type": "array", "items": {"type": "string"}},
+    "published_at": {"type": "string", "format": "date-time"}
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/concern-ledger.schema.json",
+  "title": "ConcernLedger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ledger_version", "reviewer_id", "official_review_version", "concerns"],
+  "properties": {
+    "ledger_version": {"type": "integer", "minimum": 1},
+    "reviewer_id": {"type": "string", "minLength": 1},
+    "official_review_version": {"const": 1},
+    "concerns": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["id", "text", "severity", "status", "affected_claims", "anchors"], "properties": {"id": {"type": "string"}, "text": {"type": "string"}, "severity": {"enum": ["minor", "major", "critical"]}, "status": {"enum": ["open", "resolved", "partially_resolved", "unresolved", "invalidated_by_response"]}, "affected_claims": {"type": "array", "items": {"type": "string"}}, "anchors": {"type": "array", "items": {"type": "string"}}, "evidence_refs": {"type": "array", "items": {"type": "string"}}}}}
+  }
+}

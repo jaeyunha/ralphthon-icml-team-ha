@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/decision.schema.json",
+  "title": "Decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["mode", "ac_recommendation", "sac_action", "final_decision", "pc_rationale", "unresolved_dissent", "evidence_refs"],
+  "properties": {
+    "version": {"const": 1, "default": 1},
+    "mode": {"enum": ["single_paper", "batch"]},
+    "submission_id": {"type": "string"},
+    "ac_recommendation": {"enum": ["accept", "reject"]},
+    "sac_action": {"enum": ["confirmed", "returned_for_discussion", "emergency_review_required", "overridden"]},
+    "final_decision": {"enum": ["accept", "reject", "accept_regular", "accept_spotlight"]},
+    "spotlight_candidate": {"type": "boolean"},
+    "pc_rationale": {"type": "string"},
+    "unresolved_dissent": {"type": "array", "items": {"type": "string"}},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "batch": {"type": "object", "additionalProperties": false, "required": ["rank", "accepted_count", "spotlight_selected"], "properties": {"rank": {"type": "integer", "minimum": 1}, "accepted_count": {"type": "integer", "minimum": 0}, "spotlight_selected": {"type": "boolean"}}}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"mode": {"const": "single_paper"}}, "required": ["mode"]},
+      "then": {
+        "required": ["spotlight_candidate"],
+        "properties": {"spotlight_candidate": {}, "final_decision": {"enum": ["accept", "reject"]}}
+      }
+    },
+    {
+      "if": {"properties": {"mode": {"const": "batch"}}, "required": ["mode"]},
+      "then": {
+        "required": ["batch"],
+        "properties": {"batch": {}, "final_decision": {"enum": ["reject", "accept_regular", "accept_spotlight"]}}
+      }
+    },
+    {
+      "if": {"properties": {"final_decision": {"const": "reject"}}, "required": ["final_decision"]},
+      "then": {"properties": {"spotlight_candidate": {"const": false}}}
+    }
+  ]
+}

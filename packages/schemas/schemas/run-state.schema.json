@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/run-state.schema.json",
+  "title": "RunState",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "state", "state_version", "updated_at"],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "state": {"enum": ["CREATED", "INGESTING", "DOSSIER", "PERSONA_ASSIGNMENT", "PRELIMINARY_REVIEW", "VALIDATION", "OFFICIAL_REVIEW", "AUTHOR_REBUTTAL", "REVIEWER_FOLLOWUP", "AUTHOR_FINAL", "INTERNAL_DISCUSSION", "AC_META_REVIEW", "SAC_CALIBRATION", "PC_FINALIZATION", "COMPLETE", "INPUT_INVALID", "POLICY_BLOCKED", "AGENT_FAILED", "VALIDATION_FAILED", "STALLED", "TIME_EXHAUSTED", "BUDGET_EXHAUSTED", "INCOMPLETE"]},
+    "state_version": {"type": "integer", "minimum": 1},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "failure_reason": {"type": "string", "minLength": 1}
+  }
+}

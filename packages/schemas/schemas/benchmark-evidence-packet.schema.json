@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/benchmark-evidence-packet.schema.json",
+  "title": "BenchmarkEvidencePacket",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["query_fingerprint", "sanitized_response", "response_sha256", "response_size_bytes", "retrieved_at", "source_uri", "cutoff", "content_sha256", "packet_hash"],
+  "properties": {
+    "query_fingerprint": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "sanitized_response": {"type": "string"},
+    "response_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "response_size_bytes": {"type": "integer", "minimum": 0},
+    "retrieved_at": {"type": "string", "format": "date-time"},
+    "source_uri": {"type": "string", "minLength": 1},
+    "cutoff": {"const": "2026-01-28T23:59:59-12:00"},
+    "content_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "packet_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

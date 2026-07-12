@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/phase-tasks.schema.json",
+  "title": "PhaseTasks",
+  "description": "Seeded, durable task queue for one agent phase.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tasks"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "phase": {"type": "string", "minLength": 1},
+    "current_task_id": {"type": ["string", "null"]},
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "type": {"type": "string", "minLength": 1},
+          "status": {"enum": ["pending", "in_progress", "completed", "blocked"]},
+          "description": {"type": "string", "minLength": 1},
+          "inputs": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+          "output_path": {"type": "string", "minLength": 1},
+          "completion_predicate": {"type": "string", "minLength": 1},
+          "retry_feedback": {"type": ["string", "null"]},
+          "attempt_count": {"type": "integer", "minimum": 0},
+          "blocked_reason": {"type": ["string", "null"]},
+          "completed_at": {"type": ["string", "null"], "format": "date-time"}
+        }
+      }
+    }
+  }
+}

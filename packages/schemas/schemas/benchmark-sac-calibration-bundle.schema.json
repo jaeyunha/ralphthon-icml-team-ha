@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/benchmark-sac-calibration-bundle.schema.json",
+  "title": "BenchmarkSacCalibrationBundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "campaign_id", "arm_cohort_id", "sac_id", "status", "slots", "completed_at"],
+  "properties": {
+    "version": {"const": 1},
+    "campaign_id": {"type": "string", "minLength": 1},
+    "arm_cohort_id": {"type": "string", "minLength": 1},
+    "sac_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["calibrated", "failed"]},
+    "slots": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["paper_slot", "paper_id", "status", "ac_recommendation", "recommended_decision", "action", "action_history", "meta_review_ref", "meta_review_hash", "sac_rationale", "evidence_refs"],
+            "properties": {
+              "paper_slot": {"type": "integer", "minimum": 1, "maximum": 7},
+              "paper_id": {"type": "string", "minLength": 1},
+              "status": {"const": "calibrated"},
+              "ac_recommendation": {"enum": ["accept", "reject"]},
+              "recommended_decision": {"enum": ["accept", "reject"]},
+              "action": {"enum": ["affirm", "request_meta_review_revision"]},
+              "action_history": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 2,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["sequence", "action", "reason", "defects"],
+                  "properties": {
+                    "sequence": {"type": "integer", "minimum": 1, "maximum": 2},
+                    "action": {"enum": ["affirm", "request_meta_review_revision"]},
+                    "reason": {"type": "string", "minLength": 1},
+                    "defects": {"type": "array", "items": {"type": "string"}}
+                  }
+                }
+              },
+              "meta_review_ref": {"type": "string", "minLength": 1},
+              "meta_review_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+              "sac_rationale": {"type": "string", "minLength": 1},
+              "evidence_refs": {"type": "array", "items": {"type": "string"}}
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["paper_slot", "paper_id", "status", "failure"],
+            "properties": {
+              "paper_slot": {"type": "integer", "minimum": 1, "maximum": 7},
+              "paper_id": {"type": "string", "minLength": 1},
+              "status": {"const": "failed"},
+              "failure": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["code", "stage", "message", "occurred_at", "evidence_refs"],
+                "properties": {
+                  "code": {"type": "string", "minLength": 1},
+                  "stage": {"type": "string", "minLength": 1},
+                  "message": {"type": "string", "minLength": 1},
+                  "occurred_at": {"type": "string", "format": "date-time"},
+                  "evidence_refs": {"type": "array", "items": {"type": "string"}}
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "terminal_failure_code": {"type": "string", "minLength": 1},
+    "completed_at": {"type": "string", "format": "date-time"}
+  }
+}

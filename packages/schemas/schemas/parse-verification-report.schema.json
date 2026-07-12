@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/parse-verification-report.schema.json",
+  "title": "ParseVerificationReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "checks", "sample_size", "failed_checks", "unresolved_anchor_ids", "unresolved_anchor_count", "orphan_anchor_ids", "verified_bundle"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "status": {"enum": ["passed", "failed"]},
+    "checks": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "status", "unresolved", "duplicates"],
+            "properties": {
+              "name": {"const": "inline_anchor_resolution"},
+              "status": {"enum": ["passed", "failed"]},
+              "unresolved": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z]+-[0-9]{4}$"}},
+              "duplicates": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z]+-[0-9]{4}$"}}
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "status", "orphaned"],
+            "properties": {
+              "name": {"const": "anchor_inventory"},
+              "status": {"enum": ["passed", "failed"]},
+              "orphaned": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z]+-[0-9]{4}$"}}
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "status", "malformed"],
+            "properties": {
+              "name": {"const": "provenance_records"},
+              "status": {"enum": ["passed", "failed"]},
+              "malformed": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z]+-[0-9]{4}$"}}
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "status", "unsafe", "missing"],
+            "properties": {
+              "name": {"const": "asset_resolution"},
+              "status": {"enum": ["passed", "failed"]},
+              "unsafe": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+              "missing": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "status", "failures"],
+            "properties": {
+              "name": {"const": "heading_equation_table_structure"},
+              "status": {"enum": ["passed", "failed"]},
+              "failures": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "status", "minimum_overlap", "samples", "failed_anchor_ids", "reason"],
+            "properties": {
+              "name": {"const": "sampled_text_overlap"},
+              "status": {"enum": ["passed", "failed"]},
+              "minimum_overlap": {"type": "number", "minimum": 0, "maximum": 1},
+              "samples": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["anchor_id", "status"],
+                      "properties": {
+                        "anchor_id": {"type": "string", "pattern": "^[A-Z]+-[0-9]{4}$"},
+                        "status": {"const": "not_run"}
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["anchor_id", "page", "status", "overlap"],
+                      "properties": {
+                        "anchor_id": {"type": "string", "pattern": "^[A-Z]+-[0-9]{4}$"},
+                        "page": {"type": "integer", "minimum": 1},
+                        "status": {"const": "checked"},
+                        "overlap": {"type": "number", "minimum": 0, "maximum": 1}
+                      }
+                    }
+                  ]
+                }
+              },
+              "failed_anchor_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z]+-[0-9]{4}$"}},
+              "reason": {"enum": [null, "source_text_by_page_required"]}
+            }
+          }
+        ]
+      }
+    },
+    "sample_size": {"type": "integer", "minimum": 0},
+    "failed_checks": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"enum": ["inline_anchor_resolution", "anchor_inventory", "provenance_records", "asset_resolution", "heading_equation_table_structure", "sampled_text_overlap"]}
+    },
+    "unresolved_anchor_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z]+-[0-9]{4}$"}},
+    "unresolved_anchor_count": {"type": "integer", "minimum": 0},
+    "orphan_anchor_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z]+-[0-9]{4}$"}},
+    "verified_bundle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["files", "bundle_sha256"],
+      "properties": {
+        "files": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path", "sha256", "size_bytes"],
+            "properties": {
+              "path": {"type": "string", "pattern": "^(?:paper\\.md|anchors\\.json|extraction-report\\.json|assets/[A-Z]+-[0-9]{4}\\.[A-Za-z0-9]+)$"},
+              "sha256": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+              "size_bytes": {"type": "integer", "minimum": 0}
+            }
+          }
+        },
+        "bundle_sha256": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}
+      }
+    }
+  }
+}

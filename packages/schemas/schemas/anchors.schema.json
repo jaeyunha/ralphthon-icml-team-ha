@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/anchors.schema.json",
+  "title": "Anchors",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "anchors"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "anchors": {
+      "type": "object",
+      "propertyNames": {"pattern": "^(?:SEC|FIG|TAB|EQ|THM|CIT|TXT)-[0-9]{4}$"},
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["anchor_id", "type", "page", "bbox", "source_ref", "confidence", "content_sha256", "asset_paths"],
+        "properties": {
+          "anchor_id": {"type": "string", "pattern": "^(?:SEC|FIG|TAB|EQ|THM|CIT|TXT)-[0-9]{4}$"},
+          "type": {"enum": ["section", "figure", "table", "equation", "theorem", "citation", "text"]},
+          "page": {"type": "integer", "minimum": 1},
+          "bbox": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {"type": "number"}
+          },
+          "source_ref": {"type": "string", "minLength": 1},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "content_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "asset_paths": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^assets/(?:SEC|FIG|TAB|EQ|THM|CIT|TXT)-[0-9]{4}\\.(?:png|csv|json|tex)$"
+            }
+          }
+        }
+      }
+    }
+  }
+}

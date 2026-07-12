@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/invocation-result.schema.json",
+  "title": "InvocationResult",
+  "description": "Durable outcome of one bounded agent invocation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "agent_id", "role", "phase", "status", "promise", "reason", "exit_code", "allowed_input_manifest_hash", "artifact_path", "artifact_hash", "completed_at"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "agent_id": {"type": "string", "minLength": 1},
+    "role": {"enum": ["reviewer", "author", "ac", "sac", "pc", "validator", "extractor", "watchdog"]},
+    "phase": {"type": "string", "minLength": 1},
+    "status": {"enum": ["settled", "reopen", "blocked", "policy_blocked", "agent_failed", "time_exhausted", "interrupted"]},
+    "promise": {"type": ["string", "null"], "enum": ["NEXT", "COMPLETE", "BLOCKED", null]},
+    "reason": {"type": ["string", "null"]},
+    "exit_code": {"type": "integer", "minimum": 0, "maximum": 255},
+    "allowed_input_manifest_hash": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "artifact_path": {"type": "string", "minLength": 1},
+    "artifact_hash": {"type": ["string", "null"], "pattern": "^sha256:[a-f0-9]{64}$"},
+    "completed_at": {"type": "string", "format": "date-time"}
+  }
+}

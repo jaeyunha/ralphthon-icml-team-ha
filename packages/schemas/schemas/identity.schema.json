@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/identity.schema.json",
+  "title": "Identity",
+  "description": "Persistent logical agent identity. Phase execution fields belong in phase-state.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["identity_version", "agent_id", "run_id", "role", "role_instance_id", "created_at"],
+  "properties": {
+    "identity_version": {"const": 1},
+    "agent_id": {"type": "string", "minLength": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "role": {"enum": ["reviewer", "author", "ac", "sac", "pc", "validator", "extractor", "watchdog"]},
+    "role_instance_id": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "retired_at": {"type": ["string", "null"], "format": "date-time"}
+  }
+}

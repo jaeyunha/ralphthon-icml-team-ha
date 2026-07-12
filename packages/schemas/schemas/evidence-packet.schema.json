@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/evidence-packet.schema.json",
+  "title": "EvidencePacket",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["source_id", "title", "authors", "first_public_date", "source_type", "canonical_uri", "content_hash", "admissibility", "retrieval_reason", "supporting_passages", "verification_status"],
+  "properties": {
+    "source_id": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "authors": {"type": "array", "items": {"type": "string"}},
+    "first_public_date": {"type": "string", "format": "date"},
+    "source_type": {"enum": ["official_proceedings", "publisher_page", "journal", "pmlr", "arxiv_preprint", "acl_anthology", "cvf_open_access", "metadata_registry", "benchmark_documentation", "official_repository"]},
+    "canonical_uri": {"type": "string", "minLength": 1},
+    "content_hash": {"type": "string", "pattern": "^sha256:(?:[a-f0-9]{64}|\\.\\.\\.)$"},
+    "admissibility": {"enum": ["admissible_prior_work", "admissible_background", "inadmissible_post_cutoff", "quarantined_target_duplicate", "unverified"]},
+    "retrieval_reason": {"type": "string", "minLength": 1},
+    "supporting_passages": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["anchor", "summary"], "properties": {"anchor": {"type": "string"}, "summary": {"type": "string"}}}},
+    "verification_status": {"enum": ["metadata_only", "abstract_checked", "full_text_checked", "source_inaccessible"]}
+  }
+}

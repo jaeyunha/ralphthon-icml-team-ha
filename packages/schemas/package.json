@@ -1,0 +1,19 @@
+{
+  "name": "@ralph-review/schemas",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schemas/*": "./schemas/*"
+  },
+  "scripts": {
+    "generate:types": "bun scripts/generate-types.ts",
+    "check:types": "bun scripts/generate-types.ts --check",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "ajv": "8.17.1",
+    "ajv-formats": "3.0.1"
+  }
+}

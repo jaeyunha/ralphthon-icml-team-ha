@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/benchmark-runtime-settings.schema.json",
+  "title": "BenchmarkRuntimeSettings",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "model_snapshot", "model_snapshot_hash", "reasoning_settings", "tool_settings", "context_settings", "queue_semantics", "invocation_deadline_seconds", "phase_deadline_seconds", "heartbeat_interval_seconds", "lease_timeout_seconds", "invocation_retries", "phase_retries", "no_progress_limit", "concurrency", "provider_usage_mapping", "rate_card_hash", "caps", "settings_hash"],
+  "properties": {
+    "version": {"const": 1},
+    "model_snapshot": {
+      "type": "object", "additionalProperties": false,
+      "required": ["provider", "model_identifier", "snapshot_identifier", "attestation_hash", "attested_at"],
+      "properties": {
+        "provider": {"type": "string", "minLength": 1},
+        "model_identifier": {"type": "string", "minLength": 1},
+        "snapshot_identifier": {"type": "string", "minLength": 1},
+        "attestation_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+        "attested_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "model_snapshot_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "reasoning_settings": {"type": "object"},
+    "tool_settings": {"type": "object"},
+    "context_settings": {"type": "object"},
+    "queue_semantics": {"type": "string", "minLength": 1},
+    "invocation_deadline_seconds": {"type": "integer", "minimum": 1},
+    "phase_deadline_seconds": {"type": "integer", "minimum": 1},
+    "heartbeat_interval_seconds": {"type": "integer", "minimum": 1},
+    "lease_timeout_seconds": {"type": "integer", "minimum": 1},
+    "invocation_retries": {"const": 1},
+    "phase_retries": {"const": 1},
+    "no_progress_limit": {"const": 2},
+    "concurrency": {"const": 2},
+    "provider_usage_mapping": {
+      "type": "object", "additionalProperties": false,
+      "required": ["input_tokens_field", "output_tokens_field", "cached_input_tokens_field"],
+      "properties": {
+        "input_tokens_field": {"type": "string", "minLength": 1},
+        "output_tokens_field": {"type": "string", "minLength": 1},
+        "cached_input_tokens_field": {"type": ["string", "null"]}
+      }
+    },
+    "rate_card_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "caps": {
+      "type": "object", "additionalProperties": false,
+      "required": ["paper_tokens", "paper_usd", "paper_job_hours", "arm_tokens", "arm_usd", "arm_job_hours", "campaign_tokens", "campaign_usd", "campaign_job_hours", "campaign_wall_hours"],
+      "properties": {
+        "paper_tokens": {"const": 2000000}, "paper_usd": {"const": "75"}, "paper_job_hours": {"const": "10"},
+        "arm_tokens": {"const": 200000}, "arm_usd": {"const": "10"}, "arm_job_hours": {"const": "2"},
+        "campaign_tokens": {"const": 28400000}, "campaign_usd": {"const": "1070"},
+        "campaign_job_hours": {"const": "144"}, "campaign_wall_hours": {"const": "72"}
+      }
+    },
+    "settings_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

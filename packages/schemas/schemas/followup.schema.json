@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/followup.schema.json",
+  "title": "Followup",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "reviewer_id", "official_review_version", "rebuttal_version", "concern_resolutions", "scores", "confidence", "score_change_rationale", "new_questions", "summary", "evidence_refs"],
+  "properties": {
+    "version": {"const": 1},
+    "reviewer_id": {"type": "string"},
+    "official_review_version": {"const": 1},
+    "rebuttal_version": {"type": "integer", "minimum": 1},
+    "concern_resolutions": {"type": "array", "items": {"type": "object"}},
+    "scores": {"type": "object", "additionalProperties": false, "required": ["soundness", "presentation", "significance", "originality", "overall"], "properties": {"soundness": {"type": "integer", "minimum": 1, "maximum": 4}, "presentation": {"type": "integer", "minimum": 1, "maximum": 4}, "significance": {"type": "integer", "minimum": 1, "maximum": 4}, "originality": {"type": "integer", "minimum": 1, "maximum": 4}, "overall": {"type": "integer", "minimum": 1, "maximum": 6}}},
+    "confidence": {"type": "integer", "minimum": 1, "maximum": 5},
+    "score_change_rationale": {"type": "string", "minLength": 1},
+    "new_questions": {"type": "array", "items": {"type": "string"}},
+    "summary": {"type": "string"},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}}
+  }
+}

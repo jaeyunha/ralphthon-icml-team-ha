@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/table-asset.schema.json",
+  "title": "TableAsset",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["anchor_id", "caption", "rows"],
+  "properties": {
+    "anchor_id": {"type": "string", "pattern": "^TAB-[0-9]{4}$"},
+    "caption": {"type": "string"},
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {"type": "string"}
+      }
+    }
+  }
+}

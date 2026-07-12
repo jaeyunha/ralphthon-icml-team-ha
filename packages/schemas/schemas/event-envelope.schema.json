@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/event-envelope.schema.json",
+  "title": "EventEnvelope",
+  "description": "Durable per-run event. The (run_id, sequence) pair is the storage uniqueness key and event_id is globally unique.",
+  "$comment": "Storage MUST enforce UNIQUE(run_id, sequence) and global uniqueness of event_id for idempotent replay. Core §22.3 event semantics are agent_started, task_completed, artifact_published, score_changed, discussion_opened, validation_confirmed, agent_restarted, and decision_published; R2.13 requires role.phase.event naming.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["event_id", "run_id", "sequence", "occurred_at", "type", "actor", "payload"],
+  "properties": {
+    "event_id": {"type": "string", "minLength": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "sequence": {"type": "integer", "minimum": 1},
+    "occurred_at": {"type": "string", "format": "date-time"},
+    "type": {"type": "string", "pattern": "^[a-z][a-z0-9_]*\\.[a-z][a-z0-9_]*\\.[a-z][a-z0-9_]*$"},
+    "actor": {"type": "object", "additionalProperties": false, "required": ["agent_id", "role", "phase"], "properties": {"agent_id": {"type": "string", "minLength": 1}, "role": {"type": "string", "minLength": 1}, "phase": {"type": "string", "minLength": 1}}},
+    "payload": {"type": "object"},
+    "artifact_id": {"type": "string"},
+    "causation_event_id": {"type": "string"}
+  }
+}

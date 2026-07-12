@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/task-context.schema.json",
+  "title": "TaskContext",
+  "description": "One coherent work item supplied to one agent invocation, or an honest empty phase queue marker.",
+  "type": "object",
+  "additionalProperties": false,
+  "minProperties": 1,
+  "properties": {
+    "schema_version": {"const": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "task": {"type": ["string", "null"]},
+    "type": {"type": "string", "minLength": 1},
+    "phase": {"type": "string", "minLength": 1},
+    "inputs": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {"type": "string", "minLength": 1},
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path"],
+            "properties": {
+              "category": {"type": "string", "minLength": 1},
+              "path": {"type": "string", "minLength": 1}
+            }
+          }
+        ]
+      },
+      "uniqueItems": true
+    },
+    "output_path": {"type": "string", "minLength": 1},
+    "output_schema": {"type": "string", "minLength": 1},
+    "completion_predicate": {"type": "string", "minLength": 1},
+    "retry_feedback": {"type": ["string", "null"]},
+    "attempt": {"type": "integer", "minimum": 0},
+    "max_attempts": {"type": "integer", "minimum": 1}
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/extraction-report.schema.json",
+  "title": "ExtractionReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "extractor", "source", "summary", "uncertain_regions", "suspicious_instruction_evidence", "assets", "parse_verification"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "extractor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": {"const": "docling"},
+        "version": {"type": "string", "minLength": 1}
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pdf_path", "pdf_sha256"],
+      "properties": {
+        "pdf_path": {"type": ["string", "null"], "minLength": 1},
+        "pdf_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["anchor_count", "asset_count", "mean_confidence", "minimum_confidence"],
+      "properties": {
+        "anchor_count": {"type": "integer", "minimum": 1},
+        "asset_count": {"type": "integer", "minimum": 0},
+        "mean_confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "minimum_confidence": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "uncertain_regions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["anchor_id", "page", "confidence", "reason"],
+        "properties": {
+          "anchor_id": {"type": "string", "pattern": "^(?:SEC|FIG|TAB|EQ|THM|CIT|TXT)-[0-9]{4}$"},
+          "page": {"type": "integer", "minimum": 1},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "reason": {"const": "docling_confidence_below_threshold"}
+        }
+      }
+    },
+    "suspicious_instruction_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["category", "anchor_id", "page", "matched_text", "evidence_excerpt"],
+        "properties": {
+          "category": {"enum": ["ignore_instructions", "system_prompt", "role_override", "command_execution", "review_override", "instruction_delimiter"]},
+          "anchor_id": {"type": "string", "pattern": "^(?:SEC|FIG|TAB|EQ|THM|CIT|TXT)-[0-9]{4}$"},
+          "page": {"type": "integer", "minimum": 1},
+          "matched_text": {"type": "string", "minLength": 1},
+          "evidence_excerpt": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["anchor_id", "type", "paths"],
+        "properties": {
+          "anchor_id": {"type": "string", "pattern": "^(?:FIG|TAB|EQ)-[0-9]{4}$"},
+          "type": {"enum": ["figure", "table", "equation"]},
+          "paths": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {"type": "string", "pattern": "^assets/(?:FIG|TAB|EQ)-[0-9]{4}\\.(?:png|csv|json|tex)$"}
+          }
+        }
+      }
+    },
+    "parse_verification": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "checks"],
+          "properties": {
+            "status": {"const": "pending"},
+            "checks": {"type": "array", "maxItems": 0}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "report_path", "unresolved_anchor_count"],
+          "properties": {
+            "status": {"enum": ["passed", "failed"]},
+            "report_path": {"const": "parse-verification-report.json"},
+            "unresolved_anchor_count": {"type": "integer", "minimum": 0}
+          }
+        }
+      ]
+    }
+  }
+}

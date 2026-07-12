@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/math-finding-ledger.schema.json",
+  "title": "MathematicalFindingLedger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "agent_id", "findings"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "agent_id": {"type": "string", "pattern": "^validator-mathematics-[A-Za-z0-9][A-Za-z0-9._-]*$"},
+    "findings": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^MATH-[A-Za-z0-9][A-Za-z0-9._-]*$"},
+      "uniqueItems": true
+    }
+  }
+}

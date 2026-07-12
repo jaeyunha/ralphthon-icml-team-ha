@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/run-budget.schema.json",
+  "title": "RunBudget",
+  "description": "Restart-safe watchdog budget, counters, artifact progress, and subscription cursors.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["started_at", "deadline_at", "limits", "restart_counts", "no_progress_counts", "discussion_rounds", "last_artifact_hashes", "subscription_cursors"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "started_at": {"type": "string", "format": "date-time"},
+    "deadline_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "spent_usd": {"type": "number", "minimum": 0},
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "max_budget_usd": {"type": "number", "minimum": 0},
+        "max_reviewer_restarts": {"type": "integer", "minimum": 0},
+        "max_validator_restarts": {"type": "integer", "minimum": 0},
+        "max_author_restarts": {"type": "integer", "minimum": 0},
+        "max_ac_restarts": {"type": "integer", "minimum": 0},
+        "max_restarts": {"type": "integer", "minimum": 0},
+        "max_discussion_rounds": {"type": "integer", "minimum": 0},
+        "no_progress_threshold": {"type": "integer", "minimum": 1}
+      }
+    },
+    "restart_counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+    "no_progress_counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+    "discussion_rounds": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+    "last_artifact_hashes": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}},
+    "subscription_cursors": {
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          {"type": "string", "minLength": 1},
+          {"type": "integer", "minimum": 0},
+          {"type": "null"}
+        ]
+      }
+    }
+  }
+}

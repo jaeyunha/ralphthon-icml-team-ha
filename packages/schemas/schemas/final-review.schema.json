@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/final-review.schema.json",
+  "title": "FinalReview",
+  "description": "Immutable final reviewer state; later phases reference this artifact and never mutate it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "reviewer_id", "official_review_version", "final_scores", "confidence", "final_justification", "resolved_concerns", "remaining_concerns", "discussion_refs", "evidence_refs", "frozen_at"],
+  "properties": {
+    "version": {"const": 1},
+    "reviewer_id": {"type": "string"},
+    "official_review_version": {"const": 1},
+    "final_scores": {"type": "object", "additionalProperties": false, "required": ["soundness", "presentation", "significance", "originality", "overall"], "properties": {"soundness": {"type": "integer", "minimum": 1, "maximum": 4}, "presentation": {"type": "integer", "minimum": 1, "maximum": 4}, "significance": {"type": "integer", "minimum": 1, "maximum": 4}, "originality": {"type": "integer", "minimum": 1, "maximum": 4}, "overall": {"type": "integer", "minimum": 1, "maximum": 6}}},
+    "confidence": {"type": "integer", "minimum": 1, "maximum": 5},
+    "final_justification": {"type": "string", "minLength": 1},
+    "resolved_concerns": {"type": "array", "items": {"type": "string"}},
+    "remaining_concerns": {"type": "array", "items": {"type": "string"}},
+    "discussion_refs": {"type": "array", "items": {"type": "string"}},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "frozen_at": {"type": "string", "format": "date-time"}
+  }
+}

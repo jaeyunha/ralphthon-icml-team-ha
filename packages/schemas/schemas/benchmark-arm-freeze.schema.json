@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/benchmark-arm-freeze.schema.json",
+  "title": "BenchmarkArmFreeze",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "campaign_id", "arm_cohort_id", "status", "arm_bundle_ref", "arm_bundle_hash", "decision_hashes", "paper_ledger_hashes", "provenance_root", "custody_root", "metering_root", "frozen_at", "freeze_hash"],
+  "properties": {
+    "version": {"const": 1},
+    "campaign_id": {"type": "string", "minLength": 1},
+    "arm_cohort_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["terminal", "failed"]},
+    "arm_bundle_ref": {"type": "string", "minLength": 1},
+    "arm_bundle_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "decision_hashes": {"type": "array", "minItems": 7, "maxItems": 7, "items": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}},
+    "paper_ledger_hashes": {"type": "array", "minItems": 7, "maxItems": 7, "items": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}},
+    "provenance_root": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "custody_root": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "metering_root": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "frozen_at": {"type": "string", "format": "date-time"},
+    "freeze_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

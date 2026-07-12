@@ -1,0 +1,29 @@
+{
+  "name": "@ralphthon/db",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "db:migrate": "./src/migrate.ts"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema.ts",
+    "./snapshots": "./src/snapshots.ts"
+  },
+  "scripts": {
+    "db:migrate": "bun run src/migrate.ts",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ralph-review/schemas": "workspace:*",
+    "drizzle-orm": "^0.44.5",
+    "postgres": "^3.4.7"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.20",
+    "drizzle-kit": "^0.31.4",
+    "typescript": "^5.9.2"
+  }
+}

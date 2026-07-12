@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/validation-bundle.schema.json",
+  "title": "FrozenValidationBundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["bundle_version", "submission_id", "frozen_at", "source_lanes", "findings", "conflicts", "content_hash"],
+  "properties": {
+    "bundle_version": {"const": 1},
+    "submission_id": {"type": "string", "minLength": 1},
+    "frozen_at": {"type": "string", "format": "date-time"},
+    "source_lanes": {
+      "type": "array",
+      "items": {"enum": ["g1-code", "g2-mathematics", "g3-statistics", "g3-references", "g3-ethics"]},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "findings": {
+      "type": "array",
+      "items": {"$ref": "https://ralph-review.dev/schemas/validation-finding.schema.json"},
+      "uniqueItems": true
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim_id", "finding_ids", "statuses", "resolution"],
+        "properties": {
+          "claim_id": {"type": "string", "minLength": 1},
+          "finding_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 2, "uniqueItems": true},
+          "statuses": {"type": "array", "items": {"$ref": "https://ralph-review.dev/schemas/validation-finding.schema.json#/properties/status"}, "minItems": 2, "uniqueItems": true},
+          "resolution": {"const": "surfaced_not_averaged"}
+        }
+      },
+      "uniqueItems": true
+    },
+    "content_hash": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}
+  }
+}

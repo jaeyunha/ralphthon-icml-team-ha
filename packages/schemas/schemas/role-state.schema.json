@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/role-state.schema.json",
+  "title": "RoleState",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["agent_id", "role", "current_phase", "completed_phases", "status"],
+  "properties": {
+    "agent_id": {"type": "string", "minLength": 1},
+    "role": {"enum": ["reviewer", "author", "ac", "sac", "pc", "validator", "extractor", "watchdog"]},
+    "persona_version": {"type": "integer", "minimum": 1},
+    "current_phase": {"type": "string", "minLength": 1},
+    "completed_phases": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "official_review_version": {"type": "integer", "minimum": 1},
+    "current_review_version": {"type": "integer", "minimum": 1},
+    "score_history_version": {"type": "integer", "minimum": 1},
+    "concern_ledger_version": {"type": "integer", "minimum": 1},
+    "status": {"enum": ["pending", "running", "blocked", "completed", "failed", "stalled"]}
+  }
+}
