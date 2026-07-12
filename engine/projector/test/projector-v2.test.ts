@@ -37,7 +37,7 @@ function batch(eventId = "event-1"): ProjectionBatchV2 {
     nextCursor: {
       runId: "run-v2", source: "events-v2.ndjson", byteOffset: 100, lastSequence: 1,
       lastEventId: eventId, lastEventHash: eventHash, updatedAt: "2026-07-12T00:00:01Z",
-      logDev: 1, logIno: 2, durableEndOffset: 100, durableLastSequence: 1, durableLastEventHash: eventHash,
+      lastEndOffset: 100, verifiedFromGenesisAt: "2026-07-12T00:00:01Z",
     },
   };
 }
@@ -82,7 +82,7 @@ class MemoryStore implements ProjectionStoreV2 {
 describe("NdjsonProjectorV2", () => {
   test("atomically saves canonical event, read model, batch ledger, registry, and cursor", async () => {
     const store = new MemoryStore();
-    const result = await new NdjsonProjectorV2(store, { publicationRows: (item) => [{ publicationKind: "note", publicationId: "note-1", eventId: item.event.id, eventHash: item.envelope.event_hash }] }).projectCapturedBatch(batch());
+    const result = await new NdjsonProjectorV2(store, { publicationRows: (item) => [{ publicationId: "note-1", eventId: item.event.id, eventHash: item.envelope.event_hash, receiptHash: hash("r"), audience: "public", releaseStatus: "final", sanitizationStatus: "sanitized_public" }] }).projectCapturedBatch(batch());
     expect(result).toMatchObject({ status: "committed", inserted: 1 });
     expect([...store.events.keys(), store.projections, store.publications, [...store.batches.keys()], [...store.cursors.keys()]]).toEqual(["event-1", ["event-1"], ["note-1"], ["00000000-0000-4000-8000-000000000001"], ["events-v2.ndjson"]]);
   });

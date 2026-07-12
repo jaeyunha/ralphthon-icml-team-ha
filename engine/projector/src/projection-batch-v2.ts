@@ -54,12 +54,9 @@ export function createProjectionBatchV2(
     byteOffset: durableTip.end_offset,
     lastSequence: last?.envelope.sequence ?? cursorAnchor.lastSequence,
     ...(last === undefined ? {} : { lastEventId: last.envelope.event_id, lastEventHash: last.envelope.event_hash }),
-    updatedAt: new Date().toISOString(),
-    logDev: durableTip.log_dev,
-    logIno: durableTip.log_ino,
-    durableEndOffset: durableTip.end_offset,
-    durableLastSequence: durableTip.last_sequence,
-    durableLastEventHash: durableTip.last_event_hash,
+    updatedAt: last?.envelope.occurred_at ?? "1970-01-01T00:00:00.000Z",
+    lastEndOffset: durableTip.end_offset,
+    verifiedFromGenesisAt: last?.envelope.occurred_at ?? "1970-01-01T00:00:00.000Z",
   };
   return {
     batchId: projectionBatchIdV2(runId, source, durableTip, cursorAnchor, events.map(({ event }) => event)),

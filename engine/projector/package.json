@@ -5,10 +5,14 @@
   "type": "module",
   "bin": {
     "ralph-emit-event": "./src/emit-event.ts",
-    "ralph-projector": "./src/run-projector.ts"
+    "ralph-projector": "./src/run-projector.ts",
+    "ralph-projector-v2": "./src/run-projector-v2.ts",
+    "ralph-verify-rebuild-v2": "./src/verify-rebuild-v2.ts"
   },
   "scripts": {
     "projector:run": "bun run src/run-projector.ts",
+    "projector:v2": "bun run src/run-projector-v2.ts",
+    "verify:rebuild:v2": "bun run src/verify-rebuild-v2.ts",
     "test": "bun test",
     "typecheck": "tsc --noEmit"
   },

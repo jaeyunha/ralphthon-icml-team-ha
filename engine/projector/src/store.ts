@@ -9,11 +9,8 @@ export interface CanonicalProjectionEventV2 {
 
 export interface ProjectionCursorV2 extends ProjectionCursor {
   lastEventHash?: string;
-  logDev: number;
-  logIno: number;
-  durableEndOffset: number;
-  durableLastSequence: number;
-  durableLastEventHash: string;
+  lastEndOffset: number;
+  verifiedFromGenesisAt: string;
 }
 
 export interface ProjectionCursorAnchorV2 {
@@ -34,10 +31,13 @@ export interface ProjectionBatchV2 {
 }
 
 export interface PublicationRegistryRowV2 {
-  publicationKind: string;
   publicationId: string;
   eventId: string;
   eventHash: string;
+  receiptHash: string;
+  audience: string;
+  releaseStatus: string;
+  sanitizationStatus: string;
 }
 
 export type CanonicalEventInsertResultV2 =

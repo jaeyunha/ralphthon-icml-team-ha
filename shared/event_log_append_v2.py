@@ -27,10 +27,20 @@ HASH_PREFIX = "sha256:"
 LOCK_SUFFIX = ".append-v2.lock"
 _HOOK: Callable[[str], None] | None = None
 
-_DRAFT_FIELDS = frozenset({
-    "schema_version", "event_id", "idempotency_key", "run_id", "occurred_at",
-    "type", "actor", "payload", "artifact_id", "causation_event_id",
-})
+_DRAFT_FIELDS = frozenset(
+    {
+        "schema_version",
+        "event_id",
+        "idempotency_key",
+        "run_id",
+        "occurred_at",
+        "type",
+        "actor",
+        "payload",
+        "artifact_id",
+        "causation_event_id",
+    }
+)
 _ENVELOPE_FIELDS = _DRAFT_FIELDS | frozenset({"sequence", "previous_event_hash", "event_hash"})
 
 
@@ -79,7 +89,9 @@ def _hook(name: str) -> None:
         raise FailpointError(f"failpoint reached: {name}")
 
 
-def append_draft(draft: Mapping[str, Any], event_log_path: str | os.PathLike[str], expected_run_id: str) -> dict[str, Any]:
+def append_draft(
+    draft: Mapping[str, Any], event_log_path: str | os.PathLike[str], expected_run_id: str
+) -> dict[str, Any]:
     """Persist a draft once, or reconcile an exact retry under the same lock."""
     checked_draft = _validate_draft(draft, expected_run_id)
     log_path = os.fspath(event_log_path)
@@ -94,7 +106,9 @@ def append_draft(draft: Mapping[str, Any], event_log_path: str | os.PathLike[str
         log_fd = _open_log(log_path)
         try:
             _assert_secure_fd(log_fd, "event log", exact_mode=0o600)
-            events, end_offset = _read_verified_log(log_fd, expected_run_id, repair_partial_tail=True)
+            events, end_offset = _read_verified_log(
+                log_fd, expected_run_id, repair_partial_tail=True
+            )
             duplicate = _reconcile(events, checked_draft)
             if duplicate is not None:
                 # A prior writer can have died after its LF write but before its
@@ -122,6 +136,38 @@ def append_draft(draft: Mapping[str, Any], event_log_path: str | os.PathLike[str
             events.append(envelope)
             tip = _capture_tip(log_fd, events, end_offset)
             return {"status": "appended", "envelope": envelope, "durable_tip": tip.as_dict()}
+        finally:
+            os.close(log_fd)
+    finally:
+        try:
+            fcntl.flock(lock_fd, fcntl.LOCK_UN)
+        finally:
+            os.close(lock_fd)
+
+
+def capture_durable_tip(
+    event_log_path: str | os.PathLike[str], expected_run_id: str
+) -> dict[str, int | str]:
+    """Capture one genesis-verified, fsynced prefix under the append authority lock."""
+    log_path = os.fspath(event_log_path)
+    directory = os.path.dirname(log_path) or "."
+    os.makedirs(directory, mode=0o700, exist_ok=True)
+    lock_fd = _open_lock(log_path + LOCK_SUFFIX)
+    try:
+        _hook("before_capture_lock")
+        fcntl.flock(lock_fd, fcntl.LOCK_EX)
+        _hook("after_capture_lock")
+        _assert_secure_fd(lock_fd, "lock", exact_mode=0o600)
+        log_fd = _open_log(log_path)
+        try:
+            _assert_secure_fd(log_fd, "event log", exact_mode=0o600)
+            events, end_offset = _read_verified_log(
+                log_fd, expected_run_id, repair_partial_tail=True
+            )
+            _hook("before_capture_fsync")
+            os.fsync(log_fd)
+            _hook("after_capture_fsync")
+            return _capture_tip(log_fd, events, end_offset).as_dict()
         finally:
             os.close(log_fd)
     finally:
@@ -165,7 +211,9 @@ def _assert_secure_fd(fd: int, purpose: str, *, exact_mode: int) -> os.stat_resu
     return details
 
 
-def _read_verified_log(fd: int, expected_run_id: str, *, repair_partial_tail: bool) -> tuple[list[dict[str, Any]], int]:
+def _read_verified_log(
+    fd: int, expected_run_id: str, *, repair_partial_tail: bool
+) -> tuple[list[dict[str, Any]], int]:
     size = os.fstat(fd).st_size
     os.lseek(fd, 0, os.SEEK_SET)
     data = _read_all(fd, size)
@@ -229,7 +277,9 @@ def _reconcile(events: list[dict[str, Any]], draft: dict[str, Any]) -> dict[str,
         persisted_draft = {key: envelope[key] for key in _DRAFT_FIELDS if key in envelope}
         if same_event_id and same_key and canonicalize(persisted_draft) == canonicalize(draft):
             return envelope
-        raise EventConflictError("event_id or idempotency_key conflicts with a different persisted draft")
+        raise EventConflictError(
+            "event_id or idempotency_key conflicts with a different persisted draft"
+        )
     return None
 
 
@@ -271,13 +321,22 @@ def _validate_draft(value: Mapping[str, Any], expected_run_id: str) -> dict[str,
 
 
 def _validate_envelope(value: Any, expected_run_id: str) -> dict[str, Any]:
-    if not isinstance(value, dict) or set(value) - _ENVELOPE_FIELDS or not (_DRAFT_FIELDS - {"artifact_id", "causation_event_id"}).issubset(value) or not {"sequence", "previous_event_hash", "event_hash"}.issubset(value):
+    if (
+        not isinstance(value, dict)
+        or set(value) - _ENVELOPE_FIELDS
+        or not (_DRAFT_FIELDS - {"artifact_id", "causation_event_id"}).issubset(value)
+        or not {"sequence", "previous_event_hash", "event_hash"}.issubset(value)
+    ):
         raise EventLogAppendError("event envelope has missing or forbidden fields")
     result = dict(value)
     if result.get("schema_version") != 2 or result.get("run_id") != expected_run_id:
         raise EventLogAppendError("event envelope has an invalid schema version or run ID")
     _validate_common(result)
-    if not isinstance(result["sequence"], int) or isinstance(result["sequence"], bool) or result["sequence"] < 1:
+    if (
+        not isinstance(result["sequence"], int)
+        or isinstance(result["sequence"], bool)
+        or result["sequence"] < 1
+    ):
         raise EventLogAppendError("event sequence must be a positive integer")
     for name in ("previous_event_hash", "event_hash"):
         if not _is_hash(result[name]):
@@ -299,7 +358,10 @@ def _validate_common(value: Mapping[str, Any]) -> None:
     event_type = value.get("type")
     if not isinstance(occurred_at, str) or not occurred_at:
         raise EventLogAppendError("invalid occurred_at")
-    if not isinstance(event_type, str) or re.fullmatch(r"[a-z][a-z0-9_]*\.[a-z][a-z0-9_]*\.[a-z][a-z0-9_]*", event_type) is None:
+    if (
+        not isinstance(event_type, str)
+        or re.fullmatch(r"[a-z][a-z0-9_]*\.[a-z][a-z0-9_]*\.[a-z][a-z0-9_]*", event_type) is None
+    ):
         raise EventLogAppendError("invalid type")
     actor = value.get("actor")
     if not isinstance(actor, dict) or set(actor) != {"agent_id", "role", "phase"}:
@@ -321,8 +383,14 @@ def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
         result[key] = value
     return result
 
+
 def _is_hash(value: Any) -> bool:
-    return isinstance(value, str) and len(value) == len(HASH_PREFIX) + 64 and value.startswith(HASH_PREFIX) and all(character in "0123456789abcdef" for character in value[len(HASH_PREFIX):])
+    return (
+        isinstance(value, str)
+        and len(value) == len(HASH_PREFIX) + 64
+        and value.startswith(HASH_PREFIX)
+        and all(character in "0123456789abcdef" for character in value[len(HASH_PREFIX) :])
+    )
 
 
 def _read_all(fd: int, size: int) -> bytes:
@@ -367,11 +435,18 @@ def _load_draft(path: str) -> dict[str, Any]:
 
 def main(argv: list[str] | None = None) -> int:
     args = sys.argv[1:] if argv is None else argv
-    if len(args) != 3:
-        print("usage: event_log_append_v2.py DRAFT_PATH EVENT_LOG_PATH EXPECTED_RUN_ID", file=sys.stderr)
-        return 2
     try:
-        result = append_draft(_load_draft(args[0]), args[1], args[2])
+        if len(args) == 3 and args[0] == "capture":
+            result: Mapping[str, Any] = capture_durable_tip(args[1], args[2])
+        elif len(args) == 3:
+            result = append_draft(_load_draft(args[0]), args[1], args[2])
+        else:
+            print(
+                "usage: event_log_append_v2.py DRAFT_PATH EVENT_LOG_PATH EXPECTED_RUN_ID\n"
+                "   or: event_log_append_v2.py capture EVENT_LOG_PATH EXPECTED_RUN_ID",
+                file=sys.stderr,
+            )
+            return 2
     except (OSError, EventLogAppendError, CanonicalJsonError) as error:
         print(f"event-log-append-v2: {error}", file=sys.stderr)
         return 1
