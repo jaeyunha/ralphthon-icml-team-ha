@@ -9,7 +9,8 @@ import os
 from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable, Mapping
+
 
 PHASES = ["initial-review", "followup", "discussion", "final-justification"]
 
@@ -407,7 +408,7 @@ def publish_discussion_position_v2(
     position: str,
     evidence_refs: list[str],
     score_effect: str,
-    canonical_event: dict[str, Any],
+    append_authority: Callable[[Mapping[str, Any]], Mapping[str, Any]],
     score_update: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Publish one immutable, issue/version-bound reviewer position.
@@ -415,24 +416,10 @@ def publish_discussion_position_v2(
     The shared ledger is authoritative for replay; the reviewer-local receipt
     retains the full causal score history across restarts.
     """
-    if not isinstance(canonical_event, dict):
-        raise ValueError("canonical event identity is required")
+    if not callable(append_authority):
+        raise ValueError("canonical append authority is required")
     identity = read_json(workspace / "identity.json")
-    event_id = canonical_event.get("event_id")
-    sequence = canonical_event.get("sequence")
-    event_hash = canonical_event.get("event_hash")
-    if (
-        not isinstance(event_id, str)
-        or not event_id
-        or not isinstance(sequence, int)
-        or isinstance(sequence, bool)
-        or sequence < 1
-        or not isinstance(event_hash, str)
-        or not event_hash
-    ):
-        raise ValueError("canonical event ID, sequence, and hash are required")
-    if canonical_event.get("run_id", identity["run_id"]) != identity["run_id"]:
-        raise ValueError("canonical event belongs to another run")
+
     if (
         not isinstance(issue_id, str)
         or not issue_id
@@ -463,19 +450,32 @@ def publish_discussion_position_v2(
             set(score_update) != required
             or score_update["issue_id"] != issue_id
             or score_update["version_id"] != version_id
-            or score_update["causation_event_id"] != event_id
         ):
-            raise ValueError("score update is not causally bound to this position")
+            raise ValueError("score update is not bound to this position")
+        previous, next_score = score_update["previous_score"], score_update["next_score"]
+        if (
+            not isinstance(previous, int)
+            or isinstance(previous, bool)
+            or not isinstance(next_score, int)
+            or isinstance(next_score, bool)
+        ):
+            raise ValueError("score updates require integer scores")
+        if score_effect == "unchanged" or score_effect == "pending":
+            raise ValueError("unchanged or pending positions cannot carry score updates")
+        if (score_effect == "raised" and next_score <= previous) or (
+            score_effect == "lowered" and next_score >= previous
+        ):
+            raise ValueError("score effect does not match score update direction")
+    elif score_effect in {"raised", "lowered"}:
+        raise ValueError("score-changing positions require a causal score update")
+
     if not discussion_ledger_path.exists():
         raise ValueError("unknown discussion issue or version")
     ledger = read_json(discussion_ledger_path)
     if ledger.get("schema_version") != 2 or ledger.get("run_id") != identity["run_id"]:
         raise ValueError("discussion ledger belongs to another run")
-    event = {
+    semantic_draft = {
         "run_id": identity["run_id"],
-        "event_id": event_id,
-        "sequence": sequence,
-        "event_hash": event_hash,
         "type": "reviewer.discussion.position_published",
         "issue_id": issue_id,
         "version_id": version_id,
@@ -485,20 +485,51 @@ def publish_discussion_position_v2(
         "score_effect": score_effect,
         "score_update": deepcopy(score_update),
     }
-    duplicate = next((item for item in ledger["events"] if item.get("event_id") == event_id), None)
-    if duplicate is not None:
-        if duplicate != event:
-            raise ValueError("conflicting canonical-event retry")
-        return deepcopy(event)
-    if any(item.get("sequence") == sequence for item in ledger["events"]):
-        raise ValueError("canonical event sequence is already recorded")
-    # Replaying with the proposed event rejects unknown issues/versions and any
-    # attempt to use this API as unconstrained discussion.
+    event = dict(append_authority(deepcopy(semantic_draft)))
+    required_event = {
+        "run_id",
+        "event_id",
+        "sequence",
+        "event_hash",
+        "type",
+        "issue_id",
+        "version_id",
+        "reviewer_id",
+        "position",
+        "evidence_refs",
+        "score_effect",
+        "score_update",
+    }
+    if set(event) != required_event or any(
+        event.get(key) != value for key, value in semantic_draft.items()
+    ):
+        raise ValueError("canonical append authority returned a mismatched event")
+    if (
+        not isinstance(event["event_id"], str)
+        or not event["event_id"]
+        or not isinstance(event["sequence"], int)
+        or isinstance(event["sequence"], bool)
+        or event["sequence"] < 1
+        or not isinstance(event["event_hash"], str)
+        or not event["event_hash"]
+    ):
+        raise ValueError("canonical append authority did not assign valid chronology")
+    ledger = read_json(discussion_ledger_path)
+    if ledger.get("schema_version") != 2 or ledger.get("run_id") != identity["run_id"]:
+        raise ValueError("discussion projection belongs to another run")
     from roles.ac.runtime import replay_discussion_v2_events
 
-    replay_discussion_v2_events([*ledger["events"], event])
-    ledger["events"].append(event)
-    atomic_json(discussion_ledger_path, ledger)
+    replay_discussion_v2_events(ledger["events"])
+    if event not in ledger["events"]:
+        raise ValueError("canonical event is absent from authoritative projection")
+    if score_update is not None and score_update["causation_event_id"] != event["event_id"]:
+        raise ValueError("score update is not causally bound to the canonical position event")
+    replay = replay_discussion_v2_events(ledger["events"])
+    if not any(
+        item["event_id"] == event["event_id"] and item["status"] == "accepted"
+        for item in replay["positions"]
+    ):
+        raise ValueError("stale discussion positions cannot update score history")
     receipt_path = workspace / "discussion-v2-score-history.json"
     receipt = (
         read_json(receipt_path)
@@ -516,7 +547,7 @@ def publish_discussion_position_v2(
         receipt["entries"].append(
             {
                 **deepcopy(score_update),
-                "event_id": event_id,
+                "event_id": event["event_id"],
                 "issue_id": issue_id,
                 "version_id": version_id,
             }

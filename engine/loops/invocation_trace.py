@@ -23,6 +23,8 @@ TRACE_FILES = (
     "invocation-result.json",
 )
 
+TRACE_MANIFEST_FILENAME = "trace-manifest.json"
+
 
 def timestamp() -> str:
     return (
@@ -128,7 +130,7 @@ def finalize(args: argparse.Namespace) -> None:
                 "bytes": len(content),
             }
         )
-    existing = trace / "invocation-manifest.json"
+    existing = trace / TRACE_MANIFEST_FILENAME
     if existing.exists():
         previous = json.loads(existing.read_text(encoding="utf-8"))
         if previous.get("status") != args.status or previous.get("files") != entries:

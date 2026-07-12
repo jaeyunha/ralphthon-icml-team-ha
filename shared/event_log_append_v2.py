@@ -177,6 +177,16 @@ def capture_durable_tip(
             os.close(lock_fd)
 
 
+def _fsync_parent_directory(path: str) -> None:
+    directory = os.path.dirname(path) or "."
+    flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0)
+    fd = os.open(directory, flags)
+    try:
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+
+
 def _open_lock(path: str) -> int:
     flags = os.O_RDWR | os.O_CREAT | getattr(os, "O_NOFOLLOW", 0)
     try:
@@ -185,6 +195,7 @@ def _open_lock(path: str) -> int:
         fd = os.open(path, flags)
     else:
         os.fchmod(fd, 0o600)
+        _fsync_parent_directory(path)
     return fd
 
 
@@ -195,6 +206,7 @@ def _open_log(path: str) -> int:
     except FileExistsError:
         return os.open(path, flags)
     os.fchmod(fd, 0o600)
+    _fsync_parent_directory(path)
     return fd
 
 

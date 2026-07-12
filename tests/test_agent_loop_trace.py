@@ -100,7 +100,7 @@ def test_v2_trace_preserves_attempts_and_is_idempotent(tmp_path: Path) -> None:
     assert (first / "candidate-artifact").read_bytes() == b"{}\n"
     assert b"EXACT REOPEN FEEDBACK" in (second / "prompt.txt").read_bytes()
     for directory in (first, second):
-        manifest = json.loads((directory / "invocation-manifest.json").read_text(encoding="utf-8"))
+        manifest = json.loads((directory / "trace-manifest.json").read_text(encoding="utf-8"))
         assert manifest["causation_event_id"] == "cause-1"
         assert manifest["execution_started_event_id"] == "started-1"
         for entry in manifest["files"]:

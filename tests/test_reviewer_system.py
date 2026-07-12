@@ -21,10 +21,6 @@ ANCHORS = ROOT / "tests/fixtures/extraction/34584/anchors.json"
 ADAPTER = ROOT / "engine/watchdog/contracts-adapter.sh"
 
 
-def canonical_event(sequence: int, event_id: str) -> dict[str, object]:
-    return {"event_id": event_id, "sequence": sequence, "event_hash": f"sha256:event-{sequence}"}
-
-
 def test_v2_issue_discussion_is_immutable_causal_and_replayable(tmp_path: Path):
     ac_workspace = tmp_path / "ac"
     ac_runtime.initialize_workspace(
@@ -42,28 +38,59 @@ def test_v2_issue_discussion_is_immutable_causal_and_replayable(tmp_path: Path):
     reviewer_runtime.initialize_workspace(
         reviewer_workspace, "run-v2", "reviewer-r2", persona_compiler.base_personas()[1]
     )
+    ledger_path = ac_workspace / "discussion-v2-ledger.json"
 
-    with pytest.raises(ValueError, match="canonical event ID"):
+    def append_authority(event_id: str, sequence: int, *, project: bool = False):
+        def append(semantic: object) -> dict[str, object]:
+            event = {
+                **dict(semantic),
+                "event_id": event_id,
+                "sequence": sequence,
+                "event_hash": f"sha256:event-{sequence}",
+            }
+            if project:
+                ledger = load(ledger_path)
+                existing = next(
+                    (
+                        item
+                        for item in ledger["events"]
+                        if item["event_id"] == event["event_id"]
+                    ),
+                    None,
+                )
+                if existing is not None:
+                    if existing != event:
+                        raise ValueError("conflicting canonical append retry")
+                    return existing
+                ledger["events"].append(event)
+                ac_runtime.atomic_json(ledger_path, ledger)
+            return event
+
+        return append
+
+    def rejected_append(_: object) -> dict[str, object]:
+        raise ValueError("canonical append authority rejected this discussion position")
+
+    with pytest.raises(ValueError, match="canonical append authority"):
         ac_runtime.open_issue_v2(
             ac_workspace,
             issue_id="issue-v2",
             expected_reviewer_ids=["reviewer-r2"],
-            canonical_event={},
+            append_authority=None,
         )
     ac_runtime.open_issue_v2(
         ac_workspace,
         issue_id="issue-v2",
         expected_reviewer_ids=["reviewer-r2"],
-        canonical_event=canonical_event(10, "evt-open"),
+        append_authority=append_authority("evt-open", 10),
     )
     ac_runtime.open_thread_version_v2(
         ac_workspace,
         issue_id="issue-v2",
         prior_version_id=None,
-        canonical_event=canonical_event(20, "evt-round-1"),
+        append_authority=append_authority("evt-round-1", 20),
     )
     first_version = ac_runtime.discussion_thread_version_id_v2("run-v2", "issue-v2", "evt-round-1")
-    ledger_path = ac_workspace / "discussion-v2-ledger.json"
     score_update = {
         "history_id": "reviewer-r2-scores",
         "entry_id": "discussion-score-1",
@@ -82,26 +109,27 @@ def test_v2_issue_discussion_is_immutable_causal_and_replayable(tmp_path: Path):
         position="The new ablation resolves the stated concern.",
         evidence_refs=["TAB-1"],
         score_effect="raised",
-        canonical_event=canonical_event(30, "evt-position-1"),
+        append_authority=append_authority("evt-position-1", 30, project=True),
         score_update=score_update,
     )
     ac_runtime.open_thread_version_v2(
         ac_workspace,
         issue_id="issue-v2",
         prior_version_id=first_version,
-        canonical_event=canonical_event(40, "evt-round-2"),
+        append_authority=append_authority("evt-round-2", 40),
     )
     second_version = ac_runtime.discussion_thread_version_id_v2("run-v2", "issue-v2", "evt-round-2")
-    reviewer_runtime.publish_discussion_position_v2(
-        reviewer_workspace,
-        discussion_ledger_path=ledger_path,
-        issue_id="issue-v2",
-        version_id=first_version,
-        position="Late first-round audit evidence.",
-        evidence_refs=["TAB-2"],
-        score_effect="unchanged",
-        canonical_event=canonical_event(50, "evt-position-stale"),
-    )
+    with pytest.raises(ValueError, match="stale discussion positions"):
+        reviewer_runtime.publish_discussion_position_v2(
+            reviewer_workspace,
+            discussion_ledger_path=ledger_path,
+            issue_id="issue-v2",
+            version_id=first_version,
+            position="Late first-round audit evidence.",
+            evidence_refs=["TAB-2"],
+            score_effect="unchanged",
+            append_authority=append_authority("evt-position-stale", 50, project=True),
+        )
     replay = ac_runtime.replay_discussion_v2(ac_workspace)
     assert [version["round"] for version in replay["versions"]] == [1, 2]
     assert [item["status"] for item in replay["positions"]] == ["accepted", "rejected_stale"]
@@ -114,7 +142,7 @@ def test_v2_issue_discussion_is_immutable_causal_and_replayable(tmp_path: Path):
         == replay
     )
 
-    with pytest.raises(ValueError, match="unknown discussion issue"):
+    with pytest.raises(ValueError, match="canonical append authority rejected"):
         reviewer_runtime.publish_discussion_position_v2(
             reviewer_workspace,
             discussion_ledger_path=ledger_path,
@@ -123,9 +151,9 @@ def test_v2_issue_discussion_is_immutable_causal_and_replayable(tmp_path: Path):
             position="No unconstrained chat.",
             evidence_refs=[],
             score_effect="pending",
-            canonical_event=canonical_event(60, "evt-unknown"),
+            append_authority=rejected_append,
         )
-    with pytest.raises(ValueError, match="unknown discussion thread version"):
+    with pytest.raises(ValueError, match="canonical append authority rejected"):
         reviewer_runtime.publish_discussion_position_v2(
             reviewer_workspace,
             discussion_ledger_path=ledger_path,
@@ -134,16 +162,16 @@ def test_v2_issue_discussion_is_immutable_causal_and_replayable(tmp_path: Path):
             position="No unconstrained chat.",
             evidence_refs=[],
             score_effect="pending",
-            canonical_event=canonical_event(60, "evt-unknown-version"),
+            append_authority=rejected_append,
         )
     with pytest.raises(ValueError, match="two thread versions"):
         ac_runtime.open_thread_version_v2(
             ac_workspace,
             issue_id="issue-v2",
             prior_version_id=second_version,
-            canonical_event=canonical_event(60, "evt-round-3"),
+            append_authority=append_authority("evt-round-3", 60),
         )
-    with pytest.raises(ValueError, match="conflicting canonical-event retry"):
+    with pytest.raises(ValueError, match="conflicting canonical append retry"):
         reviewer_runtime.publish_discussion_position_v2(
             reviewer_workspace,
             discussion_ledger_path=ledger_path,
@@ -152,7 +180,7 @@ def test_v2_issue_discussion_is_immutable_causal_and_replayable(tmp_path: Path):
             position="Different retry payload.",
             evidence_refs=[],
             score_effect="pending",
-            canonical_event=canonical_event(30, "evt-position-1"),
+            append_authority=append_authority("evt-position-1", 30, project=True),
         )
 
 

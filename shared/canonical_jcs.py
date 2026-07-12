@@ -46,7 +46,9 @@ def _encode(value: Any) -> str:
         for key, item in value.items():
             if not isinstance(key, str):
                 raise CanonicalJsonError("JSON object keys must be strings")
-            encoded.append((key.encode("utf-16be", "surrogatepass"), _quote(key) + ":" + _encode(item)))
+            encoded.append(
+                (key.encode("utf-16be", "surrogatepass"), _quote(key) + ":" + _encode(item))
+            )
         encoded.sort(key=lambda pair: pair[0])
         return "{" + ",".join(item for _, item in encoded) + "}"
     raise CanonicalJsonError(f"unsupported JSON value: {type(value).__name__}")
@@ -105,7 +107,7 @@ def _number(value: float) -> str:
     else:
         digits = coefficient
         decimal_index = len(digits) + exponent
-    digits = digits.lstrip("0")
+    digits = digits.lstrip("0").rstrip("0")
     assert digits
 
     absolute = abs(value)
@@ -119,4 +121,6 @@ def _number(value: float) -> str:
 
     scientific_exponent = decimal_index - 1
     mantissa = digits[0] if len(digits) == 1 else digits[0] + "." + digits[1:]
-    return sign + mantissa + "e" + ("+" if scientific_exponent >= 0 else "") + str(scientific_exponent)
+    return (
+        sign + mantissa + "e" + ("+" if scientific_exponent >= 0 else "") + str(scientific_exponent)
+    )

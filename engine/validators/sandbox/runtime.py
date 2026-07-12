@@ -8,9 +8,11 @@ import shutil
 import stat
 import subprocess
 import time
+import threading
+
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
-from typing import Literal, Sequence
+from typing import Any, Literal, Sequence
 
 
 class SandboxUnavailable(RuntimeError):
@@ -27,12 +29,13 @@ class SandboxLimits:
     workspace_mb: int = 64
     pids: int = 128
     timeout_seconds: float = 60.0
+    output_bytes: int = 1_048_576
 
     def __post_init__(self) -> None:
         if self.cpus <= 0 or self.memory_mb < 16 or self.workspace_mb < 1:
             raise ValueError("sandbox limits must be positive")
-        if self.pids < 2 or self.timeout_seconds <= 0:
-            raise ValueError("pids and timeout must be positive")
+        if self.pids < 2 or self.timeout_seconds <= 0 or self.output_bytes < 1:
+            raise ValueError("pids, timeout, and output quota must be positive")
 
 
 @dataclass(frozen=True)
@@ -234,26 +237,55 @@ class DockerSandbox:
         name = _container_name(request, input_hashes_before)
         command = self.build_command(request, name)
         started = time.monotonic()
-        process = subprocess.Popen(
-            command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
-        )
+        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         timed_out = False
+        output_quota_exceeded = threading.Event()
+
+        def capture(stream: Any, retained: bytearray) -> None:
+            while True:
+                chunk = stream.read(64 * 1024)
+                if not chunk:
+                    return
+                remaining = request.limits.output_bytes - len(retained)
+                if remaining > 0:
+                    retained.extend(chunk[:remaining])
+                if len(chunk) > remaining:
+                    output_quota_exceeded.set()
+                    if process.poll() is None:
+                        process.kill()
+
+        stdout_bytes, stderr_bytes = bytearray(), bytearray()
+        stdout_thread = threading.Thread(
+            target=capture, args=(process.stdout, stdout_bytes), daemon=True
+        )
+        stderr_thread = threading.Thread(
+            target=capture, args=(process.stderr, stderr_bytes), daemon=True
+        )
+        stdout_thread.start()
+        stderr_thread.start()
         try:
-            stdout, stderr = process.communicate(timeout=request.limits.timeout_seconds)
+            process.wait(timeout=request.limits.timeout_seconds)
         except subprocess.TimeoutExpired:
             timed_out = True
             self._run_control(["kill", name], timeout=10.0)
-            stdout, stderr = process.communicate(timeout=10.0)
+            process.wait(timeout=10.0)
         finally:
             if process.poll() is None:
                 process.kill()
+            stdout_thread.join(timeout=10.0)
+            stderr_thread.join(timeout=10.0)
             self._run_control(["rm", "-f", name], timeout=10.0)
+        stdout = bytes(stdout_bytes).decode("utf-8", errors="replace")
+        stderr = bytes(stderr_bytes).decode("utf-8", errors="replace")
+
         duration = time.monotonic() - started
         exit_code = process.returncode
         input_hashes_after = {item.name: _hash_path(item.source) for item in request.inputs}
         inputs_unchanged = input_hashes_before == input_hashes_after
         status = (
-            "input_mutated"
+            "output_quota_exceeded"
+            if output_quota_exceeded.is_set()
+            else "input_mutated"
             if not inputs_unchanged
             else "timeout"
             if timed_out
@@ -261,6 +293,7 @@ class DockerSandbox:
             if exit_code == 0
             else "failed"
         )
+
         stdout_hash = "sha256:" + hashlib.sha256(stdout.encode()).hexdigest()
         stderr_hash = "sha256:" + hashlib.sha256(stderr.encode()).hexdigest()
         controls: dict[str, object] = {
@@ -281,6 +314,10 @@ class DockerSandbox:
             "cpus": request.limits.cpus,
             "pids": request.limits.pids,
             "timeout_seconds": request.limits.timeout_seconds,
+            "output_quota_bytes": request.limits.output_bytes,
+            "stdout_retained_bytes": len(stdout_bytes),
+            "stderr_retained_bytes": len(stderr_bytes),
+            "output_truncated": output_quota_exceeded.is_set(),
             "capabilities": "none",
             "no_new_privileges": True,
             "seccomp": "docker_default",

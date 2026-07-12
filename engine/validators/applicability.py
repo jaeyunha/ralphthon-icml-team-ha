@@ -11,7 +11,8 @@ import json
 import os
 import re
 from pathlib import Path
-from typing import Any, Callable, Mapping, Sequence
+from typing import Any, Mapping, Sequence
+
 
 LANES = ("mathematics", "statistics", "code", "references", "ethics", "arbitration")
 TERMINAL_STATUSES = frozenset(
@@ -26,9 +27,6 @@ class ApplicabilityError(ValueError):
 
 class ApplicabilityConflict(ApplicabilityError):
     """An immutable artifact was retried with different content."""
-
-
-LaneRunner = Callable[[Mapping[str, Any]], Mapping[str, Any]]
 
 
 def canonical_json(value: Any) -> bytes:
@@ -61,23 +59,18 @@ def _require_lane_set(value: Mapping[str, Any], field: str) -> None:
 
 
 class ApplicabilityCoordinator:
-    """Persist immutable lane intents and aggregate opaque terminal receipts.
+    """Persist lane intents for the watchdog; never invoke validators directly."""
 
-    ``runners`` must provide one distinct injected runner for every known lane.
-    A runner receives its persisted intent and returns an opaque, hash-bound
-    receipt; the coordinator only checks protocol shape and bindings.
-    """
-
-    def __init__(self, root: Path, runners: Mapping[str, LaneRunner]) -> None:
-        _require_lane_set(runners, "runners")
-        if any(not callable(runner) for runner in runners.values()):
-            raise ApplicabilityError("every lane runner must be callable")
-        if len({id(runner) for runner in runners.values()}) != len(LANES):
-            raise ApplicabilityError("each lane requires an independent runner")
+    def __init__(self, root: Path, validator_ids: Mapping[str, str]) -> None:
+        _require_lane_set(validator_ids, "validator_ids")
+        if any(
+            not isinstance(identity, str) or not identity for identity in validator_ids.values()
+        ):
+            raise ApplicabilityError("every lane requires a non-empty validator identity")
+        if len(set(validator_ids.values())) != len(LANES):
+            raise ApplicabilityError("each lane requires a distinct validator identity")
         self.root = Path(root)
-        self.runners = dict(runners)
-        self._runner_objects = {lane: id(runner) for lane, runner in runners.items()}
-        self._runner_ids = {lane: self._runner_id(lane, runner) for lane, runner in runners.items()}
+        self.validator_ids = dict(validator_ids)
 
     def create_plan(
         self, *, admitted_facts: Mapping[str, Any], applicability: Mapping[str, Mapping[str, Any]]
@@ -99,7 +92,7 @@ class ApplicabilityCoordinator:
             "facts_hash": facts_hash,
             "applicability": entries,
             "selected_lanes": selected_lanes,
-            "runner_ids": {lane: self._runner_ids[lane] for lane in selected_lanes},
+            "validator_ids": {lane: self.validator_ids[lane] for lane in selected_lanes},
         }
         plan = {**content, "plan_hash": sha256(content)}
         plan_id = "validator-plan-" + plan["plan_hash"].split(":", 1)[1][:24]
@@ -113,7 +106,7 @@ class ApplicabilityCoordinator:
                 "lane": lane,
                 "facts_hash": facts_hash,
                 "applicability": entries[lane],
-                "runner_id": self._runner_ids[lane],
+                "validator_id": self.validator_ids[lane],
             }
             self._immutable(
                 self._path("intents", plan_id, lane),
@@ -123,59 +116,58 @@ class ApplicabilityCoordinator:
 
     plan = create_plan
 
+    def record_receipt(
+        self, plan: str | Mapping[str, Any], lane: str, receipt: Mapping[str, Any]
+    ) -> dict[str, Any]:
+        """Accept one watchdog-delivered terminal receipt for its persisted intent."""
+        record = self._load_plan(plan)
+        if lane not in record["selected_lanes"]:
+            raise ApplicabilityError("receipt lane was not selected")
+        intent = self._load(self._path("intents", record["plan_id"], lane))
+        self._validate_intent(intent, record, lane)
+        normalized = self._normalize_receipt(receipt, intent, lane)
+        self._immutable(self._path("receipts", record["plan_id"], lane), normalized)
+        return normalized
+
     def execute(self, plan: str | Mapping[str, Any]) -> dict[str, Any]:
-        """Run only selected lanes and create the exact terminal receipt bundle."""
+        """Aggregate persisted watchdog receipts; scheduling belongs to the watchdog."""
         record = self._load_plan(plan)
         plan_id = record["plan_id"]
         terminal_path = self._path("terminals", plan_id)
         if terminal_path.exists():
             return self._validated_terminal(terminal_path, record)
-
         receipts: list[dict[str, Any]] = []
         for lane in record["selected_lanes"]:
             intent = self._load(self._path("intents", plan_id, lane))
             self._validate_intent(intent, record, lane)
-            if (
-                id(self.runners[lane]) != self._runner_objects[lane]
-                or self._runner_id(lane, self.runners[lane]) != intent["runner_id"]
-            ):
-                raise ApplicabilityError(f"runner substitution for {lane}")
             receipt_path = self._path("receipts", plan_id, lane)
-            if receipt_path.exists():
-                receipt = self._load(receipt_path)
-                self._validate_receipt(receipt, intent, lane)
-            else:
-                try:
-                    supplied = self.runners[lane](dict(intent))
-                except (
-                    Exception
-                ) as exc:  # Runner failure is a visible limitation, never a judgment.
-                    supplied = {
-                        "lane": lane,
-                        "intent_hash": intent["intent_hash"],
-                        "status": "unavailable",
-                        "limitation_evidence": {
-                            "kind": "runner_failure",
-                            "error_type": type(exc).__name__,
-                        },
-                    }
-                    supplied = {**supplied, "receipt_hash": sha256(supplied)}
-                receipt = self._normalize_receipt(supplied, intent, lane)
-                self._immutable(receipt_path, receipt)
+            if not receipt_path.exists():
+                raise ApplicabilityError("watchdog has not persisted every selected lane receipt")
+            receipt = self._load(receipt_path)
+            self._validate_receipt(receipt, intent, lane)
             receipts.append(receipt)
-
         selected = record["selected_lanes"]
         receipt_lanes = [receipt["lane"] for receipt in receipts]
         if receipt_lanes != selected or len(set(receipt_lanes)) != len(receipt_lanes):
             raise ApplicabilityError("selected lanes and terminal receipt lanes differ")
+        limitations = [
+            {
+                "lane": receipt["lane"],
+                "status": receipt["status"],
+                "limitation_evidence": receipt["limitation_evidence"],
+            }
+            for receipt in receipts
+            if receipt["status"] != "complete"
+        ]
         terminal_content = {
-            "version": 1,
+            "version": 2,
             "plan_id": plan_id,
             "plan_hash": record["plan_hash"],
-            "status": "complete",
+            "status": "complete_with_limitations" if limitations else "complete",
             "selected_lanes": selected,
             "terminal_receipt_lanes": receipt_lanes,
             "receipt_hashes": [receipt["receipt_hash"] for receipt in receipts],
+            "limitations": limitations,
         }
         terminal = {**terminal_content, "terminal_hash": sha256(terminal_content)}
         self._immutable(terminal_path, terminal)
@@ -280,8 +272,13 @@ class ApplicabilityCoordinator:
         prohibited = {"score", "recommendation"} & set(receipt)
         if prohibited:
             raise ApplicabilityError("receipts must not contain score or recommendation")
-        if receipt.get("lane") != lane or receipt.get("intent_hash") != intent["intent_hash"]:
-            raise ApplicabilityError(f"{lane} receipt does not bind exact intent")
+        if (
+            receipt.get("lane") != lane
+            or receipt.get("intent_hash") != intent["intent_hash"]
+            or receipt.get("validator_id") != intent["validator_id"]
+        ):
+            raise ApplicabilityError(f"{lane} receipt does not bind exact intent and validator")
+
         status = receipt.get("status")
         if status not in TERMINAL_STATUSES:
             raise ApplicabilityError(f"{lane} receipt has non-terminal status")
@@ -300,8 +297,9 @@ class ApplicabilityCoordinator:
             or intent.get("plan_hash") != plan["plan_hash"]
             or intent.get("lane") != lane
             or intent.get("facts_hash") != plan["facts_hash"]
+            or intent.get("validator_id") != plan["validator_ids"].get(lane)
         ):
-            raise ApplicabilityError("intent does not bind plan")
+            raise ApplicabilityError("intent does not bind plan and lane validator")
 
     def _validated_terminal(self, path: Path, plan: Mapping[str, Any]) -> dict[str, Any]:
         terminal = self._load(path)
@@ -309,7 +307,7 @@ class ApplicabilityCoordinator:
             raise ApplicabilityError("terminal receipt hash mismatch")
         selected = plan["selected_lanes"]
         if (
-            terminal.get("status") != "complete"
+            terminal.get("status") not in {"complete", "complete_with_limitations"}
             or terminal.get("plan_id") != plan["plan_id"]
             or terminal.get("plan_hash") != plan["plan_hash"]
             or terminal.get("selected_lanes") != selected
@@ -319,6 +317,23 @@ class ApplicabilityCoordinator:
         hashes = terminal.get("receipt_hashes")
         if not isinstance(hashes, list) or len(hashes) != len(selected):
             raise ApplicabilityError("terminal receipt hash set is malformed")
+        limitations = terminal.get("limitations")
+        expected_limitations = [
+            {
+                "lane": lane,
+                "status": self._load(self._path("receipts", plan["plan_id"], lane))["status"],
+                "limitation_evidence": self._load(self._path("receipts", plan["plan_id"], lane))[
+                    "limitation_evidence"
+                ],
+            }
+            for lane in selected
+            if self._load(self._path("receipts", plan["plan_id"], lane))["status"] != "complete"
+        ]
+        if limitations != expected_limitations or terminal["status"] != (
+            "complete_with_limitations" if expected_limitations else "complete"
+        ):
+            raise ApplicabilityError("terminal limitation evidence does not bind lane receipts")
+
         for lane, receipt_hash in zip(selected, hashes, strict=True):
             receipt = self._load(self._path("receipts", plan["plan_id"], lane))
             intent = self._load(self._path("intents", plan["plan_id"], lane))
@@ -327,18 +342,6 @@ class ApplicabilityCoordinator:
             if receipt["receipt_hash"] != receipt_hash:
                 raise ApplicabilityError("terminal receipt hash mismatch")
         return terminal
-
-    @staticmethod
-    def _runner_id(lane: str, runner: LaneRunner) -> str:
-        supplied = getattr(runner, "runner_id", None)
-        if isinstance(supplied, str) and supplied:
-            return supplied
-        target = runner if hasattr(runner, "__qualname__") else type(runner)
-        module = getattr(target, "__module__", "")
-        name = getattr(target, "__qualname__", getattr(target, "__name__", ""))
-        if not module or not name:
-            raise ApplicabilityError(f"{lane} runner must have a stable runner_id")
-        return f"{module}.{name}"
 
     def _path(self, category: str, plan_id: str, lane: str | None = None) -> Path:
         parts = [category, plan_id]

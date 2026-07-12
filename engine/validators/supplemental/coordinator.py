@@ -158,6 +158,18 @@ class SupplementalTestCoordinator:
         }
         record = {**content, "authorization_hash": sha256(content)}
         self._immutable(self._path("authorizations", request_id), record)
+        child_content = {
+            "version": 2,
+            "request_id": request_id,
+            "request_hash": request["request_hash"],
+            "authorization_hash": record["authorization_hash"],
+            "visibility": "private",
+        }
+        self._immutable(
+            self._path("children", request_id),
+            {**child_content, "child_hash": sha256(child_content)},
+        )
+
         return record
 
     def record_preflight(
@@ -168,15 +180,26 @@ class SupplementalTestCoordinator:
             raise SupplementalTestError("preflight kind must be code or statistics")
         request = self._request(request_id)
         supplied = dict(preflight)
+        validator_id = _require_text(supplied.get("validator_id"), "preflight.validator_id")
         if (
             supplied.get("request_hash") != request["request_hash"]
             or supplied.get("status") != "authorized"
         ):
             raise SupplementalTestError("preflight must authorize the exact request hash")
-        # The coordinator hashes the opaque validator output but never evaluates it.
-        content = {"version": 1, "kind": kind, "request_id": request_id, "preflight": supplied}
+        other_path = self._path(
+            "preflights", request_id, "statistics" if kind == "code" else "code"
+        )
+        if (
+            other_path.exists()
+            and self._load(other_path)["preflight"].get("validator_id") == validator_id
+        ):
+            raise SupplementalTestError(
+                "code and statistics preflights require distinct validator identities"
+            )
+        content = {"version": 2, "kind": kind, "request_id": request_id, "preflight": supplied}
         record = {**content, "preflight_hash": sha256(content)}
         self._immutable(self._path("preflights", request_id, kind), record)
+
         return record
 
     def cancel(self, request_id: str, *, reason: str) -> dict[str, Any]:
@@ -201,7 +224,7 @@ class SupplementalTestCoordinator:
         source: Path,
         argv: tuple[str, ...] | list[str],
         environment: Mapping[str, str],
-        execution_started_event_id: str,
+        execution_started_event: Mapping[str, Any],
     ) -> dict[str, Any]:
         """Run exactly once after both independent authorization preflights."""
         request, authorization = self._ready(request_id)
@@ -219,18 +242,25 @@ class SupplementalTestCoordinator:
             receipt = self._load(existing)
             self._assert_receipt(receipt, request, authorization)
             return receipt
-        event_id = _require_text(execution_started_event_id, "execution_started_event_id")
-        event = {
-            "version": 1,
-            "request_id": request_id,
-            "event_id": event_id,
-            "type": "execution_started",
-        }
+        event = self._execution_started_event(request, execution_started_event)
+        event_id = event["event_id"]
         self._immutable(self._path("events", request_id, "execution_started"), event)
         claim_path = self._path("execution_claims", request_id)
         if claim_path.exists():
             raise SupplementalTestError("execution was already started without a receipt")
-        self._immutable(claim_path, {"version": 1, "request_id": request_id, "event_id": event_id})
+        self._immutable(
+            claim_path,
+            {
+                "version": 2,
+                "request_id": request_id,
+                "request_hash": request["request_hash"],
+                "execution_started_event_id": event_id,
+                "execution_started_event_hash": event["event_hash"],
+            },
+        )
+        if _raw_sha256(Path(source).read_bytes()) != request["source_hash"]:
+            raise SupplementalTestError("source bytes differ from frozen request")
+
         sandbox_request = SandboxRequest(
             image=request["image"],
             argv=tuple(normalized_argv),
@@ -242,6 +272,7 @@ class SupplementalTestCoordinator:
                 workspace_mb=request["max_workspace_bytes"] // (1024 * 1024),
                 pids=request["max_pids"],
                 timeout_seconds=request["max_wall_time_ms"] / 1000,
+                output_bytes=request["max_output_bytes"],
             ),
             policy_version=2,
         )
@@ -265,14 +296,22 @@ class SupplementalTestCoordinator:
     def record_assessment(
         self, request_id: str, *, kind: str, assessor_id: str, conclusion: str
     ) -> dict[str, Any]:
-        """Store an opaque validator assessment and attempt terminal parent creation."""
+        """Store a distinct validator assessment and attempt terminal parent creation."""
         if kind not in {"code", "statistics"}:
             raise SupplementalTestError("assessment kind must be code or statistics")
         receipt = self._execution(request_id)
+        assessor_id = _require_text(assessor_id, "assessor_id")
+        other_path = self._path(
+            "assessments", request_id, "statistics" if kind == "code" else "code"
+        )
+        if other_path.exists() and self._load(other_path).get("assessor_id") == assessor_id:
+            raise SupplementalTestError(
+                "code and statistics assessments require distinct validator identities"
+            )
         content = {
-            "version": 1,
+            "version": 2,
             "kind": kind,
-            "assessor_id": _require_text(assessor_id, "assessor_id"),
+            "assessor_id": assessor_id,
             "request_hash": receipt["request_hash"],
             "execution_hash": receipt["execution_hash"],
             "conclusion": _require_text(conclusion, "conclusion"),
@@ -288,21 +327,27 @@ class SupplementalTestCoordinator:
             raise SupplementalTestError("terminal receipt requires both independent assessments")
         return self._load(path)
 
-    def project_terminal(self, request_id: str, publication: Mapping[str, Any]) -> dict[str, Any]:
-        """Grant the requesting reviewer a view only for the exact terminal tuple."""
+    def project_terminal(
+        self, request_id: str, committed_registry_tuple: Mapping[str, Any]
+    ) -> dict[str, Any]:
+        """Accept only an externally committed, exact sanitized registry projection."""
         terminal = self.terminal_receipt(request_id)
         if terminal.get("terminal_state") != "assessed":
             raise SupplementalTestError("only assessed terminal receipts can be projected")
-        supplied = dict(publication)
-        expected = terminal["publication"]
-        if supplied != expected:
-            raise SupplementalTestError("publication tuple does not exactly match terminal receipt")
+        supplied = dict(committed_registry_tuple)
+        required = {"registry_event_id", "registry_event_hash", "publication"}
+        if set(supplied) != required or supplied["publication"] != terminal["publication"]:
+            raise SupplementalTestError(
+                "committed registry tuple does not exactly match terminal receipt"
+            )
+        _require_text(supplied["registry_event_id"], "registry_event_id")
+        _require_hash(supplied["registry_event_hash"], "registry_event_hash")
         projection = {
-            "version": 1,
+            "version": 2,
             "request_id": request_id,
-            "publication": expected,
+            "committed_registry_tuple": supplied,
             "projection_hash": sha256(
-                {"version": 1, "request_id": request_id, "publication": expected}
+                {"version": 2, "request_id": request_id, "committed_registry_tuple": supplied}
             ),
         }
         self._immutable(self._path("projections", request_id), projection)
@@ -323,17 +368,16 @@ class SupplementalTestCoordinator:
         # This is intentionally a new, sanitized object rather than the private records.
         return {
             "request_id": request_id,
-            "publication": self._load(projection)["publication"],
+            "publication": self._load(projection)["committed_registry_tuple"]["publication"],
             "terminal_state": terminal["terminal_state"],
         }
 
     def author_view(self, request_id: str, *, status: str) -> dict[str, str]:
-        """Author/public views never return children, output, or assessments."""
+        """Author/public status remains denied until separate sanitized publication."""
         self._request(request_id)
-        projected = self._path("projections", request_id).exists()
-        if not projected and status not in _AUTHOR_PRE_PUBLICATION:
+        if status not in _AUTHOR_PRE_PUBLICATION:
             raise SupplementalTestPermissionError(
-                "author status is prohibited before sanitized publication"
+                "author/public status is prohibited without sanitized publication"
             )
         return {"request_id": request_id, "status": status}
 
@@ -357,6 +401,18 @@ class SupplementalTestCoordinator:
                 or facts.get("status") != "authorized"
             ):
                 raise SupplementalTestError("both preflights must authorize the exact request")
+            validator_id = facts.get("validator_id")
+            if not isinstance(validator_id, str) or not validator_id:
+                raise SupplementalTestError("preflight validator identity is required")
+        code_id = self._load(self._path("preflights", request_id, "code"))["preflight"][
+            "validator_id"
+        ]
+        statistics_id = self._load(self._path("preflights", request_id, "statistics"))["preflight"][
+            "validator_id"
+        ]
+        if code_id == statistics_id:
+            raise SupplementalTestError("both preflights require distinct validator identities")
+
         return request, authorization
 
     def _receipt(
@@ -400,11 +456,41 @@ class SupplementalTestCoordinator:
             or artifact_hashes.get("stderr") != stderr_hash
         ):
             raise SupplementalTestError("sandbox artifact hashes do not bind raw stdout/stderr")
-        status = {"passed": "succeeded", "failed": "failed", "timeout": "timed_out"}.get(
-            getattr(result, "status", None)
-        )
+        status = {
+            "passed": "succeeded",
+            "failed": "failed",
+            "timeout": "timed_out",
+            "output_quota_exceeded": "failed",
+        }.get(getattr(result, "status", None))
         if status is None:
             raise SupplementalTestError("sandbox result has invalid status")
+        required_controls = {
+            "policy_version": 2,
+            "pull_policy": "never",
+            "network": "none",
+            "root_filesystem": "read_only",
+            "input_mounts": "read_only",
+            "workspace": "isolated_tmpfs",
+            "container_user": "65532:65532",
+            "capabilities": "none",
+            "no_new_privileges": True,
+            "host_environment_forwarded": False,
+            "memory_mb": request["max_memory_bytes"] // (1024 * 1024),
+            "workspace_quota_mb": request["max_workspace_bytes"] // (1024 * 1024),
+            "pids": request["max_pids"],
+            "timeout_seconds": request["max_wall_time_ms"] / 1000,
+            "output_quota_bytes": request["max_output_bytes"],
+        }
+        if not isinstance(controls, dict) or any(
+            controls.get(key) != value for key, value in required_controls.items()
+        ):
+            raise SupplementalTestError("sandbox controls or quotas differ from request")
+        if (
+            controls.get("output_truncated") is True
+            and getattr(result, "status", None) != "output_quota_exceeded"
+        ):
+            raise SupplementalTestError("sandbox output truncation lacks quota status")
+
         sandbox = {
             "pull_policy": "never",
             "policy_version": 2,
@@ -434,6 +520,9 @@ class SupplementalTestCoordinator:
             "execution_started_event_id": self._load(
                 self._path("events", request["request_id"], "execution_started")
             )["event_id"],
+            "execution_started_event_hash": self._load(
+                self._path("events", request["request_id"], "execution_started")
+            )["event_hash"],
             "status": status,
             "stdout_hash": stdout_hash,
             "stderr_hash": stderr_hash,
@@ -519,13 +608,45 @@ class SupplementalTestCoordinator:
         path = self._path("executions", request_id)
         if not path.exists():
             raise SupplementalTestError("assessment requires an execution receipt")
-        return self._load(path)
+        receipt = self._load(path)
+        event = self._load(self._path("events", request_id, "execution_started"))
+        if receipt.get("execution_started_event_id") != event.get("event_id") or receipt.get(
+            "execution_started_event_hash"
+        ) != event.get("event_hash"):
+            raise SupplementalTestError(
+                "execution receipt is not bound to exact canonical execution-start event"
+            )
+        return receipt
 
     def _request(self, request_id: str) -> dict[str, Any]:
         request = self._load(self._path("requests", request_id))
         if request.get("request_hash") != sha256(_without(request, "request_hash")):
             raise SupplementalTestError("request hash mismatch")
         return request
+
+    @staticmethod
+    def _execution_started_event(
+        request: Mapping[str, Any], event: Mapping[str, Any]
+    ) -> dict[str, Any]:
+        required = {"event_id", "event_hash", "run_id", "type", "request_hash"}
+        if not isinstance(event, Mapping) or set(event) != required:
+            raise SupplementalTestError("exact canonical execution-start event is required")
+        if (
+            event["run_id"] != request["parent_review_id"]
+            or event["type"] != "supplemental.execution_started"
+        ):
+            raise SupplementalTestError("execution-start event is not canonically qualified")
+        if event["request_hash"] != request["request_hash"]:
+            raise SupplementalTestError("execution-start event is bound to another request")
+        return {
+            "version": 2,
+            "request_id": request["request_id"],
+            "request_hash": request["request_hash"],
+            "event_id": _require_text(event["event_id"], "execution_started_event_id"),
+            "event_hash": _require_hash(event["event_hash"], "execution_started_event_hash"),
+            "run_id": event["run_id"],
+            "type": event["type"],
+        }
 
     def _path(self, category: str, request_id: str, leaf: str | None = None) -> Path:
         _require_text(request_id, "request_id")
@@ -600,6 +721,7 @@ class SupplementalTestCoordinator:
             "max_pids",
             "max_wall_time_ms",
             "max_workspace_bytes",
+            "max_output_bytes",
         )
         result: dict[str, int] = {}
         for key in keys:

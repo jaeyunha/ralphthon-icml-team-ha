@@ -9,7 +9,8 @@ import os
 from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
-from typing import Any
+from typing import Any, Callable, Mapping
+
 
 PHASES = [
     "reviewer-coverage",
@@ -443,6 +444,17 @@ def record_termination_facts(
         == set(issue["expected_respondents"])
         for issue in ledger["issues"]
     )
+    v2 = replay_discussion_v2(workspace)
+    v2_issues_complete = all(
+        {
+            position["reviewer_id"]
+            for position in v2["positions"]
+            if position["issue_id"] == issue["issue_id"] and position["status"] == "accepted"
+        }
+        >= set(issue["expected_reviewer_ids"])
+        for issue in v2["issues"]
+    )
+
     all_final = set(final_justification_reviewers) == set(coverage.get("reviewer_ids", []))
     facts = {
         "decisive_issues_closed_or_disputed": decisive_terminal,
@@ -450,6 +462,7 @@ def record_termination_facts(
         "all_reviewers_final_justification": all_final,
         "scores_stable_for_two_rounds": stable_scores_for_two_rounds,
         "no_evidence_pending": not pending_evidence,
+        "v2_issues_complete": v2_issues_complete,
     }
     facts["passed"] = all(facts.values())
     ledger["termination_facts"] = facts
@@ -484,6 +497,17 @@ def publish_meta_review(workspace: Path, meta_review: dict[str, Any]) -> Path:
     _state_for_phase(workspace, "meta-review")
     from roles.ac.checker import check_meta_review
 
+    v2 = replay_discussion_v2(workspace)
+    if any(
+        {
+            position["reviewer_id"]
+            for position in v2["positions"]
+            if position["issue_id"] == issue["issue_id"] and position["status"] == "accepted"
+        }
+        < set(issue["expected_reviewer_ids"])
+        for issue in v2["issues"]
+    ):
+        raise ValueError("v2 discussion issues are incomplete")
     issue_ledger = read_json(workspace / "issue-ledger.json")
     expertise = read_json(workspace / "expertise-weights.json")
     result = check_meta_review(meta_review, issue_ledger, expertise)
@@ -640,7 +664,7 @@ def open_issue_v2(
     *,
     issue_id: str,
     expected_reviewer_ids: list[str],
-    canonical_event: dict[str, Any],
+    append_authority: Callable[[Mapping[str, Any]], Mapping[str, Any]],
 ) -> dict[str, Any]:
     """Record an AC issue only after the canonical authority identifies it."""
     _state_for_phase(workspace, "discussion-moderation")
@@ -653,10 +677,24 @@ def open_issue_v2(
     ):
         raise ValueError("issue requires unique named reviewers")
     identity = read_json(workspace / "identity.json")
+    if not callable(append_authority):
+        raise ValueError("canonical append authority is required")
+    semantic = {
+        "run_id": identity["run_id"],
+        "type": "ac.discussion.issue_opened",
+        "issue_id": issue_id,
+        "expected_reviewer_ids": reviewers,
+    }
+    supplied_event = dict(append_authority(deepcopy(semantic)))
+    if any(supplied_event.get(key) != value for key, value in semantic.items()):
+        raise ValueError("canonical append authority returned a mismatched issue event")
     event = _canonical_event_v2(
-        canonical_event, run_id=identity["run_id"], event_type="ac.discussion.issue_opened"
+        supplied_event,
+        run_id=identity["run_id"],
+        event_type="ac.discussion.issue_opened",
     )
     event.update({"issue_id": issue_id, "expected_reviewer_ids": reviewers})
+
     existing = next(
         (
             item
@@ -680,13 +718,26 @@ def open_thread_version_v2(
     *,
     issue_id: str,
     prior_version_id: str | None,
-    canonical_event: dict[str, Any],
+    append_authority: Callable[[Mapping[str, Any]], Mapping[str, Any]],
 ) -> dict[str, Any]:
     """Open one of at most two immutable versions with the exact predecessor."""
     _state_for_phase(workspace, "discussion-moderation")
     identity = read_json(workspace / "identity.json")
+    if not callable(append_authority):
+        raise ValueError("canonical append authority is required")
+    semantic = {
+        "run_id": identity["run_id"],
+        "type": "ac.discussion.thread_version_opened",
+        "issue_id": issue_id,
+        "prior_version_id": prior_version_id,
+    }
+    supplied_event = dict(append_authority(deepcopy(semantic)))
+    if any(supplied_event.get(key) != value for key, value in semantic.items()):
+        raise ValueError("canonical append authority returned a mismatched thread event")
     event = _canonical_event_v2(
-        canonical_event, run_id=identity["run_id"], event_type="ac.discussion.thread_version_opened"
+        supplied_event,
+        run_id=identity["run_id"],
+        event_type="ac.discussion.thread_version_opened",
     )
     existing = next(
         (
@@ -826,8 +877,28 @@ def replay_discussion_v2_events(events: list[dict[str, Any]]) -> dict[str, Any]:
                     or score_update["issue_id"] != issue_id
                     or score_update["version_id"] != version_id
                     or score_update["causation_event_id"] != event["event_id"]
+                    or not isinstance(score_update["previous_score"], int)
+                    or isinstance(score_update["previous_score"], bool)
+                    or not isinstance(score_update["next_score"], int)
+                    or isinstance(score_update["next_score"], bool)
                 ):
                     raise ValueError("invalid causal score update")
+                effect = event.get("score_effect")
+                if (
+                    effect not in {"raised", "lowered"}
+                    or (
+                        effect == "raised"
+                        and score_update["next_score"] <= score_update["previous_score"]
+                    )
+                    or (
+                        effect == "lowered"
+                        and score_update["next_score"] >= score_update["previous_score"]
+                    )
+                ):
+                    raise ValueError("score effect does not match score update direction")
+            elif event.get("score_effect") not in {"unchanged", "pending"}:
+                raise ValueError("score-changing position requires a causal update")
+
             stale = current[issue_id]["version_id"] != version_id
             position_id = sha256(
                 {
@@ -854,7 +925,7 @@ def replay_discussion_v2_events(events: list[dict[str, Any]]) -> dict[str, Any]:
                 "score_update": deepcopy(score_update),
             }
             positions.append(position)
-            if score_update is not None:
+            if score_update is not None and not stale:
                 score_history.append(
                     {
                         **deepcopy(score_update),

@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""Durable v2 held-child supervisor.
-
-The supervisor is deliberately small: it records a held boundary before it can
-exec the supplied child, and accepts only a release record authenticated by the
-keys persisted with the prepared invocation.  The watchdog owns the canonical
-event append and state transition; this module owns only the held process and
-its durable hand-off files.
-"""
+"""Durable v2 held-child supervisor with private release authority."""
 
 from __future__ import annotations
 
@@ -16,6 +9,7 @@ import json
 import os
 import secrets
 import signal
+import stat
 import subprocess
 import sys
 import time
@@ -25,7 +19,6 @@ from typing import Any, Mapping
 _REPO = Path(__file__).resolve().parents[2]
 if str(_REPO) not in sys.path:
     sys.path.insert(0, str(_REPO))
-
 from shared.event_log_append_v2 import append_draft  # noqa: E402
 
 
@@ -43,24 +36,64 @@ def _fsync_directory(path: Path) -> None:
         os.close(fd)
 
 
+def _private_directory(path: Path) -> None:
+    path.mkdir(parents=True, exist_ok=True, mode=0o700)
+    entry = path.lstat()
+    if (
+        stat.S_ISLNK(entry.st_mode)
+        or not stat.S_ISDIR(entry.st_mode)
+        or entry.st_uid != os.getuid()
+        or stat.S_IMODE(entry.st_mode) != 0o700
+    ):
+        raise RuntimeError(f"unsafe supervisor directory: {path}")
+
+
+def _safe_file(path: Path) -> None:
+    entry = path.lstat()
+    if (
+        stat.S_ISLNK(entry.st_mode)
+        or not stat.S_ISREG(entry.st_mode)
+        or entry.st_nlink != 1
+        or entry.st_uid != os.getuid()
+        or stat.S_IMODE(entry.st_mode) != 0o600
+    ):
+        raise RuntimeError(f"unsafe supervisor file: {path}")
+
+
 def _save(path: Path, value: Mapping[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
+    _private_directory(path.parent)
     temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
-    with temporary.open("w", encoding="utf-8") as handle:
-        handle.write(_canonical(dict(value)).decode("utf-8"))
-        handle.write("\n")
-        handle.flush()
-        os.fsync(handle.fileno())
-    os.replace(temporary, path)
-    _fsync_directory(path.parent)
+    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL
+    if hasattr(os, "O_NOFOLLOW"):
+        flags |= os.O_NOFOLLOW
+    fd = os.open(temporary, flags, 0o600)
+    try:
+        os.write(fd, _canonical(dict(value)) + b"\n")
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+    try:
+        if path.exists() or path.is_symlink():
+            _safe_file(path)
+        os.replace(temporary, path)
+        os.chmod(path, 0o600)
+        _safe_file(path)
+        _fsync_directory(path.parent)
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 def _load(path: Path) -> dict[str, Any] | None:
     try:
+        _safe_file(path)
         value = json.loads(path.read_text(encoding="utf-8"))
-    except (FileNotFoundError, json.JSONDecodeError, OSError):
+    except FileNotFoundError:
         return None
-    return value if isinstance(value, dict) else None
+    except (json.JSONDecodeError, OSError, RuntimeError) as exc:
+        raise RuntimeError(f"unsafe or invalid supervisor record: {path}") from exc
+    if not isinstance(value, dict):
+        raise RuntimeError(f"invalid supervisor record: {path}")
+    return value
 
 
 def _alive(pid: Any) -> bool:
@@ -71,11 +104,34 @@ def _alive(pid: Any) -> bool:
         return False
 
 
+def _hash(value: Any) -> str:
+    return "sha256:" + hashlib.sha256(_canonical(value)).hexdigest()
+
+
 def invocation_identity(
-    run_id: str, actor: Mapping[str, str], attempt: int, command: list[str]
+    run_id: str,
+    actor: Mapping[str, str],
+    attempt: int,
+    command: list[str],
+    *,
+    task_hash: str | None = None,
+    cwd: str | None = None,
+    environment_hash: str | None = None,
+    grant_hash: str | None = None,
+    policy_hash: str | None = None,
 ) -> str:
-    """Return a stable identity independent of paths, PIDs, and clock time."""
-    payload = {"run_id": run_id, "actor": dict(actor), "attempt": attempt, "command": command}
+    """Return a stable identity binding every execution-relevant v2 input."""
+    payload = {
+        "run_id": run_id,
+        "actor": dict(actor),
+        "attempt": attempt,
+        "command": command,
+        "task_hash": task_hash,
+        "cwd": cwd,
+        "environment_hash": environment_hash,
+        "grant_hash": grant_hash,
+        "policy_hash": policy_hash,
+    }
     return hashlib.sha256(_canonical(payload)).hexdigest()
 
 
@@ -93,59 +149,126 @@ class HeldSupervisor:
         cwd: Path,
         env: Mapping[str, str],
         event_log: Path,
+        task_hash: str | None = None,
+        grant_hash: str | None = None,
+        policy_hash: str | None = None,
     ):
-        self.root = root
-        self.run_id = run_id
-        self.actor = dict(actor)
-        self.attempt = attempt
-        self.command = list(command)
-        self.cwd = str(cwd)
-        self.env = dict(env)
-        self.event_log = event_log
-        self.invocation_id = invocation_identity(run_id, self.actor, attempt, self.command)
+        self.root, self.run_id, self.actor, self.attempt, self.command = (
+            root,
+            run_id,
+            dict(actor),
+            attempt,
+            list(command),
+        )
+        self.cwd, self.event_log = str(cwd.resolve()), event_log
+        self.env = {
+            key: value
+            for key, value in env.items()
+            if key in {"HOME", "LANG", "PATH", "TZ", "PYTHONPATH"}
+            or key.startswith(("LC_", "WATCHDOG_", "AGENT_LOOP_"))
+        }
+        self.task_hash, self.grant_hash, self.policy_hash = task_hash, grant_hash, policy_hash
+        identity_env = {
+            key: value
+            for key, value in self.env.items()
+            if key
+            not in {
+                "AGENT_LOOP_V2_TRACE_DIR",
+                "AGENT_LOOP_INVOCATION_ID",
+                "AGENT_LOOP_INVOCATION_ATTEMPT",
+                "AGENT_LOOP_EXECUTION_STARTED_EVENT_ID",
+            }
+        }
+        self.environment_hash = _hash(identity_env)
+        self.invocation_id = invocation_identity(
+            run_id,
+            self.actor,
+            attempt,
+            self.command,
+            task_hash=task_hash,
+            cwd=self.cwd,
+            environment_hash=self.environment_hash,
+            grant_hash=grant_hash,
+            policy_hash=policy_hash,
+        )
         self.directory = root / self.invocation_id
         self.prepared_path = self.directory / "spawn_prepared.json"
         self.held_path = self.directory / "held.json"
         self.release_path = self.directory / "release.json"
         self.gate_path = self.directory / "release.gate"
         self.cancelled_path = self.directory / "cancelled.json"
+        self.secret_path = root / ".release-authority" / f"{self.invocation_id}.json"
         self.process: subprocess.Popen[Any] | None = None
 
+    def identity_record(self) -> dict[str, Any]:
+        return {
+            "invocation_id": self.invocation_id,
+            "attempt": self.attempt,
+            "task_hash": self.task_hash,
+            "cwd": self.cwd,
+            "environment_hash": self.environment_hash,
+            "grant_hash": self.grant_hash,
+            "policy_hash": self.policy_hash,
+        }
+
     def prepare(self) -> dict[str, Any]:
-        existing = _load(self.prepared_path)
+        _private_directory(self.root)
+        _private_directory(self.directory)
         expected = {
             "invocation_id": self.invocation_id,
             "run_id": self.run_id,
             "actor": self.actor,
             "attempt": self.attempt,
             "command": self.command,
+            **self.identity_record(),
         }
+        existing = _load(self.prepared_path)
         if existing is not None:
             if any(existing.get(key) != value for key, value in expected.items()):
                 raise RuntimeError("prepared invocation conflicts with immutable identity")
             return existing
-        prepared = {
-            **expected,
-            "grant_key": secrets.token_urlsafe(32),
-            "start_key": secrets.token_urlsafe(32),
-            "cwd": self.cwd,
-            "env": self.env,
-            "owner_pid": os.getpid(),
-        }
+        authority = _load(self.secret_path)
+        if authority is None:
+            authority = {
+                "invocation_id": self.invocation_id,
+                "grant_key": secrets.token_urlsafe(32),
+                "start_key": secrets.token_urlsafe(32),
+            }
+            _save(self.secret_path, authority)
+        prepared = {**expected, "cwd": self.cwd, "env": self.env, "owner_pid": os.getpid()}
         _save(self.prepared_path, prepared)
         return prepared
 
+    def _authority(self) -> dict[str, Any]:
+        authority = _load(self.secret_path)
+        if (
+            authority is None
+            or authority.get("invocation_id") != self.invocation_id
+            or not isinstance(authority.get("grant_key"), str)
+            or not isinstance(authority.get("start_key"), str)
+        ):
+            raise RuntimeError("missing or invalid private release authority")
+        return authority
+
     def spawn(self) -> subprocess.Popen[Any] | None:
         self.prepare()
+        if self.cancelled_path.exists() or self.gate_path.exists():
+            return None
         held = _load(self.held_path)
         if held and _alive(held.get("supervisor_pid")):
             return self.process
-        if self.gate_path.exists() or self.cancelled_path.exists():
-            return None
         self.process = subprocess.Popen(
-            [sys.executable, str(Path(__file__).resolve()), "--serve", str(self.prepared_path)],
+            [
+                sys.executable,
+                str(Path(__file__).resolve()),
+                "--serve",
+                str(self.prepared_path),
+                "--authority",
+                str(self.secret_path),
+            ],
             cwd=self.cwd,
             start_new_session=True,
+            close_fds=True,
         )
         return self.process
 
@@ -172,19 +295,24 @@ class HeldSupervisor:
                 "invocation_id": self.invocation_id,
                 "attempt": self.attempt,
                 "status": "running",
+                **self.identity_record(),
             },
         }
 
     def release(self) -> dict[str, Any]:
-        prepared = self.prepare()
+        self.prepare()
         if self.cancelled_path.exists():
             raise RuntimeError("held invocation was cancelled before durable execution_started")
-        held = self.wait_held()
-        if (
-            held.get("grant_key") != prepared["grant_key"]
-            or held.get("start_key") != prepared["start_key"]
-        ):
-            raise RuntimeError("held marker does not authenticate prepared invocation")
+        authority, held = self._authority(), self.wait_held()
+        authority_hash = _hash(
+            {
+                "invocation_id": self.invocation_id,
+                "grant_key": authority["grant_key"],
+                "start_key": authority["start_key"],
+            }
+        )
+        if held.get("authority_hash") != authority_hash:
+            raise RuntimeError("held marker does not authenticate private authority")
         result = append_draft(self.draft(), self.event_log, self.run_id)
         envelope = result.get("envelope")
         if (
@@ -192,24 +320,17 @@ class HeldSupervisor:
             or {key: envelope.get(key) for key in self.draft()} != self.draft()
         ):
             raise RuntimeError("event authority returned a non-exact execution_started envelope")
-        release = _load(self.release_path)
         expected = {
             "invocation_id": self.invocation_id,
-            "grant_key": prepared["grant_key"],
-            "start_key": prepared["start_key"],
+            "authority_hash": authority_hash,
             "event_hash": envelope.get("event_hash"),
         }
-        if release is not None and any(
-            release.get(key) != value for key, value in expected.items()
-        ):
-            raise RuntimeError("conflicting held invocation release")
-        if release is None:
-            _save(self.release_path, expected)
-        gate = _load(self.gate_path)
-        if gate is not None and gate != expected:
-            raise RuntimeError("conflicting release gate")
-        if gate is None:
-            _save(self.gate_path, expected)
+        for path, label in ((self.release_path, "release"), (self.gate_path, "gate")):
+            current = _load(path)
+            if current is not None and current != expected:
+                raise RuntimeError(f"conflicting held invocation {label}")
+            if current is None:
+                _save(path, expected)
         return envelope
 
     def event_present(self) -> bool:
@@ -222,13 +343,11 @@ class HeldSupervisor:
         except (FileNotFoundError, OSError, json.JSONDecodeError):
             return False
 
+    def sealed(self) -> bool:
+        return self.event_present() or self.release_path.exists() or self.gate_path.exists()
+
     def cancel_marker_only(self, reason: str = "recovery_before_execution_started") -> bool:
-        if (
-            not self.held_path.exists()
-            or self.release_path.exists()
-            or self.cancelled_path.exists()
-            or self.event_present()
-        ):
+        if not self.held_path.exists() or self.sealed() or self.cancelled_path.exists():
             return False
         held = _load(self.held_path) or {}
         if _alive(held.get("supervisor_pid")):
@@ -255,16 +374,25 @@ def _terminate_process_group(child: subprocess.Popen[Any]) -> None:
         child.wait(timeout=2)
 
 
-def _serve(prepared_path: Path) -> int:
-    prepared = _load(prepared_path)
-    if prepared is None:
+def _serve(prepared_path: Path, authority_path: Path) -> int:
+    prepared, authority = _load(prepared_path), _load(authority_path)
+    if (
+        prepared is None
+        or authority is None
+        or authority.get("invocation_id") != prepared.get("invocation_id")
+    ):
         return 2
     directory = prepared_path.parent
     held_path, gate_path = directory / "held.json", directory / "release.gate"
     held = {
         "invocation_id": prepared["invocation_id"],
-        "grant_key": prepared["grant_key"],
-        "start_key": prepared["start_key"],
+        "authority_hash": _hash(
+            {
+                "invocation_id": prepared["invocation_id"],
+                "grant_key": authority["grant_key"],
+                "start_key": authority["start_key"],
+            }
+        ),
         "supervisor_pid": os.getpid(),
     }
     _save(held_path, held)
@@ -272,38 +400,43 @@ def _serve(prepared_path: Path) -> int:
     while True:
         gate = _load(gate_path)
         if gate is not None:
-            expected = {
-                "invocation_id": prepared["invocation_id"],
-                "grant_key": prepared["grant_key"],
-                "start_key": prepared["start_key"],
-            }
-            if all(gate.get(key) == value for key, value in expected.items()):
+            if all(gate.get(key) == held[key] for key in ("invocation_id", "authority_hash")):
                 break
             return 3
         if owner_pid and not _alive(owner_pid):
             return 0
         time.sleep(0.02)
+    child: subprocess.Popen[Any] | None = None
+
+    def stop(_signum: int, _frame: Any) -> None:
+        if child is not None and child.poll() is None:
+            _terminate_process_group(child)
+        raise SystemExit(128 + _signum)
+
+    signal.signal(signal.SIGTERM, stop)
+    signal.signal(signal.SIGINT, stop)
     child = subprocess.Popen(
-        prepared["command"], cwd=prepared["cwd"], env=prepared["env"], start_new_session=True
+        prepared["command"],
+        cwd=prepared["cwd"],
+        env=prepared["env"],
+        start_new_session=True,
+        close_fds=True,
     )
     while child.poll() is None:
         if owner_pid and not _alive(owner_pid):
             _terminate_process_group(child)
             return 0
         time.sleep(0.05)
-    return_code = int(child.returncode or 0)
-    try:
-        os.killpg(child.pid, signal.SIGTERM)
-    except ProcessLookupError:
-        pass
-    return return_code
+    _terminate_process_group(child)
+    return int(child.returncode or 0)
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--serve", type=Path, required=True)
+    parser.add_argument("--authority", type=Path, required=True)
     args = parser.parse_args(argv)
-    return _serve(args.serve)
+    return _serve(args.serve, args.authority)
 
 
 if __name__ == "__main__":

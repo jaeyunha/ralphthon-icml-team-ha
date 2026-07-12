@@ -3,10 +3,12 @@ from __future__ import annotations
 import fcntl
 import json
 import os
+import stat
 import subprocess
 import sys
 import tempfile
 import threading
+from unittest import mock
 import time
 import unittest
 from pathlib import Path
@@ -51,6 +53,36 @@ class EventLogAppendV2Test(unittest.TestCase):
         self.assertEqual(second["durable_tip"]["last_sequence"], 2)
         self.assertEqual(second["durable_tip"]["end_offset"], self.path.stat().st_size)
         self.assertEqual(stat_mode(self.path), 0o600)
+
+    def test_first_created_pathnames_are_directory_durable(self) -> None:
+        original_fsync = os.fsync
+        fsynced_modes: list[int] = []
+
+        def record_fsync(fd: int) -> None:
+            fsynced_modes.append(stat.S_IFMT(os.fstat(fd).st_mode))
+            original_fsync(fd)
+
+        with mock.patch.object(authority.os, "fsync", side_effect=record_fsync):
+            authority.append_draft(self.draft(), self.path, self.run_id)
+        self.assertGreaterEqual(fsynced_modes.count(stat.S_IFDIR), 2)
+        self.assertIn(stat.S_IFREG, fsynced_modes)
+
+    def test_jcs_numbers_match_ecmascript_cutovers_and_integral_floats(self) -> None:
+        vectors = [
+            (0.0, "0"),
+            (-0.0, "0"),
+            (1.0, "1"),
+            (-1.0, "-1"),
+            (1e-6, "0.000001"),
+            (1e-7, "1e-7"),
+            (1e20, "100000000000000000000"),
+            (1e21, "1e+21"),
+            (1e23, "1e+23"),
+            (5e-324, "5e-324"),
+        ]
+        for value, expected in vectors:
+            with self.subTest(value=value):
+                self.assertEqual(canonicalize(value), expected)
 
     def test_exact_retry_is_duplicate_and_changed_draft_conflicts(self) -> None:
         draft = self.draft()

@@ -75,7 +75,8 @@ export interface SupplementalTestExecutionReceiptContent {
   readonly env: Readonly<Record<string, string>>;
   readonly env_hash: Sha256;
   readonly sandbox: SupplementalTestSandbox;
-  readonly execution_started_event: "execution_started";
+  readonly execution_started_event_id: string;
+  readonly execution_started_event_hash: Sha256;
   readonly status: SupplementalTestExecutionStatus;
   readonly stdout_hash: Sha256;
   readonly stderr_hash: Sha256;
@@ -85,6 +86,7 @@ export interface SupplementalTestExecutionReceiptContent {
 export interface SupplementalTestExecutionReceipt extends SupplementalTestExecutionReceiptContent {
   readonly execution_hash: Sha256;
 }
+
 
 export interface SupplementalTestAssessmentContent {
   readonly version: 1;
@@ -107,6 +109,8 @@ export interface SupplementalTestPublicationContent {
   readonly request_hash: Sha256;
   readonly authorization_hash: Sha256;
   readonly execution_hash: Sha256;
+  readonly execution_started_event_id: string;
+  readonly execution_started_event_hash: Sha256;
   readonly assessment_hashes: readonly [Sha256, Sha256];
   readonly status: "published_terminal";
 }
@@ -115,11 +119,21 @@ export interface SupplementalTestPublication extends SupplementalTestPublication
   readonly publication_hash: Sha256;
 }
 
-export interface SupplementalTestTerminalRegistry {
+export interface SupplementalTestTerminalRetryEvidence {
   readonly version: 1;
-  readonly parent_review_id: string;
-  readonly publication_hashes: readonly Sha256[];
-  readonly status: "projected_terminal";
+  readonly request_hash: Sha256;
+  readonly execution_hash: Sha256;
+  readonly publication_hash: Sha256;
+  readonly execution_started_event_id: string;
+  readonly execution_started_event_hash: Sha256;
+  readonly terminal_event_id: string;
+  readonly terminal_event_hash: Sha256;
+}
+
+export interface SupplementalTestTerminalRegistryAdapter {
+  readonly authority: "projector-v2";
+  loadTerminalRetryEvidence(publication: SupplementalTestPublication): SupplementalTestTerminalRetryEvidence | null;
+  assertAuthenticatedTerminalRetry(evidence: SupplementalTestTerminalRetryEvidence): void;
 }
 
 export class SupplementalTestContractError extends TypeError {
@@ -177,165 +191,73 @@ export function assertSupplementalTestExecutionReceipt(
 ): void {
   assertRequest(request);
   assertAuthorization(authorization, request);
+  assertClosed(receipt, ["version", "request_id", "request_hash", "authorization_hash", "source_hash", "image_digest", "argv", "argv_hash", "env", "env_hash", "sandbox", "execution_started_event_id", "execution_started_event_hash", "status", "stdout_hash", "stderr_hash", "output_hash", "execution_hash"], "execution receipt");
   const content = withoutHash(receipt, "execution_hash");
-  if (receipt.execution_hash !== hashSupplementalTestExecutionReceipt(content)) {
-    throw new SupplementalTestContractError("execution receipt hash mismatch");
-  }
-  if (receipt.request_id !== request.request_id || receipt.request_hash !== request.request_hash) {
-    throw new SupplementalTestContractError("execution receipt is bound to another request");
-  }
-  if (receipt.authorization_hash !== authorization.authorization_hash) {
-    throw new SupplementalTestContractError("execution receipt is bound to another authorization");
-  }
-  if (receipt.source_hash !== request.source_hash || receipt.image_digest !== request.image_digest) {
-    throw new SupplementalTestContractError("execution receipt source or image differs from request");
-  }
-  if (receipt.argv_hash !== request.argv_hash || receipt.env_hash !== request.env_hash) {
-    throw new SupplementalTestContractError("execution receipt argv or environment differs from request");
-  }
-  if (receipt.argv_hash !== sha256CanonicalJson(receipt.argv) || receipt.env_hash !== sha256CanonicalJson(receipt.env)) {
-    throw new SupplementalTestContractError("execution receipt argv or environment hash mismatch");
-  }
-  if (!receipt.argv.every((argument) => typeof argument === "string")) {
-    throw new SupplementalTestContractError("execution argv must contain only strings");
-  }
-  for (const [key, value] of Object.entries(receipt.env)) {
-    if (key.length === 0 || typeof value !== "string") {
-      throw new SupplementalTestContractError("execution environment must contain string keys and values");
-    }
-  }
-  if (receipt.execution_started_event !== "execution_started") {
-    throw new SupplementalTestContractError("execution receipt requires the execution_started event");
-  }
+  if (receipt.execution_hash !== hashSupplementalTestExecutionReceipt(content)) throw new SupplementalTestContractError("execution receipt hash mismatch");
+  if (receipt.request_id !== request.request_id || receipt.request_hash !== request.request_hash || receipt.authorization_hash !== authorization.authorization_hash) throw new SupplementalTestContractError("execution receipt is bound to another request or authorization");
+  if (receipt.source_hash !== request.source_hash || receipt.image_digest !== request.image_digest || receipt.argv_hash !== request.argv_hash || receipt.env_hash !== request.env_hash) throw new SupplementalTestContractError("execution receipt differs from request");
+  if (receipt.argv_hash !== sha256CanonicalJson(receipt.argv) || receipt.env_hash !== sha256CanonicalJson(receipt.env)) throw new SupplementalTestContractError("execution receipt argv or environment hash mismatch");
+  if (!receipt.argv.every((argument) => typeof argument === "string") || !Object.entries(receipt.env).every(([key, value]) => key.length > 0 && typeof value === "string")) throw new SupplementalTestContractError("execution argv and environment must contain only non-empty string keys and string values");
+  assertIdentifier(receipt.execution_started_event_id, "execution_started_event_id");
+  assertHash(receipt.execution_started_event_hash, "execution_started_event_hash");
   if (!isExecutionStatus(receipt.status)) throw new SupplementalTestContractError("invalid execution status");
-  assertHash(receipt.stdout_hash, "stdout_hash");
-  assertHash(receipt.stderr_hash, "stderr_hash");
-  assertHash(receipt.output_hash, "output_hash");
+  assertHash(receipt.stdout_hash, "stdout_hash"); assertHash(receipt.stderr_hash, "stderr_hash"); assertHash(receipt.output_hash, "output_hash");
   assertSandbox(receipt.sandbox, request);
 }
 
-export function assertSupplementalTestAssessments(
-  receipt: SupplementalTestExecutionReceipt,
-  assessments: readonly SupplementalTestAssessment[],
-): void {
+export function assertSupplementalTestAssessments(receipt: SupplementalTestExecutionReceipt, assessments: readonly SupplementalTestAssessment[]): void {
   if (assessments.length !== 2) throw new SupplementalTestContractError("exactly code and statistics assessments are required");
   const kinds = assessments.map((assessment) => assessment.kind).sort(compareExact);
-  if (canonicalJson(kinds) !== canonicalJson(["code", "statistics"])) {
-    throw new SupplementalTestContractError("assessments must contain one code and one statistics assessment");
-  }
+  if (canonicalJson(kinds) !== canonicalJson(["code", "statistics"])) throw new SupplementalTestContractError("assessments must contain one code and one statistics assessment");
   for (const assessment of assessments) {
+    assertClosed(assessment, ["version", "kind", "assessor_id", "request_hash", "execution_hash", "conclusion", "assessment_hash"], "assessment");
     const content = withoutHash(assessment, "assessment_hash");
-    if (assessment.assessment_hash !== hashSupplementalTestAssessment(content)) {
-      throw new SupplementalTestContractError("assessment hash mismatch");
-    }
+    if (assessment.assessment_hash !== hashSupplementalTestAssessment(content)) throw new SupplementalTestContractError("assessment hash mismatch");
     assertIdentifier(assessment.assessor_id, "assessor_id");
-    if (assessment.request_hash !== receipt.request_hash || assessment.execution_hash !== receipt.execution_hash) {
-      throw new SupplementalTestContractError("assessment is not bound to the execution receipt");
-    }
-    if (assessment.conclusion.length === 0) throw new SupplementalTestContractError("assessment conclusion is required");
+    if (assessment.request_hash !== receipt.request_hash || assessment.execution_hash !== receipt.execution_hash || assessment.conclusion.length === 0) throw new SupplementalTestContractError("assessment is not bound to the execution receipt");
   }
   sortSupplementalTestIdentities(assessments.map((assessment) => assessment.assessor_id));
 }
 
-export function assertSupplementalTestPublication(
-  request: SupplementalTestRequest,
-  authorization: SupplementalTestAuthorization,
-  receipt: SupplementalTestExecutionReceipt,
-  assessments: readonly SupplementalTestAssessment[],
-  publication: SupplementalTestPublication,
-): void {
-  if (Object.keys(publication).some((key) => key.includes("child"))) {
-    throw new SupplementalTestContractError("terminal parent publication cannot expose private child data");
-  }
-
-  assertSupplementalTestExecutionReceipt(request, authorization, receipt);
-  assertSupplementalTestAssessments(receipt, assessments);
+export function assertSupplementalTestPublication(request: SupplementalTestRequest, authorization: SupplementalTestAuthorization, receipt: SupplementalTestExecutionReceipt, assessments: readonly SupplementalTestAssessment[], publication: SupplementalTestPublication): void {
+  assertNoPrivateField(publication, "publication");
+  assertClosed(publication, ["version", "request_id", "parent_review_id", "reviewer_id", "request_hash", "authorization_hash", "execution_hash", "execution_started_event_id", "execution_started_event_hash", "assessment_hashes", "status", "publication_hash"], "publication");
+  assertSupplementalTestExecutionReceipt(request, authorization, receipt); assertSupplementalTestAssessments(receipt, assessments);
   const content = withoutHash(publication, "publication_hash");
-  if (publication.publication_hash !== hashSupplementalTestPublication(content)) {
-    throw new SupplementalTestContractError("publication hash mismatch");
-  }
-  if (
-    publication.request_id !== request.request_id ||
-    publication.parent_review_id !== request.parent_review_id ||
-    publication.reviewer_id !== request.reviewer_id ||
-    publication.request_hash !== request.request_hash ||
-    publication.authorization_hash !== authorization.authorization_hash ||
-    publication.execution_hash !== receipt.execution_hash
-  ) {
-    throw new SupplementalTestContractError("publication is not bound to its terminal parent artifacts");
-  }
-  if (publication.status !== "published_terminal") {
-    throw new SupplementalTestContractError("publication must be terminal");
-  }
+  if (publication.publication_hash !== hashSupplementalTestPublication(content)) throw new SupplementalTestContractError("publication hash mismatch");
+  if (publication.request_id !== request.request_id || publication.parent_review_id !== request.parent_review_id || publication.reviewer_id !== request.reviewer_id || publication.request_hash !== request.request_hash || publication.authorization_hash !== authorization.authorization_hash || publication.execution_hash !== receipt.execution_hash || publication.execution_started_event_id !== receipt.execution_started_event_id || publication.execution_started_event_hash !== receipt.execution_started_event_hash || publication.status !== "published_terminal") throw new SupplementalTestContractError("publication is not bound to its terminal parent artifacts");
   const expected = assessments.map((assessment) => assessment.assessment_hash).sort(compareExact);
-  if (canonicalJson(publication.assessment_hashes) !== canonicalJson(expected)) {
-    throw new SupplementalTestContractError("publication assessment hashes must exactly match sorted assessments");
-  }
+  if (canonicalJson(publication.assessment_hashes) !== canonicalJson(expected)) throw new SupplementalTestContractError("publication assessment hashes must exactly match sorted assessments");
 }
 
-export function canCancelSupplementalTest(events: readonly { readonly type: string }[]): boolean {
-  return !events.some((event) => event.type === "execution_started");
+export function canCancelSupplementalTest(events: readonly { readonly type: string; readonly event_id?: string; readonly event_hash?: string }[]): boolean {
+  return !events.some((event) => event.type === "execution_started" && typeof event.event_id === "string" && typeof event.event_hash === "string" && isSha256(event.event_hash));
 }
 
-export function assertReviewerSupplementalTestConsumption(
-  publication: SupplementalTestPublication,
-  registry: SupplementalTestTerminalRegistry,
-  consumer: { readonly role: "reviewer"; readonly reviewer_id: string },
-): void {
+export function assertReviewerSupplementalTestConsumption(publication: SupplementalTestPublication, registry: SupplementalTestTerminalRegistryAdapter, consumer: { readonly role: "reviewer"; readonly reviewer_id: string }): void {
   assertIdentifier(consumer.reviewer_id, "consumer reviewer_id");
-  if (
-    publication.version !== 1 ||
-    publication.status !== "published_terminal" ||
-    publication.publication_hash !== hashSupplementalTestPublication(withoutHash(publication, "publication_hash"))
-  ) {
-    throw new SupplementalTestContractError("publication is not a valid terminal artifact");
-  }
-  if (consumer.reviewer_id !== publication.reviewer_id) {
-    throw new SupplementalTestContractError("only the requesting reviewer may consume a supplemental test");
-  }
-  if (registry.version !== 1 || registry.status !== "projected_terminal") {
-    throw new SupplementalTestContractError("terminal registry is not projected");
-  }
-  if (registry.parent_review_id !== publication.parent_review_id) {
-    throw new SupplementalTestContractError("terminal registry belongs to another parent review");
-  }
-  const hashes = [...registry.publication_hashes];
-  if (canonicalJson(hashes) !== canonicalJson([...hashes].sort(compareExact)) || new Set(hashes).size !== hashes.length) {
-    throw new SupplementalTestContractError("terminal registry hashes must be sorted and unique");
-  }
-  if (!hashes.includes(publication.publication_hash)) {
-    throw new SupplementalTestContractError("publication is absent from the projected terminal registry");
-  }
+  if (consumer.reviewer_id !== publication.reviewer_id) throw new SupplementalTestContractError("only the requesting reviewer may consume a supplemental test");
+  if (registry.authority !== "projector-v2") throw new SupplementalTestContractError("terminal registry adapter is not projector authenticated");
+  let evidence: SupplementalTestTerminalRetryEvidence | null;
+  try { evidence = registry.loadTerminalRetryEvidence(publication); if (evidence !== null) registry.assertAuthenticatedTerminalRetry(evidence); } catch { throw new SupplementalTestContractError("terminal retry evidence is not projector authenticated"); }
+  if (evidence === null) throw new SupplementalTestContractError("publication has no terminal retry evidence");
+  assertClosed(evidence, ["version", "request_hash", "execution_hash", "publication_hash", "execution_started_event_id", "execution_started_event_hash", "terminal_event_id", "terminal_event_hash"], "terminal retry evidence");
+  if (evidence.version !== 1 || evidence.request_hash !== publication.request_hash || evidence.execution_hash !== publication.execution_hash || evidence.publication_hash !== publication.publication_hash || evidence.execution_started_event_id !== publication.execution_started_event_id || evidence.execution_started_event_hash !== publication.execution_started_event_hash) throw new SupplementalTestContractError("terminal retry evidence is not bound to publication");
+  assertIdentifier(evidence.execution_started_event_id, "execution_started_event_id"); assertIdentifier(evidence.terminal_event_id, "terminal_event_id"); assertHash(evidence.execution_started_event_hash, "execution_started_event_hash"); assertHash(evidence.terminal_event_hash, "terminal_event_hash");
 }
 
-export function canAuthorViewSupplementalTest(
-  publication: SupplementalTestPublication | null,
-  registry: SupplementalTestTerminalRegistry | null,
-): boolean {
+export function canAuthorViewSupplementalTest(publication: SupplementalTestPublication | null, registry: SupplementalTestTerminalRegistryAdapter | null): boolean {
   if (!publication || !registry) return false;
-  try {
-    assertReviewerSupplementalTestConsumption(publication, registry, {
-      role: "reviewer",
-      reviewer_id: publication.reviewer_id,
-    });
-    return true;
-  } catch {
-    return false;
-  }
+  try { assertReviewerSupplementalTestConsumption(publication, registry, { role: "reviewer", reviewer_id: publication.reviewer_id }); return true; } catch { return false; }
 }
 
-export function assertAuthorSupplementalTestStatus(
-  status: string,
-  publication: SupplementalTestPublication | null,
-  registry: SupplementalTestTerminalRegistry | null,
-): asserts status is SupplementalTestAuthorStatus {
+export function assertAuthorSupplementalTestStatus(status: string, publication: SupplementalTestPublication | null, registry: SupplementalTestTerminalRegistryAdapter | null): asserts status is SupplementalTestAuthorStatus {
   if (canAuthorViewSupplementalTest(publication, registry)) return;
-  if (status !== "cannot_answer_without_new_research" && status !== "planned_revision") {
-    throw new SupplementalTestContractError("author status is prohibited before validated terminal publication");
-  }
+  if (status !== "cannot_answer_without_new_research" && status !== "planned_revision") throw new SupplementalTestContractError("author status is prohibited before validated terminal publication");
 }
 
 function assertRequest(request: SupplementalTestRequest): void {
+  assertClosed(request, ["version", "request_id", "parent_review_id", "reviewer_id", "requested_at", "image_digest", "source_hash", "argv_hash", "env_hash", "max_cpu_millis", "max_memory_bytes", "max_pids", "max_wall_time_ms", "max_workspace_bytes", "request_hash"], "request");
   const content = withoutHash(request, "request_hash");
   if (request.request_hash !== hashSupplementalTestRequest(content)) {
     throw new SupplementalTestContractError("request hash mismatch");
@@ -357,6 +279,7 @@ function assertRequest(request: SupplementalTestRequest): void {
 }
 
 function assertAuthorization(authorization: SupplementalTestAuthorization, request: SupplementalTestRequest): void {
+  assertClosed(authorization, ["version", "request_id", "request_hash", "authorized_by", "authorized_at", "authorization_hash"], "authorization");
   const content = withoutHash(authorization, "authorization_hash");
   if (authorization.authorization_hash !== hashSupplementalTestAuthorization(content)) {
     throw new SupplementalTestContractError("authorization hash mismatch");
@@ -377,6 +300,7 @@ function assertPrivateChild(
   request: SupplementalTestRequest,
   authorization: SupplementalTestAuthorization,
 ): void {
+  assertClosed(child, ["version", "child_id", "request_id", "request_hash", "authorization_hash", "visibility"], "private child");
   if (
     child.version !== 1 ||
     child.visibility !== "private" ||
@@ -390,6 +314,7 @@ function assertPrivateChild(
 }
 
 function assertSandbox(sandbox: SupplementalTestSandbox, request: SupplementalTestRequest): void {
+  assertClosed(sandbox, ["pull_policy", "user", "network", "read_only_root", "cap_drop", "security_opt", "privileged", "host_fallback", "cpu_millis", "memory_bytes", "pids", "wall_time_ms", "workspace_bytes"], "sandbox");
   if (
     sandbox.pull_policy !== "never" ||
     !isNonRootUser(sandbox.user) ||
@@ -448,4 +373,24 @@ function isExecutionStatus(value: string): value is SupplementalTestExecutionSta
 
 function compareExact(left: string, right: string): number {
   return left < right ? -1 : left > right ? 1 : 0;
+}
+
+function assertClosed(value: object, fields: readonly string[], name: string): void {
+  const actual = Object.keys(value).sort(compareExact);
+  const expected = [...fields].sort(compareExact);
+  if (canonicalJson(actual) !== canonicalJson(expected)) throw new SupplementalTestContractError(`${name} has an unexpected schema`);
+}
+
+function assertNoPrivateField(value: unknown, path: string): void {
+  if (Array.isArray(value)) {
+    value.forEach((child, index) => assertNoPrivateField(child, `${path}[${index}]`));
+    return;
+  }
+  if (value === null || typeof value !== "object") return;
+  for (const [key, child] of Object.entries(value)) {
+    if (/child|private|secret|stdout|stderr|output|sandbox|argv|env/i.test(key)) {
+      throw new SupplementalTestContractError(`${path}.${key} cannot expose private nested data`);
+    }
+    assertNoPrivateField(child, `${path}.${key}`);
+  }
 }

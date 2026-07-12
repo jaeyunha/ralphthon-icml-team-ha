@@ -242,17 +242,123 @@ interface V2CursorRow extends CursorRow {
   verified_from_genesis_at: Date | string | null;
 }
 
+const SHA256 = /^sha256:[0-9a-f]{64}$/;
+
+function hasVerifiedCursorAnchor(row: V2CursorRow): boolean {
+  const byteOffset = Number(row.byte_offset);
+  const lastSequence = Number(row.last_sequence);
+  if (
+    !Number.isSafeInteger(byteOffset) || byteOffset < 0
+    || !Number.isSafeInteger(lastSequence) || lastSequence < 0
+    || row.last_end_offset === null || Number(row.last_end_offset) !== byteOffset
+    || row.verified_from_genesis_at === null
+    || Number.isNaN(new Date(row.verified_from_genesis_at).getTime())
+  ) return false;
+  if (byteOffset === 0) {
+    return lastSequence === 0 && row.last_event_id === null && row.last_event_hash === null;
+  }
+  return lastSequence > 0
+    && row.last_event_id !== null && row.last_event_id.length > 0
+    && row.last_event_hash !== null && SHA256.test(row.last_event_hash);
+}
+
+function hasExpectedNextCursor(batch: ProjectionBatchV2): boolean {
+  const last = batch.events.at(-1);
+  return last !== undefined
+    && batch.nextCursor.runId === batch.runId
+    && batch.nextCursor.source === batch.source
+    && batch.nextCursor.byteOffset === batch.durableTip.end_offset
+    && batch.nextCursor.byteOffset > batch.cursorAnchor.byteOffset
+    && batch.nextCursor.lastEndOffset === batch.nextCursor.byteOffset
+    && batch.nextCursor.lastSequence === last.envelope.sequence
+    && batch.nextCursor.lastEventId === last.envelope.event_id
+    && batch.nextCursor.lastEventHash === last.envelope.event_hash;
+}
+
+function sameCursor(left: ProjectionCursorV2, right: ProjectionCursorV2): boolean {
+  return left.runId === right.runId
+    && left.source === right.source
+    && left.byteOffset === right.byteOffset
+    && left.lastSequence === right.lastSequence
+    && left.lastEventId === right.lastEventId
+    && left.lastEventHash === right.lastEventHash
+    && left.lastEndOffset === right.lastEndOffset
+    && left.verifiedFromGenesisAt === right.verifiedFromGenesisAt
+    && left.updatedAt === right.updatedAt;
+}
+
+function sameCursorAnchor(left: ProjectionBatchV2["cursorAnchor"], right: ProjectionBatchV2["cursorAnchor"]): boolean {
+  return left.byteOffset === right.byteOffset
+    && left.lastSequence === right.lastSequence
+    && left.lastEventId === right.lastEventId
+    && left.lastEventHash === right.lastEventHash;
+}
+
+function isSameLockedBatch(left: ProjectionBatchV2, right: ProjectionBatchV2): boolean {
+  return left.batchId === right.batchId
+    && left.runId === right.runId
+    && left.source === right.source
+    && sameCursorAnchor(left.cursorAnchor, right.cursorAnchor)
+    && sameCursor(left.nextCursor, right.nextCursor);
+}
+
+
 class PostgresTransactionV2 implements ProjectionTransactionV2 {
   constructor(
     private readonly client: PgQueryable,
     private readonly readModels: PostgresReadModelProjector,
   ) {}
 
+  private cursorAnchorBatch?: ProjectionBatchV2;
+  private readonly persistedEventIds = new Set<string>();
+
+  private async assertCursorAnchor(batch: ProjectionBatchV2): Promise<void> {
+    if (this.cursorAnchorBatch !== undefined) {
+      if (!isSameLockedBatch(this.cursorAnchorBatch, batch)) {
+        throw new ProjectionStorageConflictErrorV2("v2 transaction received multiple projection batches");
+      }
+      return;
+    }
+    if (!hasExpectedNextCursor(batch)) {
+      throw new ProjectionStorageConflictErrorV2("v2 projection batch has an invalid next cursor");
+    }
+    const current = await this.client.query<V2CursorRow>(
+      `SELECT run_id, source, byte_offset, last_sequence, last_event_id, last_event_hash,
+              last_end_offset, verified_from_genesis_at, updated_at
+         FROM projection_cursors
+        WHERE run_id = $1 AND source = $2
+        FOR UPDATE`,
+      [batch.runId, batch.source],
+    );
+    const row = current.rows[0];
+    const anchor = batch.cursorAnchor;
+    const matchesGenesis = row === undefined
+      && anchor.byteOffset === 0
+      && anchor.lastSequence === 0
+      && anchor.lastEventId === undefined
+      && anchor.lastEventHash === undefined;
+    const matchesPersisted = row !== undefined
+      && current.rows.length === 1
+      && hasVerifiedCursorAnchor(row)
+      && row.run_id === batch.runId
+      && row.source === batch.source
+      && Number(row.byte_offset) === anchor.byteOffset
+      && Number(row.last_sequence) === anchor.lastSequence
+      && row.last_event_id === (anchor.lastEventId ?? null)
+      && row.last_event_hash === (anchor.lastEventHash ?? null);
+    if (!matchesGenesis && !matchesPersisted) {
+      throw new ProjectionStorageConflictErrorV2("v2 projection cursor does not match the batch anchor");
+    }
+    this.cursorAnchorBatch = batch;
+  }
+
+
   async persistCanonicalEnvelope(
     canonical: CanonicalProjectionEventV2,
     _batch: ProjectionBatchV2,
   ): Promise<CanonicalEventInsertResultV2> {
     const { event, envelope } = canonical;
+    await this.assertCursorAnchor(_batch);
     const canonicalEnvelopeHash = sha256Bytes(canonicalJson(envelope));
     const inserted = await this.client.query<{ id: string }>(
       `INSERT INTO events
@@ -266,13 +372,17 @@ class PostgresTransactionV2 implements ProjectionTransactionV2 {
         event.payload, envelope.schema_version, envelope.idempotency_key,
         envelope.previous_event_hash, envelope.event_hash, envelope, canonicalEnvelopeHash],
     );
+    this.persistedEventIds.add(envelope.event_id);
     if (inserted.rowCount === 1) return { status: "inserted" };
+
 
     const existing = await this.client.query<{
       id: string; run_id: string; sequence: number | string; idempotency_key: string | null;
       previous_event_hash: string | null; event_hash: string | null;
+      canonical_envelope: unknown; canonical_envelope_hash: string | null;
     }>(
-      `SELECT id, run_id, sequence, idempotency_key, previous_event_hash, event_hash FROM events
+      `SELECT id, run_id, sequence, idempotency_key, previous_event_hash, event_hash,
+              canonical_envelope, canonical_envelope_hash FROM events
         WHERE id = $1 OR (run_id = $2 AND sequence = $3)
            OR (run_id = $2 AND idempotency_key = $4) OR (run_id = $2 AND event_hash = $5)`,
       [event.id, event.runId, event.sequence, envelope.idempotency_key, envelope.event_hash],
@@ -281,7 +391,9 @@ class PostgresTransactionV2 implements ProjectionTransactionV2 {
     if (
       existing.rows.length !== 1 || row === undefined || row.id !== event.id || row.run_id !== event.runId ||
       Number(row.sequence) !== event.sequence || row.idempotency_key !== envelope.idempotency_key ||
-      row.previous_event_hash !== envelope.previous_event_hash || row.event_hash !== envelope.event_hash
+      row.previous_event_hash !== envelope.previous_event_hash || row.event_hash !== envelope.event_hash ||
+      row.canonical_envelope_hash !== canonicalEnvelopeHash || row.canonical_envelope == null ||
+      canonicalJson(row.canonical_envelope) !== canonicalJson(envelope)
     ) return { status: "conflict" };
     return { status: "duplicate" };
   }
@@ -323,6 +435,15 @@ class PostgresTransactionV2 implements ProjectionTransactionV2 {
   }
 
   async saveProjectionBatch(batch: ProjectionBatchV2): Promise<void> {
+    await this.assertCursorAnchor(batch);
+    if (
+      batch.events.length === 0
+      || this.persistedEventIds.size !== batch.events.length
+      || batch.events.some((event) => !this.persistedEventIds.has(event.envelope.event_id))
+    ) {
+      throw new ProjectionStorageConflictErrorV2("v2 projection batch is missing canonical event persistence");
+    }
+
     const first = batch.events[0];
     const last = batch.events.at(-1);
     if (first === undefined || last === undefined) {
@@ -356,6 +477,9 @@ class PostgresTransactionV2 implements ProjectionTransactionV2 {
   }
 
   async saveCursorV2(cursor: ProjectionCursorV2): Promise<void> {
+    if (this.cursorAnchorBatch === undefined || !sameCursor(cursor, this.cursorAnchorBatch.nextCursor)) {
+      throw new ProjectionStorageConflictErrorV2("v2 cursor update does not match the locked projection batch");
+    }
     await this.client.query(
       `INSERT INTO projection_cursors
          (run_id, source, byte_offset, last_sequence, last_event_id, last_event_hash,
@@ -371,6 +495,7 @@ class PostgresTransactionV2 implements ProjectionTransactionV2 {
         cursor.lastEventHash ?? null, cursor.lastEndOffset, cursor.verifiedFromGenesisAt, cursor.updatedAt],
     );
   }
+
 }
 
 /** PostgreSQL v2 store. Notifications are intentionally absent: consumers wake then replay durably. */
@@ -385,9 +510,13 @@ export class PostgresProjectionStoreV2 implements ProjectionStoreV2 {
     );
     const row = result.rows[0];
     if (row === undefined) return undefined;
-    if (row.last_end_offset === null || row.verified_from_genesis_at === null) {
-      throw new ProjectionStorageConflictErrorV2("v2 cursor lacks genesis-verification evidence");
+    if (row.run_id !== runId || row.source !== source || !hasVerifiedCursorAnchor(row)) {
+      throw new ProjectionStorageConflictErrorV2("v2 cursor lacks a complete genesis-verified anchor");
     }
+    if (row.verified_from_genesis_at === null) {
+      throw new ProjectionStorageConflictErrorV2("v2 cursor lacks genesis verification time");
+    }
+
     return {
       runId: row.run_id, source: row.source, byteOffset: Number(row.byte_offset),
       lastSequence: Number(row.last_sequence), updatedAt: new Date(row.updated_at).toISOString(),

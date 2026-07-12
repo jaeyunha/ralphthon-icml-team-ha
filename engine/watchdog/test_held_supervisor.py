@@ -39,11 +39,24 @@ class HeldSupervisorTest(unittest.TestCase):
             supervisor = self.make_supervisor(directory, marker)
             self.assertEqual(
                 supervisor.invocation_id,
-                invocation_identity("run-v2", supervisor.actor, 1, supervisor.command),
+                invocation_identity(
+                    "run-v2",
+                    supervisor.actor,
+                    1,
+                    supervisor.command,
+                    cwd=supervisor.cwd,
+                    environment_hash=supervisor.environment_hash,
+                ),
             )
             process = supervisor.spawn()
             self.assertIsNotNone(process)
             supervisor.wait_held()
+            prepared = json.loads(supervisor.prepared_path.read_text())
+            self.assertNotIn("grant_key", prepared)
+            self.assertNotIn("start_key", prepared)
+            self.assertEqual(oct(supervisor.directory.stat().st_mode & 0o777), "0o700")
+            self.assertEqual(oct(supervisor.prepared_path.stat().st_mode & 0o777), "0o600")
+            self.assertEqual(oct(supervisor.secret_path.stat().st_mode & 0o777), "0o600")
             time.sleep(0.1)
             self.assertFalse(marker.exists())
             envelope = supervisor.release()
@@ -65,17 +78,16 @@ class HeldSupervisorTest(unittest.TestCase):
             self.assertFalse(marker.exists())
             self.assertFalse((directory / "events-v2.ndjson").exists())
 
-            late = self.make_supervisor(directory, directory / "late-side-effect")
-            late.attempt = 2
-            late.invocation_id = invocation_identity(
-                late.run_id, late.actor, late.attempt, late.command
+            late = HeldSupervisor(
+                directory / "control",
+                "run-v2",
+                {"agent_id": "author", "role": "author", "phase": "rebuttal"},
+                2,
+                self.make_supervisor(directory, directory / "late-side-effect").command,
+                cwd=directory,
+                env=dict(os.environ),
+                event_log=directory / "events-v2.ndjson",
             )
-            late.directory = late.root / late.invocation_id
-            late.prepared_path = late.directory / "spawn_prepared.json"
-            late.held_path = late.directory / "held.json"
-            late.release_path = late.directory / "release.json"
-            late.gate_path = late.directory / "release.gate"
-            late.cancelled_path = late.directory / "cancelled.json"
             second = late.spawn()
             self.assertIsNotNone(second)
             late.wait_held()

@@ -20,6 +20,8 @@ import {
   type SupplementalTestExecutionReceipt,
   type SupplementalTestPublication,
   type SupplementalTestRequest,
+  type SupplementalTestTerminalRegistryAdapter,
+  type SupplementalTestTerminalRetryEvidence,
 } from "../src/supplemental-tests";
 import { sha256CanonicalJson, type Sha256 } from "../src/hashing";
 
@@ -83,7 +85,8 @@ function receipt(value = request(), auth = authorization(value)): SupplementalTe
       wall_time_ms: 5000,
       workspace_bytes: 4096,
     },
-    execution_started_event: "execution_started" as const,
+    execution_started_event_id: "execution-start-1",
+    execution_started_event_hash: hash("6"),
     status: "succeeded" as const,
     stdout_hash: hash("3"),
     stderr_hash: hash("4"),
@@ -120,10 +123,35 @@ function publication(
     request_hash: value.request_hash,
     authorization_hash: auth.authorization_hash,
     execution_hash: execution.execution_hash,
+    execution_started_event_id: execution.execution_started_event_id,
+    execution_started_event_hash: execution.execution_started_event_hash,
     assessment_hashes: results.map((result) => result.assessment_hash).sort() as [Sha256, Sha256],
     status: "published_terminal" as const,
   };
   return { ...content, publication_hash: hashSupplementalTestPublication(content) };
+}
+
+function terminalRegistry(
+  publication: SupplementalTestPublication,
+  present = true,
+): SupplementalTestTerminalRegistryAdapter {
+  const evidence: SupplementalTestTerminalRetryEvidence = {
+    version: 1,
+    request_hash: publication.request_hash,
+    execution_hash: publication.execution_hash,
+    publication_hash: publication.publication_hash,
+    execution_started_event_id: publication.execution_started_event_id,
+    execution_started_event_hash: publication.execution_started_event_hash,
+    terminal_event_id: "terminal-event-1",
+    terminal_event_hash: hash("7"),
+  };
+  return {
+    authority: "projector-v2",
+    loadTerminalRetryEvidence: (candidate) => present && candidate.publication_hash === publication.publication_hash ? evidence : null,
+    assertAuthenticatedTerminalRetry: (candidate) => {
+      if (!present || candidate !== evidence) throw new Error("unauthenticated terminal retry evidence");
+    },
+  };
 }
 
 describe("reviewer-requested supplemental tests", () => {
@@ -181,7 +209,7 @@ describe("reviewer-requested supplemental tests", () => {
 
   test("cancellation cutoff depends only on execution_started", () => {
     expect(canCancelSupplementalTest([{ type: "child_created" }, { type: "cancelled" }])).toBe(true);
-    expect(canCancelSupplementalTest([{ type: "execution_started" }, { type: "cancelled" }])).toBe(false);
+    expect(canCancelSupplementalTest([{ type: "execution_started", event_id: "execution-start-1", event_hash: hash("6") }, { type: "cancelled" }])).toBe(false);
   });
 
   test("never leaks the private child and gates reviewer consumption on exact terminal projection", () => {
@@ -198,24 +226,19 @@ describe("reviewer-requested supplemental tests", () => {
       publication_hash: hashSupplementalTestPublication(leakedContent),
     } as unknown as SupplementalTestPublication;
     expect(() => assertSupplementalTestPublication(value, auth, execution, results, leakedPublication)).toThrow(
-      /cannot expose private child/,
+      /cannot expose private (child|nested data)/,
     );
     expect("child_id" in published).toBe(false);
-    const registry = {
-      version: 1 as const,
-      parent_review_id: value.parent_review_id,
-      publication_hashes: [published.publication_hash],
-      status: "projected_terminal" as const,
-    };
+    const registry = terminalRegistry(published);
     expect(() =>
       assertReviewerSupplementalTestConsumption(published, registry, { role: "reviewer", reviewer_id: value.reviewer_id }),
     ).not.toThrow();
     expect(() =>
-      assertReviewerSupplementalTestConsumption(published, { ...registry, publication_hashes: [] }, {
+      assertReviewerSupplementalTestConsumption(published, terminalRegistry(published, false), {
         role: "reviewer",
         reviewer_id: value.reviewer_id,
       }),
-    ).toThrow(/absent/);
+    ).toThrow(/no terminal retry evidence/);
   });
 
   test("denies author visibility before a validated terminal publication and limits author statuses", () => {
