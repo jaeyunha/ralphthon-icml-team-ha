@@ -1,0 +1,30 @@
+# run workspaces (spec §21)
+runs/*
+!runs/.gitkeep
+.scratch/
+.handoffs/
+.gjc/
+.omo/
+
+# local benchmark inputs (large PDFs)
+2026_icml_paper_to_benchmark/
+
+# raw harvested OpenReview data stays local (~790MB)
+openreview_icml2026_spotlight_analysis/data/
+openreview_icml2026_spotlight_analysis/raw/
+
+# python (reference/ modules)
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# node
+node_modules/
+.next/
+
+# misc
+.DS_Store
+.codegraph
+.debug-journal.md

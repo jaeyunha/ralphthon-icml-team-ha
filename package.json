@@ -1,0 +1,19 @@
+{
+  "name": "ralphthon-icml",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "bun@1.3.14",
+  "workspaces": [
+    "apps/*",
+    "engine/*",
+    "packages/*",
+    "roles/*",
+    "roles/validators/*"
+  ],
+  "scripts": {
+    "generate:types": "bun run --cwd packages/schemas generate:types",
+    "db:migrate": "bun run --cwd packages/db db:migrate",
+    "test": "bun test",
+    "validate:fixtures": "./scripts/validate-run.sh tests/fixtures/contracts/sample-run"
+  }
+}
