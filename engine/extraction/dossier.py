@@ -12,6 +12,12 @@ from typing import Any
 from .extract import ANCHOR_RE
 from .parse_verification import bundle_identity
 from .schema_validation import ContractValidationError, validate_contract
+from .coverage_ledger import (
+    build_coverage_ledger,
+    coverage_ledger_hash,
+    verify_coverage_ledger,
+)
+
 
 SENTENCE_RE = re.compile(r"(?<=[.!?])\s+")
 CLAIM_RE = re.compile(
@@ -84,6 +90,15 @@ def build_dossier(
         raise DossierGateError("Parse verification must pass before dossier generation")
     if verification.get("unresolved_anchor_count") != 0:
         raise DossierGateError("Parse verification must resolve every inline anchor")
+    parse_ledger = verification.get("coverage_ledger")
+    if (
+        not isinstance(parse_ledger, dict)
+        or verification.get("coverage_status") != "complete"
+        or parse_ledger.get("ledger_hash") != coverage_ledger_hash(parse_ledger)
+        or verification.get("coverage_ledger_hash") != coverage_ledger_hash(parse_ledger)
+        or parse_ledger.get("status") != "complete"
+    ):
+        raise DossierGateError("Parse verification must prove complete coverage")
     verified_bundle = verification.get("verified_bundle")
     if not isinstance(verified_bundle, dict) or bundle_identity(root) != verified_bundle:
         raise DossierGateError("Canonical bundle changed after parse verification")
@@ -142,6 +157,22 @@ def build_dossier(
         "ethical_risk_triggers": _anchored_strings(ethics),
         "ambiguities": _anchored_strings(ambiguities),
     }
+    dossier_ledger = build_coverage_ledger(
+        anchors,
+        source_text_by_page=_coverage_source_pages(parse_ledger),
+        dossier=dossier,
+        inline_anchor_ids=ANCHOR_RE.findall(markdown),
+    )
+    coverage = verify_coverage_ledger(
+        dossier_ledger,
+        anchors,
+        source_text_by_page=_coverage_source_pages(parse_ledger),
+        dossier=dossier,
+        inline_anchor_ids=ANCHOR_RE.findall(markdown),
+    )
+    if coverage["status"] != "complete":
+        raise DossierGateError("Dossier contains incomplete coverage")
+    dossier["method_graph"].append({"kind": "coverage_ledger", "ledger": dossier_ledger})
     try:
         validate_contract(dossier, "paper-dossier")
     except ContractValidationError as exc:
@@ -162,7 +193,7 @@ def validate_dossier_anchors(dossier: dict[str, Any], anchors: dict[str, Any]) -
     unresolved: set[str] = set()
     for record in _evidence_records(dossier):
         anchor_id = record.get("anchor_id")
-        if not isinstance(anchor_id, str):
+        if not isinstance(anchor_id, str) or not anchor_id:
             unresolved.add("<missing>")
         elif anchor_id not in anchors:
             unresolved.add(anchor_id)
@@ -354,6 +385,30 @@ def _claim_type(statement: str) -> str:
     return "other"
 
 
+
+def _coverage_source_pages(ledger: dict[str, Any]) -> dict[int, str]:
+    """Reconstruct the independently observed page map from a verified ledger."""
+
+    pages = ledger.get("pages")
+    if not isinstance(pages, list):
+        raise DossierGateError("Parse coverage ledger has no page observations")
+    source: dict[int, str] = {}
+    for item in pages:
+        if not isinstance(item, dict):
+            raise DossierGateError("Parse coverage ledger has malformed page observations")
+        page = item.get("page")
+        substantive = item.get("observed_substantive_text")
+        state = item.get("coverage_state")
+        if (
+            not isinstance(page, int)
+            or page < 1
+            or not isinstance(substantive, bool)
+            or state not in {"covered", "missing"}
+            or page in source
+        ):
+            raise DossierGateError("Parse coverage ledger has malformed page observations")
+        source[page] = "observed" if substantive else ""
+    return source
 def _theorem_edges(
     theorems: list[dict[str, Any]], assumptions: list[dict[str, Any]]
 ) -> list[dict[str, str]]:

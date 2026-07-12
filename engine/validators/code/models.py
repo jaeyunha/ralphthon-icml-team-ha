@@ -15,6 +15,36 @@ VerificationStatus = Literal[
     "not_executable",
 ]
 
+TerminationReason = Literal[
+    "completed_planned_probe",
+    "budget_exhausted",
+    "sandbox_unavailable",
+    "not_executable",
+    "missing_dataset",
+    "missing_checkpoint",
+    "dependency_ambiguity",
+    "operator_approval_unavailable",
+    "backend_isolation_unproven",
+    "scheduling_timeout",
+    "cost_limit_exceeded",
+    "command_limit_reached",
+]
+
+TERMINATION_REASONS = {
+    "completed_planned_probe",
+    "budget_exhausted",
+    "sandbox_unavailable",
+    "not_executable",
+    "missing_dataset",
+    "missing_checkpoint",
+    "dependency_ambiguity",
+    "operator_approval_unavailable",
+    "backend_isolation_unproven",
+    "scheduling_timeout",
+    "cost_limit_exceeded",
+    "command_limit_reached",
+}
+
 PHASES = (
     "official-reproduction",
     "clean-room-reimplementation",
@@ -24,16 +54,30 @@ PHASES = (
 
 
 @dataclass(frozen=True)
+class VerificationDimensions:
+    """Independent evidence axes; none is an ordering over the others."""
+
+    official_execution: VerificationStatus = "not_attempted"
+    clean_room: VerificationStatus = "not_attempted"
+    claim_spot_check: VerificationStatus = "not_attempted"
+    coverage: str = "not_assessed"
+
+
+@dataclass(frozen=True)
 class ReproducibilityAudit:
     documentation_scale: int
     verification_status: VerificationStatus
     rationale: str
+    verification_dimensions: VerificationDimensions = field(default_factory=VerificationDimensions)
+    termination_reason: TerminationReason = "completed_planned_probe"
 
     def __post_init__(self) -> None:
         if self.documentation_scale not in {1, 2, 3, 4}:
             raise ValueError("documentation_scale must be 1 through 4")
         if not self.rationale:
             raise ValueError("audit rationale is required")
+        if self.termination_reason not in TERMINATION_REASONS:
+            raise ValueError("unknown termination reason")
 
 
 @dataclass(frozen=True)

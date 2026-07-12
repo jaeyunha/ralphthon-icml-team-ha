@@ -1,5 +1,12 @@
 """Canonical submission extraction, verification, and dossier helpers."""
 
+from .coverage_ledger import (
+    build_coverage_ledger,
+    canonical_json_bytes,
+    coverage_ledger_hash,
+    verify_coverage_ledger,
+)
+
 from .dossier import (
     DossierGateError,
     build_dossier,
@@ -36,6 +43,10 @@ __all__ = [
     "bundle_identity",
     "build_dossier",
     "build_freeze_record",
+    "build_coverage_ledger",
+    "canonical_json_bytes",
+    "coverage_ledger_hash",
+
     "extract_pdf",
     "extract_to_bundle",
     "freeze_submission",
@@ -44,6 +55,7 @@ __all__ = [
     "validate_dossier_anchors",
     "validate_submission_bundle",
     "verify_bundle",
+    "verify_coverage_ledger",
     "verified_bundle_from_dossier",
     "verify_frozen_submission",
 ]
