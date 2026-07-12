@@ -142,6 +142,8 @@ fi
 
 WATCHDOG="$REPO_ROOT/engine/watchdog/committee-watchdog.sh"
 EVENT_LOG="$RUN_DIR/events-v2.ndjson"
+PROJECTOR_MARKER="$RUN_DIR/control/.v2-projector-marker"
+mkdir -p "$RUN_DIR/control"
 python3 -c 'import os,sys; os.setsid(); os.execv(sys.argv[1], sys.argv[1:])' "$WATCHDOG" --run-dir "$RUN_DIR" --config "$CONFIG" &
 WATCHDOG_PID=$!
 WATCHDOG_STATUS=0
@@ -161,10 +163,11 @@ trap 'cleanup 130' INT
 trap 'cleanup 143' TERM
 
 while kill -0 "$WATCHDOG_PID" 2>/dev/null; do
-  if [[ -e $EVENT_LOG ]]; then
+  if [[ -e $EVENT_LOG && ( ! -e $PROJECTOR_MARKER || $EVENT_LOG -nt $PROJECTOR_MARKER ) ]]; then
     bun run "$REPO_ROOT/engine/projector/src/run-projector-v2.ts" --run-id "$RUN_ID" --event-log "$EVENT_LOG" --database-url "$DATABASE_URL_VALUE" --database-max-connections "$PROJECTOR_DB_CONNECTIONS" --allowed-event-types "$ALLOWED_EVENT_TYPES" --ack-live-v2
+    touch "$PROJECTOR_MARKER"
   fi
-  sleep 0.1
+  sleep 0.5
 done
 if wait "$WATCHDOG_PID"; then WATCHDOG_STATUS=0; else WATCHDOG_STATUS=$?; fi
 if [[ -e $EVENT_LOG ]]; then

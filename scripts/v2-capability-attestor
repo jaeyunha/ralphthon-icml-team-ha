@@ -1,0 +1,172 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import datetime as dt
+import hashlib
+import json
+import os
+from pathlib import Path
+import sys
+
+KINDS = {"custody", "sandbox", "broker", "denial"}
+ISSUER = "v2-capability-attestor"
+
+
+def canonical(value: object) -> bytes:
+    return json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+
+
+def registry_path() -> Path:
+    configured = os.environ.get("V2_CAPABILITY_ATTESTOR_REGISTRY")
+    return Path(configured).expanduser().resolve() if configured else Path.home() / ".ralph-review" / "v2-capability-attestations.jsonl"
+
+
+def config_and_phase(config_path: Path, phase_id: str, kind: str) -> tuple[bytes, dict[str, object], dict[str, object]]:
+    raw = config_path.read_bytes()
+    config = json.loads(raw)
+    if not isinstance(config, dict):
+        raise ValueError("config must be an object")
+    phases = config.get("phase_runs")
+    if not isinstance(phases, list):
+        raise ValueError("config phase_runs must be an array")
+    matches = [phase for phase in phases if isinstance(phase, dict) and phase.get("phase_run_id") == phase_id]
+    if len(matches) != 1:
+        raise ValueError("phase_run_id must identify exactly one phase")
+    phase = matches[0]
+    if kind == "custody" and phase.get("held_supervisor_v2") is not True:
+        raise ValueError("custody attestation requires held_supervisor_v2")
+    if kind == "sandbox" and phase.get("sandbox_capability") is not True:
+        raise ValueError("sandbox capability is not enabled")
+    if kind == "broker" and phase.get("broker_capability") is not True:
+        raise ValueError("broker capability is not enabled")
+    if kind == "denial":
+        launcher = phase.get("launcher")
+        if not isinstance(launcher, dict) or launcher.get("kind") != "v2_dedicated_launcher":
+            raise ValueError("denial attestation requires the dedicated v2 launcher")
+        if "agent_command" in phase or "agent_args" in phase:
+            raise ValueError("dedicated v2 phase contains a command bypass")
+    return raw, config, phase
+
+
+def append_registry(entry: dict[str, object]) -> None:
+    path = registry_path()
+    path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    descriptor = os.open(path, os.O_WRONLY | os.O_APPEND | os.O_CREAT, 0o600)
+    try:
+        os.write(descriptor, canonical(entry) + b"\n")
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+    os.chmod(path, 0o600)
+
+
+def issue(args: argparse.Namespace) -> int:
+    output = Path(args.output).resolve()
+    run_dir = Path(args.run_dir).resolve()
+    config_path = Path(args.config).resolve()
+    if args.kind not in KINDS or run_dir not in output.parents:
+        raise ValueError("attestation kind or destination is invalid")
+    raw, config, _phase = config_and_phase(config_path, args.phase_run_id, args.kind)
+    if config.get("run_id") != args.run_id:
+        raise ValueError("config run_id mismatch")
+    payload = {
+        "version": 2,
+        "kind": args.kind,
+        "run_id": args.run_id,
+        "phase_run_id": args.phase_run_id,
+        "config_hash": "sha256:" + hashlib.sha256(raw).hexdigest(),
+        "issued_at": dt.datetime.now(dt.timezone.utc).isoformat().replace("+00:00", "Z"),
+        "issuer": ISSUER,
+        "status": "verified",
+    }
+    output.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    encoded = canonical(payload)
+    descriptor = os.open(output, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    try:
+        os.write(descriptor, encoded)
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+    append_registry({
+        "attestation_hash": "sha256:" + hashlib.sha256(encoded).hexdigest(),
+        "config_hash": payload["config_hash"],
+        "run_id": args.run_id,
+        "phase_run_id": args.phase_run_id,
+        "kind": args.kind,
+        "issued_at": payload["issued_at"],
+    })
+    return 0
+
+
+def verify(args: argparse.Namespace) -> int:
+    run_dir = Path(args.run_dir).resolve()
+    path = Path(args.attestation).resolve()
+    if args.kind not in KINDS or run_dir not in path.parents or path.is_symlink() or not path.is_file():
+        return 1
+    raw = path.read_bytes()
+    try:
+        payload = json.loads(raw)
+    except json.JSONDecodeError:
+        return 1
+    expected = {
+        "version": 2,
+        "kind": args.kind,
+        "run_id": payload.get("run_id") if isinstance(payload, dict) else None,
+        "phase_run_id": args.phase_run_id,
+        "config_hash": args.config_hash,
+        "issued_at": payload.get("issued_at") if isinstance(payload, dict) else None,
+        "issuer": ISSUER,
+        "status": "verified",
+    }
+    if payload != expected:
+        return 1
+    digest = "sha256:" + hashlib.sha256(raw).hexdigest()
+    registry = registry_path()
+    if not registry.is_file() or registry.is_symlink() or registry.stat().st_mode & 0o077:
+        return 1
+    for line in registry.read_text(encoding="utf-8").splitlines():
+        try:
+            entry = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if (
+            entry.get("attestation_hash") == digest
+            and entry.get("config_hash") == args.config_hash
+            and entry.get("phase_run_id") == args.phase_run_id
+            and entry.get("kind") == args.kind
+        ):
+            return 0
+    return 1
+
+
+def parser() -> argparse.ArgumentParser:
+    root = argparse.ArgumentParser()
+    sub = root.add_subparsers(dest="command", required=True)
+    issue_parser = sub.add_parser("issue")
+    issue_parser.add_argument("--run-dir", required=True)
+    issue_parser.add_argument("--config", required=True)
+    issue_parser.add_argument("--run-id", required=True)
+    issue_parser.add_argument("--phase-run-id", required=True)
+    issue_parser.add_argument("--kind", required=True)
+    issue_parser.add_argument("--output", required=True)
+    verify_parser = sub.add_parser("verify")
+    verify_parser.add_argument("--run-dir", required=True)
+    verify_parser.add_argument("--config-hash", required=True)
+    verify_parser.add_argument("--phase-run-id", required=True)
+    verify_parser.add_argument("--kind", required=True)
+    verify_parser.add_argument("--attestation", required=True)
+    return root
+
+
+def main() -> int:
+    args = parser().parse_args()
+    try:
+        return issue(args) if args.command == "issue" else verify(args)
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        print(f"v2 capability attestation failed: {exc}", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
