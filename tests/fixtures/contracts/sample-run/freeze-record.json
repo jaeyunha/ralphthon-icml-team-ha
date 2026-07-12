@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "run_id": "run-fixture-001",
+  "frozen_at": "2026-07-11T18:42:12.000Z",
+  "review_start_time": "2026-07-11T18:42:12.000Z",
+  "literature_cutoff": "2026-07-11T18:42:12.000Z",
+  "extraction_tool": {
+    "name": "Docling",
+    "version": "2.0.0"
+  },
+  "run_config_hash": "sha256:8f38d1ec4d53dd87ad57e86c7b60b8394ac07e77ba93a0f942fa3f67ff4a0c8d",
+  "repository_commit": null,
+  "inputs": [
+    {
+      "path": "run-config.json",
+      "sha256": "sha256:8f38d1ec4d53dd87ad57e86c7b60b8394ac07e77ba93a0f942fa3f67ff4a0c8d",
+      "size_bytes": 394
+    },
+    {
+      "path": "submission-manifest.json",
+      "sha256": "sha256:f5043c0a57c69a1e31b7d0d8cf100f7278646fc54c349b1ecff5ae0b2a1517f7",
+      "size_bytes": 366
+    }
+  ],
+  "freeze_hash": "sha256:5fab3e3c74e440740a62cdf13b484be2a6a9bdbe7dca75f7df846057c401cb20"
+}

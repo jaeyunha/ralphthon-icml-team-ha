@@ -1,0 +1,50 @@
+{
+  "artifact_type": "literature_broker_response",
+  "request_id": "REF-99ea3309f02ea38b",
+  "reviewer_id": "validator-references",
+  "packets": [
+    {
+      "source_id": "SRC-AC44E8E9F5A92A5F",
+      "title": "Neural Sheaf Diffusion: A Topological Perspective on Heterophily and Oversmoothing in GNNs",
+      "authors": [
+        "Cristian Bodnar",
+        "Francesco Di Giovanni",
+        "Benjamin Chamberlain",
+        "Pietro Lió",
+        "Michael Bronstein"
+      ],
+      "first_public_date": "2022-01-01",
+      "source_type": "metadata_registry",
+      "canonical_uri": "https://doi.org/10.52202/068431-1346",
+      "content_hash": "sha256:a54fcc88b5f7059bce5e083d543bbd5a96702475197584301df7f05633876c48",
+      "admissibility": "admissible_prior_work",
+      "retrieval_reason": "Validate bibliography identity for REF-004",
+      "supporting_passages": [
+        {
+          "anchor": "retrieved:sentence:1",
+          "summary": "Neural Sheaf Diffusion: A Topological Perspective on Heterophily and Oversmoothing in GNNs - proceedings.com Skip to main content Toggle menu Search Browse Publisher By Letter a b c d e f g h i j k l m n o p q r s t u v w x y z # 35th IGC Organizing Committee Abo Akademi University, Thermal and Flow Engineering Laboratory Academic Conferences Ltd ACCM-7 Organizing Committee Acoustical Society Of America (ASA) ACS Division of Environmental Chemistry ACS Division of Fuel Chemistry ACS Northeast Regional Meeting (NERM) ACTA Press Advanced Automotive Batteries (AAB) Advanced Laser Applications..."
+        },
+        {
+          "anchor": "retrieved:sentence:2",
+          "summary": "American Chemistry Council (ACC) American College of Veterinary Internal Medicine (ACVIM) American College of Veterinary Pathologists (ACVP) American Concrete Institute (ACI) American Crystallographic Association (ACA) American Filtration and Separations Society (AFS) American Fire Safety Council (AFSC) American Forage and Grassland Council (AFGC) American Foundry Society (AFS) American Fuel and Petrochemical Manufacturers (AFPM) American Gas Association (AGA) American Institute for Aeronautics and Astronautics (AIAA) American Institute of Chemical Engineers (AIChE) American Institute of Ma..."
+        },
+        {
+          "anchor": "retrieved:sentence:3",
+          "summary": "Antenna Symposium Applied Mechanics Laboratory ASHRAE Inc Asian Association on Remote Sensing (AARS) Asian Australasian Association for Composite Materials (AACM) ASM International ASN Events Asociacion de Acusticos Argentinos Asociacion Latinoamericana de Fabricantes de Refractarios (ALAFAR) Associacao Brasileira de Energia Nuclear (ABEN) Associacao Brasileira de Metalurgia Materiais e Mineracao (ABM) Associacao Brasileira Tecnica de Celulose e Papel (ABTCP) Association Aeronautique et Astronautique de France Association for Computational Linguistics (ACL) Association for Environmental Hea..."
+        }
+      ],
+      "verification_status": "abstract_checked"
+    }
+  ],
+  "rejected_candidates": [
+    {
+      "canonical_uri": "https://doi.org/10.1109/icdm54844.2022.00169",
+      "reason": "identity: canonical page title coverage 0.00 is below 0.60"
+    },
+    {
+      "canonical_uri": "https://doi.org/10.1016/j.ins.2026.123437",
+      "reason": "post_cutoff"
+    }
+  ],
+  "created_at": "2026-07-11T15:03:27.610Z"
+}

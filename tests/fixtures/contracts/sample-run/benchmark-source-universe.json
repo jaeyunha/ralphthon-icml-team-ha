@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "cutoff": "2026-01-28T23:59:59-12:00",
+  "intended_slots": [
+    {"slot_id": "S1", "forum_id": "forum-1", "submission_number": 1, "stratum": "accept"},
+    {"slot_id": "S2", "forum_id": "forum-2", "submission_number": 2, "stratum": "accept"},
+    {"slot_id": "S3", "forum_id": "forum-3", "submission_number": 3, "stratum": "reject"},
+    {"slot_id": "S4", "forum_id": "forum-4", "submission_number": 4, "stratum": "accept"},
+    {"slot_id": "S5", "forum_id": "forum-5", "submission_number": 5, "stratum": "accept"},
+    {"slot_id": "S6", "forum_id": "forum-6", "submission_number": 6, "stratum": "reject"},
+    {"slot_id": "S7", "forum_id": "forum-7", "submission_number": 7, "stratum": "reject"}
+  ],
+  "candidates": [
+    {
+      "forum_id": "replacement-1",
+      "submission_number": 11,
+      "stratum": "accept",
+      "original_pdf": {
+        "kind": "original_pdf",
+        "source_uri": "https://example.test/replacement-1.pdf",
+        "sha256": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "size_bytes": 1024,
+        "first_public_at": "2026-01-28T12:00:00Z",
+        "cutoff": "2026-01-28T23:59:59-12:00",
+        "status": "eligible",
+        "revision": "v1"
+      },
+      "artifacts": [],
+      "eligibility_reason": "provenance_eligible",
+      "eligible": true
+    }
+  ],
+  "manifest_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+}

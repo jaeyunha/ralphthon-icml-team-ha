@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "reviewer_id": "reviewer-r2",
+  "official_review_version": 1,
+  "responses": [
+    {
+      "concern_id": "reviewer-r2-W6",
+      "response_label": "limitation_acknowledged",
+      "response": "We acknowledge that the submitted paper does not report the split protocol, repeated-run uncertainty, capacity-matched tuning, or the requested intervention and ablation studies. The submitted evidence is limited to the experiment description and tables already present in the paper.",
+      "evidence_refs": ["TXT-0264", "TAB-0003", "TAB-0004", "TXT-0281"]
+    }
+  ],
+  "evidence_refs": ["TXT-0264", "TAB-0003", "TAB-0004", "TXT-0281"],
+  "commitments": ["Clarify the empirical protocol and scope in a revision without claiming unsubmitted results."],
+  "limitations_acknowledged": ["The submission lacks sufficient experimental detail and uncertainty reporting to establish the broad empirical claims."],
+  "published_at": "2026-07-11T16:15:00Z"
+}

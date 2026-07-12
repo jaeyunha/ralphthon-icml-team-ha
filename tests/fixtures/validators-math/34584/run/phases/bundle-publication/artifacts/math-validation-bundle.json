@@ -1,0 +1,112 @@
+{
+  "agent_id": "validator-mathematics-34584",
+  "finding_count": 5,
+  "findings": [
+    {
+      "artifact_refs": [
+        "phases/assumption-audit/artifacts/uat-assumption-audit.json"
+      ],
+      "claim_id": "THEOREM-011",
+      "confidence": 0.95,
+      "confirmation_paths": [],
+      "finding_id": "MATH-34584-001",
+      "limitations": "This structural audit checks whether the dossier statement exposes central hypotheses; it does not verify the omitted proof.",
+      "method": "Explicit theorem-scope and dependency audit",
+      "observation": "The audited statement exposes every required scope phrase and declared symbol.",
+      "paper_anchors": [
+        "THM-0011"
+      ],
+      "severity_candidate": "none",
+      "status": "partially_verified",
+      "validator_type": "exact_math"
+    },
+    {
+      "artifact_refs": [
+        "phases/symbolic-validation/artifacts/reynolds-c2-symbolic.json"
+      ],
+      "claim_id": "EQ-016",
+      "confidence": 0.94,
+      "confirmation_paths": [],
+      "finding_id": "MATH-34584-002",
+      "limitations": "This verifies a representative finite-group instantiation, not Lemma 2.8 for every group, representation, and MLP.",
+      "method": "SymPy expansion of the paper's Reynolds operator for the C2 sign representation",
+      "observation": "Symbolic simplification reduced the claimed difference to zero.",
+      "paper_anchors": [
+        "EQ-0016",
+        "THM-0004"
+      ],
+      "severity_candidate": "none",
+      "status": "verified_symbolically",
+      "validator_type": "symbolic_math"
+    },
+    {
+      "artifact_refs": [
+        "phases/symbolic-validation/artifacts/transporter-c2-smt.json"
+      ],
+      "claim_id": "EQ-007",
+      "confidence": 0.91,
+      "confirmation_paths": [],
+      "finding_id": "MATH-34584-003",
+      "limitations": "This is an exact finite two-site specialization, not a proof of Proposition 2.3 for arbitrary bundles.",
+      "method": "Z3 negated-implication check for the two-site permutation-only transporter constraint",
+      "observation": "Z3 found the negated implication unsatisfiable under the declared constraints.",
+      "paper_anchors": [
+        "EQ-0007",
+        "THM-0001"
+      ],
+      "severity_candidate": "none",
+      "status": "verified_exactly",
+      "validator_type": "exact_math"
+    },
+    {
+      "artifact_refs": [
+        "phases/symbolic-validation/artifacts/block-kernel-shape.json"
+      ],
+      "claim_id": "EQ-006",
+      "confidence": 0.98,
+      "confirmation_paths": [],
+      "finding_id": "MATH-34584-004",
+      "limitations": "Checks the declared Hom(V_p,W_q) application shape for a representative finite-dimensional fiber pair.",
+      "method": "Exact block-kernel dimension propagation",
+      "observation": "All declared tensor operations and output dimensions are shape-consistent.",
+      "paper_anchors": [
+        "EQ-0006"
+      ],
+      "severity_candidate": "none",
+      "status": "verified_exactly",
+      "validator_type": "exact_math"
+    },
+    {
+      "artifact_refs": [
+        "phases/counterexample-search/artifacts/reynolds-c2-numerical.json"
+      ],
+      "claim_id": "EQ-016",
+      "confidence": 0.9,
+      "confirmation_paths": [],
+      "finding_id": "MATH-34584-005",
+      "limitations": "Bounded numerical support duplicates the same representative instance and is not a general proof.",
+      "method": "Exact rational and 80-digit boundary/adversarial replay of the C2 Reynolds instance",
+      "observation": "No counterexample was found in 65 exact and high-precision samples.",
+      "paper_anchors": [
+        "EQ-0016",
+        "THM-0004"
+      ],
+      "severity_candidate": "none",
+      "status": "supported_numerically",
+      "validator_type": "numerical_math"
+    }
+  ],
+  "phase_order": [
+    "claim-extraction",
+    "assumption-audit",
+    "symbolic-validation",
+    "counterexample-search",
+    "formalization",
+    "confirmation",
+    "bundle-publication"
+  ],
+  "published_at": "2026-07-11T15:01:43.601368Z",
+  "run_id": "math-34584-real-001",
+  "schema_version": 1,
+  "submission_id": "34584"
+}

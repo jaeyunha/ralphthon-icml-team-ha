@@ -1,0 +1,13 @@
+{
+  "config_version": 1,
+  "run_id": "run-fixture-001",
+  "mode": "live_submission",
+  "review_start_time": "2026-07-11T18:42:12Z",
+  "literature_cutoff": "review_start_time",
+  "submission_manifest_path": "submission-manifest.json",
+  "reviewer_count": 4,
+  "privacy_mode": "strict",
+  "block_exact_target_title_search": true,
+  "block_target_authors": true,
+  "block_target_preprint": true
+}

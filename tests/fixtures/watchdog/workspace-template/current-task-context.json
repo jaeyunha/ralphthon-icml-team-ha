@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "task_id": "fixture-review",
+  "phase": "initial-review",
+  "completion_predicate": "A schema-valid review.json exists and COMPLETE is promised"
+}

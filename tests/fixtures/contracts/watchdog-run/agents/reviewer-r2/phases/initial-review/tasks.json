@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "phase": "initial-review",
+  "current_task_id": "fixture-review",
+  "tasks": [
+    {
+      "id": "fixture-review",
+      "type": "review",
+      "status": "in_progress",
+      "description": "Produce one schema-valid review artifact",
+      "attempt_count": 1,
+      "retry_feedback": "Artifact validation failed; retry with exact feedback"
+    }
+  ]
+}

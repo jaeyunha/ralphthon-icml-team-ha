@@ -1,0 +1,48 @@
+{
+  "artifact_type": "literature_broker_response",
+  "request_id": "REF-578b330ee7c74945",
+  "reviewer_id": "validator-references",
+  "packets": [
+    {
+      "source_id": "SRC-E83023BC030D893B",
+      "title": "TAGDN: type-aligning graph diffusion network for capturing long-range dependencies in heterogeneous graphs without over-squashing and over-smoothing",
+      "authors": [
+        "Seong Jin Ahn",
+        "Min-Soo Kim",
+        "Myoung-Ho Kim"
+      ],
+      "first_public_date": "2025-10-22",
+      "source_type": "publisher_page",
+      "canonical_uri": "https://doi.org/10.1007/s00521-025-11684-7",
+      "content_hash": "sha256:3b3949b60803807ed964b28aaf72d79b7e6582f270a2f90eafef858661099d62",
+      "admissibility": "admissible_prior_work",
+      "retrieval_reason": "Validate bibliography identity for REF-001",
+      "supporting_passages": [
+        {
+          "anchor": "retrieved:sentence:1",
+          "summary": "TAGDN: type-aligning graph diffusion network for capturing long-range dependencies in heterogeneous graphs without over-squashing and over-smoothing | Neural Computing and Applications | Springer Nature Link Skip to main content Advertisement Log in Menu Find a journal Publish with us Track your research Search Saved research Cart Home Neural Computing and Applications Article TAGDN: type-aligning graph diffusion network for capturing long-range dependencies in heterogeneous graphs without over-squashing and over-smoothing Original Article Open access Published: 22 October 2025 Volume 37 ,..."
+        },
+        {
+          "anchor": "retrieved:sentence:2",
+          "summary": "Recent studies have attempted to analyze heterogeneous graphs without relying on manually selected metapaths."
+        },
+        {
+          "anchor": "retrieved:sentence:3",
+          "summary": "However, existing methods often struggle to learn long-range dependencies between distant nodes because of over-squashing and over-smoothing."
+        }
+      ],
+      "verification_status": "full_text_checked"
+    }
+  ],
+  "rejected_candidates": [
+    {
+      "canonical_uri": "https://doi.org/10.1109/ijcnn54540.2023.10191773",
+      "reason": "identity: canonical page title coverage 0.00 is below 0.60"
+    },
+    {
+      "canonical_uri": "https://doi.org/10.1109/ijcnn64981.2025.11228084",
+      "reason": "identity: canonical page title coverage 0.00 is below 0.60"
+    }
+  ],
+  "created_at": "2026-07-11T15:03:03.570Z"
+}

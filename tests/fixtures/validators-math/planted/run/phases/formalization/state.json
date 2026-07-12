@@ -1,0 +1,17 @@
+{
+  "agent_id": "validator-mathematics-planted",
+  "allowed_input_manifest_hash": "sha256:45fbad7b35a64b6f6717c0d273ef8a5adb62add9ca352d4c055ded6766aaf84a",
+  "attempt": 1,
+  "attempt_count": 1,
+  "completed_at": "2026-07-11T15:01:43.148428Z",
+  "current_task": null,
+  "input_manifest_hash": "sha256:45fbad7b35a64b6f6717c0d273ef8a5adb62add9ca352d4c055ded6766aaf84a",
+  "last_artifact_hash": null,
+  "no_progress_count": 0,
+  "phase": "formalization",
+  "phase_run_id": "math-planted-001:validator-mathematics-planted:formalization",
+  "role": "validator",
+  "run_id": "math-planted-001",
+  "started_at": "2026-07-11T15:01:40.971433Z",
+  "status": "completed"
+}

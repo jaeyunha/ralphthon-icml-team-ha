@@ -1,0 +1,7 @@
+{
+  "findingId": "MATH-12",
+  "validatorId": "validator-math-1",
+  "status": "confirmed",
+  "claim": "Proposition 2 holds with the revised constant when the density ratio is bounded by rho_max.",
+  "checks": ["symbolic-bound", "constant-trace", "assumption-coverage"]
+}

@@ -1,0 +1,18 @@
+{
+  "artifact_refs": [
+    "phases/counterexample-search/artifacts/hidden-assumption-counterexample.json"
+  ],
+  "claim_id": "CLAIM-HIDDEN",
+  "confidence": 1.0,
+  "confirmation_paths": [],
+  "finding_id": "MATH-PLANTED-HIDDEN-CONFIRM",
+  "limitations": "Confirms the omitted nonnegative assumption with a concrete real input.",
+  "method": "Exact boundary search over negative and nonnegative inputs",
+  "observation": "Boundary/adversarial search found counterexample {'x': '-3'}.",
+  "paper_anchors": [
+    "THM-HIDDEN"
+  ],
+  "severity_candidate": "none",
+  "status": "counterexample_found",
+  "validator_type": "numerical_math"
+}

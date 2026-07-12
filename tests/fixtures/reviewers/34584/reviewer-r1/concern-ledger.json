@@ -1,0 +1,153 @@
+{
+  "concerns": [
+    {
+      "affected_claims": [
+        "CLAIM-005",
+        "CLAIM-007"
+      ],
+      "anchors": [
+        "TXT-0019",
+        "TXT-0065",
+        "TXT-0258",
+        "TXT-0259",
+        "TXT-0332"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "STAT-BASELINE-001",
+        "STAT-BREADTH-001",
+        "STAT-LEAKAGE-001",
+        "STAT-MULTICOMP-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001"
+      ],
+      "id": "reviewer-r1-W1",
+      "severity": "major",
+      "status": "open",
+      "text": "The central framing is broader than the formal symmetry used by OENN. OENN equivariance is exactly equivariance to a finite group G acting on the total direct-sum feature space; the order supplies G-stable masks, incidence relations, and admissible automorphisms but is not itself an equivariance or naturality condition, as the paper later acknowledges. In the full class, the UAT broadcasts the whole input and applies site-stabilizer Reynolds MLPs. The manuscript therefore needs a theorem-level account of what is new beyond finite-group equivariant networks and an action-groupoid reformulation, particularly for posets with small or trivial automorphism groups."
+    },
+    {
+      "affected_claims": [
+        "CLAIM-005"
+      ],
+      "anchors": [
+        "TXT-0001",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0106",
+        "TXT-0349"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "STAT-BASELINE-001",
+        "STAT-BREADTH-001",
+        "STAT-LEAKAGE-001",
+        "STAT-MULTICOMP-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001"
+      ],
+      "id": "reviewer-r1-W2",
+      "severity": "major",
+      "status": "open",
+      "text": "The statement that the UAT is new even when restricted to sheaf neural networks is not matched by the architecture class actually proved universal. The full theorem permits global orbital mixing, while the local theorem reconstructs global access with source-labeled pair states that retain every source feature and propagate for diameter-many layers. The paper itself states that ordinary sheaf diffusion or sheaf message passing remains non-universal in general. The result is therefore a UAT for a broad sheaf-indexed OENN completion, not for conventional sheaf neural networks; the headline claim should be narrowed or a theorem for a recognizable sheaf-network class should be added."
+    },
+    {
+      "affected_claims": [
+        "CLAIM-002",
+        "CLAIM-006",
+        "CLAIM-007"
+      ],
+      "anchors": [
+        "TXT-0192",
+        "TXT-0193",
+        "THM-0018",
+        "TXT-0200",
+        "TXT-0250"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "STAT-BASELINE-001",
+        "STAT-BREADTH-001",
+        "STAT-LEAKAGE-001",
+        "STAT-MULTICOMP-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001"
+      ],
+      "id": "reviewer-r1-W3",
+      "severity": "major",
+      "status": "open",
+      "text": "The CENN portion is not self-contained enough for the breadth claimed. Definition A.2 delegates the arrow-bundle generators to Maruyama (2025a), and Theorem A.3 invokes standard CENN hypotheses without fully specifying or proving the machinery needed for the asserted general UAT. Much of the subsequent appendix establishes a finite action-groupoid specialization that is already covered by the direct OENN proof. The paper should clearly separate imported prior results from new results and either provide complete definitions and hypotheses or substantially narrow the CENN claims."
+    },
+    {
+      "affected_claims": [
+        "CLAIM-008",
+        "CLAIM-009"
+      ],
+      "anchors": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "STAT-BASELINE-001",
+        "STAT-BREADTH-001",
+        "STAT-LEAKAGE-001",
+        "STAT-MULTICOMP-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001"
+      ],
+      "id": "reviewer-r1-W4",
+      "severity": "major",
+      "status": "open",
+      "text": "The empirical claims are not currently reliable. The paper supplies only a result table and a qualitative explanation, while the statistical validation bundle reports a non-like-for-like TemporalCNN comparison involving different compute, tuning, splits, and metric definitions, and an exact subject identifier shared between training and held-out data. It additionally finds fewer than two recorded seeds, no uncertainty estimate, and no multiplicity correction. These findings directly compromise the claimed outperformance and improved generalization, although they are ancillary to the OENN theory. A subject-disjoint, protocol-matched rerun with run-level uncertainty is needed."
+    },
+    {
+      "affected_claims": [
+        "CLAIM-005"
+      ],
+      "anchors": [
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0345",
+        "TXT-0349"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "STAT-BASELINE-001",
+        "STAT-BREADTH-001",
+        "STAT-LEAKAGE-001",
+        "STAT-MULTICOMP-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001"
+      ],
+      "id": "reviewer-r1-W5",
+      "severity": "minor",
+      "status": "open",
+      "text": "The constructive local UAT has severe unquantified cost: every carrier stores source-labeled slots totaling the whole input dimension, depth scales with directed diameter, and the exact compilation uses pair-specific walk-count rescaling. The paper provides no parameter, compute, sample-complexity, optimization, or stability analysis and no empirical evaluation of this OENN construction. This limits the practical significance of the local universality result without invalidating its formal existence claim."
+    }
+  ],
+  "ledger_version": 1,
+  "official_review_version": 1,
+  "reviewer_id": "reviewer-r1"
+}

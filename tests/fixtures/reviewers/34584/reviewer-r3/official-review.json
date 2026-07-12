@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "reviewer_id": "reviewer-r3",
+  "summary": "This submission formulates order-equivariant neural networks (OENNs) on finite posets equipped with finite-group actions and transported local feature fibers. It characterizes linear equivariant maps through pair-orbit transporter and stabilizer constraints, constructs nonlinear layers from orbital affine maps, Reynolds-equivariant blocks, and pair-orbit aggregation, and proves universal approximation for both a full architecture and a source-labeled local pair-state architecture under a diameter condition. It specializes the framework to fixed graphs and cellular or simplicial sheaf layers, relates completed OENN maps to CENN natural transformations over action groupoids, and includes an EMG-IMU case study.",
+  "strengths": [
+    {
+      "text": "The linear theory is explicit and constructive: the transporter law is paired with an orbit-representative parametrization and stabilizer intertwiner condition, and the appendix supplies direct proofs. The validator evidence supports the declared block shapes and a representative two-site transporter specialization, while appropriately limiting those checks to special cases.",
+      "anchors": [
+        "THM-0001",
+        "THM-0002",
+        "EQ-0007"
+      ]
+    },
+    {
+      "text": "The expressivity discussion usefully separates ordinary anonymous message passing, source-labeled pair-state locality, and unrestricted full OENNs. The local theorem combines a dependency lower bound with an exact diameter-depth broadcast construction and explicitly states the associated hidden-state growth, making the universality claim more informative than an unqualified density result.",
+      "anchors": [
+        "THM-0011",
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0349"
+      ]
+    },
+    {
+      "text": "The graph and sheaf specializations are technically careful about when familiar tied message-passing layers are strict subfamilies of the full orbit-parametrized operator. The sheaf construction also tracks restriction maps, invariant fiber metrics, adjoints, and stabilizer transports rather than assuming all fibers transform trivially.",
+      "anchors": [
+        "TXT-0078",
+        "TXT-0105",
+        "THM-0017"
+      ]
+    },
+    {
+      "text": "The categorical appendix contains a valuable clarification that completed OENN equivariance is represented by naturality over an action groupoid, not by naturality over the thin poset category itself. The objectwise correspondence between equivariant maps and natural families is stated cleanly.",
+      "anchors": [
+        "TXT-0149",
+        "THM-0019",
+        "TXT-0259"
+      ]
+    }
+  ],
+  "weaknesses": [
+    {
+      "id": "reviewer-r3-W1",
+      "text": "The central order-equivariant framing is broader than the actual equivariance constraint established in the main theory. Definition 2.2 is ordinary equivariance for a finite group acting on the total poset-indexed bundle, and the paper later explicitly states that the thin poset category does not provide the OENN embedding. The order supplies useful masks, incidences, covers, and sheaf structure, but the full UAT itself is not visibly order-dependent. This creates a major originality and significance uncertainty: the authors should identify the theorem content that is genuinely beyond a generic finite-group equivariant UAT, compare it theorem-by-theorem with the closest such results, or narrow the claims. I do not view this as a demonstrated algebraic error in Theorem 3.3.",
+      "severity": "major",
+      "affected_claims": [
+        "CLAIM-002",
+        "CLAIM-005"
+      ],
+      "anchors": [
+        "TXT-0020",
+        "EQ-0005",
+        "TXT-0258",
+        "TXT-0259"
+      ]
+    },
+    {
+      "id": "reviewer-r3-W2",
+      "text": "The general CENN claim is not independently assessable from this submission at the advertised scope. The CENN definition delegates the arrow-bundle generators to prior work, Theorem A.3 invokes standard CENN hypotheses without a proof here, and the later finite-realization argument carefully limits itself to selected finite action-groupoid approximants. The OENN-to-action-groupoid correspondence is useful, but the stronger statements that CENN gives the general form of equivariant networks and infinitary UATs require the complete primitive definitions, assumptions, and proof, or substantially narrower wording that treats them as imported background.",
+      "severity": "major",
+      "affected_claims": [
+        "CLAIM-002",
+        "CLAIM-006"
+      ],
+      "anchors": [
+        "TXT-0192",
+        "TXT-0193",
+        "THM-0018",
+        "TXT-0250"
+      ]
+    },
+    {
+      "id": "reviewer-r3-W3",
+      "text": "The EMG-IMU comparison does not currently support the claim of substantial outperformance or improved generalization. The statistical validator found that TemporalCNN used a different split and metric, received less than two-thirds of the proposed method's compute budget and materially fewer tuning trials, and that subject-2 appeared in both training and held-out data. These are not like-for-like conditions, and the subject overlap is a direct threat to held-out validity. Resolution requires a subject-disjoint fixed split, identical preprocessing and metric definitions, matched or sensitivity-tested compute and tuning budgets, and complete run-level protocol disclosure before interpreting the performance gap.",
+      "severity": "major",
+      "affected_claims": [
+        "CLAIM-008",
+        "CLAIM-009"
+      ],
+      "anchors": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281"
+      ]
+    },
+    {
+      "id": "reviewer-r3-W4",
+      "text": "Even after repairing split and baseline parity, the empirical evidence is too thin for a generalization claim: fewer than two distinct seeds are recorded, no uncertainty estimate is reported, eight comparisons lack a multiplicity correction, and the tested evidence does not cover distribution shift or hardware variation. Repeated independent runs with per-run values and confidence intervals, a declared primary comparison or justified correction, and narrower scope would resolve this concern.",
+      "severity": "minor",
+      "affected_claims": [
+        "CLAIM-008",
+        "CLAIM-009"
+      ],
+      "anchors": [
+        "TXT-0264",
+        "TXT-0281"
+      ]
+    },
+    {
+      "id": "reviewer-r3-W5",
+      "text": "The universality constructions do not establish practical or sample efficiency. The pair-state local construction stores a source-indexed copy of the total input at every carrier and needs diameter-many propagation layers, while the full proof uses a global broadcast. A complexity analysis and experiments comparing memory, parameter count, runtime, and accuracy against ordinary and higher-order message passing would clarify when the additional expressivity is usable rather than only existential.",
+      "severity": "minor",
+      "affected_claims": [
+        "CLAIM-001",
+        "CLAIM-005"
+      ],
+      "anchors": [
+        "TXT-0071",
+        "TXT-0106",
+        "TXT-0332",
+        "TXT-0349"
+      ]
+    }
+  ],
+  "scores": {
+    "soundness": 3,
+    "presentation": 2,
+    "significance": 3,
+    "originality": 2,
+    "overall": 3
+  },
+  "key_questions": [
+    {
+      "id": "reviewer-r3-Q1",
+      "question": "Which exact theorem or architecture property depends essentially on the poset order rather than only on the finite group representation and a chosen invariant relation, and how does it differ from the closest finite-group equivariant UAT?",
+      "possible_score_impact": "A precise, literature-grounded distinction could raise originality from 2 to 3 and move the overall recommendation from 3 to 4; an answer showing no substantive distinction would preserve the current assessment."
+    },
+    {
+      "id": "reviewer-r3-Q2",
+      "question": "Can the authors provide or rerun the EMG-IMU study with a subject-disjoint fixed split, identical metrics and preprocessing, matched compute and tuning budgets for all baselines, multiple independent seeds, and run-level uncertainty?",
+      "possible_score_impact": "If the advantage remains under this protocol, weaknesses W3-W4 would be substantially reduced and the overall score could increase by one point; if it does not, CLAIM-008 and CLAIM-009 should be removed or sharply narrowed."
+    },
+    {
+      "id": "reviewer-r3-Q3",
+      "question": "Can the paper state all CENN primitive definitions and analytic hypotheses needed for Theorem A.3, and clearly separate results proved in this submission from results imported from prior CENN work?",
+      "possible_score_impact": "A self-contained account or a disciplined narrowing of the claim could raise presentation and reduce the soundness uncertainty; failure to do so leaves the broad CENN claims unsupported here."
+    },
+    {
+      "id": "reviewer-r3-Q4",
+      "question": "What are the asymptotic and measured memory, parameter, and runtime costs of pair-state OENN relative to ordinary message passing and standard higher-order or tensorized GNNs on representative graph or sheaf domains?",
+      "possible_score_impact": "Convincing complexity bounds and empirical scaling evidence would strengthen significance, while unfavorable scaling would not invalidate the UAT but would require a narrower practical claim."
+    }
+  ],
+  "limitations": "The proved OENN results concern finite posets, finite groups, finite-dimensional fibers, and compact invariant input domains. Local universality additionally requires a strongly connected communication relation, source-labeled state whose width scales with the total input dimension at every carrier, and depth at least the directed diameter; no sample-complexity or computational-efficiency guarantee follows. The general CENN theorem is not self-contained in this paper. Empirical support is confined to one wearable benchmark and, according to the supplied statistical validation, has split, baseline-parity, repeated-run, uncertainty, multiplicity, and robustness-scope limitations. My originality judgment also carries uncertainty because the allowed reference validation does not provide a clean verification of all recent closest-work claims.",
+  "confidence": 3,
+  "ethical_concerns": [
+    "The empirical appendix uses human wearable biosignal data but does not discuss consent provenance, privacy handling, demographic coverage, or dataset-license constraints. Because the paper appears to reuse cited public datasets rather than collect new data, this is a reporting and scope concern, not evidence of misconduct."
+  ],
+  "evidence_refs": [
+    "MATH-34584-001",
+    "MATH-34584-002",
+    "MATH-34584-003",
+    "MATH-34584-004",
+    "MATH-34584-005",
+    "STAT-BASELINE-001",
+    "STAT-LEAKAGE-001",
+    "STAT-SEEDS-001",
+    "STAT-UNCERTAINTY-001",
+    "STAT-MULTICOMP-001",
+    "STAT-BREADTH-001"
+  ]
+}

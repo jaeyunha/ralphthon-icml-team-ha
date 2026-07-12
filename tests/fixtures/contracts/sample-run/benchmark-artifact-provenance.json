@@ -1,0 +1,10 @@
+{
+  "kind": "original_pdf",
+  "source_uri": "https://example.test/original.pdf",
+  "sha256": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "size_bytes": 1024,
+  "first_public_at": "2026-01-28T12:00:00Z",
+  "cutoff": "2026-01-28T23:59:59-12:00",
+  "status": "eligible",
+  "revision": "v1"
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "finding_id":"CODE-CROSS-001",
+    "validator_type":"code",
+    "claim_id":"CLAIM-X",
+    "status":"key_result_reproduced",
+    "severity_candidate":"none",
+    "paper_anchors":["TXT-0264"],
+    "method":"Executed the frozen official artifact in the isolated sandbox.",
+    "observation":"The key result was reproduced within the declared tolerance.",
+    "limitations":"Only the key result was run.",
+    "confirmation_paths":["official reproduction log"],
+    "confidence":0.95,
+    "artifact_refs":["fixture://g1/official-run.json"]
+  }
+]

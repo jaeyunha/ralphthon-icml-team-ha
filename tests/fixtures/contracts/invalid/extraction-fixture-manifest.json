@@ -1,0 +1,36 @@
+{
+  "artifacts": [],
+  "assets": {
+    "file_count": 0,
+    "total_size_bytes": 0,
+    "tree_sha256": "sha256:6666666666666666666666666666666666666666666666666666666666666666"
+  },
+  "dossier_summary": {
+    "assumptions": 0,
+    "equations": 0,
+    "experiments": 0,
+    "claims": 0,
+    "references": 0,
+    "theorems": 0
+  },
+  "fixture_id": "extraction-34584",
+  "paper_id": "34584",
+  "schema_version": 1,
+  "source": {
+    "pdf_committed": false,
+    "pdf_filename": "34584_Foundations_of_Equivaria.pdf",
+    "pdf_sha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "size_bytes": 433402
+  },
+  "state": "golden",
+  "tool": {
+    "name": "docling",
+    "version": "2.112.0"
+  },
+  "verification": {
+    "sample_size": 0,
+    "status": "passed",
+    "unresolved_anchor_count": 0
+  },
+  "verified_bundle_sha256": "not-a-sha256"
+}

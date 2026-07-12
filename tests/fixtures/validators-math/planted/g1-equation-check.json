@@ -1,0 +1,8 @@
+{
+  "artifact_ref": "g1/conformance/official-vs-clean-room.json#equation-7",
+  "variables": ["x"],
+  "paper_expression": "x**2+x",
+  "implementation_expression": "x**2-x",
+  "sample_domains": {"x": {"min": -2, "max": 2, "points": 9}},
+  "tolerance": 1e-12
+}

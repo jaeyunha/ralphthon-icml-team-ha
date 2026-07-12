@@ -1,0 +1,41 @@
+{
+  "ledger_version": 1,
+  "questions": [
+    {
+      "answer_refs": [],
+      "id": "reviewer-r2-Q1",
+      "possible_score_impact": "A precise narrowing consistent with the proof, or a valid theorem for the stronger restriction-compatible class, would substantially reduce W1 and could raise soundness and the overall recommendation; maintaining the broad interpretation without new evidence would preserve the current assessment.",
+      "question": "Is the intended OENN/sheaf approximation target merely finite-G-equivariant maps on a poset- or sheaf-indexed total space, or maps satisfying an additional order-naturality or restriction-compatibility condition? Please state the target class precisely and identify where the approximating architecture enforces any stronger condition.",
+      "status": "open"
+    },
+    {
+      "answer_refs": [],
+      "id": "reviewer-r2-Q2",
+      "possible_score_impact": "A self-contained and verifiable account could materially improve soundness, presentation, and the overall recommendation; unresolved dependence on unstated constructions would leave a headline contribution uncertain.",
+      "question": "Can the authors provide the complete arrow-bundle generators, exact hypotheses, and proof dependencies used by Theorem A.3 and Lemma A.6, and clarify which CENN results are proved here versus imported from prior work?",
+      "status": "open"
+    },
+    {
+      "answer_refs": [],
+      "id": "reviewer-r2-Q3",
+      "possible_score_impact": "A valid unrestricted-depth indistinguishability result would support the claimed necessity and improve soundness; otherwise, narrowing the claim would make the issue bounded but would remove part of the advertised contribution.",
+      "question": "What theorem rules out universality of sufficiently deep anonymous relation-message-passing OENNs, beyond the stated lower bound for fewer than d_R(p,q) inter-site layers?",
+      "status": "open"
+    },
+    {
+      "answer_refs": [],
+      "id": "reviewer-r2-Q4",
+      "possible_score_impact": "Complete, leakage-controlled, repeated, and capacity-matched evidence could improve presentation and empirical significance and might move the overall recommendation; absent such evidence, CLAIM-008 and CLAIM-009 remain unsupported.",
+      "question": "What were the exact EMG-IMU split protocol, evaluation metric and numeric results, number of runs and uncertainty, baseline implementations and tuning budgets, model capacities, and ablations or transformed-test evaluations that isolate categorical equivariance?",
+      "status": "open"
+    },
+    {
+      "answer_refs": [],
+      "id": "reviewer-r2-Q5",
+      "possible_score_impact": "A verified comparison showing substantive non-overlap could raise originality; close unacknowledged overlap or continued inability to substantiate the priority claim could lower originality and potentially the overall recommendation.",
+      "question": "What theorem-level literature comparison supports the claim that no prior sheaf-network UAT was known, and how do the transporter, pair-state, and categorical results differ from the closest verified equivariant approximation and higher-order message-passing frameworks?",
+      "status": "open"
+    }
+  ],
+  "reviewer_id": "reviewer-r2"
+}

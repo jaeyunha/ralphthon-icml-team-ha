@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "agent_id": "reviewer-r2",
+  "role": "reviewer",
+  "phase": "initial-review",
+  "status": "settled",
+  "promise": "COMPLETE",
+  "reason": null,
+  "exit_code": 0,
+  "allowed_input_manifest_hash": "sha256:not-a-digest",
+  "artifact_path": "agents/reviewer-r2/phases/initial-review/artifacts/review.json",
+  "artifact_hash": null,
+  "completed_at": "2026-07-11T12:05:00Z"
+}

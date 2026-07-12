@@ -1,0 +1,14 @@
+{
+  "started_at": "2026-07-11T12:00:00Z",
+  "deadline_at": "2026-07-12T12:00:00Z",
+  "limits": {
+    "no_progress_threshold": 3
+  },
+  "restart_counts": {
+    "reviewer-r2::initial-review": -1
+  },
+  "no_progress_counts": {},
+  "discussion_rounds": {},
+  "last_artifact_hashes": {},
+  "subscription_cursors": {}
+}

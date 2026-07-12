@@ -1,0 +1,20 @@
+{
+  "claim_id": "THM-MISMATCH",
+  "compiler_exit_code": 0,
+  "compiler_stderr": "",
+  "compiler_stdout": "",
+  "formalization_fidelity": "mismatch",
+  "formalization_sha256": "sha256:7b55812d88bc888595649f1be7b7556b66032c12c19e61b362ee8e5f6636a660",
+  "paper_anchors": [
+    "THM-MISMATCH-ANCHOR"
+  ],
+  "proof_attempted": true,
+  "proof_compiled": true,
+  "proof_validity": "accepted",
+  "protocol_note": "Lean proof accepted does not imply that the paper theorem was verified.",
+  "statement_alignment": "mismatch",
+  "statement_alignment_checked": true,
+  "statement_alignment_evidence": "The formal artifact drops the universal binder n and replaces the paper operation n+0 with the closed expression 1+1.",
+  "toolchain_image": "leanprovercommunity/lean4@sha256:d61f7052fa82e7e726db46984ef4f11c84525eabd4a8d1d20ba80f1ccee34018",
+  "toolchain_version": "4.10.0"
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "agent_id": "reviewer-r2",
+  "version": 1,
+  "entries": [
+    {
+      "query_id": "lit-001",
+      "query": "verified prior work",
+      "status": "completed",
+      "results": [
+        {
+          "source_id": "SRC-108",
+          "title": "Verified Prior Work",
+          "canonical_uri": "arxiv:2510.12345",
+          "content_hash": "sha256:not-a-digest"
+        }
+      ]
+    }
+  ]
+}

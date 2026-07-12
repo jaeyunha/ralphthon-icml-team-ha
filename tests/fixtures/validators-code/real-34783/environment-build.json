@@ -1,0 +1,27 @@
+{
+  "paper_id": "34783",
+  "image": "ralphthon/equities-jepa-validator:34783",
+  "image_digest": "sha256:b67a1537eb454817ade05ffad8a2fbd9d5bb82d43e5bdbffb125b4e8487a3045",
+  "base_image": "python@sha256:423ed6ab25b1921a477529254bfeeabf5855151dc2c3141699a1bfc852199fbf",
+  "container_user": "65532:65532",
+  "workdir": "/workspace",
+  "dependencies": {
+    "torch": "2.7.1",
+    "numpy": "2.2.6",
+    "pyyaml": "6.0.2",
+    "zarr": "2.18.7"
+  },
+  "build_attempts": [
+    {
+      "attempt": 1,
+      "status": "failed",
+      "observation": "numcodecs 0.15.1 required a local aarch64 build and gcc was absent"
+    },
+    {
+      "attempt": 2,
+      "status": "passed",
+      "observation": "pinned dependencies installed after adding gcc/libc6-dev; final image runs as uid 65532"
+    }
+  ],
+  "network_policy": "Package installation occurred during controlled image construction; all research-code execution used Docker --network none."
+}

@@ -1,0 +1,15 @@
+{
+  "dossier_version": 1,
+  "submission_id": "planted-math-defects",
+  "claims": [
+    {"id": "CLAIM-ALG", "anchor_id": "EQ-ALG", "statement": "For all real x and y, (x+y)^2 = x^2+y^2."},
+    {"id": "CLAIM-HIDDEN", "anchor_id": "THM-HIDDEN", "statement": "For every real x, sqrt(x^2)=x."}
+  ],
+  "equations": [
+    {"id": "EQ-CODE", "anchor_id": "EQ-CODE-ANCHOR", "statement": "f(x)=x^2+x."}
+  ],
+  "theorems": [
+    {"id": "LEMMA-CORRECT", "anchor_id": "THM-CORRECT", "statement": "For every natural n, n+0=n."},
+    {"id": "THM-MISMATCH", "anchor_id": "THM-MISMATCH-ANCHOR", "statement": "For every natural n, n+0=n."}
+  ]
+}

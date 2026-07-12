@@ -1,0 +1,22 @@
+{
+  "finding_id": "CODE-34584-NO-CODE-001",
+  "validator_type": "reproducibility",
+  "claim_id": "CLAIM-008",
+  "status": "not_executable",
+  "severity_candidate": "major",
+  "paper_anchors": [
+    "TXT-0264",
+    "TAB-0004"
+  ],
+  "method": "Inspected the frozen submission manifest and submitted artifact inventory for an executable implementation, environment specification, checkpoints, and evaluation entry point.",
+  "observation": "The frozen paper-34584 submission contains no executable code artifact or environment capable of reproducing the reported EMG-IMU experiment, so official reproduction and clean-room conformance cannot be executed against submitted code.",
+  "limitations": "This status does not show that an implementation cannot exist; it records that no executable implementation was available inside the frozen submission evidence boundary.",
+  "confirmation_paths": [
+    "tests/fixtures/extraction/34584/fixture-manifest.json",
+    "tests/fixtures/extraction/34584/paper-dossier.json"
+  ],
+  "confidence": 0.99,
+  "artifact_refs": [
+    "tests/fixtures/extraction/34584/fixture-manifest.json"
+  ]
+}

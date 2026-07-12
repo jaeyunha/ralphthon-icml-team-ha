@@ -1,0 +1,18 @@
+{
+  "errors": [],
+  "inferred_shapes": {
+    "K_qp": [
+      5,
+      3
+    ],
+    "term_q": [
+      5,
+      1
+    ],
+    "x_p": [
+      3,
+      1
+    ]
+  },
+  "valid": true
+}

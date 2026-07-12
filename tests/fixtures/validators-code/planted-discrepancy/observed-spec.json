@@ -1,0 +1,9 @@
+{
+  "equations": {
+    "masked_loss": "mean(square(prediction - stop_gradient(target)))"
+  },
+  "hyperparameters": {
+    "mask_ratio": 0.4
+  },
+  "operation_order": ["normalize_target", "compute_loss"]
+}

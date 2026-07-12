@@ -1,0 +1,13 @@
+{
+  "claims": [
+    {"id": "T-C1", "statement": "The proposed formal operator is equivariant under the stated finite group action.", "anchor_id": "T-A1"},
+    {"id": "T-C2", "statement": "The theorem gives a universal approximation guarantee under compactness assumptions.", "anchor_id": "T-A2"}
+  ],
+  "theorems": [
+    {"id": "T-THM1", "statement": "Theorem 1 establishes equivariance for the operator family.", "anchor_id": "T-A1"},
+    {"id": "T-THM2", "statement": "Theorem 2 establishes universal approximation on compact domains.", "anchor_id": "T-A2"}
+  ],
+  "references": [
+    {"id": "T-R1", "title": "Prior formal learning result"}
+  ]
+}

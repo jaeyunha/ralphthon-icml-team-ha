@@ -1,0 +1,18 @@
+{
+  "artifact_refs": [
+    "phases/symbolic-validation/artifacts/correct-symbolic-lemma.json"
+  ],
+  "claim_id": "LEMMA-CORRECT",
+  "confidence": 1.0,
+  "confirmation_paths": [],
+  "finding_id": "MATH-PLANTED-CORRECT-SYMBOLIC",
+  "limitations": "The symbolic variable is treated as real, while the Lean path separately checks Nat.",
+  "method": "SymPy exact simplification",
+  "observation": "Symbolic simplification reduced the claimed difference to zero.",
+  "paper_anchors": [
+    "THM-CORRECT"
+  ],
+  "severity_candidate": "none",
+  "status": "verified_symbolically",
+  "validator_type": "symbolic_math"
+}

@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "campaign_id": "campaign-1",
+  "arm_cohort_id": "arm-v1",
+  "slots": [
+    {"paper_slot": 1, "paper_id": "paper-1", "status": "paper_failure", "failure": {"code": "ac_phase_failed", "stage": "ac", "message": "Synthetic failure.", "occurred_at": "2026-07-11T00:00:00Z", "evidence_refs": []}},
+    {"paper_slot": 2, "paper_id": "paper-2", "status": "paper_failure", "failure": {"code": "ac_phase_failed", "stage": "ac", "message": "Synthetic failure.", "occurred_at": "2026-07-11T00:00:00Z", "evidence_refs": []}},
+    {"paper_slot": 3, "paper_id": "paper-3", "status": "paper_failure", "failure": {"code": "ac_phase_failed", "stage": "ac", "message": "Synthetic failure.", "occurred_at": "2026-07-11T00:00:00Z", "evidence_refs": []}},
+    {"paper_slot": 4, "paper_id": "paper-4", "status": "paper_failure", "failure": {"code": "ac_phase_failed", "stage": "ac", "message": "Synthetic failure.", "occurred_at": "2026-07-11T00:00:00Z", "evidence_refs": []}},
+    {"paper_slot": 5, "paper_id": "paper-5", "status": "paper_failure", "failure": {"code": "ac_phase_failed", "stage": "ac", "message": "Synthetic failure.", "occurred_at": "2026-07-11T00:00:00Z", "evidence_refs": []}},
+    {"paper_slot": 6, "paper_id": "paper-6", "status": "paper_failure", "failure": {"code": "ac_phase_failed", "stage": "ac", "message": "Synthetic failure.", "occurred_at": "2026-07-11T00:00:00Z", "evidence_refs": []}},
+    {"paper_slot": 7, "paper_id": "paper-7", "status": "paper_failure", "failure": {"code": "ac_phase_failed", "stage": "ac", "message": "Synthetic failure.", "occurred_at": "2026-07-11T00:00:00Z", "evidence_refs": []}}
+  ]
+}

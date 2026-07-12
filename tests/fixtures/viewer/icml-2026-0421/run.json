@@ -1,0 +1,25 @@
+{
+  "id": "icml-2026-0421",
+  "title": "Adaptive Certificates for Distribution-Shifted Optimization",
+  "status": "completed",
+  "mode": "live_submission",
+  "venue": "ICML 2026",
+  "paper": {
+    "number": 421,
+    "abstract": "We introduce adaptive optimality certificates for stochastic optimization under covariate shift. The method combines a shift-aware confidence sequence with a restart rule and reports finite-sample guarantees.",
+    "keywords": ["distribution shift", "stochastic optimization", "confidence sequences"],
+    "authors": ["Anonymous Author 1", "Anonymous Author 2", "Anonymous Author 3"]
+  },
+  "decision": {
+    "value": "accept_spotlight",
+    "label": "Accept (Spotlight)",
+    "publishedAt": "2026-06-18T16:04:12.000Z"
+  },
+  "progress": {
+    "phase": "decision_published",
+    "completedSteps": 18,
+    "totalSteps": 18
+  },
+  "createdAt": "2026-05-03T09:12:00.000Z",
+  "updatedAt": "2026-06-18T16:04:12.000Z"
+}

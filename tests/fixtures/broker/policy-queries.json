@@ -1,0 +1,42 @@
+[
+  {
+    "name": "exact target title",
+    "query": "Foundations of Equivariant Deep Learning: Unifying Graph and Sheaf Neural Networks",
+    "code": "TARGET_TITLE_LEAKAGE"
+  },
+  {
+    "name": "target title n-gram probe",
+    "query": "Find unifying graph and sheaf neural networks",
+    "code": "TARGET_TITLE_LEAKAGE"
+  },
+  {
+    "name": "target author",
+    "query": "papers by Yoshihiro Maruyama on geometric deep learning",
+    "code": "TARGET_AUTHOR_LEAKAGE"
+  },
+  {
+    "name": "distinctive copied sentence",
+    "query": "Specifically, we develop order-equivariant neural networks (OENN), which generalize standard graph message passing and sheaf neural networks via the theory of equivariant bundles over face posets (face categories).",
+    "code": "TARGET_TEXT_LEAKAGE"
+  },
+  {
+    "name": "target OpenReview page",
+    "query": "openreview.net/forum?id=aIH1jyU37z",
+    "code": "DISALLOWED_OPENREVIEW"
+  },
+  {
+    "name": "reviews and rebuttal",
+    "query": "find the peer reviews and author rebuttal for this paper",
+    "code": "OUTCOME_SEEKING"
+  },
+  {
+    "name": "meta review decision",
+    "query": "what was the meta-review decision",
+    "code": "OUTCOME_SEEKING"
+  },
+  {
+    "name": "acceptance announcement",
+    "query": "was this work accepted as a spotlight",
+    "code": "OUTCOME_SEEKING"
+  }
+]

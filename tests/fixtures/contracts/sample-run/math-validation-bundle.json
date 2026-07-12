@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "run_id": "math-paper-1",
+  "agent_id": "validator-mathematics-paper-1",
+  "submission_id": "paper-1",
+  "finding_count": 1,
+  "findings": [{
+    "finding_id": "MATH-001",
+    "validator_type": "exact_math",
+    "claim_id": "THEOREM-001",
+    "status": "verified_exactly",
+    "severity_candidate": "none",
+    "paper_anchors": ["THM-0001"],
+    "method": "Exact finite-domain proof.",
+    "observation": "The negated implication is unsatisfiable.",
+    "limitations": "Finite-domain specialization only.",
+    "confirmation_paths": [],
+    "confidence": 0.95
+  }],
+  "phase_order": ["claim-extraction", "assumption-audit", "symbolic-validation", "counterexample-search", "formalization", "confirmation", "bundle-publication"],
+  "published_at": "2026-07-11T15:00:00Z"
+}

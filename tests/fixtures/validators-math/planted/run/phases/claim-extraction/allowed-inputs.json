@@ -1,0 +1,38 @@
+{
+  "agent_id": "validator-mathematics-planted",
+  "inputs": [
+    {
+      "category": "paper",
+      "path": "paper-dossier.json",
+      "visibility": "full"
+    },
+    {
+      "category": "paper",
+      "path": "anchors.json",
+      "visibility": "full"
+    },
+    {
+      "category": "task_context",
+      "path": "validation-plan.json",
+      "visibility": "full"
+    },
+    {
+      "category": "own_private_state",
+      "path": "role-state.json",
+      "visibility": "full"
+    }
+  ],
+  "manifest_hash": "sha256:4781f1cb65745a24f04d605128ce5a14fd2f42fd2960346c46cf2556322d17f7",
+  "permissions": {
+    "author_response": "no",
+    "internal_discussion": "no",
+    "other_reviews": "no",
+    "own_private_state": "yes",
+    "paper": "yes",
+    "validation": "yes"
+  },
+  "phase": "claim-extraction",
+  "role": "validator_mathematics",
+  "run_id": "math-planted-001",
+  "schema_version": 1
+}

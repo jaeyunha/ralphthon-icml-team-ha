@@ -1,0 +1,15 @@
+{
+  "ledger_version": 1,
+  "reviewer_id": "R2",
+  "official_review_version": 1,
+  "concerns": [
+    {
+      "id": "R2-W1",
+      "text": "The theorem statement omits a required assumption.",
+      "severity": "major",
+      "affected_claims": ["THM-2"],
+      "anchors": ["theorem:2"],
+      "status": "open"
+    }
+  ]
+}

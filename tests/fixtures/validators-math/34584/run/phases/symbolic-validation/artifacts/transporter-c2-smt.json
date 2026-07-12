@@ -1,0 +1,5 @@
+{
+  "counterexample": null,
+  "result": "unsat",
+  "tool": "z3-4.16.0"
+}

@@ -1,0 +1,4 @@
+{"event":"validators.code.official_reproduction.environment_install_started","attempt":1,"image":"ralphthon/equities-jepa-validator:34783","packages":["torch==2.7.1","numpy==2.2.6","pyyaml==6.0.2","zarr==2.18.7"]}
+{"event":"validators.code.official_reproduction.environment_install_failed","attempt":1,"status":"execution_failed","observation":"numcodecs 0.15.1 aarch64 wheel build failed because gcc was unavailable","resolution":"add pinned gcc/libc6-dev build toolchain"}
+{"event":"validators.code.official_reproduction.environment_install_started","attempt":2,"image":"ralphthon/equities-jepa-validator:34783","packages":["torch==2.7.1","numpy==2.2.6","pyyaml==6.0.2","zarr==2.18.7"]}
+{"event":"validators.code.official_reproduction.environment_install_completed","attempt":2,"status":"environment_built","image_digest":"sha256:b67a1537eb454817ade05ffad8a2fbd9d5bb82d43e5bdbffb125b4e8487a3045","runtime_user":"65532:65532"}

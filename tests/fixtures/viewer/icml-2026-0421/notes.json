@@ -1,0 +1,161 @@
+[
+  {
+    "id": "note-review-r2",
+    "runId": "icml-2026-0421",
+    "threadId": "note-review-r2",
+    "parentId": null,
+    "type": "official_review",
+    "invitation": "ICML.cc/2026/Conference/-/Official_Review",
+    "number": 1,
+    "signatures": ["ICML.cc/2026/Conference/Submission421/Reviewer_R2"],
+    "readers": ["everyone"],
+    "createdAt": "2026-05-19T10:08:31.000Z",
+    "content": {
+      "summary": "The paper proposes adaptive certificates for stochastic optimization under covariate shift. The main result combines an anytime concentration bound with a restart mechanism whose threshold depends on an estimated density ratio.",
+      "strengthsAndWeaknesses": "Strengths: the problem is important, the certificate is operational, and the evaluation covers both synthetic and image-classification shifts. Weaknesses: the original theorem statement hid a bounded-ratio assumption, and the first ablation did not isolate the restart rule.",
+      "soundness": 3,
+      "presentation": 3,
+      "significance": 4,
+      "originality": 4,
+      "questions": [
+        "Can the authors state explicitly where the bounded density-ratio assumption enters Proposition 2?",
+        "How much of the gain remains when the restart rule is disabled but the confidence sequence is retained?"
+      ],
+      "limitations": "The guarantee does not cover unbounded density ratios, and the experiments do not test adversarial shifts.",
+      "overallRecommendation": 4,
+      "confidence": 4,
+      "ethicalConcerns": "None identified.",
+      "finalJustification": null
+    }
+  },
+  {
+    "id": "note-rebuttal-r2",
+    "runId": "icml-2026-0421",
+    "threadId": "note-review-r2",
+    "parentId": "note-review-r2",
+    "type": "author_rebuttal",
+    "invitation": "ICML.cc/2026/Conference/-/Author_Rebuttal",
+    "number": 2,
+    "signatures": ["ICML.cc/2026/Conference/Submission421/Authors"],
+    "readers": ["everyone"],
+    "createdAt": "2026-05-27T14:21:10.000Z",
+    "content": {
+      "title": "Author rebuttal",
+      "text": "We agree that the bounded density-ratio assumption should have been explicit. We added it to Proposition 2 and supplied a line-by-line proof patch. We also ran the requested no-restart ablation: the confidence sequence alone improves shifted accuracy by 0.8 points, while the full method improves it by 2.7 points. The attached table reports all seeds and intervals."
+    }
+  },
+  {
+    "id": "note-followup-r2",
+    "runId": "icml-2026-0421",
+    "threadId": "note-review-r2",
+    "parentId": "note-rebuttal-r2",
+    "type": "reviewer_follow_up",
+    "invitation": "ICML.cc/2026/Conference/-/Reviewer_Followup",
+    "number": 3,
+    "signatures": ["ICML.cc/2026/Conference/Submission421/Reviewer_R2"],
+    "readers": ["everyone"],
+    "createdAt": "2026-06-01T08:47:03.000Z",
+    "content": {
+      "title": "Reviewer follow-up",
+      "text": "The revised statement resolves my main soundness concern. The validator artifact independently confirms the corrected constant. The no-restart ablation is also informative; please include confidence intervals in the final paper.",
+      "scoreChanges": [
+        {
+          "field": "overallRecommendation",
+          "from": 4,
+          "to": 5,
+          "reason": "The theorem assumption is now explicit and the requested ablation supports the mechanism claim."
+        }
+      ]
+    }
+  },
+  {
+    "id": "note-final-r2",
+    "runId": "icml-2026-0421",
+    "threadId": "note-review-r2",
+    "parentId": "note-followup-r2",
+    "type": "author_final_follow_up",
+    "invitation": "ICML.cc/2026/Conference/-/Author_Final_Followup",
+    "number": 4,
+    "signatures": ["ICML.cc/2026/Conference/Submission421/Authors"],
+    "readers": ["everyone"],
+    "createdAt": "2026-06-02T12:09:44.000Z",
+    "content": {
+      "title": "Author final follow-up",
+      "text": "Confirmed. The camera-ready checklist now requires confidence intervals for every shifted-accuracy table, and the corrected Proposition 2 wording is included verbatim in the revision artifact."
+    }
+  },
+  {
+    "id": "note-final-justification-r2",
+    "runId": "icml-2026-0421",
+    "threadId": "note-review-r2",
+    "parentId": "note-final-r2",
+    "type": "reviewer_final_justification",
+    "invitation": "ICML.cc/2026/Conference/-/Reviewer_Final_Justification",
+    "number": 5,
+    "signatures": ["ICML.cc/2026/Conference/Submission421/Reviewer_R2"],
+    "readers": ["everyone"],
+    "createdAt": "2026-06-03T09:18:20.000Z",
+    "content": {
+      "title": "Reviewer final justification",
+      "text": "After rebuttal, I raise the recommendation from 4 to 5. The revised Proposition 2 states the bounded-ratio assumption, the proof artifact checks the corrected constant, and the new ablation supports the claimed contribution of the restart rule. The author final follow-up also commits to retaining confidence intervals."
+    }
+  },
+  {
+    "id": "note-review-r4",
+    "runId": "icml-2026-0421",
+    "threadId": "note-review-r4",
+    "parentId": null,
+    "type": "official_review",
+    "invitation": "ICML.cc/2026/Conference/-/Official_Review",
+    "number": 6,
+    "signatures": ["ICML.cc/2026/Conference/Submission421/Reviewer_R4"],
+    "readers": ["everyone"],
+    "createdAt": "2026-05-20T17:32:50.000Z",
+    "content": {
+      "summary": "This is a careful and useful treatment of certification under covariate shift, with a strong connection between the theoretical stopping rule and the implemented algorithm.",
+      "strengthsAndWeaknesses": "The empirical protocol is unusually transparent and the result is novel. The main limitation is reliance on density-ratio estimation, which may be unstable in very high dimensions.",
+      "soundness": 4,
+      "presentation": 4,
+      "significance": 3,
+      "originality": 4,
+      "questions": ["Could the authors report sensitivity to density-ratio clipping?"],
+      "limitations": "The evaluation covers moderate but not extreme shifts.",
+      "overallRecommendation": 5,
+      "confidence": 3,
+      "ethicalConcerns": "None.",
+      "finalJustification": null
+    }
+  },
+  {
+    "id": "note-meta-review",
+    "runId": "icml-2026-0421",
+    "threadId": "note-meta-review",
+    "parentId": null,
+    "type": "meta_review",
+    "invitation": "ICML.cc/2026/Conference/-/Meta_Review",
+    "number": 7,
+    "signatures": ["ICML.cc/2026/Conference/Area_Chair_17"],
+    "readers": ["everyone"],
+    "createdAt": "2026-06-11T19:11:05.000Z",
+    "content": {
+      "title": "Meta-review",
+      "text": "The reviewers agree that the paper is technically strong and original. The only material soundness concern was resolved by an explicit assumption, a checked proof patch, and a targeted ablation. I recommend acceptance and nominate the paper for spotlight consideration."
+    }
+  },
+  {
+    "id": "note-decision",
+    "runId": "icml-2026-0421",
+    "threadId": "note-decision",
+    "parentId": null,
+    "type": "decision",
+    "invitation": "ICML.cc/2026/Conference/-/Decision",
+    "number": 8,
+    "signatures": ["ICML.cc/2026/Conference/Program_Chairs"],
+    "readers": ["everyone"],
+    "createdAt": "2026-06-18T16:04:12.000Z",
+    "content": {
+      "title": "Decision: Accept (Spotlight)",
+      "text": "The paper is accepted to ICML 2026 as a spotlight presentation. The final version must retain the clarified assumption and full ablation intervals."
+    }
+  }
+]

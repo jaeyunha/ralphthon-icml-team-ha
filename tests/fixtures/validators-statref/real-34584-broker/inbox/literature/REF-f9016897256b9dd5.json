@@ -1,0 +1,65 @@
+{
+  "artifact_type": "literature_broker_response",
+  "request_id": "REF-f9016897256b9dd5",
+  "reviewer_id": "validator-references",
+  "packets": [
+    {
+      "source_id": "SRC-8EBFF8676EADF20F",
+      "title": "Locally connected graphs",
+      "authors": [
+        "Gary Chartrand",
+        "Raymond E. Pippert"
+      ],
+      "first_public_date": "2008-01-01",
+      "source_type": "metadata_registry",
+      "canonical_uri": "https://doi.org/10.21136/cpm.1974.117838",
+      "content_hash": "sha256:e72e2a9a52d3f1813d899441503925f16cb9661703e57f1b4879da5ab0024f95",
+      "admissibility": "admissible_prior_work",
+      "retrieval_reason": "Validate bibliography identity for REF-006",
+      "supporting_passages": [
+        {
+          "anchor": "retrieved:sentence:1",
+          "summary": "DML-CZ - Czech Digital Mathematics Library: Locally connected graphs About DML-CZ | FAQ | Conditions of Use | Math Archives | Contact Us Previous | Up | Next DML-CZ Home Časopis pro pěstování matematiky Volume 99 Issue 2 Article Chartrand, Gary ; Pippert, Raymond E."
+        },
+        {
+          "anchor": "retrieved:sentence:2",
+          "summary": "158-163 MSC: 05C35 | MR 0398872 | Zbl 0278.05113 | DOI: 10.21136/CPM.1974.117838 Full entry | PDF (0.6 MB) Feedback Similar articles: Search Search This Collection Advanced Search Browse Collections Titles Authors MSC About DML-CZ Partner of &copy; 2010 Institute of Mathematics CAS"
+        }
+      ],
+      "verification_status": "abstract_checked"
+    },
+    {
+      "source_id": "SRC-01C118B855C23AC2",
+      "title": "Partially Connected Locally Recurrent Probabilistic Neural Networks",
+      "authors": [
+        "Todor D.",
+        "Konstantinos E.",
+        "Michael N.",
+        "Nikos D."
+      ],
+      "first_public_date": "2008-09-01",
+      "source_type": "metadata_registry",
+      "canonical_uri": "https://doi.org/10.5772/5552",
+      "content_hash": "sha256:2ee5b334695c75eae9df8b5d2eec71267940603b81f7086b7daab4dc398eb71d",
+      "admissibility": "admissible_prior_work",
+      "retrieval_reason": "Validate bibliography identity for REF-006",
+      "supporting_passages": [
+        {
+          "anchor": "retrieved:sentence:1",
+          "summary": "Partially Connected Locally Recurrent Probabilistic Neural Networks | IntechOpen Books Book Series Journals Publish About News Author Panel Login Submit What is Open Access?"
+        },
+        {
+          "anchor": "retrieved:sentence:2",
+          "summary": "Open Access is an initiative that aims to make scientific research freely available to all."
+        },
+        {
+          "anchor": "retrieved:sentence:3",
+          "summary": "To date our community has made over 100 million downloads."
+        }
+      ],
+      "verification_status": "abstract_checked"
+    }
+  ],
+  "rejected_candidates": [],
+  "created_at": "2026-07-11T15:03:42.079Z"
+}

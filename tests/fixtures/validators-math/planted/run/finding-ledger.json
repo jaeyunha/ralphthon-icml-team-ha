@@ -1,0 +1,15 @@
+{
+  "agent_id": "validator-mathematics-planted",
+  "findings": [
+    "MATH-PLANTED-HIDDEN",
+    "MATH-PLANTED-ALG",
+    "MATH-PLANTED-CORRECT-SYMBOLIC",
+    "MATH-PLANTED-SHAPE",
+    "MATH-PLANTED-CODE",
+    "MATH-PLANTED-ALG-CONFIRM",
+    "MATH-PLANTED-HIDDEN-CONFIRM",
+    "MATH-PLANTED-CORRECT-LEAN",
+    "MATH-PLANTED-LEAN-MISMATCH"
+  ],
+  "schema_version": 1
+}

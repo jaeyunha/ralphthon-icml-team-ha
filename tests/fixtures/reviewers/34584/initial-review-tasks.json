@@ -1,0 +1,194 @@
+{
+  "current_task_id": null,
+  "phase": "initial-review",
+  "schema_version": 1,
+  "tasks": [
+    {
+      "attempt_count": 1,
+      "blocked_reason": null,
+      "completed_at": "2026-07-11T15:18:17.567974Z",
+      "completion_predicate": "Accurate anchored whole-paper comprehension artifact exists.",
+      "description": "Explain the paper's problem, method, assumptions, and evidence without critique.",
+      "id": "paper-comprehension",
+      "inputs": [
+        "shared/paper/paper.md",
+        "shared/paper/paper-dossier.json"
+      ],
+      "output_path": "phases/initial-review/artifacts/paper-comprehension.json",
+      "retry_feedback": null,
+      "status": "completed",
+      "type": "analysis"
+    },
+    {
+      "attempt_count": 1,
+      "blocked_reason": null,
+      "completed_at": "2026-07-11T15:22:19.590256Z",
+      "completion_predicate": "Every central contribution has resolving anchors.",
+      "description": "Map claimed contributions to sections, theorems, equations, and experiments.",
+      "id": "contribution-map",
+      "inputs": [
+        "shared/paper/paper-dossier.json",
+        "shared/paper/anchors.json"
+      ],
+      "output_path": "phases/initial-review/artifacts/contribution-map.json",
+      "retry_feedback": null,
+      "status": "completed",
+      "type": "analysis"
+    },
+    {
+      "attempt_count": 1,
+      "blocked_reason": null,
+      "completed_at": "2026-07-11T15:27:45.222554Z",
+      "completion_predicate": "Central claims have anchored support assessments.",
+      "description": "Audit central claims for support, scope, assumptions, and contradictions.",
+      "id": "claim-audit",
+      "inputs": [
+        "shared/paper/paper.md",
+        "shared/paper/paper-dossier.json"
+      ],
+      "output_path": "phases/initial-review/artifacts/claim-audit.json",
+      "retry_feedback": null,
+      "status": "completed",
+      "type": "analysis"
+    },
+    {
+      "attempt_count": 1,
+      "blocked_reason": null,
+      "completed_at": "2026-07-11T15:32:34.379422Z",
+      "completion_predicate": "Central theory claims receive anchored scrutiny.",
+      "description": "Audit definitions, theorem statements, proof dependencies, and formal scope.",
+      "id": "theory-audit",
+      "inputs": [
+        "shared/paper/paper.md",
+        "shared/paper/paper-dossier.json"
+      ],
+      "output_path": "phases/initial-review/artifacts/theory-audit.json",
+      "retry_feedback": null,
+      "status": "completed",
+      "type": "analysis"
+    },
+    {
+      "attempt_count": 1,
+      "blocked_reason": null,
+      "completed_at": "2026-07-11T15:36:53.377094Z",
+      "completion_predicate": "Empirical claims and limitations are anchored.",
+      "description": "Audit datasets, baselines, metrics, uncertainty, ablations, and reporting.",
+      "id": "experiment-audit",
+      "inputs": [
+        "shared/paper/paper.md",
+        "shared/paper/paper-dossier.json"
+      ],
+      "output_path": "phases/initial-review/artifacts/experiment-audit.json",
+      "retry_feedback": null,
+      "status": "completed",
+      "type": "analysis"
+    },
+    {
+      "attempt_count": 1,
+      "blocked_reason": null,
+      "completed_at": "2026-07-11T15:39:44.890772Z",
+      "completion_predicate": "Decision-relevant broker queries are scoped without searching directly.",
+      "description": "Identify novelty questions that require controlled literature research.",
+      "id": "related-work-plan",
+      "inputs": [
+        "shared/paper/paper-dossier.json"
+      ],
+      "output_path": "phases/initial-review/artifacts/related-work-plan.json",
+      "retry_feedback": null,
+      "status": "completed",
+      "type": "research-plan"
+    },
+    {
+      "attempt_count": 1,
+      "blocked_reason": null,
+      "completed_at": "2026-07-11T15:42:09.169587Z",
+      "completion_predicate": "External claims cite verified broker source IDs only.",
+      "description": "Interpret admissible broker evidence for related-work and novelty claims.",
+      "id": "literature-research",
+      "inputs": [
+        "shared/validation/published/broker-evidence.json",
+        "literature-registry.json"
+      ],
+      "output_path": "phases/initial-review/artifacts/literature-research.json",
+      "retry_feedback": null,
+      "status": "completed",
+      "type": "analysis"
+    },
+    {
+      "attempt_count": 1,
+      "blocked_reason": null,
+      "completed_at": "2026-07-11T15:44:16.637613Z",
+      "completion_predicate": "Validator evidence is interpreted rather than copied.",
+      "description": "Interpret published validator evidence and its decision relevance.",
+      "id": "validation-bundle-review",
+      "inputs": [
+        "shared/validation/published"
+      ],
+      "output_path": "phases/initial-review/artifacts/validation-bundle-review.json",
+      "retry_feedback": null,
+      "status": "completed",
+      "type": "analysis"
+    },
+    {
+      "attempt_count": 1,
+      "blocked_reason": null,
+      "completed_at": "2026-07-11T15:48:30.139222Z",
+      "completion_predicate": "Concern severity is consistent and actionable.",
+      "description": "Calibrate each concern severity to affected claims and decision impact.",
+      "id": "severity-calibration",
+      "inputs": [
+        "phases/initial-review/artifacts"
+      ],
+      "output_path": "phases/initial-review/artifacts/severity-calibration.json",
+      "retry_feedback": null,
+      "status": "completed",
+      "type": "analysis"
+    },
+    {
+      "attempt_count": 1,
+      "blocked_reason": null,
+      "completed_at": "2026-07-11T15:51:50.722829Z",
+      "completion_predicate": "Scores match prose and overall is not averaged.",
+      "description": "Choose independent axis, overall, and confidence scores from evidence.",
+      "id": "score-calibration",
+      "inputs": [
+        "phases/initial-review/artifacts"
+      ],
+      "output_path": "phases/initial-review/artifacts/score-calibration.json",
+      "retry_feedback": null,
+      "status": "completed",
+      "type": "analysis"
+    },
+    {
+      "attempt_count": 1,
+      "blocked_reason": null,
+      "completed_at": "2026-07-11T15:59:52.188548Z",
+      "completion_predicate": "Official review schema passes and all weaknesses have anchors.",
+      "description": "Assemble immutable official review version 1 from completed audits.",
+      "id": "official-review-assembly",
+      "inputs": [
+        "phases/initial-review/artifacts"
+      ],
+      "output_path": "phases/initial-review/artifacts/official-review-assembly.json",
+      "retry_feedback": null,
+      "status": "completed",
+      "type": "publication"
+    },
+    {
+      "attempt_count": 3,
+      "blocked_reason": null,
+      "completed_at": "2026-07-11T16:11:46.763671Z",
+      "completion_predicate": "Review checker passes with matching concern ledger.",
+      "description": "Run the completion gate and emit the corrected official review.",
+      "id": "review-self-audit",
+      "inputs": [
+        "phases/initial-review/artifacts/official-review-assembly.json",
+        "shared/paper/anchors.json"
+      ],
+      "output_path": "phases/initial-review/artifacts/official-review.json",
+      "retry_feedback": null,
+      "status": "completed",
+      "type": "quality-gate"
+    }
+  ]
+}

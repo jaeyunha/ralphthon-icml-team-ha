@@ -1,0 +1,21 @@
+{
+  "bundle_version": 1,
+  "submission_id": "paper-1",
+  "frozen_at": "2026-07-11T15:00:00Z",
+  "source_lanes": ["g2-mathematics"],
+  "findings": [{
+    "finding_id": "MATH-001",
+    "validator_type": "exact_math",
+    "claim_id": "THEOREM-001",
+    "status": "verified_exactly",
+    "severity_candidate": "none",
+    "paper_anchors": ["THM-0001"],
+    "method": "Exact finite-domain proof.",
+    "observation": "The negated implication is unsatisfiable.",
+    "limitations": "Finite-domain specialization only.",
+    "confirmation_paths": [],
+    "confidence": 0.95
+  }],
+  "conflicts": [],
+  "content_hash": "sha256:b592df33c45c91333501592973a7b6c9f0b68da291b5fc5ce7f3695ed52acac8"
+}

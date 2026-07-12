@@ -1,0 +1,27 @@
+{
+  "artifact_type": "literature_broker_response",
+  "request_id": "REQ-conceptual-1",
+  "reviewer_id": "reviewer-r2",
+  "packets": [
+    {
+      "source_id": "SRC-9C55A99C3A5FB0D1",
+      "title": "Equivariant Neural Networks and Equivariant Maps",
+      "authors": ["Alex Example", "Bea Example"],
+      "first_public_date": "2021-05-10",
+      "source_type": "arxiv_preprint",
+      "canonical_uri": "https://arxiv.org/abs/2105.04026v2",
+      "content_hash": "sha256:00d52cf12eecc2d933e45bfa633634fa01aeb91dc71a3244a9f8913f005d629d",
+      "admissibility": "admissible_prior_work",
+      "retrieval_reason": "Potential conceptual predecessor to claim C1",
+      "supporting_passages": [
+        {
+          "anchor": "retrieved:sentence:1",
+          "summary": "We study neural architectures that respect group actions and characterize approximation properties for continuous equivariant maps."
+        }
+      ],
+      "verification_status": "full_text_checked"
+    }
+  ],
+  "rejected_candidates": [],
+  "created_at": "2026-01-28T12:00:00.000Z"
+}

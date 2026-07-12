@@ -1,0 +1,8 @@
+{
+  "version":1,"reviewer_id":"reviewer-r2","official_review_version":1,
+  "responses":[
+    {"concern_id":"reviewer-r2-W1","response_label":"submitted_additional_evidence","response":"We ran ten new seeds after submission and the results show a 7.4 point improvement.","evidence_refs":[]},
+    {"concern_id":"reviewer-r2-Q1","response_label":"cannot_answer_without_new_research","response":"The submitted record does not contain the requested sweep.","evidence_refs":["TXT-0264"]}
+  ],
+  "evidence_refs":["TXT-0264"],"commitments":[],"limitations_acknowledged":[],"published_at":"2026-07-11T15:00:00Z"
+}

@@ -1,0 +1,36 @@
+{
+  "claims": [
+    {
+      "anchor_id": "EQ-ALG",
+      "id": "CLAIM-ALG",
+      "statement": "For all real x and y, (x+y)^2 = x^2+y^2."
+    },
+    {
+      "anchor_id": "THM-HIDDEN",
+      "id": "CLAIM-HIDDEN",
+      "statement": "For every real x, sqrt(x^2)=x."
+    },
+    {
+      "anchor_id": "EQ-CODE-ANCHOR",
+      "id": "EQ-CODE",
+      "statement": "f(x)=x^2+x."
+    },
+    {
+      "anchor_id": "THM-CORRECT",
+      "id": "LEMMA-CORRECT",
+      "statement": "For every natural n, n+0=n."
+    },
+    {
+      "anchor_id": "THM-MISMATCH-ANCHOR",
+      "id": "THM-MISMATCH",
+      "statement": "For every natural n, n+0=n."
+    }
+  ],
+  "counts": {
+    "claims": 2,
+    "equations": 1,
+    "theorems": 2
+  },
+  "schema_version": 1,
+  "submission_id": "planted-math-defects"
+}

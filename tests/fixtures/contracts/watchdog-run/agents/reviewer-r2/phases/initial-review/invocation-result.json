@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "agent_id": "reviewer-r2",
+  "role": "reviewer",
+  "phase": "initial-review",
+  "status": "reopen",
+  "promise": "NEXT",
+  "reason": "Artifact validation failed; retry with exact feedback",
+  "exit_code": 0,
+  "allowed_input_manifest_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+  "artifact_path": "agents/reviewer-r2/phases/initial-review/artifacts/review.json",
+  "artifact_hash": null,
+  "completed_at": "2026-07-11T12:05:00Z"
+}

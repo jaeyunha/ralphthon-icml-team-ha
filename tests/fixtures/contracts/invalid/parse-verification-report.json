@@ -1,0 +1,14 @@
+{
+  "checks": [],
+  "failed_checks": [],
+  "orphan_anchor_ids": [],
+  "sample_size": 0,
+  "schema_version": "1.0",
+  "status": "passed",
+  "unresolved_anchor_count": 0,
+  "unresolved_anchor_ids": [],
+  "verified_bundle": {
+    "bundle_sha256": "sha256:invalid",
+    "files": []
+  }
+}

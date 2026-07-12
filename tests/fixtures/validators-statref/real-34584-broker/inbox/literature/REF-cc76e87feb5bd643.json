@@ -1,0 +1,16 @@
+{
+  "artifact_type": "literature_broker_refusal",
+  "request_id": "REF-cc76e87feb5bd643",
+  "reviewer_id": "validator-references",
+  "code": "BACKEND_UNAVAILABLE",
+  "stage": "source_discovery",
+  "message": "No discovery backend returned a usable candidate.",
+  "retryable": true,
+  "created_at": "2026-07-11T15:03:29.161Z",
+  "details": {
+    "backend_failures": [
+      "arxiv: arXiv returned HTTP 429",
+      "ever: Ever repl exited with 1: Ever repl returned malformed JSON: JSON Parse error: Unexpected EOF; Error: everd daemon crashed on startup: code: 'ERR_MODULE_NOT_FOUND',   url: 'file:///Users/jaeyunha/wt/forever-agent/staging/packages/ai/src/overflow' } Node.js v25.2.1"
+    ]
+  }
+}

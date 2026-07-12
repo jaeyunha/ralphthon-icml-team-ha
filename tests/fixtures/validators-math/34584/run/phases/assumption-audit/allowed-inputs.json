@@ -1,0 +1,43 @@
+{
+  "agent_id": "validator-mathematics-34584",
+  "inputs": [
+    {
+      "category": "paper",
+      "path": "paper-dossier.json",
+      "visibility": "full"
+    },
+    {
+      "category": "paper",
+      "path": "anchors.json",
+      "visibility": "full"
+    },
+    {
+      "category": "task_context",
+      "path": "validation-plan.json",
+      "visibility": "full"
+    },
+    {
+      "category": "own_private_state",
+      "path": "role-state.json",
+      "visibility": "full"
+    },
+    {
+      "category": "own_private_state",
+      "path": "published/claim-inventory.json",
+      "visibility": "full"
+    }
+  ],
+  "manifest_hash": "sha256:9d63ed53adbfffcce4f3b196a7232d894c467891f8914be09a04910b497b5e21",
+  "permissions": {
+    "author_response": "no",
+    "internal_discussion": "no",
+    "other_reviews": "no",
+    "own_private_state": "yes",
+    "paper": "yes",
+    "validation": "yes"
+  },
+  "phase": "assumption-audit",
+  "role": "validator_mathematics",
+  "run_id": "math-34584-real-001",
+  "schema_version": 1
+}

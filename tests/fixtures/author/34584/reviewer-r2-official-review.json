@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "reviewer_id": "reviewer-r2",
+  "summary": "The submission develops order-equivariant neural networks on poset-indexed feature bundles, characterizes linear layers, and gives universal-approximation constructions with graph, sheaf, and multimodal examples.",
+  "strengths": [
+    {"text":"The transporter-law characterization gives a concrete parameterization of equivariant linear maps.","anchors":["THM-0001"]},
+    {"text":"The hierarchy distinguishes anonymous message passing from source-labeled pair-state models.","anchors":["TXT-0061"]}
+  ],
+  "weaknesses": [
+    {"id":"reviewer-r2-W1","text":"The empirical comparison is too narrow to establish the broad practical benefit claimed for the framework.","severity":"major","affected_claims":["CLAIM-008","CLAIM-009"],"anchors":["TXT-0264","TAB-0004"]}
+  ],
+  "scores":{"soundness":3,"presentation":3,"significance":2,"originality":3,"overall":3},
+  "key_questions":[
+    {"id":"reviewer-r2-Q1","question":"How stable is the reported empirical gain across seeds and matched-capacity baselines?","possible_score_impact":"A robust comparison could raise Significance and Overall by one point."}
+  ],
+  "limitations":"The review did not independently execute code or formalize the universal-approximation proofs.",
+  "confidence":4,
+  "ethical_concerns":[],
+  "evidence_refs":["TXT-0264","TAB-0004"]
+}

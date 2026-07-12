@@ -1,0 +1,16 @@
+{
+  "paperId": "34584",
+  "title": "Foundations of Equivariant Deep Learning: Unifying Graph and Sheaf Neural Networks",
+  "authors": [
+    "Yoshihiro Maruyama"
+  ],
+  "abstract": "Symmetry is everywhere in nature and society. Geometric deep learning exploits symmetries in data to improve the performance and efficiency of deep learning systems. In this paper, we extend geometric deep learning to utilize richer symmetry structures. Specifically, we develop order-equivariant neural networks (OENN), which generalize standard graph message passing and sheaf neural networks via the theory of equivariant bundles over face posets (face categories). We characterize all linear order-equivariant maps, build OENN layers, and prove universal approximation theorems for continuous order-equivariant maps.",
+  "distinctiveSentences": [
+    "Specifically, we develop order-equivariant neural networks (OENN), which generalize standard graph message passing and sheaf neural networks via the theory of equivariant bundles over face posets (face categories).",
+    "We characterize all linear order-equivariant maps, build OENN layers, and prove universal approximation theorems for continuous order-equivariant maps."
+  ],
+  "canonicalUris": [
+    "https://openreview.net/forum?id=aIH1jyU37z",
+    "openreview:aIH1jyU37z"
+  ]
+}

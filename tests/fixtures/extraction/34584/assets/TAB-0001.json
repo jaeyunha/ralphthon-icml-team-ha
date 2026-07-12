@@ -1,0 +1,51 @@
+{
+  "anchor_id": "TAB-0001",
+  "caption": "",
+  "rows": [
+    [
+      "Category",
+      "Arrows encode",
+      "Equivariance enforces"
+    ],
+    [
+      "Group",
+      "invertible sym.",
+      "global sym. consistency"
+    ],
+    [
+      "Monoid",
+      "causal update",
+      "time consistency"
+    ],
+    [
+      "Poset",
+      "hierarchical rel.",
+      "hierarchical consistency"
+    ],
+    [
+      "Lattice",
+      "logical relation",
+      "logical consistency"
+    ],
+    [
+      "Graph",
+      "adjacency rel.",
+      "message-passing consist."
+    ],
+    [
+      "Sheaf",
+      "spatial relation",
+      "local-to-global consist."
+    ],
+    [
+      "Groupoid",
+      "local symmetry",
+      "orbitwise consistency"
+    ],
+    [
+      "Gen. cat.",
+      "typed process",
+      "compositional consist."
+    ]
+  ]
+}

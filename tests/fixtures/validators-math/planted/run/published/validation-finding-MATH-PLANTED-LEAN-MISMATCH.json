@@ -1,0 +1,18 @@
+{
+  "artifact_refs": [
+    "phases/formalization/artifacts/mismatched-lean-formalization.json"
+  ],
+  "claim_id": "THM-MISMATCH",
+  "confidence": 1.0,
+  "confirmation_paths": [],
+  "finding_id": "MATH-PLANTED-LEAN-MISMATCH",
+  "limitations": "Designed to prove that compilation cannot override a failed alignment audit.",
+  "method": "Lean 4 proof plus separate statement-alignment audit",
+  "observation": "The Lean artifact compiled, but the separate alignment audit found that it formalized a different statement.",
+  "paper_anchors": [
+    "THM-MISMATCH-ANCHOR"
+  ],
+  "severity_candidate": "minor",
+  "status": "statement_mismatch",
+  "validator_type": "formal_math"
+}

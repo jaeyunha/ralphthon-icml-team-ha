@@ -1,0 +1,18 @@
+{
+  "artifact_refs": [
+    "phases/assumption-audit/artifacts/uat-assumption-audit.json"
+  ],
+  "claim_id": "THEOREM-011",
+  "confidence": 0.95,
+  "confirmation_paths": [],
+  "finding_id": "MATH-34584-001",
+  "limitations": "This structural audit checks whether the dossier statement exposes central hypotheses; it does not verify the omitted proof.",
+  "method": "Explicit theorem-scope and dependency audit",
+  "observation": "The audited statement exposes every required scope phrase and declared symbol.",
+  "paper_anchors": [
+    "THM-0011"
+  ],
+  "severity_candidate": "none",
+  "status": "partially_verified",
+  "validator_type": "exact_math"
+}

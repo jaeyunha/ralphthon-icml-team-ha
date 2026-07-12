@@ -1,0 +1,20 @@
+{
+  "artifact_refs": [
+    "phases/assumption-audit/artifacts/hidden-assumption-audit.json"
+  ],
+  "claim_id": "CLAIM-HIDDEN",
+  "confidence": 0.99,
+  "confirmation_paths": [
+    "hidden-assumption-counterexample"
+  ],
+  "finding_id": "MATH-PLANTED-HIDDEN",
+  "limitations": "The audit checks the stated real-valued domain and the missing nonnegative restriction.",
+  "method": "Quantifier and domain audit",
+  "observation": "The statement omits required scope ['x >= 0'] or symbols [].",
+  "paper_anchors": [
+    "THM-HIDDEN"
+  ],
+  "severity_candidate": "major",
+  "status": "missing_assumption",
+  "validator_type": "exact_math"
+}

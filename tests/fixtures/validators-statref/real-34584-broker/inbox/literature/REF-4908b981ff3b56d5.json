@@ -1,0 +1,26 @@
+{
+  "artifact_type": "literature_broker_refusal",
+  "request_id": "REF-4908b981ff3b56d5",
+  "reviewer_id": "validator-references",
+  "code": "NO_ADMISSIBLE_SOURCES",
+  "stage": "full_text_retrieval",
+  "message": "Discovery completed, but no source passed target, cutoff, identity, retrieval, and packet validation gates.",
+  "retryable": false,
+  "created_at": "2026-07-11T15:02:48.806Z",
+  "details": {
+    "rejected_candidates": [
+      {
+        "canonical_uri": "https://doi.org/10.14711/thesis-b1206070",
+        "reason": "network: retrieval failed: The operation was aborted."
+      },
+      {
+        "canonical_uri": "https://doi.org/10.1007/978-3-032-29593-4_18",
+        "reason": "target_duplicate"
+      }
+    ],
+    "backend_failures": [
+      "arxiv: arXiv returned HTTP 429",
+      "ever: Ever repl exited with 1: Ever repl returned malformed JSON: JSON Parse error: Unexpected EOF; Error: everd daemon crashed on startup: code: 'ERR_MODULE_NOT_FOUND',   url: 'file:///Users/jaeyunha/wt/forever-agent/staging/packages/ai/src/overflow' } Node.js v25.2.1"
+    ]
+  }
+}

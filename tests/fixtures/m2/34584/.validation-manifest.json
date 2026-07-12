@@ -1,0 +1,17 @@
+{
+  "manifest_version": 1,
+  "artifacts": {
+    "code-validation-finding.json": {
+      "schema": "validation-finding.schema.json",
+      "sha256": "43f3a7c12974b0eb2ab54a5250d4251822397468f437e326ee44f902be5e0e85"
+    },
+    "events.ndjson": {
+      "schema": "event-envelope.schema.json",
+      "sha256": "07045ffccffb154d531727ae76d2bb96229ae544b84ac8be24a2cefa5d304d2c"
+    },
+    "live-append-event.json": {
+      "schema": "event-envelope.schema.json",
+      "sha256": "58c5427148278659309e6ee54f487f681cb8b6e30c56bdc612dab056df8b583a"
+    }
+  }
+}

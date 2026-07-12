@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "run_id": "fixture-run",
+  "initial_run_state": "PRELIMINARY_REVIEW",
+  "runner": "engine/loops/agent-loop.sh",
+  "poll_seconds": 0.1,
+  "initial_backoff_seconds": 1,
+  "max_backoff_seconds": 60,
+  "auto_advance_run_state": true,
+  "advance_empty_states": false,
+  "complete_when_all_phases": true,
+  "facts": {
+    "persona_frozen": true,
+    "paper_frozen": true
+  },
+  "safety": {
+    "max_wall_clock_seconds": 30,
+    "max_restarts_per_role": 2,
+    "max_discussion_rounds": 1,
+    "no_progress_threshold": 3
+  },
+  "phase_runs": [
+    {
+      "agent_id": "reviewer-r2",
+      "role_instance_id": "R2",
+      "role": "reviewer",
+      "phase": "initial-review",
+      "run_states": ["PRELIMINARY_REVIEW"],
+      "gates": ["persona_frozen", "paper_frozen"],
+      "completion_gates": [
+        {
+          "type": "file_exists",
+          "path": "agents/reviewer-r2/published/official-review.json"
+        }
+      ],
+      "subscriptions": [
+        {
+          "event": "author.rebuttal.published"
+        }
+      ],
+      "requires_artifact": true,
+      "artifacts_are_validated": true,
+      "tasks_template": "roles/reviewer/phases/initial-review/tasks.template.json",
+      "task_context": "agents/reviewer-r2/phases/initial-review/current-task-context.json",
+      "output_schema": "official-review.schema.json",
+      "artifact": "agents/reviewer-r2/phases/initial-review/artifacts/review.json",
+      "publication_paths": ["agents/reviewer-r2/published/official-review.json"],
+      "timeout_seconds": 120,
+      "use_contract_manifest": true
+    }
+  ]
+}

@@ -1,0 +1,265 @@
+{
+  "artifacts": {
+    "allowed-inputs.json": {
+      "schema": "allowed-inputs.schema.json",
+      "sha256": "5e7d6ff23ec0d89fb38d78209ec7d40e6c73ca3e827ded3c8f2be9b829189744"
+    },
+    "anchors.json": {
+      "schema": "anchors.schema.json",
+      "sha256": "46909c90d51ca83d9764b9fd6da804652a135932a5095dd6b5c4f804ade29b21"
+    },
+    "benchmark-arm-decision-bundle.json": {
+      "schema": "benchmark-arm-decision-bundle.schema.json",
+      "sha256": "fd1b5d1385e9b25594200958a5ca4d29d742a68616ca5e7809f276969ffa53a3"
+    },
+    "benchmark-arm-freeze.json": {
+      "schema": "benchmark-arm-freeze.schema.json",
+      "sha256": "76ec5bd591fa21bcd433b4ed77d0b32a1594b0692c7b239f29a78a1e6542ff33"
+    },
+    "benchmark-artifact-provenance.json": {
+      "schema": "benchmark-artifact-provenance.schema.json",
+      "sha256": "dcd73c3832bb3259c0d9611c3a153da64cc118c17109349ba7ce498dd963399c"
+    },
+    "benchmark-broker-snapshot.json": {
+      "schema": "benchmark-broker-snapshot.schema.json",
+      "sha256": "04064a30cf54520a69d8e4c3a386f5d73b6ec3391d6a40eadd8eb5775c46fed9"
+    },
+    "benchmark-custody-state.json": {
+      "schema": "benchmark-custody-state.schema.json",
+      "sha256": "cc88663d4e3f5d4c09b8623fa390775cd4b4e1e17aef04cb2757df75d11f7756"
+    },
+    "benchmark-evidence-packet.json": {
+      "schema": "benchmark-evidence-packet.schema.json",
+      "sha256": "fc6fa1c979a6291892135fd9a84a0dc78ce0bb2e1a16c12f908ed5eadaf201ed"
+    },
+    "benchmark-job-event.json": {
+      "schema": "benchmark-job-event.schema.json",
+      "sha256": "620fa2e908fd100c596b8c75e7d99b6ce2299e118ca6ca4e62ad97c809b733bf"
+    },
+    "benchmark-metering-reconciliation.json": {
+      "schema": "benchmark-metering-reconciliation.schema.json",
+      "sha256": "06f72b5e2e9209f184a4a5764bcff966f6ee61995e4b436765c0e6713c4ff911"
+    },
+    "benchmark-pc-decision.json": {
+      "schema": "benchmark-pc-decision.schema.json",
+      "sha256": "ec7431a016fa7f94af5318d0a8bf557c16c0f7dd56bfc20c91c951ee09cdfaac"
+    },
+    "benchmark-provider-usage.json": {
+      "schema": "benchmark-provider-usage.schema.json",
+      "sha256": "7f89cac82812e8fdd8efb111ad6569cb3fc45deca24d7a007e46ff2f4f163607"
+    },
+    "benchmark-replacement-ledger.json": {
+      "schema": "benchmark-replacement-ledger.schema.json",
+      "sha256": "87c3df0660a1fa9adaee237b4cf758df04096f55ffbb4ae979c2b0f8c1e26380"
+    },
+    "benchmark-runtime-settings.json": {
+      "schema": "benchmark-runtime-settings.schema.json",
+      "sha256": "6cbe5bc7a05d93c2cd6c2037d92204d1d5862c5f54f09b5425a1f6d97e178da6"
+    },
+    "benchmark-sac-calibration-bundle.json": {
+      "schema": "benchmark-sac-calibration-bundle.schema.json",
+      "sha256": "7e37d7d3e782f62242ad51293eeef2cdbfc3751f182093c614bd94918de9a835"
+    },
+    "benchmark-source-universe.json": {
+      "schema": "benchmark-source-universe.schema.json",
+      "sha256": "5ecf012bad8eea06828f6e6d9b3d5d2b4bc12f8dec775ddaa59cb9bc1f0f34ce"
+    },
+    "benchmark-sterile-root-capability.json": {
+      "schema": "benchmark-sterile-root-capability.schema.json",
+      "sha256": "8916860392e53f97d3ae80359c814c74a3588e47407c7c612a729be29828ce44"
+    },
+    "calibration-followup-v2.json": {
+      "schema": "calibration-followup-v2.schema.json",
+      "sha256": "d67c3a7d6f3dc68710cc737448de0ffafeb084fb408456bce036bb2ed15d97a1"
+    },
+    "calibration-official-review-v2.json": {
+      "schema": "calibration-official-review-v2.schema.json",
+      "sha256": "cefb62e4fd792ff3736c17aff56db9436d3244ce8380f380c5ca452b229e9496"
+    },
+    "claim.json": {
+      "schema": "claim.schema.json",
+      "sha256": "a6c16ff273dff53304fd2ce0afd030b15139bfe63e29d8d101c93f848d4396dc"
+    },
+    "concern-ledger.json": {
+      "schema": "concern-ledger.schema.json",
+      "sha256": "a2d7d449d5ecb7d53dda51e34a7f1802309a9056c25ad3a4742e8cad2e5cb7bb"
+    },
+    "concern-resolution.json": {
+      "schema": "concern-resolution.schema.json",
+      "sha256": "29ae95999cffed45379937d4514495879b2b9aacadd9c4610291ba3db18935cf"
+    },
+    "decision.json": {
+      "schema": "decision.schema.json",
+      "sha256": "f36434dae58cac008c545e70e12bc685734c09c02e7813a8526674814814df55"
+    },
+    "discussion-issue.json": {
+      "schema": "discussion-issue.schema.json",
+      "sha256": "62dd108ad95257b898f1ea66cdc973101e394267dc5fbe0109534d51fd9c076b"
+    },
+    "discussion-position.json": {
+      "schema": "discussion-position.schema.json",
+      "sha256": "5a7f86dc912dd0e13128eec3750ad276c5c1a8a7dd18506487056ed2fc155471"
+    },
+    "event-envelope.json": {
+      "schema": "event-envelope.schema.json",
+      "sha256": "9b30b1f91d189d2179d968e64c06123c98a81ef1197673caef07bdab6a15de87"
+    },
+    "evidence-packet.json": {
+      "schema": "evidence-packet.schema.json",
+      "sha256": "497827a87d1385d7d555b59bc5d5ae1593942abbd7585c17483af4d48d1a9e20"
+    },
+    "extraction-report.json": {
+      "schema": "extraction-report.schema.json",
+      "sha256": "3e74a2a12776710f2d39f47b2eccbd06fc70e8a3d6b86cb708a2ac69b96e5ab6"
+    },
+    "final-review.json": {
+      "schema": "final-review.schema.json",
+      "sha256": "b177a1e9613fd159a76a4a6cf5d628319b891335a65946c5f9e13936bc7406b9"
+    },
+    "fixture-contract.json": {
+      "schema": "extraction-fixture-contract.schema.json",
+      "sha256": "b597ffb3b9ec30602a3caf16c125caad6ed8fceafca5dab40c5de2fbe72366d8"
+    },
+    "fixture-manifest.json": {
+      "schema": "extraction-fixture-manifest.schema.json",
+      "sha256": "426ea9667b16aae3ada967941b97f275b7c11b543650608a1ddbce4eadaa0586"
+    },
+    "followup.json": {
+      "schema": "followup.schema.json",
+      "sha256": "9915b7413fbccda22f54526169b3870df90833a7f1ac623b7c3f0a2767d3b5bc"
+    },
+    "freeze-record.json": {
+      "schema": "freeze-record.schema.json",
+      "sha256": "bba6f4c70569ad76597d2b114203f459e24d7e981d414420945a6e864ca6f958"
+    },
+    "identity.json": {
+      "schema": "identity.schema.json",
+      "sha256": "a031524764b42163791c75889b2a2572ae038f8b62e20ac6ee7ea3373b8a41b2"
+    },
+    "invocation-result.json": {
+      "schema": "invocation-result.schema.json",
+      "sha256": "4b21b12258a90a54f1dc14a016b152e148b07c444623c88faf6817da4bc7b164"
+    },
+    "literature-registry.json": {
+      "schema": "literature-registry.schema.json",
+      "sha256": "687e9cb7aaffcf78b11552c04927a2e559b0140ff64b7b2a4c2b656fe0715660"
+    },
+    "math-claim-inventory.json": {
+      "schema": "math-claim-inventory.schema.json",
+      "sha256": "3c770265d0ddb1d521306ddb24c73f6af1cccf90541dd39c18bd4ea7a93032f9"
+    },
+    "math-confirmation-report.json": {
+      "schema": "math-confirmation-report.schema.json",
+      "sha256": "e95580da30d9bf187d3ea7f3746a22979424af278ecb67c0e7a979678e28426b"
+    },
+    "math-finding-ledger.json": {
+      "schema": "math-finding-ledger.schema.json",
+      "sha256": "6537c279177610494d827d88c430f06c0b86c1fc0d1f59c4853ca298674ebc4d"
+    },
+    "math-formal-proof-result.json": {
+      "schema": "math-formal-proof-result.schema.json",
+      "sha256": "42e2beb3f10a446d4becad7194ed605caad111e2bf3adda48241d8454f8bb893"
+    },
+    "math-tool-evidence.json": {
+      "schema": "math-tool-evidence.schema.json",
+      "sha256": "982dfd9a2b3e76310a1db04c2d6e089c037e256e37f89d42f43d9e00d3bfa3b7"
+    },
+    "math-validation-bundle.json": {
+      "schema": "math-validation-bundle.schema.json",
+      "sha256": "933d325b258a4c0aecb376f3bb22b05f87237fb087bdf2ba17f95e51831d5c45"
+    },
+    "meta-review.json": {
+      "schema": "meta-review.schema.json",
+      "sha256": "76d95de7529f836aaf5f682318a1dd4732ad9ec3a3122804c4a0a164cddf07f2"
+    },
+    "official-review.json": {
+      "schema": "official-review.schema.json",
+      "sha256": "32d30b5e76488517a49e8efb709a0eb8e973047245130c0471c605b89aa4e85d"
+    },
+    "paper-dossier.json": {
+      "schema": "paper-dossier.schema.json",
+      "sha256": "8a95afb0765378d497050f80c15d98911213e4b5197cdcd8bb38ffd4424e087e"
+    },
+    "parse-verification-report.json": {
+      "schema": "parse-verification-report.schema.json",
+      "sha256": "9fcc1db3b0de1713408955de83ed0d18f5171a668f9926ef65a62b7856f47eda"
+    },
+    "persona.json": {
+      "schema": "persona.schema.json",
+      "sha256": "86598954e244705ad8e5eafe01d9982d9b83a17d00ba8bfbfd1881b2785232e6"
+    },
+    "phase-state.json": {
+      "schema": "phase-state.schema.json",
+      "sha256": "f3316341914f71b98ae319d60227103f4fcf700f4e7ade959b3e8b1494a640d4"
+    },
+    "phase-tasks.json": {
+      "schema": "phase-tasks.schema.json",
+      "sha256": "1e77ce0c4a08712c40db23c0e96c81bb44e998fc2d817738ed97b9fda6814de7"
+    },
+    "question-ledger.json": {
+      "schema": "question-ledger.schema.json",
+      "sha256": "e43d959b1d9d4950665cd9469b43a31739b75a9453c84845ab7ca31dfb6e2ed2"
+    },
+    "rebuttal.json": {
+      "schema": "rebuttal.schema.json",
+      "sha256": "6a4228b43dfd4aaddcd76b1d6a1ac84a51719f59584bba77c63b5b58c08ba64a"
+    },
+    "response-matrix.json": {
+      "schema": "response-matrix.schema.json",
+      "sha256": "2d9621c5b5c07f6c5e35caf5d50f72a297f7420c5e460894212a48a2ea641a2a"
+    },
+    "role-state.json": {
+      "schema": "role-state.schema.json",
+      "sha256": "da60535d8c31d613e515a0363fc57fbf36234f0398f9453322ffba232bcdb317"
+    },
+    "run-budget.json": {
+      "schema": "run-budget.schema.json",
+      "sha256": "477c4fe504981d79438b097a96621be4660c9b5d7ccb7b2340e6ccea1031cb38"
+    },
+    "run-config.json": {
+      "schema": "run-config.schema.json",
+      "sha256": "8f38d1ec4d53dd87ad57e86c7b60b8394ac07e77ba93a0f942fa3f67ff4a0c8d"
+    },
+    "run-state.json": {
+      "schema": "run-state.schema.json",
+      "sha256": "360533766a68356715d7458613de9f70f7af0a7bf97b252f226fa12e2adca4fd"
+    },
+    "score-history.json": {
+      "schema": "score-history.schema.json",
+      "sha256": "032f0496e5c2fca2874a2e4b4c914bebedac1441e15743dd3ee3eed9f10d2e5b"
+    },
+    "submission-manifest.json": {
+      "schema": "submission-manifest.schema.json",
+      "sha256": "f5043c0a57c69a1e31b7d0d8cf100f7278646fc54c349b1ecff5ae0b2a1517f7"
+    },
+    "table-asset.json": {
+      "schema": "table-asset.schema.json",
+      "sha256": "bd1b4d3e7425e0b95657bca33ed016fc3f2543493fa504e820a2fcb949265b20"
+    },
+    "task-context.json": {
+      "schema": "task-context.schema.json",
+      "sha256": "5576c2773fd8f6b6be0b48cda103653a24b936f206a160dc9b6ccee38e6862c5"
+    },
+    "terminal-arm-input.json": {
+      "schema": "terminal-arm-input.schema.json",
+      "sha256": "7fa9e6db1e0ea7a96c2a6621ddd0efc99ab627238c5ef2e73d0416f90b439ee9"
+    },
+    "validation-bundle.json": {
+      "schema": "validation-bundle.schema.json",
+      "sha256": "68ea11f1fdf8dab3085ac673a3f5df95afc84acec32f1107cf4f65b76aa46ebe"
+    },
+    "validation-finding.json": {
+      "schema": "validation-finding.schema.json",
+      "sha256": "2eea45078fb7f695dd529c2765dd885b8dac3db23d33b51561f8bfe81ca485e1"
+    },
+    "watchdog-config.json": {
+      "schema": "watchdog-config.schema.json",
+      "sha256": "1445b3e992ea0a46dd9a6a9ea1c8ae9d383294d08d57fd6675e274612692ac17"
+    },
+    "watchdog-status.json": {
+      "schema": "watchdog-status.schema.json",
+      "sha256": "552052d06abfa61b39b5d1794a2bad5c58ca3f8baeb8e4261ba9ce32c5faf12f"
+    }
+  },
+  "manifest_version": 1
+}

@@ -1,0 +1,66 @@
+{
+  "findings": [
+    {
+      "claim_id": null,
+      "confidence": 0.94,
+      "confirmation_paths": [
+        "anchored trigger phrase audit",
+        "independent evidence-context classification"
+      ],
+      "finding_id": "ETHICS-PERSONALLY-IDENTIFIABLE-INFORMATION",
+      "limitations": "A trigger is not a misconduct determination and may describe mitigation, prior work, or a benign use case.",
+      "method": "Screened anchored dossier evidence for the specification's ethics and integrity trigger conditions, then classified the surrounding context.",
+      "observation": "Trigger 'personally_identifiable_information' appears in 1 evidence item(s); ethics review is recommended.",
+      "paper_anchors": [
+        "TXT-0900"
+      ],
+      "severity_candidate": "major",
+      "status": "partially_verified",
+      "validator_type": "ethics_integrity"
+    },
+    {
+      "claim_id": null,
+      "confidence": 0.94,
+      "confirmation_paths": [
+        "anchored trigger phrase audit"
+      ],
+      "finding_id": "ETHICS-SENSITIVE-ATTRIBUTES",
+      "limitations": "A trigger is not a misconduct determination and may describe mitigation, prior work, or a benign use case.",
+      "method": "Screened anchored dossier evidence for the specification's ethics and integrity trigger conditions, then classified the surrounding context.",
+      "observation": "Trigger 'sensitive_attributes' appears in 1 evidence item(s); ethics review is recommended.",
+      "paper_anchors": [
+        "TXT-0900"
+      ],
+      "severity_candidate": "minor",
+      "status": "partially_verified",
+      "validator_type": "ethics_integrity"
+    },
+    {
+      "claim_id": null,
+      "confidence": 0.94,
+      "confirmation_paths": [
+        "anchored trigger phrase audit",
+        "independent evidence-context classification"
+      ],
+      "finding_id": "ETHICS-PROMPT-INJECTION",
+      "limitations": "A trigger is not a misconduct determination and may describe mitigation, prior work, or a benign use case.",
+      "method": "Screened anchored dossier evidence for the specification's ethics and integrity trigger conditions, then classified the surrounding context.",
+      "observation": "Trigger 'prompt_injection' appears in 1 evidence item(s); ethics review is recommended.",
+      "paper_anchors": [
+        "TXT-0901"
+      ],
+      "severity_candidate": "major",
+      "status": "partially_verified",
+      "validator_type": "ethics_integrity"
+    }
+  ],
+  "misconduct_determination": null,
+  "policy": "This validator supplies evidence and a review flag; it never declares misconduct.",
+  "recommended_ethics_review_flag": "required",
+  "triggered_conditions": [
+    "personally_identifiable_information",
+    "prompt_injection",
+    "sensitive_attributes"
+  ],
+  "validator": "ethics"
+}

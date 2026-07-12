@@ -1,0 +1,56 @@
+{
+  "createdAt": "2026-07-11T15:02:08.500488Z",
+  "literatureCutoff": "2026-01-28T23:59:59-12:00",
+  "maxResults": 3,
+  "mode": "historical_benchmark",
+  "query": "Simplicial neural networks 2020",
+  "queryKind": "cited_work_lookup",
+  "requestId": "REF-1a241814d9d0901a",
+  "retrievalReason": "Validate bibliography identity for REF-011",
+  "reviewerId": "validator-references",
+  "runId": "run-34584-g3-real",
+  "targetFingerprint": {
+    "authorTokens": [
+      "yoshihiro maruyama",
+      "maruyama"
+    ],
+    "canonicalUris": [
+      "https://openreview.net/forum?id=aih1jyu37z",
+      "openreview:aih1jyu37z"
+    ],
+    "distinctiveSentences": [
+      "specifically we develop order equivariant neural networks oenn which generalize standard graph message passing and sheaf neural networks via the theory of equivariant bundles over face posets face categories",
+      "we characterize all linear order equivariant maps build oenn layers and prove universal approximation theorems for continuous order equivariant maps",
+      "geometric deep learning exploits symmetries in data to improve the performance and efficiency of deep learning systems",
+      "in this paper we extend geometric deep learning to utilize richer symmetry structures"
+    ],
+    "normalizedTitle": "foundations of equivariant deep learning unifying graph and sheaf neural networks",
+    "paperId": "34584",
+    "titleNgrams": [
+      "foundations of equivariant",
+      "of equivariant deep",
+      "equivariant deep learning",
+      "deep learning unifying",
+      "learning unifying graph",
+      "unifying graph and",
+      "graph and sheaf",
+      "and sheaf neural",
+      "sheaf neural networks",
+      "foundations of equivariant deep",
+      "of equivariant deep learning",
+      "equivariant deep learning unifying",
+      "deep learning unifying graph",
+      "learning unifying graph and",
+      "unifying graph and sheaf",
+      "graph and sheaf neural",
+      "and sheaf neural networks",
+      "foundations of equivariant deep learning",
+      "of equivariant deep learning unifying",
+      "equivariant deep learning unifying graph",
+      "deep learning unifying graph and",
+      "learning unifying graph and sheaf",
+      "unifying graph and sheaf neural",
+      "graph and sheaf neural networks"
+    ]
+  }
+}

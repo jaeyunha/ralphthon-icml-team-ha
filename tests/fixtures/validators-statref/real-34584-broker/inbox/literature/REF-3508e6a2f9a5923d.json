@@ -1,0 +1,70 @@
+{
+  "artifact_type": "literature_broker_response",
+  "request_id": "REF-3508e6a2f9a5923d",
+  "reviewer_id": "validator-references",
+  "packets": [
+    {
+      "source_id": "SRC-3995A0CE90C4075A",
+      "title": "On sheaves and cosheaves of modules over Boolean algebras",
+      "authors": [
+        "S V Rychkov"
+      ],
+      "first_public_date": "2007-10-16",
+      "source_type": "metadata_registry",
+      "canonical_uri": "https://doi.org/10.1070/rm1987v042n03abeh001434",
+      "content_hash": "sha256:4588e81b4ecbed0834ced3925bd7ec2e9f6bde691f75085acde0c6cc802cb0ba",
+      "admissibility": "admissible_prior_work",
+      "retrieval_reason": "Validate bibliography identity for REF-009",
+      "supporting_passages": [
+        {
+          "anchor": "retrieved:sentence:1",
+          "summary": "Rychkov, &#x201C;On sheaves and cosheaves of modules over Boolean algebras&#x201D;, Russian Math."
+        },
+        {
+          "anchor": "retrieved:sentence:2",
+          "summary": "Surveys, 42:3 (1987), 231&ndash;232 Russian Mathematical Surveys RUS ENG --> JOURNALS PEOPLE ORGANISATIONS CONFERENCES SEMINARS VIDEO LIBRARY PACKAGE AMSBIB JavaScript is disabled in your browser."
+        },
+        {
+          "anchor": "retrieved:sentence:3",
+          "summary": "Please switch it on to enable full functionality of the website General information Latest issue Archive Impact factor Submit a manuscript Search papers Search references RSS Latest issue Current issues Archive issues What is RSS Uspekhi Mat."
+        }
+      ],
+      "verification_status": "abstract_checked"
+    },
+    {
+      "source_id": "SRC-6768FF63B08E0B88",
+      "title": "Cosheaves",
+      "authors": [
+        "Andrei V. Prasolov"
+      ],
+      "first_public_date": "2021-01-01",
+      "source_type": "metadata_registry",
+      "canonical_uri": "https://doi.org/10.70930/tac/zvahwq1i",
+      "content_hash": "sha256:a4602bd851f38fa7bfbbfd890297cdfe60f8ea5ccce899ad4ab4fba0af1ae6bd",
+      "admissibility": "admissible_prior_work",
+      "retrieval_reason": "Validate bibliography identity for REF-009",
+      "supporting_passages": [
+        {
+          "anchor": "retrieved:sentence:1",
+          "summary": "Prasolov The categories pCS(X,Pro(k)) of precosheaves and CS(X,Pro(k)) of cosheaves on a small Grothendieck site X, with values in the category Pro(k) of pro-k-modules, are constructed."
+        },
+        {
+          "anchor": "retrieved:sentence:2",
+          "summary": "It is proved that pCS(X,Pro(k)) satisfies the AB4 and AB5* axioms, while CS(X,Pro(k)) satisfies AB3 and AB5*."
+        },
+        {
+          "anchor": "retrieved:sentence:3",
+          "summary": "Homology theories for cosheaves and precosheaves, based on quasi-projective resolutions, are constructed and investigated."
+        }
+      ],
+      "verification_status": "abstract_checked"
+    }
+  ],
+  "rejected_candidates": [
+    {
+      "canonical_uri": "https://doi.org/10.1016/j.jpaa.2017.06.001",
+      "reason": "Retrieved source contains no sanitized abstract or full-text passage."
+    }
+  ],
+  "created_at": "2026-07-11T15:02:25.315Z"
+}

@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "fixture_id": "extraction-34584",
+  "paper_id": "34584",
+  "state": "golden",
+  "generated_artifacts_present": true,
+  "source": {
+    "pdf_committed": false,
+    "pdf_available_in_checkout": true,
+    "sha256": "sha256:7de57c5f431ee13df26d2dd14154b1f0621db001222336bf1a3acce17f13a82a",
+    "note": "Generated from the real gitignored benchmark PDF; the PDF itself remains uncommitted."
+  },
+  "expected_artifacts": [
+    {
+      "path": "fixture-manifest.json",
+      "kind": "observed-hash-manifest",
+      "required_for_golden": true,
+      "present": true
+    },
+    {
+      "path": "paper.md",
+      "kind": "canonical-anchored-markdown",
+      "required_for_golden": true,
+      "present": true
+    },
+    {
+      "path": "anchors.json",
+      "kind": "anchor-provenance-map",
+      "required_for_golden": true,
+      "present": true
+    },
+    {
+      "path": "assets/",
+      "kind": "extracted-figure-table-assets",
+      "required_for_golden": true,
+      "present": true
+    },
+    {
+      "path": "extraction-report.json",
+      "kind": "extraction-confidence-and-safety-report",
+      "required_for_golden": true,
+      "present": true
+    },
+    {
+      "path": "parse-verification-report.json",
+      "kind": "passing-verification-gate",
+      "required_for_golden": true,
+      "present": true
+    },
+    {
+      "path": "paper-dossier.json",
+      "kind": "anchored-paper-dossier",
+      "required_for_golden": true,
+      "present": true
+    }
+  ],
+  "required_invariants": [
+    "The source PDF identity and SHA-256 are observed from the real benchmark input.",
+    "Every inline anchor in paper.md resolves exactly once through anchors.json.",
+    "Anchor provenance refers only to the frozen source or declared assets.",
+    "Suspicious instruction-like paper content is preserved and flagged as evidence.",
+    "The parse-verification report has passed status and zero unresolved anchors.",
+    "The dossier identifies the exact verified bundle.",
+    "Every paper-derived dossier item has at least one resolvable anchor.",
+    "Every dossier cross-reference resolves to an existing item.",
+    "Fixture manifest hashes match the committed generated artifact bytes."
+  ],
+  "promotion_requirements": {
+    "real_production_run": true,
+    "manual_placeholder_content_forbidden": true,
+    "all_expected_artifacts_present": true,
+    "all_required_invariants_validated": true,
+    "state_after_promotion": "golden"
+  }
+}

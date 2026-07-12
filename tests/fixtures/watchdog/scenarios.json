@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "scenarios": {
+    "happy-path": {
+      "expected_status": "SUCCESS",
+      "responses": [{
+        "promise": "COMPLETE",
+        "artifact_path": "phases/initial-review/artifacts/review.json",
+        "artifact": {"schema_version": 1, "agent_id": "reviewer-r2", "phase": "initial-review", "artifact_version": 1, "decision": "complete", "evidence": ["paper.md#claim-1"]}
+      }]
+    },
+    "malformed-artifact": {
+      "expected_status": "INCOMPLETE",
+      "expected_feedback": "REOPEN: artifact validation failed: invalid JSON",
+      "responses": [{
+        "promise": "COMPLETE",
+        "artifact_path": "phases/initial-review/artifacts/review.json",
+        "artifact_raw": "{not-json"
+      }]
+    },
+    "missing-artifact": {
+      "expected_status": "INCOMPLETE",
+      "expected_feedback": "REOPEN: COMPLETE promise requires a schema-valid artifact",
+      "responses": [{"promise": "COMPLETE"}]
+    },
+    "crash-resume": {
+      "expected_status": "SUCCESS",
+      "responses": [
+        {"exit_code": 70, "stderr": "simulated codex crash"},
+        {"promise": "COMPLETE", "artifact_path": "phases/initial-review/artifacts/review.json", "artifact": {"schema_version": 1, "agent_id": "reviewer-r2", "phase": "initial-review", "artifact_version": 2, "decision": "complete", "evidence": ["resume preserved identity"]}}
+      ]
+    },
+    "phase-before-gate": {
+      "expected_status": "BLOCKED",
+      "gate_open": false,
+      "responses": [{"promise": "COMPLETE", "artifact_path": "phases/initial-review/artifacts/review.json", "artifact": {"schema_version": 1, "agent_id": "reviewer-r2", "phase": "initial-review", "artifact_version": 1, "decision": "complete"}}]
+    },
+    "manifest-violation": {
+      "expected_status": "POLICY_BLOCKED",
+      "responses": [{
+        "read_path": "../forbidden-secret.txt",
+        "promise": "COMPLETE",
+        "artifact_path": "phases/initial-review/artifacts/review.json",
+        "artifact": {"schema_version": 1, "agent_id": "reviewer-r2", "phase": "initial-review", "artifact_version": 1, "decision": "complete"}
+      }]
+    },
+    "no-progress": {
+      "expected_status": "STALLED",
+      "no_progress_threshold": 3,
+      "responses": [
+        {"promise": "NEXT", "artifact_path": "phases/initial-review/artifacts/review.json", "artifact": {"schema_version": 1, "agent_id": "reviewer-r2", "phase": "initial-review", "artifact_version": 1, "decision": "continue"}},
+        {"promise": "NEXT", "artifact_path": "phases/initial-review/artifacts/review.json", "artifact": {"schema_version": 1, "agent_id": "reviewer-r2", "phase": "initial-review", "artifact_version": 1, "decision": "continue"}},
+        {"promise": "NEXT", "artifact_path": "phases/initial-review/artifacts/review.json", "artifact": {"schema_version": 1, "agent_id": "reviewer-r2", "phase": "initial-review", "artifact_version": 1, "decision": "continue"}},
+        {"promise": "NEXT", "artifact_path": "phases/initial-review/artifacts/review.json", "artifact": {"schema_version": 1, "agent_id": "reviewer-r2", "phase": "initial-review", "artifact_version": 1, "decision": "continue"}}
+      ]
+    },
+    "wall-clock-exhaustion": {
+      "expected_status": "TIME_EXHAUSTED",
+      "responses": [{"sleep_seconds": 4, "promise": "COMPLETE", "artifact_path": "phases/initial-review/artifacts/review.json", "artifact": {"schema_version": 1, "agent_id": "reviewer-r2", "phase": "initial-review", "artifact_version": 1, "decision": "complete"}}]
+    },
+    "term-resume": {
+      "expected_status": "SUCCESS",
+      "responses": [
+        {"sleep_seconds": 4, "promise": "COMPLETE", "artifact_path": "phases/initial-review/artifacts/review.json", "artifact": {"schema_version": 1, "agent_id": "reviewer-r2", "phase": "initial-review", "artifact_version": 1, "decision": "complete"}},
+        {"promise": "COMPLETE", "artifact_path": "phases/initial-review/artifacts/review.json", "artifact": {"schema_version": 1, "agent_id": "reviewer-r2", "phase": "initial-review", "artifact_version": 2, "decision": "complete", "evidence": ["resumed after TERM"]}}
+      ]
+    }
+  }
+}

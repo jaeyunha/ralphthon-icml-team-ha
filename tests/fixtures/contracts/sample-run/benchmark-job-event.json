@@ -1,0 +1,10 @@
+{
+  "job_id": "job-1",
+  "sequence": 0,
+  "kind": "start",
+  "monotonic_ns": 0,
+  "assignment": "paper:arm-v2:v2:S1",
+  "previous_event_hash": null,
+  "closed_at_ns": null,
+  "event_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+}

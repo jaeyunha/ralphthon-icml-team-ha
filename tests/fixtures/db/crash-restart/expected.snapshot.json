@@ -1,0 +1,170 @@
+{
+  "agent_phase_runs": [
+    {
+      "agent_id": "reviewer-r7",
+      "attempt_count": 1,
+      "completed_at": "2026-07-02T11:00:06Z",
+      "id": "phase-reviewer-r7-initial_review",
+      "input_manifest_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "last_artifact_id": "artifact-crash-review",
+      "phase": "initial_review",
+      "run_id": "run-db-crash-001",
+      "started_at": "2026-07-02T11:00:03Z",
+      "status": "completed"
+    }
+  ],
+  "agents": [
+    {
+      "display_name": "Reviewer R7",
+      "id": "reviewer-r7",
+      "role": "reviewer",
+      "run_id": "run-db-crash-001",
+      "status": "active"
+    }
+  ],
+  "artifacts": [
+    {
+      "agent_id": "reviewer-r7",
+      "artifact_type": "official_review",
+      "created_at": "2026-07-02T11:00:04Z",
+      "id": "artifact-crash-review",
+      "path": "runs/run-db-crash-001/agents/reviewer-r7/published/official-review-v1.json",
+      "phase": "initial_review",
+      "run_id": "run-db-crash-001",
+      "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "version": 1
+    }
+  ],
+  "decisions": [],
+  "discussion_issues": [],
+  "events": [
+    {
+      "actor_role": "system",
+      "agent_id": "watchdog",
+      "artifact_id": null,
+      "causation_event_id": null,
+      "id": "evt-crash-001",
+      "occurred_at": "2026-07-01T10:00:01Z",
+      "payload": {
+        "created_at": "2026-07-02T11:00:00Z",
+        "status": "running",
+        "title": "Crash Recovery Fixture"
+      },
+      "phase": "run",
+      "run_id": "run-db-crash-001",
+      "sequence": 1,
+      "type": "system.run.created"
+    },
+    {
+      "actor_role": "reviewer",
+      "agent_id": "reviewer-r7",
+      "artifact_id": null,
+      "causation_event_id": null,
+      "id": "evt-crash-002",
+      "occurred_at": "2026-07-01T10:00:02Z",
+      "payload": {
+        "display_name": "Reviewer R7",
+        "role": "reviewer",
+        "status": "active"
+      },
+      "phase": "initial_review",
+      "run_id": "run-db-crash-001",
+      "sequence": 2,
+      "type": "reviewer.initial_review.registered"
+    },
+    {
+      "actor_role": "reviewer",
+      "agent_id": "reviewer-r7",
+      "artifact_id": null,
+      "causation_event_id": null,
+      "id": "evt-crash-003",
+      "occurred_at": "2026-07-01T10:00:03Z",
+      "payload": {
+        "attempt_count": 1,
+        "input_manifest_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "started_at": "2026-07-02T11:00:03Z"
+      },
+      "phase": "initial_review",
+      "run_id": "run-db-crash-001",
+      "sequence": 3,
+      "type": "reviewer.initial_review.started"
+    },
+    {
+      "actor_role": "reviewer",
+      "agent_id": "reviewer-r7",
+      "artifact_id": null,
+      "causation_event_id": null,
+      "id": "evt-crash-004",
+      "occurred_at": "2026-07-01T10:00:04Z",
+      "payload": {
+        "artifact_id": "artifact-crash-review",
+        "artifact_type": "official_review",
+        "created_at": "2026-07-02T11:00:04Z",
+        "path": "runs/run-db-crash-001/agents/reviewer-r7/published/official-review-v1.json",
+        "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "version": 1
+      },
+      "phase": "initial_review",
+      "run_id": "run-db-crash-001",
+      "sequence": 4,
+      "type": "reviewer.initial_review.artifact_published"
+    },
+    {
+      "actor_role": "reviewer",
+      "agent_id": "reviewer-r7",
+      "artifact_id": null,
+      "causation_event_id": null,
+      "id": "evt-crash-005",
+      "occurred_at": "2026-07-01T10:00:05Z",
+      "payload": {
+        "confidence": 5,
+        "overall_score": 5,
+        "reason": "Strong evidence and complete validation.",
+        "recorded_at": "2026-07-02T11:00:05Z",
+        "score_history_id": "score-r7-001"
+      },
+      "phase": "initial_review",
+      "run_id": "run-db-crash-001",
+      "sequence": 5,
+      "type": "reviewer.initial_review.score_changed"
+    },
+    {
+      "actor_role": "reviewer",
+      "agent_id": "reviewer-r7",
+      "artifact_id": null,
+      "causation_event_id": null,
+      "id": "evt-crash-006",
+      "occurred_at": "2026-07-01T10:00:06Z",
+      "payload": {
+        "completed_at": "2026-07-02T11:00:06Z",
+        "last_artifact_id": "artifact-crash-review"
+      },
+      "phase": "initial_review",
+      "run_id": "run-db-crash-001",
+      "sequence": 6,
+      "type": "reviewer.initial_review.completed"
+    }
+  ],
+  "execution_jobs": [],
+  "notes": [],
+  "runs": [
+    {
+      "created_at": "2026-07-02T11:00:00Z",
+      "id": "run-db-crash-001",
+      "status": "running",
+      "title": "Crash Recovery Fixture"
+    }
+  ],
+  "score_history": [
+    {
+      "confidence": 5,
+      "id": "score-r7-001",
+      "overall_score": 5,
+      "phase": "initial_review",
+      "reason": "Strong evidence and complete validation.",
+      "recorded_at": "2026-07-02T11:00:05Z",
+      "reviewer_id": "reviewer-r7",
+      "run_id": "run-db-crash-001"
+    }
+  ]
+}

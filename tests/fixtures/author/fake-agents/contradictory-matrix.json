@@ -1,0 +1,6 @@
+{
+  "rows":[
+    {"reviewer_id":"reviewer-r1","concern_id":"reviewer-r1-W1","commitments":["will:add a matched-capacity baseline table"]},
+    {"reviewer_id":"reviewer-r2","concern_id":"reviewer-r2-W1","commitments":["will_not:add a matched-capacity baseline table"]}
+  ]
+}

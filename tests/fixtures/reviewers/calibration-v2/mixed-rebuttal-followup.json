@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "reviewer_id": "reviewer-r2",
+  "official_review_version": 1,
+  "rebuttal_version": 1,
+  "concern_resolutions": [
+    {
+      "concern_id": "reviewer-r2-W1",
+      "status": "partially_resolved",
+      "response_evidence": ["rebuttal#/responses/0"],
+      "paper_evidence": ["T-A1"],
+      "assessment": "The response clarifies the theorem scope but introduces a new compactness qualification whose effect is not established.",
+      "remaining_gap": "The relation between the new qualification and the claimed theorem remains unclear.",
+      "score_effect": "Soundness remains unchanged pending clarification of the qualification.",
+      "new_question_id": "reviewer-r2-FQ1"
+    },
+    {
+      "concern_id": "reviewer-r2-W2",
+      "status": "unresolved",
+      "response_evidence": ["rebuttal#/responses/1"],
+      "paper_evidence": ["E-A2"],
+      "assessment": "The response repeats the original split description without supplying a participant-disjoint analysis.",
+      "remaining_gap": "The central leakage concern remains unresolved.",
+      "score_effect": "Soundness and Overall remain unchanged.",
+      "no_new_question_reason": "The original participant-disjoint rerun request is already precise; restating it would add no decision-relevant information."
+    }
+  ],
+  "scores": {"soundness": 2, "presentation": 3, "significance": 2, "originality": 3, "overall": 3},
+  "confidence": 4,
+  "score_change_rationale": "The theorem clarification is incomplete and the empirical leakage concern remains unresolved, so every score remains unchanged.",
+  "new_questions": [
+    {
+      "id": "reviewer-r2-FQ1",
+      "concern_id": "reviewer-r2-W1",
+      "question": "Does the newly stated compactness qualification restrict the theorem's target function class?",
+      "answer_induced_by": ["rebuttal#/responses/0"],
+      "decision_relevance": "A restrictive qualification could reduce the claimed soundness and significance of the theorem."
+    }
+  ],
+  "summary": "One response creates a bounded clarification question; the independent empirical concern remains unresolved without requiring a redundant new question.",
+  "evidence_refs": ["rebuttal#/responses/0", "rebuttal#/responses/1", "T-A1", "E-A2"]
+}

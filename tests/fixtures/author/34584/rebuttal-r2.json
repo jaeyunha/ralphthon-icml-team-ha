@@ -1,0 +1,23 @@
+{
+  "version":1,
+  "reviewer_id":"reviewer-r2",
+  "official_review_version":1,
+  "responses":[
+    {
+      "concern_id":"reviewer-r2-W1",
+      "response_label":"limitation_acknowledged",
+      "response":"We agree that the submitted empirical evidence is narrow. Table 2 reports one EMG-IMU comparison against TemporalCNN and InvariantTransformer; the submission does not provide multi-seed dispersion, matched-capacity sweeps, or distribution-shift tests. We therefore limit the empirical conclusion to the reported setup and do not claim broader practical robustness from this experiment.",
+      "evidence_refs":["TXT-0264","TAB-0004","TXT-0281"]
+    },
+    {
+      "concern_id":"reviewer-r2-Q1",
+      "response_label":"cannot_answer_without_new_research",
+      "response":"The submitted materials contain no per-seed runs or matched-capacity baseline sweep. Quantifying stability across those axes requires new experiments, so we cannot supply or claim that result in rebuttal.",
+      "evidence_refs":["TXT-0264","TAB-0004"]
+    }
+  ],
+  "evidence_refs":["TXT-0264","TAB-0004","TXT-0281"],
+  "commitments":["will:narrow the empirical generalization claim to the reported setup","will:clarify Table 2 is a single reported setup"],
+  "limitations_acknowledged":["The submission does not establish seed stability, matched-capacity baseline fairness, or distribution-shift robustness for the reported empirical gain."],
+  "published_at":"2026-07-11T15:00:00Z"
+}

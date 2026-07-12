@@ -1,0 +1,13 @@
+{
+  "counterexample": null,
+  "interval_residual": "0",
+  "methods": [
+    "exact-rational-grid",
+    "80-digit-evaluation",
+    "interval-arithmetic-enclosure",
+    "deterministic-property-sweep",
+    "exhaustive-small-cases",
+    "boundary-and-adversarial-points"
+  ],
+  "samples_checked": 65
+}

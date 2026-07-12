@@ -1,0 +1,46 @@
+{
+  "artifact_type": "literature_broker_response",
+  "request_id": "REF-5fbe27fd51e0de4b",
+  "reviewer_id": "validator-references",
+  "packets": [
+    {
+      "source_id": "SRC-8CFACE11260C628E",
+      "title": "Machine Learning in Human Activity Recognition",
+      "authors": [
+        "Suparna Biswas"
+      ],
+      "first_public_date": "2026-01-02",
+      "source_type": "metadata_registry",
+      "canonical_uri": "https://doi.org/10.1007/978-3-032-09241-0_3",
+      "content_hash": "sha256:3e66a8b06bc795c98fdebc4e02543bd6a490877da914b6cc321fbb2962ce2c6d",
+      "admissibility": "admissible_prior_work",
+      "retrieval_reason": "Validate bibliography identity for REF-025",
+      "supporting_passages": [
+        {
+          "anchor": "retrieved:sentence:1",
+          "summary": "Machine Learning in Human Activity Recognition | Springer Nature Link Skip to main content Advertisement Log in Menu Find a journal Publish with us Track your research Search Saved research Cart Home Machine Learning and Deep Learning in Human Activity Recognition and Fall Detection Chapter Machine Learning in Human Activity Recognition Chapter First Online: 02 January 2026 pp 49–67 Cite this chapter Save chapter View saved research Machine Learning and Deep Learning in Human Activity Recognition and Fall Detection Suparna Biswas 8 Part of the book series: Signals and Communication Technolo..."
+        },
+        {
+          "anchor": "retrieved:sentence:2",
+          "summary": "This paper proposes a novel solution leveraging ubiquitous smart devices like smartphones and smartwatches."
+        },
+        {
+          "anchor": "retrieved:sentence:3",
+          "summary": "These devices, equipped with a variety of built-in sensors, including accelerometers, gyroscopes, and more, serve as unobtrusive tools to collect data on users’ activities."
+        }
+      ],
+      "verification_status": "abstract_checked"
+    }
+  ],
+  "rejected_candidates": [
+    {
+      "canonical_uri": "https://doi.org/10.1109/ispp69262.2026.11543061",
+      "reason": "post_cutoff"
+    },
+    {
+      "canonical_uri": "https://doi.org/10.1007/978-3-032-29548-4_4",
+      "reason": "target_duplicate"
+    }
+  ],
+  "created_at": "2026-07-11T15:03:06.711Z"
+}

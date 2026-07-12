@@ -1,0 +1,12 @@
+{
+  "invocation_id": "invocation-1",
+  "provider": "codex-provider",
+  "assignment": "paper:arm-v2:v2:S1",
+  "input_tokens": 1000,
+  "output_tokens": 500,
+  "cached_input_tokens": 200,
+  "billed_usd": "0.005",
+  "provider_record_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "runtime_settings_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+  "record_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+}

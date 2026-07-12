@@ -1,0 +1,26 @@
+[
+  {
+    "finding_id": "CODE-34783-REPRO-001",
+    "validator_type": "reproducibility",
+    "claim_id": "CLAIM-34783-CENTRAL-RESULTS",
+    "status": "partial_execution",
+    "severity_candidate": "major",
+    "paper_anchors": [
+      "paper:34783:section:2.2",
+      "paper:34783:section:2.5",
+      "paper:34783:section:3"
+    ],
+    "method": "Pinned rootless Docker environment, static source compilation, bundled-synthetic-data load, and tokenizer/JEPA encoder forward smoke",
+    "observation": "The official repository compiled and its bundled synthetic dataset (1400 x 512 x 28), tokenizer, and temporal encoder executed successfully in the network-disabled sandbox. The paper's central reported evaluations could not be reproduced because the Massive.com market dataset, trained checkpoints, and complete evaluation pipeline are not included.",
+    "limitations": "This confirms executable model/data paths, not the reported empirical metrics or full claim set. The available data are synthetic noise rather than the proprietary market data described by the paper.",
+    "confirmation_paths": [
+      "artifact:real-34783/reproduction-report.json#commands/source-tests",
+      "artifact:real-34783/reproduction-report.json#commands/synthetic-smoke"
+    ],
+    "confidence": 0.99,
+    "artifact_refs": [
+      "artifact:real-34783/environment-build.json",
+      "artifact:real-34783/reproduction-report.json"
+    ]
+  }
+]

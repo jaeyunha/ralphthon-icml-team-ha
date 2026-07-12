@@ -1,0 +1,52 @@
+{
+  "artifacts": [
+    {
+      "path": "anchors.json",
+      "sha256": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "size_bytes": 640
+    },
+    {
+      "path": "extraction-report.json",
+      "sha256": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "size_bytes": 720
+    },
+    {
+      "path": "parse-verification-report.json",
+      "sha256": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "size_bytes": 1280
+    }
+  ],
+  "assets": {
+    "file_count": 2,
+    "total_size_bytes": 180,
+    "tree_sha256": "sha256:6666666666666666666666666666666666666666666666666666666666666666"
+  },
+  "dossier_summary": {
+    "assumptions": 1,
+    "equations": 0,
+    "experiments": 1,
+    "claims": 1,
+    "references": 1,
+    "theorems": 0
+  },
+  "fixture_id": "extraction-34584",
+  "paper_id": "34584",
+  "schema_version": 1,
+  "source": {
+    "pdf_committed": false,
+    "pdf_filename": "34584_Foundations_of_Equivaria.pdf",
+    "pdf_sha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "size_bytes": 433402
+  },
+  "state": "golden",
+  "tool": {
+    "name": "docling",
+    "version": "2.112.0"
+  },
+  "verification": {
+    "sample_size": 1,
+    "status": "passed",
+    "unresolved_anchor_count": 0
+  },
+  "verified_bundle_sha256": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+}

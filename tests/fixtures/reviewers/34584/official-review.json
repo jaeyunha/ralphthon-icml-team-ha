@@ -1,0 +1,261 @@
+{
+  "version": 1,
+  "reviewer_id": "reviewer-r2",
+  "summary": "The submission formulates order-equivariant neural networks for finite posets equipped with finite-group actions and transported finite-dimensional feature fibers. It characterizes equivariant linear maps through blockwise transporter constraints and orbit-stabilizer intertwiners, then constructs nonlinear networks from orbital affine maps, Reynolds-averaged modules, and pair-orbit aggregation. The paper establishes approximation results for globally communicating OENNs and for source-labeled local pair-state networks whose propagation depth is tied to directed diameter, and it instantiates the framework for graphs and sheaf-valued features. The appendix recasts equivariance as naturality for category-equivariant neural networks, relates finite action-groupoid constructions to OENNs, and describes a Grothendieck-CENN application to multimodal EMG-IMU activity classification.",
+  "strengths": [
+    {
+      "text": "The linear theory is precise and complete within the stated finite setting: the transporter law is derived in both directions, and the orbit-representative and pair-stabilizer parametrization gives an explicit description and dimension count for all equivariant linear maps.",
+      "anchors": [
+        "THM-0001",
+        "THM-0002",
+        "THM-0003"
+      ]
+    },
+    {
+      "text": "The full-OENN approximation proof is constructive and internally coherent: stabilizer-equivariant component approximants are obtained by Reynolds averaging, transported across site orbits, and supplied with the complete input through an equivariant broadcast layer.",
+      "anchors": [
+        "THM-0010",
+        "THM-0011",
+        "TXT-0332",
+        "TXT-0333"
+      ]
+    },
+    {
+      "text": "The local theory gives a useful connection between communication geometry and architecture depth. The source-labeled pair-state construction compiles global information in directed-diameter depth, while the dependency result establishes the matching worst-case obstruction for insufficient inter-site depth and yields a clear cover-local specialization.",
+      "anchors": [
+        "THM-0013",
+        "TXT-0071",
+        "THM-0014",
+        "THM-0015"
+      ]
+    },
+    {
+      "text": "The graph and sheaf examples make the orbit formalism concrete, including fixed-graph message passing, vertex-edge interactions, and transport-compatible restriction and adjoint blocks for sheaf-valued features.",
+      "anchors": [
+        "TXT-0075",
+        "TXT-0080",
+        "THM-0016",
+        "THM-0017"
+      ]
+    },
+    {
+      "text": "The finite action-groupoid correspondence between OENN equivariance and categorical naturality is explicit and conceptually useful, and the appendix identifies how OENN primitives and auxiliary pair-state constructions fit into that categorical representation.",
+      "anchors": [
+        "THM-0019",
+        "THM-0020",
+        "THM-0021",
+        "TXT-0259"
+      ]
+    }
+  ],
+  "weaknesses": [
+    {
+      "id": "reviewer-r2-W1",
+      "text": "The central order/sheaf universality claims are broader than the proved target class. Order-equivariance is defined as ordinary finite-G equivariance; the order supplies masks and relations, and the full-OENN proof uses a global broadcast that does not depend on the order. Likewise, the sheaf specialization approximates equivariant maps on the total feature space without requiring the approximating network to commute with sheaf restrictions, while ordinary restriction-based message passing is acknowledged to be non-universal. This materially changes the interpretation of the advertised richer-order symmetry and sheaf-network UAT, although it does not invalidate the finite-group density theorem. The concern would be resolved by narrowing the claims to finite-group-equivariant maps on poset- or sheaf-indexed total spaces, or by proving density within an order-natural or restriction-compatible architecture class.",
+      "severity": "major",
+      "affected_claims": [
+        "CONTRIB-001",
+        "CLAIM-005",
+        "THEOREM-011",
+        "THEOREM-014"
+      ],
+      "anchors": [
+        "TXT-0001",
+        "TXT-0019",
+        "TXT-0020",
+        "EQ-0005",
+        "THM-0011",
+        "TXT-0332",
+        "TXT-0333",
+        "EQ-0058",
+        "TXT-0105",
+        "TXT-0106",
+        "TXT-0258",
+        "TXT-0259"
+      ]
+    },
+    {
+      "id": "reviewer-r2-W2",
+      "text": "The broad CENN universal-approximation extension is not independently checkable from the submission. Essential arrow-bundle generators are deferred to prior work, the required topological and approximation hypotheses are presented only as an operational summary, and the finite OENN-realizability argument relies on unprovided details of the imported CENN construction. Because this is a headline extension beyond finite group actions, the missing definitions and proof dependencies create material uncertainty about both scope and correctness. A complete specification of the generators, hypotheses, and reduction, or explicit treatment of the general CENN theorem as imported with the contribution narrowed to the finite action-groupoid embedding, would resolve the concern.",
+      "severity": "major",
+      "affected_claims": [
+        "CLAIM-002",
+        "CLAIM-006",
+        "CLAIM-007",
+        "THEOREM-018",
+        "THEOREM-021",
+        "THEOREM-022"
+      ],
+      "anchors": [
+        "TXT-0001",
+        "TXT-0192",
+        "TXT-0193",
+        "TXT-0195",
+        "THM-0018",
+        "THM-0021",
+        "TXT-0249",
+        "TXT-0250",
+        "TXT-0254"
+      ]
+    },
+    {
+      "id": "reviewer-r2-W3",
+      "text": "The CENN and OENN UAT statements alternate between epsilon-density or closure language and literal equality between finite-network classes and all continuous natural or equivariant maps. The supplied argument supports density, not exact finite representability. This appears locally repairable without changing the approximation result, but the formal statements should use closure or density notation unless a separate exact-representation proof is supplied.",
+      "severity": "minor",
+      "affected_claims": [
+        "CLAIM-002",
+        "THEOREM-018",
+        "THEOREM-022"
+      ],
+      "anchors": [
+        "TXT-0195",
+        "THM-0018",
+        "EQ-0087",
+        "EQ-0088",
+        "EQ-0124",
+        "EQ-0125"
+      ]
+    },
+    {
+      "id": "reviewer-r2-W4",
+      "text": "The claim that source labels, higher-order state, global attention, or broadcast are unavoidable is not established by the local lower bound. The theorem shows only that fewer than d_R(p,q) inter-site layers cannot transmit x_p to q; it does not prove that sufficiently deep anonymous relation-message-passing networks remain non-universal. This overstates a highlighted necessity conclusion while leaving the pair-state sufficiency construction and short-depth obstruction intact. An unrestricted-depth indistinguishability or collision theorem, or narrower wording limited to the proved depth lower bound, is needed.",
+      "severity": "major",
+      "affected_claims": [
+        "CONTRIB-003",
+        "THEOREM-013",
+        "THEOREM-015"
+      ],
+      "anchors": [
+        "THM-0013",
+        "TXT-0069",
+        "TXT-0072",
+        "THM-0015",
+        "TXT-0082",
+        "TXT-0335",
+        "TXT-0336",
+        "TXT-0350"
+      ]
+    },
+    {
+      "id": "reviewer-r2-W5",
+      "text": "The pair-state local universality result is not a bounded-width or size-uniform guarantee. Its construction stores a source-labeled copy of the total input across carriers and uses pair-dependent walk-count rescaling, so hidden-state memory and width grow with the complete input-fiber dimension. This does not undermine the theorem as stated, but it limits scalability and practical-significance interpretations. The paper should state the depth, width, and memory costs explicitly and avoid efficiency implications unless a bounded-resource result is proved.",
+      "severity": "minor",
+      "affected_claims": [
+        "CONTRIB-003",
+        "THEOREM-013"
+      ],
+      "anchors": [
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0344",
+        "TXT-0349",
+        "TXT-0350"
+      ]
+    },
+    {
+      "id": "reviewer-r2-W6",
+      "text": "The sole empirical study does not provide enough evidence for the claims of substantial improvement and improved generalization. The appendix omits the data split and leakage controls, metric and units, run count and uncertainty, baseline implementation and capacity controls, training details, and ablations or transformed-test checks isolating the categorical symmetry; the prose and table caption also disagree about the comparator roster. Moreover, the experiment evaluates Grothendieck CENN rather than the main OENN class. A complete numeric protocol with repeated-run uncertainty, fair tuned baselines, component and robustness ablations, and direct OENN experiments is needed to support the empirical claims.",
+      "severity": "major",
+      "affected_claims": [
+        "CLAIM-008",
+        "CLAIM-009"
+      ],
+      "anchors": [
+        "TXT-0109",
+        "SEC-0024",
+        "TXT-0260",
+        "TXT-0264",
+        "TAB-0003",
+        "TAB-0004",
+        "TXT-0281"
+      ]
+    },
+    {
+      "id": "reviewer-r2-W7",
+      "text": "The priority claim that no universal approximation theorem was previously known for sheaf neural networks remains unverified. The available broker-verified source establishes prior approximation theory for continuous group-equivariant maps but does not resolve overlap for poset-indexed bundles, sheaf networks, transporter parametrizations, pair-state locality, or CENNs. This is not evidence of prior overlap, but it materially limits confidence in the originality positioning. A theorem-level comparison with verified closest work, or softened priority language, is needed.",
+      "severity": "minor",
+      "affected_claims": [
+        "CONTRIB-001",
+        "CLAIM-005"
+      ],
+      "anchors": [
+        "TXT-0001",
+        "TXT-0007",
+        "TXT-0009",
+        "TXT-0011",
+        "THM-0011"
+      ]
+    }
+  ],
+  "scores": {
+    "soundness": 2,
+    "presentation": 2,
+    "significance": 3,
+    "originality": 2,
+    "overall": 3
+  },
+  "key_questions": [
+    {
+      "id": "reviewer-r2-Q1",
+      "question": "Is the intended OENN/sheaf approximation target merely finite-G-equivariant maps on a poset- or sheaf-indexed total space, or maps satisfying an additional order-naturality or restriction-compatibility condition? Please state the target class precisely and identify where the approximating architecture enforces any stronger condition.",
+      "possible_score_impact": "A precise narrowing consistent with the proof, or a valid theorem for the stronger restriction-compatible class, would substantially reduce W1 and could raise soundness and the overall recommendation; maintaining the broad interpretation without new evidence would preserve the current assessment."
+    },
+    {
+      "id": "reviewer-r2-Q2",
+      "question": "Can the authors provide the complete arrow-bundle generators, exact hypotheses, and proof dependencies used by Theorem A.3 and Lemma A.6, and clarify which CENN results are proved here versus imported from prior work?",
+      "possible_score_impact": "A self-contained and verifiable account could materially improve soundness, presentation, and the overall recommendation; unresolved dependence on unstated constructions would leave a headline contribution uncertain."
+    },
+    {
+      "id": "reviewer-r2-Q3",
+      "question": "What theorem rules out universality of sufficiently deep anonymous relation-message-passing OENNs, beyond the stated lower bound for fewer than d_R(p,q) inter-site layers?",
+      "possible_score_impact": "A valid unrestricted-depth indistinguishability result would support the claimed necessity and improve soundness; otherwise, narrowing the claim would make the issue bounded but would remove part of the advertised contribution."
+    },
+    {
+      "id": "reviewer-r2-Q4",
+      "question": "What were the exact EMG-IMU split protocol, evaluation metric and numeric results, number of runs and uncertainty, baseline implementations and tuning budgets, model capacities, and ablations or transformed-test evaluations that isolate categorical equivariance?",
+      "possible_score_impact": "Complete, leakage-controlled, repeated, and capacity-matched evidence could improve presentation and empirical significance and might move the overall recommendation; absent such evidence, CLAIM-008 and CLAIM-009 remain unsupported."
+    },
+    {
+      "id": "reviewer-r2-Q5",
+      "question": "What theorem-level literature comparison supports the claim that no prior sheaf-network UAT was known, and how do the transporter, pair-state, and categorical results differ from the closest verified equivariant approximation and higher-order message-passing frameworks?",
+      "possible_score_impact": "A verified comparison showing substantive non-overlap could raise originality; close unacknowledged overlap or continued inability to substantiate the priority claim could lower originality and potentially the overall recommendation."
+    }
+  ],
+  "limitations": "The formal OENN results concern a fixed finite poset, a finite acting group, finite-dimensional fibers, and compact invariant approximation domains; the full class permits unrestricted orbital communication. Local universality additionally requires a strongly connected relation with self-loops and uses source-labeled state whose width and memory scale with the total input dimension, so no size-uniform efficiency result is established. The sheaf construction assumes a compatible lift of the group action to restrictions. The general CENN statement introduces additional measured-topological and feature-field assumptions, and the empirical evidence is limited to one appendix benchmark for Grothendieck CENN rather than direct evaluation of the main OENN class. Holistically, the Weak Reject recommendation is based directly on the cumulative decision impact of W1, W2, W4, and W6: the supported finite-group core remains potentially useful, but the unresolved scope, categorical-proof, necessity, and empirical-evidence issues currently outweigh it. The recommendation is not computed from the numerical axis scores.",
+  "confidence": 3,
+  "ethical_concerns": [],
+  "evidence_refs": [
+    "CONTRIB-001",
+    "CONTRIB-002",
+    "CONTRIB-003",
+    "CLAIM-002",
+    "CLAIM-005",
+    "CLAIM-006",
+    "CLAIM-007",
+    "CLAIM-008",
+    "CLAIM-009",
+    "THEOREM-001",
+    "THEOREM-002",
+    "THEOREM-003",
+    "THEOREM-010",
+    "THEOREM-011",
+    "THEOREM-013",
+    "THEOREM-014",
+    "THEOREM-015",
+    "THEOREM-016",
+    "THEOREM-017",
+    "THEOREM-018",
+    "THEOREM-019",
+    "THEOREM-020",
+    "THEOREM-021",
+    "THEOREM-022",
+    "REPRO-010",
+    "EXP-002",
+    "EXP-003",
+    "EXP-004",
+    "BASE-001",
+    "RESULT-006",
+    "RESULT-008",
+    "SRC-9C55A99C3A5FB0D1"
+  ]
+}

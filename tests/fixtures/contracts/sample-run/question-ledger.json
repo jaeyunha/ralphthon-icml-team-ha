@@ -1,0 +1,12 @@
+{
+  "ledger_version": 1,
+  "reviewer_id": "R2",
+  "questions": [
+    {
+      "id": "R2-Q1",
+      "question": "Does the theorem require bounded inputs?",
+      "possible_score_impact": "Could raise Soundness from 2 to 3.",
+      "status": "open"
+    }
+  ]
+}

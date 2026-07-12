@@ -1,0 +1,119 @@
+{
+  "agent_command": "codex exec --dangerously-bypass-approvals-and-sandbox -",
+  "agent_id": "reviewer-r2",
+  "agent_version": "codex-cli 0.144.1",
+  "broker_evidence_path": "shared/validation/published/broker-evidence.json",
+  "checker": {
+    "action": "complete",
+    "feedback": [],
+    "passed": true
+  },
+  "completed_at": "2026-07-11T16:11:46.763671Z",
+  "concern_ledger_hash": "sha256:92997a63728c435af30632a7e303834c9dc275dc4d1c2d153ec43c8a49ebc8d6",
+  "identity_continuity_verified": true,
+  "official_review_hash": "sha256:c6d1c38694a14f8f0fcdb91a08aad46026cf9fc08a3ed42325c210ce17544d89",
+  "paper_id": "34584",
+  "run_id": "reviewer-real-34584-worker1",
+  "schema_version": 1,
+  "score_history_hash": "sha256:f63733916601f5110d4825abdae1096cec923a973ecb2715c84ea1a0eb0f73a6",
+  "task_count": 12,
+  "tasks": [
+    {
+      "artifact": "agents/reviewer-r2/phases/initial-review/artifacts/paper-comprehension.json",
+      "artifact_hash": "sha256:cfaf4bb33780e8aa1504ac8f140c635c6724beebf42336dd32fef4c4b91f1e53",
+      "attempt_count": 1,
+      "completed_at": "2026-07-11T15:18:17.567974Z",
+      "manifest_hash": "sha256:9265bd389977e2ad5ed3b1a50d20838e26912a446700b29cac44704f5887d4e3",
+      "task_id": "paper-comprehension"
+    },
+    {
+      "artifact": "agents/reviewer-r2/phases/initial-review/artifacts/contribution-map.json",
+      "artifact_hash": "sha256:9f55944a3040bb517c3122c6ef5d60d274f6e47c841d57b45593a673257864eb",
+      "attempt_count": 1,
+      "completed_at": "2026-07-11T15:22:19.590256Z",
+      "manifest_hash": "sha256:9265bd389977e2ad5ed3b1a50d20838e26912a446700b29cac44704f5887d4e3",
+      "task_id": "contribution-map"
+    },
+    {
+      "artifact": "agents/reviewer-r2/phases/initial-review/artifacts/claim-audit.json",
+      "artifact_hash": "sha256:bd0941085625048dd1ed25fa02a623f81c28a05579369d8444bffc2bf159cab6",
+      "attempt_count": 1,
+      "completed_at": "2026-07-11T15:27:45.222554Z",
+      "manifest_hash": "sha256:9265bd389977e2ad5ed3b1a50d20838e26912a446700b29cac44704f5887d4e3",
+      "task_id": "claim-audit"
+    },
+    {
+      "artifact": "agents/reviewer-r2/phases/initial-review/artifacts/theory-audit.json",
+      "artifact_hash": "sha256:62d91df7a35e65211d67d03acd06b06a914c29c6eec626a849fa5a3517b9d738",
+      "attempt_count": 1,
+      "completed_at": "2026-07-11T15:32:34.379422Z",
+      "manifest_hash": "sha256:9265bd389977e2ad5ed3b1a50d20838e26912a446700b29cac44704f5887d4e3",
+      "task_id": "theory-audit"
+    },
+    {
+      "artifact": "agents/reviewer-r2/phases/initial-review/artifacts/experiment-audit.json",
+      "artifact_hash": "sha256:9cfbdeea09f42c6c1752fdb010f1f4cb212de14c7e1e95b3c9e24598a7828a7e",
+      "attempt_count": 1,
+      "completed_at": "2026-07-11T15:36:53.377094Z",
+      "manifest_hash": "sha256:9265bd389977e2ad5ed3b1a50d20838e26912a446700b29cac44704f5887d4e3",
+      "task_id": "experiment-audit"
+    },
+    {
+      "artifact": "agents/reviewer-r2/phases/initial-review/artifacts/related-work-plan.json",
+      "artifact_hash": "sha256:9aecdbd45fc43acc6d53e6e790af0b7f15b3a49b3c8907b3bb6b4330573b21d2",
+      "attempt_count": 1,
+      "completed_at": "2026-07-11T15:39:44.890772Z",
+      "manifest_hash": "sha256:9265bd389977e2ad5ed3b1a50d20838e26912a446700b29cac44704f5887d4e3",
+      "task_id": "related-work-plan"
+    },
+    {
+      "artifact": "agents/reviewer-r2/phases/initial-review/artifacts/literature-research.json",
+      "artifact_hash": "sha256:34ff1b70262f9d8a109e45512a0cfc47fbd3ef149804060327536a2bfa747c7f",
+      "attempt_count": 1,
+      "completed_at": "2026-07-11T15:42:09.169587Z",
+      "manifest_hash": "sha256:9265bd389977e2ad5ed3b1a50d20838e26912a446700b29cac44704f5887d4e3",
+      "task_id": "literature-research"
+    },
+    {
+      "artifact": "agents/reviewer-r2/phases/initial-review/artifacts/validation-bundle-review.json",
+      "artifact_hash": "sha256:8febd2bf9f837e99217e89da3dde95fe64321fce198f2aa09b4b38f71cca2fe6",
+      "attempt_count": 1,
+      "completed_at": "2026-07-11T15:44:16.637613Z",
+      "manifest_hash": "sha256:9265bd389977e2ad5ed3b1a50d20838e26912a446700b29cac44704f5887d4e3",
+      "task_id": "validation-bundle-review"
+    },
+    {
+      "artifact": "agents/reviewer-r2/phases/initial-review/artifacts/severity-calibration.json",
+      "artifact_hash": "sha256:7c64e2da472c71988ba99c6adf70f650231b5201e8c59122a3965526211baa30",
+      "attempt_count": 1,
+      "completed_at": "2026-07-11T15:48:30.139222Z",
+      "manifest_hash": "sha256:9265bd389977e2ad5ed3b1a50d20838e26912a446700b29cac44704f5887d4e3",
+      "task_id": "severity-calibration"
+    },
+    {
+      "artifact": "agents/reviewer-r2/phases/initial-review/artifacts/score-calibration.json",
+      "artifact_hash": "sha256:612a0df4fad107b556e7019fb3e6f447cda054b6f89cfe0a7b1f8251151ef049",
+      "attempt_count": 1,
+      "completed_at": "2026-07-11T15:51:50.722829Z",
+      "manifest_hash": "sha256:9265bd389977e2ad5ed3b1a50d20838e26912a446700b29cac44704f5887d4e3",
+      "task_id": "score-calibration"
+    },
+    {
+      "artifact": "agents/reviewer-r2/phases/initial-review/artifacts/official-review-assembly.json",
+      "artifact_hash": "sha256:a82cd3f11322fa36ac7ef3eb2ba555ecf497aa1c6ab6e316b2198666c4fa55fc",
+      "attempt_count": 1,
+      "completed_at": "2026-07-11T15:59:52.188548Z",
+      "manifest_hash": "sha256:9265bd389977e2ad5ed3b1a50d20838e26912a446700b29cac44704f5887d4e3",
+      "task_id": "official-review-assembly"
+    },
+    {
+      "artifact": "agents/reviewer-r2/phases/initial-review/artifacts/official-review.json",
+      "artifact_hash": "sha256:c6d1c38694a14f8f0fcdb91a08aad46026cf9fc08a3ed42325c210ce17544d89",
+      "attempt_count": 3,
+      "completed_at": "2026-07-11T16:11:46.763671Z",
+      "manifest_hash": "sha256:9265bd389977e2ad5ed3b1a50d20838e26912a446700b29cac44704f5887d4e3",
+      "task_id": "review-self-audit"
+    }
+  ],
+  "visibility_manifests_verified": true
+}

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "campaign_id": "campaign-1",
+  "arm_cohort_id": "arm-v1",
+  "paper_slot": 1,
+  "paper_id": "paper-1",
+  "pc_id": "pc-arm-v1",
+  "outcome": "failed",
+  "reason": "Synthetic terminal failure.",
+  "evidence_refs": [],
+  "meta_review_ref": null,
+  "sac_ref": "published/calibration-bundle.json",
+  "terminal_failure_code": "sac_phase_failed",
+  "unresolved_dissent": [],
+  "finalized_at": "2026-07-11T00:00:00Z",
+  "decision_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+}

@@ -1,0 +1,15 @@
+{
+  "claims": [
+    {"id": "E-C1", "statement": "The model improves empirical benchmark accuracy.", "anchor_id": "E-A1"}
+  ],
+  "experiments": [
+    {"id": "E-EXP1", "statement": "The evaluation compares test accuracy across three benchmark datasets.", "anchor_id": "E-A1"},
+    {"id": "E-EXP2", "statement": "A participant-level split is used for the reported baseline comparison.", "anchor_id": "E-A2"}
+  ],
+  "datasets": [
+    {"id": "E-D1", "statement": "Dataset records include repeated participants."}
+  ],
+  "artifacts": [
+    {"id": "E-ART1", "statement": "A code repository and training configuration are provided."}
+  ]
+}

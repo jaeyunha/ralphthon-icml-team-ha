@@ -1,0 +1,19 @@
+{
+  "artifact_refs": [
+    "phases/symbolic-validation/artifacts/reynolds-c2-symbolic.json"
+  ],
+  "claim_id": "EQ-016",
+  "confidence": 0.94,
+  "confirmation_paths": [],
+  "finding_id": "MATH-34584-002",
+  "limitations": "This verifies a representative finite-group instantiation, not Lemma 2.8 for every group, representation, and MLP.",
+  "method": "SymPy expansion of the paper's Reynolds operator for the C2 sign representation",
+  "observation": "Symbolic simplification reduced the claimed difference to zero.",
+  "paper_anchors": [
+    "EQ-0016",
+    "THM-0004"
+  ],
+  "severity_candidate": "none",
+  "status": "verified_symbolically",
+  "validator_type": "symbolic_math"
+}

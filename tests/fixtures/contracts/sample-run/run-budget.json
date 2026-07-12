@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "started_at": "2026-07-11T12:00:00Z",
+  "deadline_at": "2026-07-12T12:00:00Z",
+  "updated_at": "2026-07-11T12:05:00Z",
+  "spent_usd": 1.25,
+  "limits": {
+    "max_budget_usd": 20,
+    "max_reviewer_restarts": 8,
+    "max_validator_restarts": 8,
+    "max_author_restarts": 6,
+    "max_ac_restarts": 6,
+    "max_restarts": 6,
+    "max_discussion_rounds": 6,
+    "no_progress_threshold": 3
+  },
+  "restart_counts": {
+    "reviewer-r2::initial-review": 1
+  },
+  "no_progress_counts": {
+    "reviewer-r2::initial-review": 0
+  },
+  "discussion_rounds": {},
+  "last_artifact_hashes": {
+    "reviewer-r2::initial-review": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "subscription_cursors": {
+    "reviewer-r2::initial-review:0": "evt-12",
+    "reviewer-r2::initial-review:1": 1720699500000000000,
+    "reviewer-r2::initial-review:2": null
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "principal": {
+    "principal_id": "reviewer-arm-v2-S1-r1",
+    "kind": "model_role",
+    "campaign_id": "campaign-1",
+    "arm_id": "arm-v2",
+    "model_capable": true
+  },
+  "role_root": "/campaigns/campaign-1/arms/arm-v2/papers/S1/reviewer-r1",
+  "prompt_rpc_socket": "/rpc/prompt.sock",
+  "ever_rpc_socket": "/rpc/ever.sock",
+  "read_only_mounts": ["/campaigns/campaign-1/arms/arm-v2/shared"],
+  "forbidden_roots": ["/repo", "/home", "/.gjc", "/outcomes", "/human-threads", "/scorer", "/credentials"],
+  "network_enabled": false,
+  "dns_enabled": false,
+  "denied_capabilities": ["repository", "home", ".gjc", "outcome", "human_thread", "scorer", "other_arm", "dns", "network", "package_install", "git", "socket", "credential"],
+  "contract_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+}

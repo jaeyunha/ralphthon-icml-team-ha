@@ -1,0 +1,22 @@
+{
+  "artifact_type": "literature_broker_refusal",
+  "request_id": "REF-eba11ff23f132ac4",
+  "reviewer_id": "validator-references",
+  "code": "NO_ADMISSIBLE_SOURCES",
+  "stage": "full_text_retrieval",
+  "message": "Discovery completed, but no source passed target, cutoff, identity, retrieval, and packet validation gates.",
+  "retryable": false,
+  "created_at": "2026-07-11T15:03:34.415Z",
+  "details": {
+    "rejected_candidates": [
+      {
+        "canonical_uri": "https://doi.org/10.53846/goediss-2561",
+        "reason": "network: retrieval returned HTTP 403"
+      }
+    ],
+    "backend_failures": [
+      "arxiv: arXiv returned HTTP 429",
+      "ever: Ever repl exited with 1: Ever repl returned malformed JSON: JSON Parse error: Unexpected EOF; Error: everd daemon crashed on startup: code: 'ERR_MODULE_NOT_FOUND',   url: 'file:///Users/jaeyunha/wt/forever-agent/staging/packages/ai/src/overflow' } Node.js v25.2.1"
+    ]
+  }
+}

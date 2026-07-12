@@ -1,0 +1,1265 @@
+{
+  "claims": [
+    {
+      "anchor_id": "TXT-0001",
+      "id": "CLAIM-001",
+      "page": 1,
+      "statement": "Geometric deep learning exploits symmetries in data to improve the performance and efficiency of deep learning systems."
+    },
+    {
+      "anchor_id": "TXT-0001",
+      "id": "CLAIM-002",
+      "page": 1,
+      "statement": "In addition, we show that OENN can be extended further to CENN, Category-Equivariant Neural Network, which gives the general form of equivariant neural networks as well as of equivariant universal approximation theorems, allowing us to leverage categorical symmetry in data (e.g., noninvertible symmetries on multiple objects with compositional relations on those symmetries)."
+    },
+    {
+      "anchor_id": "TXT-0002",
+      "id": "CLAIM-003",
+      "page": 1,
+      "statement": "Group-equivariant architectures explicitly exploit the symmetries of an index set to share parameters, improve sample efficiency, and en-"
+    },
+    {
+      "anchor_id": "TXT-0005",
+      "id": "CLAIM-004",
+      "page": 1,
+      "statement": "More recently, this principle has been extended to permutation-invariant and permutation-equivariant models such as DeepSets (Zaheer et al., 2017) and graph neural networks GNNs (Gilmer et al., 2017; Xu et al., 2019; Maron et al., 2019), which achieve equivariance with respect to the automorphism group of a graph."
+    },
+    {
+      "anchor_id": "TXT-0009",
+      "id": "CLAIM-005",
+      "page": 2,
+      "statement": "We prove equivariant universal approximation theorems (UATs) for OENNs."
+    },
+    {
+      "anchor_id": "TXT-0109",
+      "id": "CLAIM-006",
+      "page": 9,
+      "statement": "The appendix places OENN inside the more general category-equivariant neural network (CENN) framework, where posets are replaced by categories and action groupoids; this extension connects the present theory to broader category-equivariant models and applications (Maruyama, 2025a;b;c; 2026a;b; Maruyama and Yasuda, 2026), which demonstrate how the extended equivariant models help to improve the experimental performance of classic equivariant models in concrete machine learning tasks."
+    },
+    {
+      "anchor_id": "TXT-0149",
+      "id": "CLAIM-007",
+      "page": 12,
+      "statement": "We show, in particular, that completed OENN input-output maps are embedded into CENN through the action groupoid of the chosen symmetry action, while hidden pair-state and branch constructions may use auxiliary action groupoids built from the same action."
+    },
+    {
+      "anchor_id": "TXT-0264",
+      "id": "CLAIM-008",
+      "page": 19,
+      "statement": "Table 2 shows the experimental results; GrothendieckCENN substantially outperformed both of them."
+    },
+    {
+      "anchor_id": "TXT-0281",
+      "id": "CLAIM-009",
+      "page": 19,
+      "statement": "This yields improved generalization."
+    },
+    {
+      "anchor_id": "EQ-0001",
+      "id": "EQ-001",
+      "page": 2,
+      "statement": "T V γ,p : V p → V γp ( γ ∈ G, p ∈ P )"
+    },
+    {
+      "anchor_id": "EQ-0002",
+      "id": "EQ-002",
+      "page": 2,
+      "statement": "T V γη,p = T V γ,ηp ◦ T V η,p ( γ, η ∈ G,p ∈ P ) ."
+    },
+    {
+      "anchor_id": "EQ-0003",
+      "id": "EQ-003",
+      "page": 2,
+      "statement": "X := ⊕ p ∈ P V p ."
+    },
+    {
+      "anchor_id": "EQ-0004",
+      "id": "EQ-004",
+      "page": 3,
+      "statement": "( ρ X ( γ ) x ) q = T V γ,γ -1 q x γ -1 q . (1)"
+    },
+    {
+      "anchor_id": "EQ-0005",
+      "id": "EQ-005",
+      "page": 3,
+      "statement": "F ( ρ X ( γ ) x ) = ρ Y ( γ ) F ( x ) ( γ ∈ G, x ∈ K ) . (2)"
+    },
+    {
+      "anchor_id": "EQ-0006",
+      "id": "EQ-006",
+      "page": 3,
+      "statement": "( Lx ) q = ∑ p ∈ P K ( q, p ) x p , K ( q, p ) ∈ Hom( V p , W q ) . (3)"
+    },
+    {
+      "anchor_id": "EQ-0007",
+      "id": "EQ-007",
+      "page": 3,
+      "statement": "K ( γq, γp ) T V γ,p = T W γ,q K ( q, p ) ( γ ∈ G,p, q ∈ P ) . (4)"
+    },
+    {
+      "anchor_id": "EQ-0008",
+      "id": "EQ-008",
+      "page": 3,
+      "statement": "H O := { η ∈ G : ηq O = q O , ηp O = p O } ."
+    },
+    {
+      "anchor_id": "EQ-0009",
+      "id": "EQ-009",
+      "page": 3,
+      "statement": "A O ∈ Hom( V p O , W q O )"
+    },
+    {
+      "anchor_id": "EQ-0010",
+      "id": "EQ-010",
+      "page": 3,
+      "statement": "K ( q, p ) := T W γ,q O A O ( T V γ,p O ) -1 (6)"
+    },
+    {
+      "anchor_id": "EQ-0011",
+      "id": "EQ-011",
+      "page": 3,
+      "statement": "dimHom G ( X,Y ) = ∑ O∈ ( P × P ) /G dimHom H O ( V p O , W q O ) ."
+    },
+    {
+      "anchor_id": "EQ-0012",
+      "id": "EQ-012",
+      "page": 3,
+      "statement": "( Lx ) t = ∑ s ∈ S K ( t, s ) x s , K ( t, s ) ∈ Hom( V s , W t ) ,"
+    },
+    {
+      "anchor_id": "EQ-0013",
+      "id": "EQ-013",
+      "page": 3,
+      "statement": "K ( γt, γs ) T V γ,s = T W γ,t K ( t, s ) ( γ ∈ G, s ∈ S, t ∈ T ) ."
+    },
+    {
+      "anchor_id": "EQ-0014",
+      "id": "EQ-014",
+      "page": 3,
+      "statement": "b γq = T W γ,q b q ."
+    },
+    {
+      "anchor_id": "EQ-0015",
+      "id": "EQ-015",
+      "page": 3,
+      "statement": "T W η,q O A O = A O T V η,p O ( η ∈ H O ) . (5)"
+    },
+    {
+      "anchor_id": "EQ-0016",
+      "id": "EQ-016",
+      "page": 4,
+      "statement": "R eq H [Ψ]( u ) := 1 | H | ∑ h ∈ H ( T V h ) -1 Ψ( T U h u ) . (7)"
+    },
+    {
+      "anchor_id": "EQ-0017",
+      "id": "EQ-017",
+      "page": 4,
+      "statement": "R inv H [Ψ]( u ) := 1 | H | ∑ h ∈ H Ψ(( T U h ) -1 u ) . (8)"
+    },
+    {
+      "anchor_id": "EQ-0018",
+      "id": "EQ-018",
+      "page": 4,
+      "statement": "ψ s 0 := R eq G s 0 [Ψ s 0 ] ,"
+    },
+    {
+      "anchor_id": "EQ-0019",
+      "id": "EQ-019",
+      "page": 4,
+      "statement": "ψ s ( e ) := T F γ,s 0 ψ s 0 ( ( T E γ,s 0 ) -1 e ) , e ∈ E s . (9)"
+    },
+    {
+      "anchor_id": "EQ-0020",
+      "id": "EQ-020",
+      "page": 4,
+      "statement": "K ( q, p ) = 0 unless ( q, p ) ∈ R."
+    },
+    {
+      "anchor_id": "EQ-0021",
+      "id": "EQ-021",
+      "page": 4,
+      "statement": "K (( q, p ) , ( r, s )) = 0 unless s = p and ( q, r ) ∈ R."
+    },
+    {
+      "anchor_id": "EQ-0022",
+      "id": "EQ-022",
+      "page": 4,
+      "statement": "R cov := ∆ P ∪ { ( q, p ) : q ≺ p } ∪ { ( q, p ) : p ≺ q } ."
+    },
+    {
+      "anchor_id": "EQ-0023",
+      "id": "EQ-023",
+      "page": 5,
+      "statement": "P/G q = { Ω 1 ( q ) , . . . , Ω R ( q ) ( q ) }"
+    },
+    {
+      "anchor_id": "EQ-0024",
+      "id": "EQ-024",
+      "page": 5,
+      "statement": "O ↦- → Ω O ( q ) := { p ∈ P : ( q, p ) ∈ O} ."
+    },
+    {
+      "anchor_id": "EQ-0025",
+      "id": "EQ-025",
+      "page": 5,
+      "statement": "φ q,p ( v ) := φ O ( ( T V γ,p O ) -1 v ) , v ∈ V p . (10)"
+    },
+    {
+      "anchor_id": "EQ-0026",
+      "id": "EQ-026",
+      "page": 5,
+      "statement": "S O ( q ; x ) := ∑ p ∈ P ( q,p ) ∈O φ q,p ( x p ) ∈ R m O , (11)"
+    },
+    {
+      "anchor_id": "EQ-0027",
+      "id": "EQ-027",
+      "page": 5,
+      "statement": "S O ( τq ; ρ X ( τ ) x ) = S O ( q ; x ) ."
+    },
+    {
+      "anchor_id": "EQ-0028",
+      "id": "EQ-028",
+      "page": 5,
+      "statement": "S R ( q ; x ) := ∑ O⊂ R S O ( q ; x ) = ∑ p ∈ P ( q,p ) ∈ R φ R q,p ( x p ) ."
+    },
+    {
+      "anchor_id": "EQ-0029",
+      "id": "EQ-029",
+      "page": 5,
+      "statement": "ψ q 0 : V q 0 ⊕ ⊕ O∈A ( q 0 ) R m O → W q 0 ,"
+    },
+    {
+      "anchor_id": "EQ-0030",
+      "id": "EQ-030",
+      "page": 5,
+      "statement": "F ( x ) q := T W γ,q 0 ψ q 0 ( ( T V γ,q 0 ) -1 x q , { S O ( q ; x ) } O∈A ( q 0 ) ) . (12)"
+    },
+    {
+      "anchor_id": "EQ-0031",
+      "id": "EQ-031",
+      "page": 5,
+      "statement": "h ′ q = θ q ( h q , { S O ( q ; h ) } O⊆ R ) . (13)"
+    },
+    {
+      "anchor_id": "EQ-0032",
+      "id": "EQ-032",
+      "page": 5,
+      "statement": "OENN R -mp σ ⊆ OENN R -pair σ ⊆ OENN full σ ."
+    },
+    {
+      "anchor_id": "EQ-0033",
+      "id": "EQ-033",
+      "page": 6,
+      "statement": "F ( ρ X ( η ) x ) q = T W η,q F ( x ) q ( x ∈ K ) ."
+    },
+    {
+      "anchor_id": "EQ-0034",
+      "id": "EQ-034",
+      "page": 6,
+      "statement": "ψ ( u ) := 1 | H | ∑ h ∈ H ( T V h ) -1 Ψ( T U h u )"
+    },
+    {
+      "anchor_id": "EQ-0035",
+      "id": "EQ-035",
+      "page": 6,
+      "statement": "sup u ∈ K ‖ ψ ( u ) -f ( u ) ‖ ∗ < ε."
+    },
+    {
+      "anchor_id": "EQ-0036",
+      "id": "EQ-036",
+      "page": 6,
+      "statement": "sup x ∈ K ‖ F ( x ) -f ( x ) ‖ < ε."
+    },
+    {
+      "anchor_id": "EQ-0037",
+      "id": "EQ-037",
+      "page": 6,
+      "statement": "B : X → ⊕ q ∈ P ˜ X q , ˜ X q := X, ( Bx ) q = x,"
+    },
+    {
+      "anchor_id": "EQ-0038",
+      "id": "EQ-038",
+      "page": 7,
+      "statement": "( Lh ) v = ∑ O∈ ( V × V ) / Aut( G ) A O ∑ u ∈ V ( v,u ) ∈O h u . (14)"
+    },
+    {
+      "anchor_id": "EQ-0039",
+      "id": "EQ-039",
+      "page": 7,
+      "statement": "( Lh ) v = A self h v + A adj ∑ u ∈ N ( v ) h u (15)"
+    },
+    {
+      "anchor_id": "EQ-0040",
+      "id": "EQ-040",
+      "page": 7,
+      "statement": "h ′ v = ψ   h v , ∑ u ∈ N ( v ) φ ( h u )   (16)"
+    },
+    {
+      "anchor_id": "EQ-0041",
+      "id": "EQ-041",
+      "page": 7,
+      "statement": "z t +1 v,u = ∑ w ∈ N [ v ] z t w,u ,"
+    },
+    {
+      "anchor_id": "EQ-0042",
+      "id": "EQ-042",
+      "page": 7,
+      "statement": "O ℓ = { ( i, i + ℓ ) : i ∈ Z n } , ℓ ∈ Z n ."
+    },
+    {
+      "anchor_id": "EQ-0043",
+      "id": "EQ-043",
+      "page": 7,
+      "statement": "( Lh ) i = ∑ ℓ ∈ Z n A ℓ h i + ℓ . (17)"
+    },
+    {
+      "anchor_id": "EQ-0044",
+      "id": "EQ-044",
+      "page": 8,
+      "statement": "( Lh ) i = A 0 h i + ∑ 1 ≤ k<n/ 2 A k ( h i + k + h i -k ) + 1 2 | n A n/ 2 h i + n/ 2 . (18)"
+    },
+    {
+      "anchor_id": "EQ-0045",
+      "id": "EQ-045",
+      "page": 8,
+      "statement": "( Lx ) v = A V V, 0 h v + A V V, 1 ∑ u ∈ N ( v ) h u + A V E, inc ∑ e ∋ v z e , (19)"
+    },
+    {
+      "anchor_id": "EQ-0046",
+      "id": "EQ-046",
+      "page": 8,
+      "statement": "R p → q : V p → V q ( q ≤ p ) ,"
+    },
+    {
+      "anchor_id": "EQ-0047",
+      "id": "EQ-047",
+      "page": 8,
+      "statement": "T V γ,q R p → q = R γp → γq T V γ,p ( q ≤ p ) . (20)"
+    },
+    {
+      "anchor_id": "EQ-0048",
+      "id": "EQ-048",
+      "page": 8,
+      "statement": "T V γ,p R ∗ p → q = R ∗ γp → γq T V γ,q ( q ≤ p, γ ∈ G ) . (21)"
+    },
+    {
+      "anchor_id": "EQ-0049",
+      "id": "EQ-049",
+      "page": 8,
+      "statement": "U ◦ := { ( q, p ) : q < p }"
+    },
+    {
+      "anchor_id": "EQ-0050",
+      "id": "EQ-050",
+      "page": 8,
+      "statement": "D ◦ := { ( q, r ) : r < q } ."
+    },
+    {
+      "anchor_id": "EQ-0051",
+      "id": "EQ-051",
+      "page": 8,
+      "statement": "B ↑ O ∈ Hom( V q O , W q O )"
+    },
+    {
+      "anchor_id": "EQ-0052",
+      "id": "EQ-052",
+      "page": 8,
+      "statement": "A ↑ O := B ↑ O R p O → q O ∈ Hom( V p O , W q O ) ."
+    },
+    {
+      "anchor_id": "EQ-0053",
+      "id": "EQ-053",
+      "page": 8,
+      "statement": "T W η,q O B ↑ O = B ↑ O T V η,q O ( η ∈ H O ) ."
+    },
+    {
+      "anchor_id": "EQ-0054",
+      "id": "EQ-054",
+      "page": 8,
+      "statement": "R ∗ q → r : V r → V q ."
+    },
+    {
+      "anchor_id": "EQ-0055",
+      "id": "EQ-055",
+      "page": 8,
+      "statement": "B ↓ O ∈ Hom( V q O , W q O ) , A ↓ O := B ↓ O R ∗ q O → r O ∈ Hom( V r O , W q O ) ,"
+    },
+    {
+      "anchor_id": "EQ-0056",
+      "id": "EQ-056",
+      "page": 8,
+      "statement": "T W η,q O B ↓ O = B ↓ O T V η,q O ( η ∈ H O )"
+    },
+    {
+      "anchor_id": "EQ-0057",
+      "id": "EQ-057",
+      "page": 9,
+      "statement": "x ′ q = K 0 ( q, q ) x q + ∑ p : q<p K ↑ ( q, p ) x p + ∑ r : r<q K ↓ ( q, r ) x r , (22)"
+    },
+    {
+      "anchor_id": "EQ-0058",
+      "id": "EQ-058",
+      "page": 9,
+      "statement": "x ′ q = B 0 x q + ∑ p : q<p B ↑ R p → q x p + ∑ r : r<q B ↓ R ∗ q → r x r , (23)"
+    },
+    {
+      "anchor_id": "EQ-0059",
+      "id": "EQ-059",
+      "page": 12,
+      "statement": "∫ c ∈C F ( c )"
+    },
+    {
+      "anchor_id": "EQ-0060",
+      "id": "EQ-060",
+      "page": 12,
+      "statement": "s ( u ) = b, t ( u ) = a"
+    },
+    {
+      "anchor_id": "EQ-0061",
+      "id": "EQ-061",
+      "page": 12,
+      "statement": "I ( a ) := ⊔ b ∈ Ob( C ) Hom C ( b, a ) , µ a := ⊕ b µ b,a (24)"
+    },
+    {
+      "anchor_id": "EQ-0062",
+      "id": "EQ-062",
+      "page": 12,
+      "statement": "Z : C op -→ Meas ."
+    },
+    {
+      "anchor_id": "EQ-0063",
+      "id": "EQ-063",
+      "page": 12,
+      "statement": "Z ( u ) : Z ( a ) -→ Z ( b ) ,"
+    },
+    {
+      "anchor_id": "EQ-0064",
+      "id": "EQ-064",
+      "page": 12,
+      "statement": "Z (id a ) = id Z ( a ) , Z ( u ◦ v ) = Z ( v ) ◦ Z ( u )"
+    },
+    {
+      "anchor_id": "EQ-0065",
+      "id": "EQ-065",
+      "page": 13,
+      "statement": "Z ( a ) := C (Ω( a ) , E Z ( a )) . (25)"
+    },
+    {
+      "anchor_id": "EQ-0066",
+      "id": "EQ-066",
+      "page": 13,
+      "statement": "π u : Ω( b ) → Ω( a ) , τ u : Ω( a ) → Ω( b ) ,"
+    },
+    {
+      "anchor_id": "EQ-0067",
+      "id": "EQ-067",
+      "page": 13,
+      "statement": "L Z u : E Z ( a ) → E Z ( b ) ."
+    },
+    {
+      "anchor_id": "EQ-0068",
+      "id": "EQ-068",
+      "page": 13,
+      "statement": "π u ◦ v = π u ◦ π v , τ u ◦ v = τ v ◦ τ u , L Z u ◦ v = L Z v ◦ L Z u ,"
+    },
+    {
+      "anchor_id": "EQ-0069",
+      "id": "EQ-069",
+      "page": 13,
+      "statement": "Z ( u ) h := L Z u ◦ h ◦ π u ∈ C (Ω( b ) , E Z ( b )) , h ∈ Z ( a ) . (26)"
+    },
+    {
+      "anchor_id": "EQ-0070",
+      "id": "EQ-070",
+      "page": 13,
+      "statement": "Z ( a ) ∼ = E Z ( a ) , Z ( u ) = L Z u : E Z ( a ) → E Z ( b ) ."
+    },
+    {
+      "anchor_id": "EQ-0071",
+      "id": "EQ-071",
+      "page": 13,
+      "statement": "Φ : X ⇒ Y, Φ = { Φ a : X ( a ) → Y ( a ) } a ∈ Ob( C ) ,"
+    },
+    {
+      "anchor_id": "EQ-0072",
+      "id": "EQ-072",
+      "page": 13,
+      "statement": "X ( a ) Φ a - - → Y ( a ) X ( u ) ↓ ↓ Y ( u ) X ( b ) Φ b - - → Y ( b )"
+    },
+    {
+      "anchor_id": "EQ-0073",
+      "id": "EQ-073",
+      "page": 13,
+      "statement": "Y ( u ) ◦ Φ a = Φ b ◦ X ( u ) . (27)"
+    },
+    {
+      "anchor_id": "EQ-0074",
+      "id": "EQ-074",
+      "page": 13,
+      "statement": "‖ Φ ‖ F, ( K a ) := max a ∈ F sup x ∈ K a ‖ Φ a ( x ) ‖ ∞ . (28)"
+    },
+    {
+      "anchor_id": "EQ-0075",
+      "id": "EQ-075",
+      "page": 13,
+      "statement": "F ( ρ X ( g ) x ) = ρ Y ( g ) F ( x ) ."
+    },
+    {
+      "anchor_id": "EQ-0076",
+      "id": "EQ-076",
+      "page": 13,
+      "statement": "K ( u, y ) : E Z ( b ) → E Z ′ ( a ) ."
+    },
+    {
+      "anchor_id": "EQ-0077",
+      "id": "EQ-077",
+      "page": 13,
+      "statement": "Z ′ ( u ) β a = β b ( u : b → a ) ."
+    },
+    {
+      "anchor_id": "EQ-0078",
+      "id": "EQ-078",
+      "page": 13,
+      "statement": "( ( ˜ L K ) a z ) ( y ) := β a ( y ) + ∫ I ( a ) K ( u, y ) ( Z ( u ) z ) ( τ u y ) dµ a ( u ) . (29)"
+    },
+    {
+      "anchor_id": "EQ-0079",
+      "id": "EQ-079",
+      "page": 13,
+      "statement": "Z ′ ( w )( ˜ L K ) c = ( ˜ L K ) a Z ( w ) . (30)"
+    },
+    {
+      "anchor_id": "EQ-0080",
+      "id": "EQ-080",
+      "page": 14,
+      "statement": "L Z ′ w ∫ I ( c ) K ( u ′ , π w y ) ( Z ( u ′ ) z ) ( τ u ′ π w y ) dµ c ( u ′ ) = ∫ I ( a ) K ( u, y ) ( Z ( w ◦ u ) z ) ( τ u y ) dµ a ( u ) ."
+    },
+    {
+      "anchor_id": "EQ-0081",
+      "id": "EQ-081",
+      "page": 14,
+      "statement": "( ˜ L K ) a z = β a + ∑ u : b → a K ( u ) Z ( u ) z. (31)"
+    },
+    {
+      "anchor_id": "EQ-0082",
+      "id": "EQ-082",
+      "page": 14,
+      "statement": "S ( a ) = C (Ω( a ) , R ) , S ( u ) r = r ◦ π u ,"
+    },
+    {
+      "anchor_id": "EQ-0083",
+      "id": "EQ-083",
+      "page": 14,
+      "statement": "( Σ α,s a z ) ( y ) = α ( s a ( z )( y ) ) z ( y ) . (32)"
+    },
+    {
+      "anchor_id": "EQ-0084",
+      "id": "EQ-084",
+      "page": 14,
+      "statement": "r ↦-→ (1 , r j ) ↦-→ α ( r j )(1 , r j ) ,"
+    },
+    {
+      "anchor_id": "EQ-0085",
+      "id": "EQ-085",
+      "page": 14,
+      "statement": "CENN α ( X,Y ) ."
+    },
+    {
+      "anchor_id": "EQ-0086",
+      "id": "EQ-086",
+      "page": 14,
+      "statement": "CENN α ( X,Y ) ⊆ EqvCont( X,Y ) ."
+    },
+    {
+      "anchor_id": "EQ-0087",
+      "id": "EQ-087",
+      "page": 14,
+      "statement": "CENN α ( X,Y ) = EqvCont( X,Y )"
+    },
+    {
+      "anchor_id": "EQ-0088",
+      "id": "EQ-088",
+      "page": 15,
+      "statement": "max a ∈ F sup x ∈ K a ‖ Φ a ( x ) -Ψ a ( x ) ‖ ∞ < ε."
+    },
+    {
+      "anchor_id": "EQ-0089",
+      "id": "EQ-089",
+      "page": 15,
+      "statement": "X tot = ⊕ p ∈ P V p , Y tot = ⊕ q ∈ P W q"
+    },
+    {
+      "anchor_id": "EQ-0090",
+      "id": "EQ-090",
+      "page": 15,
+      "statement": "A := G ⋉ P."
+    },
+    {
+      "anchor_id": "EQ-0091",
+      "id": "EQ-091",
+      "page": 15,
+      "statement": "( γ, p ) : p -→ γp"
+    },
+    {
+      "anchor_id": "EQ-0092",
+      "id": "EQ-092",
+      "page": 15,
+      "statement": "( η, γp ) ◦ ( γ, p ) = ( ηγ, p ) ."
+    },
+    {
+      "anchor_id": "EQ-0093",
+      "id": "EQ-093",
+      "page": 15,
+      "statement": "V : A op → Meas , V ( p ) = V p , V ( γ, p ) = ( T V γ,p ) -1 : V γp → V p ."
+    },
+    {
+      "anchor_id": "EQ-0094",
+      "id": "EQ-094",
+      "page": 15,
+      "statement": "op"
+    },
+    {
+      "anchor_id": "EQ-0095",
+      "id": "EQ-095",
+      "page": 15,
+      "statement": "X : A → Meas , X ( q ) := X tot , X ( γ, q ) := ρ X ( γ -1 ) : X tot → X tot ,"
+    },
+    {
+      "anchor_id": "EQ-0096",
+      "id": "EQ-096",
+      "page": 15,
+      "statement": "Y : A op → Meas , Y ( q ) := W q , Y ( γ, q ) := ( T W γ,q ) -1 : W γq → W q ."
+    },
+    {
+      "anchor_id": "EQ-0097",
+      "id": "EQ-097",
+      "page": 15,
+      "statement": "H ( t ) := H tot , H ( γ, t ) := ρ H ( γ -1 ) : H tot → H tot ,"
+    },
+    {
+      "anchor_id": "EQ-0098",
+      "id": "EQ-098",
+      "page": 15,
+      "statement": "H ′ ( t ) := H ′ t , H ′ ( γ, t ) := ( T H ′ γ,t ) -1 : H ′ γt → H ′ t ."
+    },
+    {
+      "anchor_id": "EQ-0099",
+      "id": "EQ-099",
+      "page": 15,
+      "statement": "Nat K ( X , Y )"
+    },
+    {
+      "anchor_id": "EQ-0100",
+      "id": "EQ-100",
+      "page": 15,
+      "statement": "F ↦-→ Φ F , Φ F q ( x ) := F ( x ) q ,"
+    },
+    {
+      "anchor_id": "EQ-0101",
+      "id": "EQ-101",
+      "page": 15,
+      "statement": "C G ( K,Y tot ) ∼ = Nat K ( X , Y ) ."
+    },
+    {
+      "anchor_id": "EQ-0102",
+      "id": "EQ-102",
+      "page": 16,
+      "statement": "Y ( γ, q )Φ γq ( x ) = Φ q ( X ( γ, q ) x ) , x ∈ K."
+    },
+    {
+      "anchor_id": "EQ-0103",
+      "id": "EQ-103",
+      "page": 16,
+      "statement": "( T W γ,q ) -1 Φ γq ( x ) = Φ q ( ρ X ( γ -1 ) x ) . (33)"
+    },
+    {
+      "anchor_id": "EQ-0104",
+      "id": "EQ-104",
+      "page": 16,
+      "statement": "Φ γq ( ρ X ( γ ) x ) = T W γ,q Φ q ( x ) . (34)"
+    },
+    {
+      "anchor_id": "EQ-0105",
+      "id": "EQ-105",
+      "page": 16,
+      "statement": "F ( ρ X ( γ ) x ) = ρ Y ( γ ) F ( x ) ."
+    },
+    {
+      "anchor_id": "EQ-0106",
+      "id": "EQ-106",
+      "page": 16,
+      "statement": "max q ∈ P sup x ∈ K ‖ Φ q ( x ) -Ψ q ( x ) ‖ = sup x ∈ K ‖ F Φ ( x ) -F Ψ ( x ) ‖ Y tot , max ,"
+    },
+    {
+      "anchor_id": "EQ-0107",
+      "id": "EQ-107",
+      "page": 16,
+      "statement": "H tot = ⊕ s ∈ S H s , H ′ tot = ⊕ t ∈ T H ′ t"
+    },
+    {
+      "anchor_id": "EQ-0108",
+      "id": "EQ-108",
+      "page": 16,
+      "statement": "A ( h ) t = b t + ∑ s ∈ S K ( t, s ) h s ."
+    },
+    {
+      "anchor_id": "EQ-0109",
+      "id": "EQ-109",
+      "page": 16,
+      "statement": "L t : H tot → H ′ t , L t ( h ) := ∑ s ∈ S K ( t, s ) h s ."
+    },
+    {
+      "anchor_id": "EQ-0110",
+      "id": "EQ-110",
+      "page": 16,
+      "statement": "( T H ′ γ,t ) -1 L γt = L t ρ H ( γ -1 ) , ( T H ′ γ,t ) -1 b γt = b t ."
+    },
+    {
+      "anchor_id": "EQ-0111",
+      "id": "EQ-111",
+      "page": 16,
+      "statement": "L γt ρ H ( γ ) = T H ′ γ,t L t , b γt = T H ′ γ,t b t ."
+    },
+    {
+      "anchor_id": "EQ-0112",
+      "id": "EQ-112",
+      "page": 16,
+      "statement": "K ( γt, γs ) T H γ,s = T H ′ γ,t K ( t, s ) ,"
+    },
+    {
+      "anchor_id": "EQ-0113",
+      "id": "EQ-113",
+      "page": 16,
+      "statement": "K (id t ) := L t , K ( u ) := 0 ( u = id t in I ( t )) ."
+    },
+    {
+      "anchor_id": "EQ-0114",
+      "id": "EQ-114",
+      "page": 16,
+      "statement": "ψ s 0 ( u ) = 1 | G s 0 | ∑ h ∈ G s 0 ( T F h,s 0 ) -1 Ψ s 0 ( T E h,s 0 u )"
+    },
+    {
+      "anchor_id": "EQ-0115",
+      "id": "EQ-115",
+      "page": 17,
+      "statement": "ψ γs 0 ( e ) = T F γ,s 0 ψ s 0 ( ( T E γ,s 0 ) -1 e )"
+    },
+    {
+      "anchor_id": "EQ-0116",
+      "id": "EQ-116",
+      "page": 17,
+      "statement": "K (( q, p ) , ( r, s )) = 0 unless s = p and ( q, r ) ∈ R"
+    },
+    {
+      "anchor_id": "EQ-0117",
+      "id": "EQ-117",
+      "page": 17,
+      "statement": "F Ψ : X tot → Y tot , F Ψ ( x ) q := Ψ q ( x ) ,"
+    },
+    {
+      "anchor_id": "EQ-0118",
+      "id": "EQ-118",
+      "page": 17,
+      "statement": "T Z γ,q := Z ( γ, q ) -1 : Z ( q ) → Z ( γq ) ."
+    },
+    {
+      "anchor_id": "EQ-0119",
+      "id": "EQ-119",
+      "page": 17,
+      "statement": "Λ t ( h ) = c t + ∑ s ∈ S Λ t,s h s , Λ t,s : H s → H ′ t ."
+    },
+    {
+      "anchor_id": "EQ-0120",
+      "id": "EQ-120",
+      "page": 17,
+      "statement": "( T H ′ γ,t ) -1 Λ γt ( h ) = Λ t ( ρ H ( γ -1 ) h ) ."
+    },
+    {
+      "anchor_id": "EQ-0121",
+      "id": "EQ-121",
+      "page": 17,
+      "statement": "Λ γt,γs T H γ,s = T H ′ γ,t Λ t,s , c γt = T H ′ γ,t c t ."
+    },
+    {
+      "anchor_id": "EQ-0122",
+      "id": "EQ-122",
+      "page": 17,
+      "statement": "λ γs T Z γ,s = T Z ′ γ,s λ s , c γs = T Z ′ γ,s c s ,"
+    },
+    {
+      "anchor_id": "EQ-0123",
+      "id": "EQ-123",
+      "page": 18,
+      "statement": "CENN α ( X , Y ) | K"
+    },
+    {
+      "anchor_id": "EQ-0124",
+      "id": "EQ-124",
+      "page": 18,
+      "statement": "CENN α ( X , Y ) | K = Nat K ( X , Y ) ∼ = C G ( K,Y tot )"
+    },
+    {
+      "anchor_id": "EQ-0125",
+      "id": "EQ-125",
+      "page": 18,
+      "statement": "OENN full α ( X tot , Y tot ) | K = C G ( K,Y tot ) ."
+    },
+    {
+      "anchor_id": "EQ-0126",
+      "id": "EQ-126",
+      "page": 18,
+      "statement": "˜ F ( x ) := 1 | G | ∑ γ ∈ G ρ Y ( γ -1 ) H ( ρ X ( γ ) x ) ."
+    },
+    {
+      "anchor_id": "EQ-0127",
+      "id": "EQ-127",
+      "page": 18,
+      "statement": "F ( ρ X ( γ ) x ) = ρ Y ( γ ) F ( x ) ( γ ∈ G ) ,"
+    },
+    {
+      "anchor_id": "EQ-0128",
+      "id": "EQ-128",
+      "page": 18,
+      "statement": "F : B op → Cat , (35)"
+    },
+    {
+      "anchor_id": "EQ-0129",
+      "id": "EQ-129",
+      "page": 18,
+      "statement": "∫ b ∈B F ( b ) , (36)"
+    },
+    {
+      "anchor_id": "EQ-0130",
+      "id": "EQ-130",
+      "page": 19,
+      "statement": "( g, ψ ) ◦ ( f, φ ) = ( g ◦ f, F ( f )( ψ ) ◦ φ ) ."
+    },
+    {
+      "anchor_id": "EQ-0131",
+      "id": "EQ-131",
+      "page": 19,
+      "statement": "F : B op → Cat ,"
+    },
+    {
+      "anchor_id": "EQ-0132",
+      "id": "EQ-132",
+      "page": 19,
+      "statement": "G ACC = G GYR = SO(3) × C T , G EMG = C 8 × C T , G TOT = C T ."
+    },
+    {
+      "anchor_id": "EQ-0133",
+      "id": "EQ-133",
+      "page": 19,
+      "statement": "∫ b ∈B F ( b )"
+    },
+    {
+      "anchor_id": "EQ-0134",
+      "id": "EQ-134",
+      "page": 20,
+      "statement": "( Lρ X ( γ ) x ) q = ∑ p ∈ P K ( q, p ) T V γ,γ -1 p x γ -1 p = ∑ r ∈ P K ( q, γr ) T V γ,r x r ."
+    },
+    {
+      "anchor_id": "EQ-0135",
+      "id": "EQ-135",
+      "page": 20,
+      "statement": "( ρ Y ( γ ) Lx ) q = T W γ,γ -1 q ( Lx ) γ -1 q = ∑ r ∈ P T W γ,γ -1 q K ( γ -1 q, r ) x r ."
+    },
+    {
+      "anchor_id": "EQ-0136",
+      "id": "EQ-136",
+      "page": 20,
+      "statement": "K ( q, γr ) T V γ,r = T W γ,γ -1 q K ( γ -1 q, r ) ( q, r ∈ P ) ."
+    },
+    {
+      "anchor_id": "EQ-0137",
+      "id": "EQ-137",
+      "page": 20,
+      "statement": "T γ W 1 ,q O A O ( T V γ 1 ,p O ) -1 = T γ W 2 ,q O T W η,q O A O ( T V η,p O ) -1 ( T V γ 2 ,p O ) -1 = T γ W 2 ,q O A O ( T V γ 2 ,p O ) -1 ."
+    },
+    {
+      "anchor_id": "EQ-0138",
+      "id": "EQ-138",
+      "page": 20,
+      "statement": "R eq H [Ψ]( T U g u ) = 1 | H | ∑ h ∈ H ( T V h ) -1 Ψ( T U hg u ) = T V g R eq H [Ψ]( u ) ."
+    },
+    {
+      "anchor_id": "EQ-0139",
+      "id": "EQ-139",
+      "page": 20,
+      "statement": "Ψ( u ) = A L σ ( A L -1 σ ( · · · σ ( A 1 u + b 1 ) · · · ) + b L -1 ) + b L ."
+    },
+    {
+      "anchor_id": "EQ-0140",
+      "id": "EQ-140",
+      "page": 20,
+      "statement": "( π i ( g ) z ) h = z hg ."
+    },
+    {
+      "anchor_id": "EQ-0141",
+      "id": "EQ-141",
+      "page": 20,
+      "statement": "( B 1 u ) h = A 1 T U h u + b 1 ,"
+    },
+    {
+      "anchor_id": "EQ-0142",
+      "id": "EQ-142",
+      "page": 20,
+      "statement": "Cz = 1 | H | ∑ h ∈ H ( T V h ) -1 ( A L z h + b L )"
+    },
+    {
+      "anchor_id": "EQ-0143",
+      "id": "EQ-143",
+      "page": 20,
+      "statement": "φ τq,τp ( T V τ,p v ) = φ O ( ( T V τγ,p O ) -1 T V τ,p v ) = φ O ( ( T V γ,p O ) -1 v ) = φ q,p ( v ) ."
+    },
+    {
+      "anchor_id": "EQ-0144",
+      "id": "EQ-144",
+      "page": 20,
+      "statement": "̂ Z ( q,p ) := V p , T ̂ Z τ, ( q,p ) := T V τ,p : ̂ Z ( q,p ) → ̂ Z ( τq,τp ) ."
+    },
+    {
+      "anchor_id": "EQ-0145",
+      "id": "EQ-145",
+      "page": 20,
+      "statement": "B : X → ⊕ ( q,p ) ∈ P × P ̂ Z ( q,p ) , ( Bx ) ( q,p ) := x p ."
+    },
+    {
+      "anchor_id": "EQ-0146",
+      "id": "EQ-146",
+      "page": 20,
+      "statement": "( Bρ X ( τ ) x ) ( q,p ) = T V τ,τ -1 p x τ -1 p = ( ρ ̂ Z ( τ ) Bx ) ( q,p ) ."
+    },
+    {
+      "anchor_id": "EQ-0147",
+      "id": "EQ-147",
+      "page": 21,
+      "statement": "u O ( q,p ) = φ q,p ( x p ) (( q, p ) ∈ O ) ."
+    },
+    {
+      "anchor_id": "EQ-0148",
+      "id": "EQ-148",
+      "page": 21,
+      "statement": "( A O u ) q := ∑ p ∈ P ( q,p ) ∈O u ( q,p ) ."
+    },
+    {
+      "anchor_id": "EQ-0149",
+      "id": "EQ-149",
+      "page": 21,
+      "statement": "A ( q ) := {O : ∃ p ∈ P with ( q, p ) ∈ O} ."
+    },
+    {
+      "anchor_id": "EQ-0150",
+      "id": "EQ-150",
+      "page": 21,
+      "statement": "E q := V q ⊕ ⊕ O∈A ( q ) R m O ,"
+    },
+    {
+      "anchor_id": "EQ-0151",
+      "id": "EQ-151",
+      "page": 21,
+      "statement": "z 0 q,p := { h q , p = q, 0 , p = q,"
+    },
+    {
+      "anchor_id": "EQ-0152",
+      "id": "EQ-152",
+      "page": 21,
+      "statement": "z 1 q,p := ∑ r :( q,r ) ∈ R z 0 r,p ."
+    },
+    {
+      "anchor_id": "EQ-0153",
+      "id": "EQ-153",
+      "page": 21,
+      "statement": "‖ v ‖ ∗ ≤ c ‖ v ‖ 0 ( v ∈ V ) ."
+    },
+    {
+      "anchor_id": "EQ-0154",
+      "id": "EQ-154",
+      "page": 21,
+      "statement": "sup u ∈ K ‖ Ψ( u ) -f ( u ) ‖ 0 < ε/c."
+    },
+    {
+      "anchor_id": "EQ-0155",
+      "id": "EQ-155",
+      "page": 21,
+      "statement": "ψ ( u ) -f ( u ) = 1 | H | ∑ h ∈ H ( T V h ) -1 ( Ψ( T U h u ) -f ( T U h u ) ) ,"
+    },
+    {
+      "anchor_id": "EQ-0156",
+      "id": "EQ-156",
+      "page": 21,
+      "statement": "sup u ∈ K ‖ ψ ( u ) -f ( u ) ‖ ∗ < ε."
+    },
+    {
+      "anchor_id": "EQ-0157",
+      "id": "EQ-157",
+      "page": 22,
+      "statement": "g q 0 : K → W q 0 , g q 0 ( x ) = f ( x ) q 0 ."
+    },
+    {
+      "anchor_id": "EQ-0158",
+      "id": "EQ-158",
+      "page": 22,
+      "statement": "C := max ( 1 , max γ ∈ G, q 0 ∈Q ‖ T W γ,q 0 ‖ op ) ,"
+    },
+    {
+      "anchor_id": "EQ-0159",
+      "id": "EQ-159",
+      "page": 22,
+      "statement": "ψ q 0 : X → W q 0"
+    },
+    {
+      "anchor_id": "EQ-0160",
+      "id": "EQ-160",
+      "page": 22,
+      "statement": "sup x ∈ K ‖ ψ q 0 ( x ) -g q 0 ( x ) ‖ W q 0 < δ. (37)"
+    },
+    {
+      "anchor_id": "EQ-0161",
+      "id": "EQ-161",
+      "page": 22,
+      "statement": "ψ q ( x ) := T W γ,q 0 ψ q 0 ( ρ X ( γ -1 ) x ) . (38)"
+    },
+    {
+      "anchor_id": "EQ-0162",
+      "id": "EQ-162",
+      "page": 22,
+      "statement": "T W η,q 0 ψ q 0 ( ρ X ( η -1 ) v ) = ψ q 0 ( v ) ,"
+    },
+    {
+      "anchor_id": "EQ-0163",
+      "id": "EQ-163",
+      "page": 22,
+      "statement": "F ( ρ X ( τ ) x ) τq = T W τγ,q 0 ψ q 0 ( ρ X ( γ -1 ) x ) = T W τ,q F ( x ) q ."
+    },
+    {
+      "anchor_id": "EQ-0164",
+      "id": "EQ-164",
+      "page": 22,
+      "statement": "f ( x ) q = T W γ,q 0 g q 0 ( ρ X ( γ -1 ) x ) ."
+    },
+    {
+      "anchor_id": "EQ-0165",
+      "id": "EQ-165",
+      "page": 22,
+      "statement": "‖ F ( x ) q -f ( x ) q ‖ W q ≤ ‖ T W γ,q 0 ‖ op δ ≤ Cδ = ε."
+    },
+    {
+      "anchor_id": "EQ-0166",
+      "id": "EQ-166",
+      "page": 22,
+      "statement": "B : X → ⊕ q ∈ P ˜ X q , ( Bx ) q = x, (39)"
+    },
+    {
+      "anchor_id": "EQ-0167",
+      "id": "EQ-167",
+      "page": 22,
+      "statement": "Z ( q,p ) := V p , T Z γ, ( q,p ) := T V γ,p : Z ( q,p ) → Z ( γq,γp ) ."
+    },
+    {
+      "anchor_id": "EQ-0168",
+      "id": "EQ-168",
+      "page": 22,
+      "statement": "( Ix ) q,p := { x p , q = p, 0 , q = p."
+    },
+    {
+      "anchor_id": "EQ-0169",
+      "id": "EQ-169",
+      "page": 22,
+      "statement": "( Mz ) q,p := ∑ r ∈ P ( q,r ) ∈ R z r,p ."
+    },
+    {
+      "anchor_id": "EQ-0170",
+      "id": "EQ-170",
+      "page": 22,
+      "statement": "K (( q, p ) , ( r, s )) = 0 unless s = p and ( q, r ) ∈ R,"
+    },
+    {
+      "anchor_id": "EQ-0171",
+      "id": "EQ-171",
+      "page": 22,
+      "statement": "( M D Ix ) q,p = a q,p x p ,"
+    },
+    {
+      "anchor_id": "EQ-0172",
+      "id": "EQ-172",
+      "page": 23,
+      "statement": "a γq,γp = a q,p ( γ ∈ G ) ."
+    },
+    {
+      "anchor_id": "EQ-0173",
+      "id": "EQ-173",
+      "page": 23,
+      "statement": "( Sz ) q,p := a -1 q,p z q,p"
+    },
+    {
+      "anchor_id": "EQ-0174",
+      "id": "EQ-174",
+      "page": 23,
+      "statement": "( Cz ) q = ( z q,p ) p ∈ P ∈ ⊕ p ∈ P V p = X."
+    },
+    {
+      "anchor_id": "EQ-0175",
+      "id": "EQ-175",
+      "page": 23,
+      "statement": "R ∗ p → q ( T V γ,q ) -1 = ( T V γ,p ) -1 R ∗ γp → γq ,"
+    },
+    {
+      "anchor_id": "EQ-0176",
+      "id": "EQ-176",
+      "page": 23,
+      "statement": "K ↑ ( q, p ) = T W α,q O B ↑ O R p O → q O ( T V α,p O ) -1 ."
+    },
+    {
+      "anchor_id": "EQ-0177",
+      "id": "EQ-177",
+      "page": 23,
+      "statement": "K ↑ ( γq, γp ) T V γ,p = T W γα,q O B ↑ O R p O → q O ( T V γα,p O ) -1 T V γ,p = T W γ,q K ↑ ( q, p ) ."
+    },
+    {
+      "anchor_id": "EQ-0178",
+      "id": "EQ-178",
+      "page": 23,
+      "statement": "B ↑ R γp → γq T V γ,p = B ↑ T V γ,q R p → q ,"
+    },
+    {
+      "anchor_id": "THM-0001",
+      "id": "THEOREM-001",
+      "page": 3,
+      "statement": "Theorem/Assumption:   Proposition 2.3 (Transporter law) . A linear map L : X → Y with kernels K ( q, p ) is order-equivariant if and only if"
+    },
+    {
+      "anchor_id": "THM-0002",
+      "id": "THEOREM-002",
+      "page": 3,
+      "statement": "Theorem/Assumption:   Proposition 2.4 (Orbit parametrization) . For each pairorbit O , choose"
+    },
+    {
+      "anchor_id": "THM-0003",
+      "id": "THEOREM-003",
+      "page": 3,
+      "statement": "Theorem/Assumption:   Corollary 2.5 (Permutation-only case) . If the input and output bundles are permutation-only, so that source fibers and target fibers in each site-orbit are canonically identified and all transports are identities under these identifications, then the stabilizer constraint is vacuous and, after the same canonical identifications, K ( q, p ) is constant on each pairorbit."
+    },
+    {
+      "anchor_id": "THM-0004",
+      "id": "THEOREM-004",
+      "page": 4,
+      "statement": "Theorem/Assumption:   Lemma 2.8 (Equivariance and branch realization) . The map (7) is H -equivariant. Moreover, it is realizable by equivariant affine maps and coordinatewise activations on hidden branch spaces whose H -action is by permutation of branches."
+    },
+    {
+      "anchor_id": "THM-0005",
+      "id": "THEOREM-005",
+      "page": 5,
+      "statement": "Theorem/Assumption:   Lemma 2.12 (Equivariance of pair summaries) . For all τ ∈ G ,"
+    },
+    {
+      "anchor_id": "THM-0006",
+      "id": "THEOREM-006",
+      "page": 5,
+      "statement": "Theorem/Assumption:   Proposition 2.13 (Pair-orbit aggregation is an OENN layer) . The map F in (12) is order-equivariant and is realizable as an OENN layer stack."
+    },
+    {
+      "anchor_id": "THM-0007",
+      "id": "THEOREM-007",
+      "page": 5,
+      "statement": "Theorem/Assumption:   Proposition 2.15 (Message-passing-compatible updates) . Every relation-message-passing OENN layer is an orderequivariant OENN stack. Conversely, any continuous update of the form (13) whose encoders are stabilizer-invariant and whose readouts are stabilizer-equivariant can be uniformly approximated on compact invariant sets by relationmessage-passing OENN layers with any continuous nonpolynomial activation σ ."
+    },
+    {
+      "anchor_id": "THM-0008",
+      "id": "THEOREM-008",
+      "page": 5,
+      "statement": "Theorem/Assumption:   Proposition 2.16 (Architecture hierarchy) . For every G -invariant relation R ⊆ P × P containing the diagonal and every activation σ used in the OENN layers,"
+    },
+    {
+      "anchor_id": "THM-0009",
+      "id": "THEOREM-009",
+      "page": 6,
+      "statement": "Theorem/Assumption:   Lemma 3.1 (Sitewise stabilizer equivariance) . Let K ⊆ X be G -invariant. If F ∈ C G ( K,Y ) , then for every q ∈ P and every η ∈ G q := Stab G ( q ) ,"
+    },
+    {
+      "anchor_id": "THM-0010",
+      "id": "THEOREM-010",
+      "page": 6,
+      "statement": "Theorem/Assumption:   Lemma 3.2 (Equivariant density for finite groups) . Let H be a finite group acting linearly on finite-dimensional real vector spaces U and V by T U and T V . Let K ⊂ U be compact and H -invariant, and let f : K → V be continuous and H -equivariant. If σ : R → R is continuous and non-polynomial, then for every norm ‖ · ‖ ∗ on V and every ε   0 there is an ordinary MLP Ψ : U → V with activation σ such that"
+    },
+    {
+      "anchor_id": "THM-0011",
+      "id": "THEOREM-011",
+      "page": 6,
+      "statement": "Theorem/Assumption:   Theorem 3.3 (Full OENN UAT) . Let ( P, ≤ ) be finite and let G be a finite group acting on P by order automorphisms. Let X = ⊕ p ∈ P V p and Y = ⊕ q ∈ P W q be G -equivariant bundles. Let K ⊂ X be compact and G -invariant, and let σ : R → R be continuous and non-polynomial. Then OENN full σ ( X,Y ) is dense in C G ( K,Y ) in the uniform norm. Equivalently, for every f ∈ C G ( K,Y ) and every ε   0 , there exists a full OENN F : X → Y such that"
+    },
+    {
+      "anchor_id": "THM-0012",
+      "id": "THEOREM-012",
+      "page": 6,
+      "statement": "Theorem/Assumption:   Corollary 3.4 (Permutation-only UAT) . Assume that the original input and output transports are identity maps between canonically identified fibers, so that G acts by block permutations. Then the linear part of OENN specializes to affine layers whose blocks and biases are tied on G -orbits. Ordinary sitewise pointwise layers reduce to shared MLPs on site-orbits, while stabilizer-equivariant readouts on auxiliary broadcast fibers are finite Reynolds averages over permutation representations. Consequently, Theorem 3.3 specializes to universal approximation of continuous G -"
+    },
+    {
+      "anchor_id": "THM-0013",
+      "id": "THEOREM-013",
+      "page": 6,
+      "statement": "Theorem/Assumption:   Theorem 3.5 (Diameter-sharp pair-state local universality) . Let R ⊆ P × P be a G -invariant relation containing the diagonal, and let Γ R and d R be as above."
+    },
+    {
+      "anchor_id": "THM-0014",
+      "id": "THEOREM-014",
+      "page": 7,
+      "statement": "Theorem/Assumption:   Corollary 3.6 (Pair-state cover-local OENN UAT) . Let R cov be the cover-local relation from Definition 2.11. If the undirected Hasse graph of P is connected, then OENN R cov -pair σ ( X,Y ) is dense in C G ( K,Y ) in the uniform norm."
+    },
+    {
+      "anchor_id": "THM-0015",
+      "id": "THEOREM-015",
+      "page": 7,
+      "statement": "Theorem/Assumption:   Theorem 3.5 is a universality theorem for the pair-state local completion. Ordinary message passing aggregates neighbor information without a persistent source label; pair-state propagation stores z q,p and therefore lets the readout at q access the contribution from each source p separately. Some mechanism of this kind (source labels, higher-order states, global attention, or a global broadcast) is unavoidable for worst-case approximation of arbitrary maps in C G ( K,Y ) ."
+    },
+    {
+      "anchor_id": "THM-0016",
+      "id": "THEOREM-016",
+      "page": 8,
+      "statement": "Theorem/Assumption:   Lemma 4.1 (Invariant fiber metrics and sheaf adjoints) . For every finite lifted action satisfying (20) , there exist inner products on all fibers V p for which every transport T V γ,p : V p → V γp is an isometry. With respect to any such invariant inner products, the adjoints of the restriction maps satisfy"
+    },
+    {
+      "anchor_id": "THM-0017",
+      "id": "THEOREM-017",
+      "page": 9,
+      "statement": "Theorem/Assumption:   Lemma 4.2 (Sheaf orbital transporter law) . The self, upward, and downward kernels in (22) , transported from the orbit representatives as in (6) and satisfying the stabilizer conditions above, satisfy the transporter law (4) . Hence (22) is order-equivariant."
+    },
+    {
+      "anchor_id": "THM-0018",
+      "id": "THEOREM-018",
+      "page": 14,
+      "statement": "Theorem/Assumption:   Theorem A.3 (CENN UAT) . Assume the standard CENN hypotheses above, with X and Y fi eld-type Meas -valued functors whose object spaces carry the topologies and norms used in the compact-open seminorms. Let α : R → R be continuous, non-polynomial, and globally Lipschitz. Then"
+    },
+    {
+      "anchor_id": "THM-0019",
+      "id": "THEOREM-019",
+      "page": 15,
+      "statement": "Theorem/Assumption:   Proposition A.4 (OENN equivariance as CENN naturality) . The assignment"
+    },
+    {
+      "anchor_id": "THM-0020",
+      "id": "THEOREM-020",
+      "page": 16,
+      "statement": "Theorem/Assumption:   Proposition A.5 (OENN primitives as finite CENN primitives) . With the primitivewise typing convention above, each completed OENN primitive, viewed through its site-output family after assembly, is represented by finite point-base CENN primitives over action groupoids of the finite G -sets indexing that primitive and its auxiliary branch states. Thus the primitive-level comparison uses action groupoids G ⋉ S for auxiliary finite G -sets S that occur in the OENN stack, rather than forcing every hidden primitive to live literally over the single object set P ."
+    },
+    {
+      "anchor_id": "THM-0021",
+      "id": "THEOREM-021",
+      "page": 17,
+      "statement": "Theorem/Assumption:   Lemma A.6 (Finite CENN UAT layers are OENN-realizable) . Let A = G ⋉ P be the finite action groupoid above, with point bases and finite-dimensional Borel feature spaces. The finite CENN approximants needed in the CENN UAT proof over A can be chosen to be realizable by full OENN primitives after allowing the auxiliary finite G -sets already permitted in Definition 2.10. Consequently, if Ψ is one of these chosen finite action-groupoid CENN approximants from Theorem A.3, then the assembled map"
+    },
+    {
+      "anchor_id": "THM-0022",
+      "id": "THEOREM-022",
+      "page": 17,
+      "statement": "Theorem/Assumption:   Corollary A.7 (CENN UAT and OENN UAT) . For the action groupoid A = G ⋉ P and the global-input/site- output functors X , Y above, write"
+    }
+  ],
+  "counts": {
+    "claims": 9,
+    "equations": 178,
+    "theorems": 22
+  },
+  "schema_version": 1,
+  "submission_id": "34584"
+}

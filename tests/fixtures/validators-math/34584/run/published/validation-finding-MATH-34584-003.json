@@ -1,0 +1,19 @@
+{
+  "artifact_refs": [
+    "phases/symbolic-validation/artifacts/transporter-c2-smt.json"
+  ],
+  "claim_id": "EQ-007",
+  "confidence": 0.91,
+  "confirmation_paths": [],
+  "finding_id": "MATH-34584-003",
+  "limitations": "This is an exact finite two-site specialization, not a proof of Proposition 2.3 for arbitrary bundles.",
+  "method": "Z3 negated-implication check for the two-site permutation-only transporter constraint",
+  "observation": "Z3 found the negated implication unsatisfiable under the declared constraints.",
+  "paper_anchors": [
+    "EQ-0007",
+    "THM-0001"
+  ],
+  "severity_candidate": "none",
+  "status": "verified_exactly",
+  "validator_type": "exact_math"
+}

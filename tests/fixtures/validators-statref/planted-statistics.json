@@ -1,0 +1,12 @@
+{
+  "claims": [{"claim_id":"CLAIM-008","anchor":"TXT-0264","breadth":["datasets","hardware","distribution_shift"]}],
+  "runs": [
+    {"seed":7,"anchor":"TXT-0264","train_sample_ids":["subject-1","subject-2"],"validation_sample_ids":["subject-2"],"test_sample_ids":["subject-3"],"robustness_axes":["seeds"],"effect_size":0.8,"p_value":0.02},
+    {"seed":7,"anchor":"TXT-0264","train_sample_ids":["subject-1","subject-2"],"validation_sample_ids":["subject-4"],"test_sample_ids":["subject-3"],"robustness_axes":["seeds"]}
+  ],
+  "proposed_method":{"compute_budget":100,"tuning_trials":50,"split_id":"split-a","metric_definition":"macro-f1"},
+  "baselines":[{"name":"TemporalCNN","anchor":"TAB-0004","compute_budget":20,"tuning_trials":5,"split_id":"split-b","metric_definition":"accuracy"}],
+  "evidence_scope":["datasets"],
+  "multiple_comparisons":{"count":8,"correction":null},
+  "metric_definitions":{"macro-f1":"unweighted mean per-class F1"}
+}

@@ -1,0 +1,12 @@
+{
+  "persona_version": 1,
+  "reviewer_id": "reviewer-r2",
+  "primary_expertise": ["machine learning evaluation"],
+  "secondary_expertise": ["reproducibility"],
+  "familiarity": {"fixture domain": "medium"},
+  "likely_deep_dive_areas": ["claim support"],
+  "known_blind_spots": ["specialized hardware"],
+  "confidence_policy": "Lower confidence when evidence is missing",
+  "decision_bias": "neutral",
+  "communication_style": "concise and evidence-first"
+}

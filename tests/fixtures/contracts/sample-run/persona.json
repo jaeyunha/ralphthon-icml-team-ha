@@ -1,0 +1,27 @@
+{
+  "reviewer_id": "R2",
+  "primary_expertise": [
+    "equivariant deep learning",
+    "graph neural networks"
+  ],
+  "secondary_expertise": [
+    "category-theoretic machine learning"
+  ],
+  "familiarity": {
+    "core_domain": "high",
+    "mathematical_formalism": "very_high",
+    "empirical_benchmarks": "medium",
+    "systems_scalability": "low"
+  },
+  "likely_deep_dive_areas": [
+    "formal definitions",
+    "theorem correctness",
+    "relationship to sheaf neural networks"
+  ],
+  "known_blind_spots": [
+    "large-scale distributed systems"
+  ],
+  "confidence_policy": "Lower confidence outside primary expertise.",
+  "decision_bias": "neutral",
+  "communication_style": "specific, professional, evidence-first"
+}

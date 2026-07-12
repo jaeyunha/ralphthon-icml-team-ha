@@ -1,0 +1,25 @@
+{
+  "assets": [],
+  "extractor": {
+    "name": "docling",
+    "version": "2.112.0"
+  },
+  "parse_verification": {
+    "report_path": "parse-verification-report.json",
+    "status": "passed",
+    "unresolved_anchor_count": 0
+  },
+  "schema_version": "1.0",
+  "source": {
+    "pdf_path": "paper.pdf",
+    "pdf_sha256": "sha256:too-short"
+  },
+  "summary": {
+    "anchor_count": 0,
+    "asset_count": 0,
+    "mean_confidence": 0.99,
+    "minimum_confidence": 0.99
+  },
+  "suspicious_instruction_evidence": [],
+  "uncertain_regions": []
+}

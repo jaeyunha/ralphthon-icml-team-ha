@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "reviewer_id": "reviewer-r3",
+  "official_review_version": 1,
+  "rebuttal_version": 1,
+  "concern_resolutions": [
+    {
+      "concern_id": "reviewer-r3-W1",
+      "original_severity": "major",
+      "status": "partially_resolved",
+      "original_resolution_standard": "Identify theorem or architecture content that depends essentially on the poset order and compare it with generic finite-group equivariant UATs, or narrow the claims.",
+      "rebuttal_evidence": {
+        "citation": "rebuttal-r3.json#/responses/0",
+        "response_label": "planned_revision",
+        "finding": "The authors agree that Definition 2.2 is finite-group equivariance on the total bundle, acknowledge that the full UAT uses global broadcast and lacks a verified theorem-level separation from generic finite-group equivariant UATs, and commit to narrowing the order-specific contribution to structured/local architectures, diameter-depth compilation, and sheaf constructions."
+      },
+      "paper_evidence_refs": [
+        "EQ-0005",
+        "TXT-0019",
+        "TXT-0020",
+        "TXT-0061",
+        "THM-0011",
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0149",
+        "TXT-0258",
+        "TXT-0259"
+      ],
+      "assessment": "The response meets the originally offered narrowing route and does not dispute the concern. It materially improves claim calibration by separating the finite-group equivariance equation from the order-dependent locality and sheaf structure. It does not establish the broader novelty originally claimed.",
+      "remaining_gap": "The promised manuscript narrowing is not shown, and no theorem-by-theorem closest-work comparison or verified novelty separation is supplied. The originality uncertainty therefore remains.",
+      "score_effect": "Together with the clearer CENN boundary in W2, this supports presentation increasing from 2 to 3. Originality remains 2, significance remains 3, and overall remains 3 because the response explicitly supplies no new theorem-level novelty evidence."
+    },
+    {
+      "concern_id": "reviewer-r3-W2",
+      "original_severity": "major",
+      "status": "partially_resolved",
+      "original_resolution_standard": "Provide the complete CENN primitives, assumptions, and proof needed for the broad claim, or substantially narrow the wording and clearly mark the general CENN results as imported background.",
+      "rebuttal_evidence": {
+        "citation": "rebuttal-r3.json#/responses/1",
+        "response_label": "planned_revision",
+        "finding": "The authors acknowledge that Definition A.2 and Theorem A.3 are imported and not self-contained, distinguish them from the finite action-groupoid/OENN results developed in the submission, and commit to narrowing the general-form wording."
+      },
+      "paper_evidence_refs": [
+        "TXT-0149",
+        "TXT-0192",
+        "TXT-0193",
+        "TXT-0195",
+        "THM-0018",
+        "THM-0019",
+        "THM-0021",
+        "TXT-0249",
+        "TXT-0250",
+        "TXT-0252"
+      ],
+      "assessment": "The response follows the original narrowing option and identifies a concrete dependency boundary between imported general CENN material and the submitted finite OENN/action-groupoid development. This makes the intended contribution substantially more assessable, but it is a revision commitment rather than a self-contained replacement proof or revised manuscript passage.",
+      "remaining_gap": "The broad CENN UAT remains non-self-contained and cannot receive independent technical credit here; the final manuscript must actually mark the imported results and remove the broader general-form implication.",
+      "score_effect": "This is the main basis for presentation increasing from 2 to 3, because the response now states a disciplined contribution boundary. Soundness remains 3 rather than increasing because no new proof or complete primitive definition is supplied."
+    },
+    {
+      "concern_id": "reviewer-r3-W3",
+      "original_severity": "major",
+      "status": "partially_resolved",
+      "original_resolution_standard": "Do not interpret the reported performance gap without a subject-disjoint fixed split, identical preprocessing and metrics, matched or sensitivity-tested compute and tuning budgets, and complete run-level protocol disclosure; otherwise remove or sharply narrow the affected claims.",
+      "rebuttal_evidence": {
+        "citation": "rebuttal-r3.json#/responses/2",
+        "response_label": "limitation_acknowledged",
+        "finding": "The authors accept that the submitted EMG-IMU evidence does not support substantial outperformance or improved generalization, cite the protocol mismatch and subject overlap, state that no corrected result is available, and commit to removing or sharply qualifying the claims."
+      },
+      "paper_evidence_refs": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281"
+      ],
+      "validator_evidence_refs": [
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001"
+      ],
+      "assessment": "The response does not repair the experiment, but it takes the alternative remedy already specified in the original review: withdraw or sharply narrow CLAIM-008 and CLAIM-009. The unsupported empirical claims therefore receive no positive evidentiary weight, while the authors' concession prevents continued reliance on the invalid comparison.",
+      "remaining_gap": "No subject-disjoint split manifest, protocol-matched rerun, budget-parity analysis, or corrected result is provided, and the revised claim text is not shown.",
+      "score_effect": "Soundness remains 3: the response improves claim-evidence alignment by withdrawing the interpretation, but adds no valid empirical support that would justify an increase. Overall remains 3 because the case cannot rely on the reported performance advantage."
+    },
+    {
+      "concern_id": "reviewer-r3-W4",
+      "original_severity": "minor",
+      "status": "partially_resolved",
+      "original_resolution_standard": "Provide repeated independent runs with per-run values and uncertainty, declare a primary comparison or justify multiplicity correction, and narrow unsupported robustness or generalization scope.",
+      "rebuttal_evidence": {
+        "citation": "rebuttal-r3.json#/responses/3",
+        "response_label": "limitation_acknowledged",
+        "finding": "The authors acknowledge the missing seeds, uncertainty, multiplicity control, and validation breadth, state that no such new result exists, and commit to removing or sharply qualifying the generalization claim."
+      },
+      "paper_evidence_refs": [
+        "TXT-0264",
+        "TXT-0281"
+      ],
+      "validator_evidence_refs": [
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "assessment": "Claim narrowing addresses the original scope requirement, but none of the requested repeated-run or statistical evidence is supplied. The empirical result can remain only as a narrowly described single-study observation, not evidence of generalization.",
+      "remaining_gap": "Multiple independent seeds, run-level values, uncertainty intervals, multiplicity handling, and distribution-shift or hardware-robustness evidence remain absent; revised wording is not shown.",
+      "score_effect": "Soundness remains 3 and significance remains 3. The concession avoids further overclaiming, but it does not strengthen the empirical contribution or justify a higher overall recommendation."
+    },
+    {
+      "concern_id": "reviewer-r3-W5",
+      "original_severity": "minor",
+      "status": "unresolved",
+      "original_resolution_standard": "Provide complexity analysis and measured comparisons of memory, parameters, runtime, and accuracy against ordinary and higher-order message passing to establish when the existential construction is practically usable.",
+      "rebuttal_evidence": {
+        "citation": "rebuttal-r3.json#/responses/4",
+        "response_label": "limitation_acknowledged",
+        "finding": "The authors restate the source-indexed hidden-state width and diameter-scale propagation cost, acknowledge that no parameter, runtime, sample-complexity, optimization, stability, or implementation study is available, and commit only to clarifying that universality is not an efficiency result."
+      },
+      "paper_evidence_refs": [
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0106",
+        "TXT-0332",
+        "TXT-0345",
+        "TXT-0349"
+      ],
+      "assessment": "The response accurately bounds the theorem and avoids claiming practical efficiency, but it supplies none of the analysis or measurements requested by the original concern. The limitation therefore remains rather than being invalidated by the response.",
+      "remaining_gap": "Asymptotic parameter and memory costs beyond the stated hidden width, runtime and construction costs, sample or optimization behavior, and measured comparisons remain unavailable.",
+      "score_effect": "Significance remains 3 rather than increasing: the existential expressivity result remains useful, but practical and sample efficiency are unestablished. This unresolved minor limitation does not independently lower soundness or overall below their official-review values."
+    }
+  ],
+  "scores": {
+    "soundness": 3,
+    "presentation": 3,
+    "significance": 3,
+    "originality": 2,
+    "overall": 3
+  },
+  "confidence": 3,
+  "score_change_rationale": "Score history appended from official review v1: soundness 3 -> 3 (unchanged) because the core finite OENN theory was not rebutted, and the authors withdraw unsupported empirical interpretations, but no corrected experiment, new proof, or complete CENN formalization warrants a 4. Presentation 2 -> 3 (changed) because the response explicitly separates finite-group equivariance from order-dependent structure and distinguishes imported general CENN results from the finite OENN/action-groupoid contribution; 4 is not warranted because the manuscript revisions and self-contained CENN details are absent. Significance 3 -> 3 (unchanged) because the structured/local and sheaf results retain value, while practical efficiency and robust empirical support remain unavailable. Originality 2 -> 2 (unchanged) because the authors explicitly cannot provide a verified theorem-level separation from generic finite-group equivariant UATs; narrowing avoids overclaiming but is not new novelty evidence. Overall 3 -> 3 (unchanged) because the rebuttal improves scope discipline and presentation but does not resolve the decisive originality uncertainty or add valid empirical evidence, so the case remains marginally negative. Confidence 3 -> 3 (unchanged) because the response is candid and the cited paper anchors are inspectable, but the closest-work novelty comparison, corrected experimental provenance, and full imported CENN formalism remain unavailable, consistent with the frozen persona's medium theory familiarity and evidence-first confidence policy.",
+  "new_questions": [],
+  "summary": "The rebuttal candidly accepts the central scope and evidence concerns. It commits to describing OENN equivariance as finite-group equivariance with order-dependent structured/local and sheaf machinery, separating imported general CENN results from the finite action-groupoid/OENN development, withdrawing or sharply narrowing the unsupported EMG-IMU outperformance and generalization claims, and stating that the universality construction is existential rather than efficient. Against the original standards, W1-W4 are partially resolved through precise narrowing or claim withdrawal, while W5 remains unresolved because no complexity or practical evaluation is supplied. No concern is invalidated by the response, and no new decision-relevant question arises from it.",
+  "evidence_refs": [
+    "EQ-0005",
+    "TXT-0019",
+    "TXT-0020",
+    "TXT-0061",
+    "THM-0011",
+    "THM-0013",
+    "TXT-0071",
+    "TXT-0072",
+    "TXT-0149",
+    "TXT-0258",
+    "TXT-0259",
+    "TXT-0192",
+    "TXT-0193",
+    "TXT-0195",
+    "THM-0018",
+    "THM-0019",
+    "THM-0021",
+    "TXT-0249",
+    "TXT-0250",
+    "TXT-0252",
+    "TXT-0264",
+    "TAB-0004",
+    "TXT-0281",
+    "STAT-BASELINE-001",
+    "STAT-LEAKAGE-001",
+    "STAT-SEEDS-001",
+    "STAT-UNCERTAINTY-001",
+    "STAT-MULTICOMP-001",
+    "STAT-BREADTH-001",
+    "TXT-0106",
+    "TXT-0332",
+    "TXT-0345",
+    "TXT-0349"
+  ]
+}

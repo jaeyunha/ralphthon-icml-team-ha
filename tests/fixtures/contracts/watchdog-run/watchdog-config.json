@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "run_id": "watchdog-fixture-run",
+  "initial_run_state": "PRELIMINARY_REVIEW",
+  "runner": "engine/loops/agent-loop.sh",
+  "poll_seconds": 0.1,
+  "safety": {
+    "max_wall_clock_seconds": 30,
+    "max_restarts_per_role": 2,
+    "max_discussion_rounds": 1,
+    "no_progress_threshold": 3
+  },
+  "phase_runs": [
+    {
+      "agent_id": "reviewer-r2",
+      "role": "reviewer",
+      "phase": "initial-review",
+      "run_states": ["PRELIMINARY_REVIEW"],
+      "gates": ["persona_frozen", "paper_frozen"],
+      "subscriptions": [],
+      "requires_artifact": true
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "equivalent": true,
+  "actual_gradient": ["2*x*y", "x**2"],
+  "expected_gradient": ["2*x*y", "x**2"],
+  "simplified_differences": ["0", "0"],
+  "tool": "sympy-1.14.0"
+}

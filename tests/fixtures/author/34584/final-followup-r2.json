@@ -1,0 +1,18 @@
+{
+  "version":1,
+  "reviewer_id":"reviewer-r2",
+  "reviewer_followup_version":1,
+  "prior_rebuttal_version":1,
+  "responses":[
+    {
+      "question_id":"reviewer-r2-FQ1",
+      "response_label":"planned_revision",
+      "response":"Yes. We will revise the empirical discussion to state that Table 2 supports only the reported EMG-IMU setup and does not establish robustness across seeds, matched-capacity baselines, or distribution shifts.",
+      "evidence_refs":["TXT-0264","TAB-0004","TXT-0281"]
+    }
+  ],
+  "evidence_refs":["TXT-0264","TAB-0004","TXT-0281","rebuttal:reviewer-r2-W1"],
+  "commitments_carried":["will:narrow the empirical generalization claim to the reported setup","will:clarify Table 2 is a single reported setup"],
+  "limitations_carried":["The submission does not establish seed stability, matched-capacity baseline fairness, or distribution-shift robustness for the reported empirical gain."],
+  "published_at":"2026-07-11T16:00:00Z"
+}

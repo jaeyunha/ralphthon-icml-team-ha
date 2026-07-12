@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "reviewer_id": "R2",
+  "summary": "The paper proposes adaptive certificates for stochastic optimization under covariate shift.",
+  "strengths": [
+    {
+      "text": "The problem is important, the certificate is operational, and the evaluation covers synthetic and image-classification shifts.",
+      "anchors": ["page:1 abstract", "page:7 section:4"]
+    }
+  ],
+  "weaknesses": [
+    {
+      "id": "R2-W1",
+      "text": "The original theorem statement omitted the bounded density-ratio assumption used in the concentration step.",
+      "severity": "major",
+      "affected_claims": ["PROPOSITION-2"],
+      "anchors": ["page:6 proposition:2", "page:13 appendix:B.2"]
+    }
+  ],
+  "scores": {
+    "soundness": 3,
+    "presentation": 3,
+    "significance": 4,
+    "originality": 4,
+    "overall": 4
+  },
+  "key_questions": [
+    {
+      "id": "R2-Q1",
+      "question": "Can the authors state explicitly where the bounded density-ratio assumption enters Proposition 2?",
+      "possible_score_impact": "Resolving the assumption mismatch could raise the overall recommendation from 4 to 5."
+    }
+  ],
+  "limitations": "The guarantee does not cover unbounded density ratios, and the experiments do not test adversarial shifts.",
+  "confidence": 4,
+  "ethical_concerns": [],
+  "evidence_refs": ["EVID-PAPER-PROP2", "EVID-MATH-12", "EVID-CODE-07"]
+}

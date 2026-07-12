@@ -1,0 +1,582 @@
+{
+  "coverage_notes": [
+    "Dossier THEOREM-015 is explanatory prose for Theorem 3.5 and is intentionally deduplicated into THEOREM-013.",
+    "Empirical targets EXP-002 and EXP-004 jointly cover dossier CLAIM-008 and CLAIM-009 at the same anchors without duplicate task records.",
+    "Every reviewer retains full-paper responsibility; deep-audit ownership identifies additional accountability rather than exclusive scope."
+  ],
+  "deep_audit_assignments": [
+    {
+      "also_reviewed_by": [
+        "reviewer-r2"
+      ],
+      "description": "Audit the complete theorem at THM-0001 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r1"
+      ],
+      "target_id": "THEOREM-001",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r2"
+      ],
+      "description": "Audit the complete theorem at THM-0002 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r1"
+      ],
+      "target_id": "THEOREM-002",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r2"
+      ],
+      "description": "Audit the complete theorem at THM-0003 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r1"
+      ],
+      "target_id": "THEOREM-003",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r2"
+      ],
+      "description": "Audit the complete theorem at THM-0004 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r1"
+      ],
+      "target_id": "THEOREM-004",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r1"
+      ],
+      "description": "Audit the complete theorem at THM-0005 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r2"
+      ],
+      "target_id": "THEOREM-005",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r1"
+      ],
+      "description": "Audit the complete theorem at THM-0006 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r2"
+      ],
+      "target_id": "THEOREM-006",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r1"
+      ],
+      "description": "Audit the complete theorem at THM-0007 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r2"
+      ],
+      "target_id": "THEOREM-007",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r2"
+      ],
+      "description": "Audit the complete theorem at THM-0008 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r1"
+      ],
+      "target_id": "THEOREM-008",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r2"
+      ],
+      "description": "Audit the complete theorem at THM-0009 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r1"
+      ],
+      "target_id": "THEOREM-009",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r2"
+      ],
+      "description": "Audit the complete theorem at THM-0010 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r1"
+      ],
+      "target_id": "THEOREM-010",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r1",
+        "reviewer-r3"
+      ],
+      "description": "Audit the complete theorem at THM-0011 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r2"
+      ],
+      "target_id": "THEOREM-011",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r1"
+      ],
+      "description": "Audit the complete theorem at THM-0012 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r2"
+      ],
+      "target_id": "THEOREM-012",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r2",
+        "reviewer-r3"
+      ],
+      "description": "Audit the complete theorem at THM-0013 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r1"
+      ],
+      "target_id": "THEOREM-013",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r1"
+      ],
+      "description": "Audit the complete theorem at THM-0014 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r2"
+      ],
+      "target_id": "THEOREM-014",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r1"
+      ],
+      "description": "Audit the complete theorem at THM-0016 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r2"
+      ],
+      "target_id": "THEOREM-016",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r2"
+      ],
+      "description": "Audit the complete theorem at THM-0017 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r1"
+      ],
+      "target_id": "THEOREM-017",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r2",
+        "reviewer-r3"
+      ],
+      "description": "Audit the complete theorem at THM-0018 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r1"
+      ],
+      "target_id": "THEOREM-018",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r1"
+      ],
+      "description": "Audit the complete theorem at THM-0019 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r2"
+      ],
+      "target_id": "THEOREM-019",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r1"
+      ],
+      "description": "Audit the complete theorem at THM-0020 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r2"
+      ],
+      "target_id": "THEOREM-020",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r2"
+      ],
+      "description": "Audit the complete theorem at THM-0021 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r1"
+      ],
+      "target_id": "THEOREM-021",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r1",
+        "reviewer-r3"
+      ],
+      "description": "Audit the complete theorem at THM-0022 in the frozen paper: verify all assumptions, quantifiers, conclusions, dependencies, and proof steps rather than relying on the dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r2"
+      ],
+      "target_id": "THEOREM-022",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r1"
+      ],
+      "description": "Independently classify dossier item EXP-001 at TXT-0006 as empirical evidence, background, or related work and record the rationale.",
+      "primary_reviewers": [
+        "reviewer-r2"
+      ],
+      "target_id": "EXP-001",
+      "target_type": "classification_correction"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r3"
+      ],
+      "description": "Audit the empirical evidence at TXT-0264: dataset construction, baselines, uncertainty, ablations, and support for the stated claim.",
+      "primary_reviewers": [
+        "reviewer-r4"
+      ],
+      "target_id": "EXP-002",
+      "target_type": "empirical_evaluation"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r3"
+      ],
+      "description": "Audit the empirical evidence at TXT-0270: dataset construction, baselines, uncertainty, ablations, and support for the stated claim. Require transformation-specific interventions for pose, temporal shift, electrode reindexing, and gain drift.",
+      "primary_reviewers": [
+        "reviewer-r4"
+      ],
+      "target_id": "EXP-003",
+      "target_type": "empirical_evaluation"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r4"
+      ],
+      "description": "Audit the empirical evidence at TXT-0281: dataset construction, baselines, uncertainty, ablations, and support for the stated claim. Require transformation-specific interventions for pose, temporal shift, electrode reindexing, and gain drift.",
+      "primary_reviewers": [
+        "reviewer-r3"
+      ],
+      "target_id": "EXP-004",
+      "target_type": "empirical_evaluation"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r1"
+      ],
+      "description": "Audit the complete CLAIM-001 at TXT-0001 in the frozen paper for scope, support, assumptions, and contradictions; do not rely on a truncated dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r3"
+      ],
+      "target_id": "CLAIM-AUDIT-CLAIM-001",
+      "target_type": "whole_paper_claim_audit"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r2"
+      ],
+      "description": "Audit the complete CLAIM-002 at TXT-0001 in the frozen paper for scope, support, assumptions, and contradictions; do not rely on a truncated dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r1"
+      ],
+      "target_id": "CLAIM-AUDIT-CLAIM-002",
+      "target_type": "categorical_generalization"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r1"
+      ],
+      "description": "Audit the complete CLAIM-003 at TXT-0002 in the frozen paper for scope, support, assumptions, and contradictions; do not rely on a truncated dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r2"
+      ],
+      "target_id": "CLAIM-AUDIT-CLAIM-003",
+      "target_type": "closest_literature"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r1"
+      ],
+      "description": "Audit the complete CLAIM-004 at TXT-0005 in the frozen paper for scope, support, assumptions, and contradictions; do not rely on a truncated dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r2"
+      ],
+      "target_id": "CLAIM-AUDIT-CLAIM-004",
+      "target_type": "closest_literature"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r2"
+      ],
+      "description": "Audit the complete CLAIM-005 at TXT-0009 in the frozen paper for scope, support, assumptions, and contradictions; do not rely on a truncated dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r1"
+      ],
+      "target_id": "CLAIM-AUDIT-CLAIM-005",
+      "target_type": "mathematical_theory"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r2"
+      ],
+      "description": "Audit the complete CLAIM-006 at TXT-0109 in the frozen paper for scope, support, assumptions, and contradictions; do not rely on a truncated dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r1"
+      ],
+      "target_id": "CLAIM-AUDIT-CLAIM-006",
+      "target_type": "categorical_generalization"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r1"
+      ],
+      "description": "Audit the complete CLAIM-007 at TXT-0149 in the frozen paper for scope, support, assumptions, and contradictions; do not rely on a truncated dossier excerpt.",
+      "primary_reviewers": [
+        "reviewer-r2"
+      ],
+      "target_id": "CLAIM-AUDIT-CLAIM-007",
+      "target_type": "categorical_generalization"
+    },
+    {
+      "also_reviewed_by": [],
+      "description": "Jointly verify that claimed pose, temporal-shift, electrode-reindexing, and gain invariances are formally specified, implemented, and tested with transformation-specific interventions.",
+      "primary_reviewers": [
+        "reviewer-r2",
+        "reviewer-r3",
+        "reviewer-r4"
+      ],
+      "target_id": "INVARIANCE-IMPLEMENTATION-TRACE",
+      "target_type": "implementation_invariance_trace"
+    },
+    {
+      "also_reviewed_by": [
+        "reviewer-r2"
+      ],
+      "description": "Closest literature and novelty positioning",
+      "primary_reviewers": [
+        "reviewer-r1"
+      ],
+      "target_id": "RELATED-WORK",
+      "target_type": "closest_literature"
+    },
+    {
+      "also_reviewed_by": [],
+      "description": "Implementation clarity and reproducibility",
+      "primary_reviewers": [
+        "reviewer-r4"
+      ],
+      "target_id": "REPRODUCIBILITY",
+      "target_type": "reproducibility"
+    }
+  ],
+  "domain_classification": [
+    {
+      "domain": "equivariant_and_geometric_deep_learning",
+      "evidence_terms": [
+        "equivariant",
+        "symmetry",
+        "geometric deep learning"
+      ]
+    },
+    {
+      "domain": "category_and_sheaf_theory",
+      "evidence_terms": [
+        "category",
+        "sheaf",
+        "poset"
+      ]
+    },
+    {
+      "domain": "universal_approximation_theory",
+      "evidence_terms": [
+        "universal approximation",
+        "theorem",
+        "proof"
+      ]
+    },
+    {
+      "domain": "graph_and_topological_learning",
+      "evidence_terms": [
+        "graph neural",
+        "message passing",
+        "topological"
+      ]
+    },
+    {
+      "domain": "multimodal_empirical_evaluation",
+      "evidence_terms": [
+        "experiment",
+        "benchmark",
+        "emg",
+        "imu"
+      ]
+    }
+  ],
+  "gate": {
+    "judge_check": {
+      "command": "codex exec --dangerously-bypass-approvals-and-sandbox -",
+      "passed": true,
+      "reasons": [
+        "The four personas are complementary rather than semantic duplicates: architecture and literature, formal theory, empirical methodology, and reproducibility each have distinct ownership.",
+        "The panel covers the identified mathematical, categorical, geometric, empirical, and implementation domains, with cross-review where claims span domains.",
+        "Potential omissions are explicitly reconciled: THEOREM-015 is deduplicated into THEOREM-013, and CLAIM-008 and CLAIM-009 are covered through empirical targets.",
+        "The joint invariance trace combines formal, empirical, and implementation reviewers, mitigating individual blind spots.",
+        "No persona encodes a predetermined verdict or generalized harshness; confidence policies are evidence-dependent and decision biases are neutral.",
+        "Transformation-specific intervention requirements are appropriately tied to testing the paper's stated invariance claims rather than presupposing failure."
+      ],
+      "status": "completed"
+    },
+    "panel_hash": "sha256:89dc9e52f1ec3b0bf436a0def2ded58c1223586501ec2f06cd3c74c748e0669c",
+    "passed": true,
+    "reviewer_count": 4,
+    "violations": []
+  },
+  "paper_id": "34584",
+  "personas": [
+    {
+      "communication_style": "comparative, synthesis-oriented, professional, and evidence-first",
+      "confidence_policy": "Use high confidence for literature and architecture synthesis only after checking primary sources; be conservative on systems claims.",
+      "decision_bias": "neutral",
+      "familiarity": {
+        "core_domain": "very_high",
+        "empirical_benchmarks": "medium",
+        "mathematical_formalism": "high",
+        "systems_scalability": "low"
+      },
+      "known_blind_spots": [
+        "low-level systems optimization"
+      ],
+      "likely_deep_dive_areas": [
+        "relationship to graph and sheaf neural networks",
+        "novelty against equivariant architectures",
+        "full-paper claim map"
+      ],
+      "persona_version": 1,
+      "primary_expertise": [
+        "geometric deep learning",
+        "graph and sheaf neural networks"
+      ],
+      "reviewer_id": "reviewer-r1",
+      "secondary_expertise": [
+        "categorical equivariance",
+        "representation learning",
+        "closest-literature analysis"
+      ]
+    },
+    {
+      "communication_style": "formal, assumption-explicit, professional, and evidence-first",
+      "confidence_policy": "Confidence tracks explicit verification of definitions, quantifiers, and proof dependencies; lower it for empirical generalization.",
+      "decision_bias": "neutral",
+      "familiarity": {
+        "core_domain": "high",
+        "empirical_benchmarks": "medium",
+        "mathematical_formalism": "very_high",
+        "systems_scalability": "low"
+      },
+      "known_blind_spots": [
+        "large-scale production deployment"
+      ],
+      "likely_deep_dive_areas": [
+        "transporter-law assumptions",
+        "universal approximation proofs",
+        "formal definitions and quantifiers"
+      ],
+      "persona_version": 1,
+      "primary_expertise": [
+        "equivariant representation theory",
+        "category and poset mathematics"
+      ],
+      "reviewer_id": "reviewer-r2",
+      "secondary_expertise": [
+        "universal approximation theory",
+        "functional analysis",
+        "closest literature for categorical learning"
+      ]
+    },
+    {
+      "communication_style": "experiment-focused, quantitative, professional, and evidence-first",
+      "confidence_policy": "Use high confidence only when dataset construction, splits, baselines, uncertainty, and repeated-run evidence are inspectable.",
+      "decision_bias": "neutral",
+      "familiarity": {
+        "core_domain": "medium",
+        "empirical_benchmarks": "very_high",
+        "mathematical_formalism": "medium",
+        "systems_scalability": "medium"
+      },
+      "known_blind_spots": [
+        "advanced category-theoretic formalism"
+      ],
+      "likely_deep_dive_areas": [
+        "baseline fairness",
+        "data splits and uncertainty",
+        "ablation and robustness coverage"
+      ],
+      "persona_version": 1,
+      "primary_expertise": [
+        "empirical machine-learning methodology",
+        "wearable biosignal and EMG-IMU evaluation",
+        "multimodal time-series evaluation"
+      ],
+      "reviewer_id": "reviewer-r3",
+      "secondary_expertise": [
+        "statistical validation",
+        "benchmark design",
+        "counterexample-based theorem stress testing"
+      ]
+    },
+    {
+      "communication_style": "checklist-driven, reproducibility-focused, professional, and evidence-first",
+      "confidence_policy": "Confidence depends on executable artifacts and traceability; report lower confidence when code or environment evidence is unavailable.",
+      "decision_bias": "neutral",
+      "familiarity": {
+        "core_domain": "medium",
+        "empirical_benchmarks": "high",
+        "mathematical_formalism": "low",
+        "systems_scalability": "very_high"
+      },
+      "known_blind_spots": [
+        "proof-theoretic subtleties"
+      ],
+      "likely_deep_dive_areas": [
+        "implementation-to-equation traceability",
+        "artifact completeness",
+        "computational cost and reproducibility"
+      ],
+      "persona_version": 1,
+      "primary_expertise": [
+        "machine-learning reproducibility",
+        "research software engineering"
+      ],
+      "reviewer_id": "reviewer-r4",
+      "secondary_expertise": [
+        "experimental reporting",
+        "scientific artifact evaluation"
+      ]
+    }
+  ],
+  "schema_version": 1
+}

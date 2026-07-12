@@ -1,0 +1,7 @@
+{
+  "submission_id":"planted-references",
+  "references":[
+    {"id":"REF-REAL","anchor_id":"TXT-0111","page":10,"statement":"Cohen, T. S. and Welling, M. Group equivariant convolutional networks. ICML, 2016."},
+    {"id":"REF-FAKE","anchor_id":"TXT-0133","page":11,"statement":"Fabricator, F. Universal Category Networks for Everything. Journal of Invented Results, 2024."}
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "profile_id": "v2",
+  "reviewer_id": "reviewer-r1",
+  "official_review_version": 2,
+  "rebuttal_version": 1,
+  "concern_resolutions": [
+    {
+      "concern_id": "reviewer-r1-W1",
+      "status": "unresolved",
+      "response_evidence": ["rebuttal#/responses/0"],
+      "assessment": "The response does not supply the requested analysis.",
+      "remaining_gap": "The original evidence gap remains.",
+      "score_effect": "Scores remain unchanged.",
+      "no_new_question_reason": "The original request already precisely identifies the needed evidence."
+    }
+  ],
+  "scores": {"soundness": 3, "presentation": 3, "significance": 3, "originality": 3, "overall": 3},
+  "confidence": 4,
+  "score_change_rationale": "No new evidence supports a score change.",
+  "new_questions": [],
+  "summary": "The original concern remains unresolved without a redundant new question.",
+  "evidence_refs": ["rebuttal#/responses/0"]
+}

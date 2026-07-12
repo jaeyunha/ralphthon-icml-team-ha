@@ -1,0 +1,634 @@
+{
+  "challenge_policy": "challenged findings are recomputed from broker evidence and never defended by default",
+  "findings": [
+    {
+      "artifact_refs": [
+        "https://doi.org/10.1007/s00521-025-11684-7",
+        "sha256:3b3949b60803807ed964b28aaf72d79b7e6582f270a2f90eafef858661099d62"
+      ],
+      "claim_id": "REF-001",
+      "confidence": 0.795,
+      "confirmation_paths": [
+        "broker source-identity verification"
+      ],
+      "finding_id": "REF-ID-REF-001",
+      "limitations": "Author-name normalization is conservative and typographic extraction noise may lower similarity.",
+      "method": "Compared the cited title and year with the broker's canonical, retrieved, content-hashed source identity.",
+      "observation": "Title token similarity=0.19; cited year=2025; source year=2025.",
+      "paper_anchors": [
+        "TXT-0111"
+      ],
+      "severity_candidate": "minor",
+      "status": "unresolved",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-002",
+      "confidence": 0.9,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-002",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "Broker refused or could not complete the lookup (TARGET_TITLE_LEAKAGE).",
+      "paper_anchors": [
+        "TXT-0112"
+      ],
+      "severity_candidate": "minor",
+      "status": "unresolved",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-003",
+      "confidence": 0.72,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-003",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "No admissible source was retrieved; the identity is likely nonexistent but not independently confirmed.",
+      "paper_anchors": [
+        "TXT-0113"
+      ],
+      "severity_candidate": "minor",
+      "status": "likely_nonexistent",
+      "validator_type": "reference_identity"
+    },
+    {
+      "artifact_refs": [
+        "https://doi.org/10.52202/068431-1346",
+        "sha256:a54fcc88b5f7059bce5e083d543bbd5a96702475197584301df7f05633876c48"
+      ],
+      "claim_id": "REF-004",
+      "confidence": 0.99,
+      "confirmation_paths": [
+        "broker source-identity verification"
+      ],
+      "finding_id": "REF-ID-REF-004",
+      "limitations": "Author-name normalization is conservative and typographic extraction noise may lower similarity.",
+      "method": "Compared the cited title and year with the broker's canonical, retrieved, content-hashed source identity.",
+      "observation": "Title token similarity=1.00; cited year=2022; source year=2022.",
+      "paper_anchors": [
+        "TXT-0114"
+      ],
+      "severity_candidate": "none",
+      "status": "verified_exact",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-005",
+      "confidence": 0.9,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-005",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "Broker refused or could not complete the lookup (BACKEND_UNAVAILABLE).",
+      "paper_anchors": [
+        "TXT-0115"
+      ],
+      "severity_candidate": "minor",
+      "status": "unresolved",
+      "validator_type": "reference_identity"
+    },
+    {
+      "artifact_refs": [
+        "https://doi.org/10.21136/cpm.1974.117838",
+        "sha256:e72e2a9a52d3f1813d899441503925f16cb9661703e57f1b4879da5ab0024f95"
+      ],
+      "claim_id": "REF-006",
+      "confidence": 0.99,
+      "confirmation_paths": [
+        "broker source-identity verification",
+        "independent title/year metadata comparison"
+      ],
+      "finding_id": "REF-ID-REF-006",
+      "limitations": "Author-name normalization is conservative and typographic extraction noise may lower similarity.",
+      "method": "Compared the cited title and year with the broker's canonical, retrieved, content-hashed source identity.",
+      "observation": "Title token similarity=1.00; cited year=2014; source year=2008.",
+      "paper_anchors": [
+        "TXT-0116"
+      ],
+      "severity_candidate": "major",
+      "status": "metadata_mismatch",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-007",
+      "confidence": 0.72,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-007",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "No admissible source was retrieved; the identity is likely nonexistent but not independently confirmed.",
+      "paper_anchors": [
+        "TXT-0117"
+      ],
+      "severity_candidate": "minor",
+      "status": "likely_nonexistent",
+      "validator_type": "reference_identity"
+    },
+    {
+      "artifact_refs": [
+        "https://doi.org/10.52202/075280-0763",
+        "sha256:a8dfadacd6af6c585635033726e6fc741d09b11467fd7e1518b3136cd0f09678"
+      ],
+      "claim_id": "REF-008",
+      "confidence": 0.846,
+      "confirmation_paths": [
+        "broker source-identity verification"
+      ],
+      "finding_id": "REF-ID-REF-008",
+      "limitations": "Author-name normalization is conservative and typographic extraction noise may lower similarity.",
+      "method": "Compared the cited title and year with the broker's canonical, retrieved, content-hashed source identity.",
+      "observation": "Title token similarity=0.40; cited year=2017; source year=2023.",
+      "paper_anchors": [
+        "TXT-0118"
+      ],
+      "severity_candidate": "minor",
+      "status": "unresolved",
+      "validator_type": "reference_identity"
+    },
+    {
+      "artifact_refs": [
+        "https://doi.org/10.70930/tac/zvahwq1i",
+        "sha256:a4602bd851f38fa7bfbbfd890297cdfe60f8ea5ccce899ad4ab4fba0af1ae6bd"
+      ],
+      "claim_id": "REF-009",
+      "confidence": 0.99,
+      "confirmation_paths": [
+        "broker source-identity verification",
+        "independent title/year metadata comparison"
+      ],
+      "finding_id": "REF-ID-REF-009",
+      "limitations": "Author-name normalization is conservative and typographic extraction noise may lower similarity.",
+      "method": "Compared the cited title and year with the broker's canonical, retrieved, content-hashed source identity.",
+      "observation": "Title token similarity=1.00; cited year=2014; source year=2021.",
+      "paper_anchors": [
+        "TXT-0119"
+      ],
+      "severity_candidate": "major",
+      "status": "metadata_mismatch",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-010",
+      "confidence": 0.72,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-010",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "No admissible source was retrieved; the identity is likely nonexistent but not independently confirmed.",
+      "paper_anchors": [
+        "TXT-0120"
+      ],
+      "severity_candidate": "minor",
+      "status": "likely_nonexistent",
+      "validator_type": "reference_identity"
+    },
+    {
+      "artifact_refs": [
+        "https://doi.org/10.52202/075280-0712",
+        "sha256:bfcdb82795ca0c49e23f5aa21e4479ecc6fa1b939954d0befdf8600556bf0802"
+      ],
+      "claim_id": "REF-011",
+      "confidence": 0.84,
+      "confirmation_paths": [
+        "broker source-identity verification"
+      ],
+      "finding_id": "REF-ID-REF-011",
+      "limitations": "Author-name normalization is conservative and typographic extraction noise may lower similarity.",
+      "method": "Compared the cited title and year with the broker's canonical, retrieved, content-hashed source identity.",
+      "observation": "Title token similarity=0.38; cited year=2020; source year=2023.",
+      "paper_anchors": [
+        "TXT-0121"
+      ],
+      "severity_candidate": "minor",
+      "status": "unresolved",
+      "validator_type": "reference_identity"
+    },
+    {
+      "artifact_refs": [
+        "https://doi.org/10.52202/079017-3692",
+        "sha256:fc3d3019b706b17fb6fed8928bb2f2a475c4461caab346a0ae774ff7dcb39ea9"
+      ],
+      "claim_id": "REF-012",
+      "confidence": 0.8528571428571429,
+      "confirmation_paths": [
+        "broker source-identity verification"
+      ],
+      "finding_id": "REF-ID-REF-012",
+      "limitations": "Author-name normalization is conservative and typographic extraction noise may lower similarity.",
+      "method": "Compared the cited title and year with the broker's canonical, retrieved, content-hashed source identity.",
+      "observation": "Title token similarity=0.43; cited year=1970; source year=2024.",
+      "paper_anchors": [
+        "TXT-0122"
+      ],
+      "severity_candidate": "minor",
+      "status": "unresolved",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-013",
+      "confidence": 0.9,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-013",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "Broker refused or could not complete the lookup (BACKEND_UNAVAILABLE).",
+      "paper_anchors": [
+        "TXT-0123"
+      ],
+      "severity_candidate": "minor",
+      "status": "unresolved",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-014",
+      "confidence": 0.72,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-014",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "No admissible source was retrieved; the identity is likely nonexistent but not independently confirmed.",
+      "paper_anchors": [
+        "TXT-0124"
+      ],
+      "severity_candidate": "minor",
+      "status": "likely_nonexistent",
+      "validator_type": "reference_identity"
+    },
+    {
+      "artifact_refs": [
+        "https://doi.org/10.5351/kjas.2025.38.5.589",
+        "sha256:175ac97001ccad70fa66a584c622f2827e7f685457d692f9e6c4b35b79684417"
+      ],
+      "claim_id": "REF-015",
+      "confidence": 0.8590909090909091,
+      "confirmation_paths": [
+        "broker source-identity verification"
+      ],
+      "finding_id": "REF-ID-REF-015",
+      "limitations": "Author-name normalization is conservative and typographic extraction noise may lower similarity.",
+      "method": "Compared the cited title and year with the broker's canonical, retrieved, content-hashed source identity.",
+      "observation": "Title token similarity=0.45; cited year=2022; source year=2025.",
+      "paper_anchors": [
+        "TXT-0125"
+      ],
+      "severity_candidate": "minor",
+      "status": "unresolved",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-016",
+      "confidence": 0.9,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-016",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "Broker refused or could not complete the lookup (TARGET_TITLE_LEAKAGE).",
+      "paper_anchors": [
+        "TXT-0126"
+      ],
+      "severity_candidate": "minor",
+      "status": "unresolved",
+      "validator_type": "reference_identity"
+    },
+    {
+      "artifact_refs": [
+        "https://doi.org/10.1007/978-3-319-78440-3_23",
+        "sha256:b4720e43bcf6b7a244409ba67c23e7aae0a64ad037ea26863e71086968e31697"
+      ],
+      "claim_id": "REF-017",
+      "confidence": 0.99,
+      "confirmation_paths": [
+        "broker source-identity verification"
+      ],
+      "finding_id": "REF-ID-REF-017",
+      "limitations": "Author-name normalization is conservative and typographic extraction noise may lower similarity.",
+      "method": "Compared the cited title and year with the broker's canonical, retrieved, content-hashed source identity.",
+      "observation": "Title token similarity=1.00; cited year=2020; source year=2020.",
+      "paper_anchors": [
+        "TXT-0127"
+      ],
+      "severity_candidate": "none",
+      "status": "verified_exact",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-018",
+      "confidence": 0.72,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-018",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "No admissible source was retrieved; the identity is likely nonexistent but not independently confirmed.",
+      "paper_anchors": [
+        "TXT-0128"
+      ],
+      "severity_candidate": "minor",
+      "status": "likely_nonexistent",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-019",
+      "confidence": 0.72,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-019",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "No admissible source was retrieved; the identity is likely nonexistent but not independently confirmed.",
+      "paper_anchors": [
+        "TXT-0129"
+      ],
+      "severity_candidate": "minor",
+      "status": "likely_nonexistent",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-020",
+      "confidence": 0.9,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-020",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "Broker refused or could not complete the lookup (BACKEND_UNAVAILABLE).",
+      "paper_anchors": [
+        "TXT-0130"
+      ],
+      "severity_candidate": "minor",
+      "status": "unresolved",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-021",
+      "confidence": 0.72,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-021",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "No admissible source was retrieved; the identity is likely nonexistent but not independently confirmed.",
+      "paper_anchors": [
+        "TXT-0131"
+      ],
+      "severity_candidate": "minor",
+      "status": "likely_nonexistent",
+      "validator_type": "reference_identity"
+    },
+    {
+      "artifact_refs": [
+        "https://doi.org/10.1007/978-1-4612-0261-5_16",
+        "sha256:a42927967d8eb7cc617e1ae52fd52dc9485252d1a037765d83f6b4ee20dfa4ae"
+      ],
+      "claim_id": "REF-022",
+      "confidence": 0.83,
+      "confirmation_paths": [
+        "broker source-identity verification"
+      ],
+      "finding_id": "REF-ID-REF-022",
+      "limitations": "Author-name normalization is conservative and typographic extraction noise may lower similarity.",
+      "method": "Compared the cited title and year with the broker's canonical, retrieved, content-hashed source identity.",
+      "observation": "Title token similarity=0.33; cited year=2025; source year=1994.",
+      "paper_anchors": [
+        "TXT-0132"
+      ],
+      "severity_candidate": "minor",
+      "status": "unresolved",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-023",
+      "confidence": 0.72,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-023",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "No admissible source was retrieved; the identity is likely nonexistent but not independently confirmed.",
+      "paper_anchors": [
+        "TXT-0133"
+      ],
+      "severity_candidate": "minor",
+      "status": "likely_nonexistent",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-024",
+      "confidence": 0.72,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-024",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "No admissible source was retrieved; the identity is likely nonexistent but not independently confirmed.",
+      "paper_anchors": [
+        "TXT-0134"
+      ],
+      "severity_candidate": "minor",
+      "status": "likely_nonexistent",
+      "validator_type": "reference_identity"
+    },
+    {
+      "artifact_refs": [
+        "https://doi.org/10.1007/978-3-032-09241-0_3",
+        "sha256:3e66a8b06bc795c98fdebc4e02543bd6a490877da914b6cc321fbb2962ce2c6d"
+      ],
+      "claim_id": "REF-025",
+      "confidence": 0.942,
+      "confirmation_paths": [
+        "broker source-identity verification"
+      ],
+      "finding_id": "REF-ID-REF-025",
+      "limitations": "Author-name normalization is conservative and typographic extraction noise may lower similarity.",
+      "method": "Compared the cited title and year with the broker's canonical, retrieved, content-hashed source identity.",
+      "observation": "Title token similarity=0.80; cited year=2026; source year=2026.",
+      "paper_anchors": [
+        "TXT-0135"
+      ],
+      "severity_candidate": "none",
+      "status": "verified_exact",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-026",
+      "confidence": 0.72,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-026",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "No admissible source was retrieved; the identity is likely nonexistent but not independently confirmed.",
+      "paper_anchors": [
+        "TXT-0136"
+      ],
+      "severity_candidate": "minor",
+      "status": "likely_nonexistent",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-027",
+      "confidence": 0.72,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-027",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "No admissible source was retrieved; the identity is likely nonexistent but not independently confirmed.",
+      "paper_anchors": [
+        "TXT-0137"
+      ],
+      "severity_candidate": "minor",
+      "status": "likely_nonexistent",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-028",
+      "confidence": 0.72,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-028",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "No admissible source was retrieved; the identity is likely nonexistent but not independently confirmed.",
+      "paper_anchors": [
+        "TXT-0138"
+      ],
+      "severity_candidate": "minor",
+      "status": "likely_nonexistent",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-029",
+      "confidence": 0.72,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-029",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "No admissible source was retrieved; the identity is likely nonexistent but not independently confirmed.",
+      "paper_anchors": [
+        "TXT-0139"
+      ],
+      "severity_candidate": "minor",
+      "status": "likely_nonexistent",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-030",
+      "confidence": 0.9,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-030",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "Broker refused or could not complete the lookup (BACKEND_UNAVAILABLE).",
+      "paper_anchors": [
+        "TXT-0140"
+      ],
+      "severity_candidate": "minor",
+      "status": "unresolved",
+      "validator_type": "reference_identity"
+    },
+    {
+      "artifact_refs": [
+        "https://doi.org/10.52202/068431-0345",
+        "sha256:69fccc2617f7504b845f85d674ccb1cac5909b7d177e06801bf09fa3b4ab8fef"
+      ],
+      "claim_id": "REF-031",
+      "confidence": 0.9099999999999999,
+      "confirmation_paths": [
+        "broker source-identity verification"
+      ],
+      "finding_id": "REF-ID-REF-031",
+      "limitations": "Author-name normalization is conservative and typographic extraction noise may lower similarity.",
+      "method": "Compared the cited title and year with the broker's canonical, retrieved, content-hashed source identity.",
+      "observation": "Title token similarity=0.67; cited year=2019; source year=2022.",
+      "paper_anchors": [
+        "TXT-0141"
+      ],
+      "severity_candidate": "minor",
+      "status": "verified_with_minor_metadata_difference",
+      "validator_type": "reference_identity"
+    },
+    {
+      "claim_id": "REF-032",
+      "confidence": 0.72,
+      "confirmation_paths": [
+        "typed broker refusal audit"
+      ],
+      "finding_id": "REF-ID-REF-032",
+      "limitations": "A broker refusal alone is never treated as confirmed nonexistence.",
+      "method": "Queried the controlled literature broker and inspected its typed refusal and rejection provenance.",
+      "observation": "No admissible source was retrieved; the identity is likely nonexistent but not independently confirmed.",
+      "paper_anchors": [
+        "TXT-0142"
+      ],
+      "severity_candidate": "minor",
+      "status": "likely_nonexistent",
+      "validator_type": "reference_identity"
+    }
+  ],
+  "identity_statuses": {
+    "REF-001": "unresolved",
+    "REF-002": "unresolved",
+    "REF-003": "likely_nonexistent",
+    "REF-004": "verified_exact",
+    "REF-005": "unresolved",
+    "REF-006": "metadata_mismatch",
+    "REF-007": "likely_nonexistent",
+    "REF-008": "unresolved",
+    "REF-009": "metadata_mismatch",
+    "REF-010": "likely_nonexistent",
+    "REF-011": "unresolved",
+    "REF-012": "unresolved",
+    "REF-013": "unresolved",
+    "REF-014": "likely_nonexistent",
+    "REF-015": "unresolved",
+    "REF-016": "unresolved",
+    "REF-017": "verified_exact",
+    "REF-018": "likely_nonexistent",
+    "REF-019": "likely_nonexistent",
+    "REF-020": "unresolved",
+    "REF-021": "likely_nonexistent",
+    "REF-022": "unresolved",
+    "REF-023": "likely_nonexistent",
+    "REF-024": "likely_nonexistent",
+    "REF-025": "verified_exact",
+    "REF-026": "likely_nonexistent",
+    "REF-027": "likely_nonexistent",
+    "REF-028": "likely_nonexistent",
+    "REF-029": "likely_nonexistent",
+    "REF-030": "unresolved",
+    "REF-031": "verified_with_minor_metadata_difference",
+    "REF-032": "likely_nonexistent"
+  },
+  "validator": "references"
+}

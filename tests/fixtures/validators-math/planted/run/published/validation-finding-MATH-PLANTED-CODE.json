@@ -1,0 +1,18 @@
+{
+  "artifact_refs": [
+    "phases/symbolic-validation/artifacts/equation-code-mismatch.json"
+  ],
+  "claim_id": "EQ-CODE",
+  "confidence": 1.0,
+  "confirmation_paths": [],
+  "finding_id": "MATH-PLANTED-CODE",
+  "limitations": "Fixture expression models a scalar implementation interface.",
+  "method": "Symbolic equation-to-code comparison with exact replay",
+  "observation": "Equation-to-code comparison found difference 2*x and counterexample {'x': '-2'}.",
+  "paper_anchors": [
+    "EQ-CODE-ANCHOR"
+  ],
+  "severity_candidate": "minor",
+  "status": "equation_code_mismatch",
+  "validator_type": "exact_math"
+}

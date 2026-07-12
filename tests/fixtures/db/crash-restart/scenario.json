@@ -1,0 +1,12 @@
+{
+  "batch_size": 3,
+  "committed_sequence_before_crash": 4,
+  "crash_point": "after committing sequence 4 and its notification, before cursor checkpoint",
+  "durable_cursor_after_restart": 6,
+  "durable_cursor_before_crash": 3,
+  "expected_inserted_event_rows": 6,
+  "expected_notifications": 6,
+  "expected_replay_conflict_noops": 1,
+  "invariant": "Restart replays sequence 4 idempotently, then commits 5-6 without loss or duplicate notification.",
+  "restart_first_sequence": 4
+}

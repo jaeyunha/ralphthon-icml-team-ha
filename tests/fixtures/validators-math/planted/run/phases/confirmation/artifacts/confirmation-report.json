@@ -1,0 +1,9 @@
+{
+  "checked_findings": 9,
+  "high_impact_negative_findings": [
+    "MATH-PLANTED-HIDDEN",
+    "MATH-PLANTED-ALG"
+  ],
+  "schema_version": 1,
+  "status": "passed"
+}

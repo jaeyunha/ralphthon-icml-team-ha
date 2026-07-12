@@ -1,0 +1,20 @@
+{
+  "artifact_refs": [
+    "phases/symbolic-validation/artifacts/algebra-symbolic-primary.json"
+  ],
+  "claim_id": "CLAIM-ALG",
+  "confidence": 1.0,
+  "confirmation_paths": [
+    "algebra-numerical-confirm"
+  ],
+  "finding_id": "MATH-PLANTED-ALG",
+  "limitations": "Polynomial identity over real scalar variables.",
+  "method": "SymPy algebraic equivalence",
+  "observation": "Symbolic simplification produced nonzero difference 2*x*y.",
+  "paper_anchors": [
+    "EQ-ALG"
+  ],
+  "severity_candidate": "major",
+  "status": "counterexample_found",
+  "validator_type": "symbolic_math"
+}

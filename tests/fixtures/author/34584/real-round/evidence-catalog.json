@@ -1,0 +1,2558 @@
+{
+  "CODE-CROSS-001": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "EQ-0001": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0002": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0003": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0004": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0005": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0006": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0007": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0008": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0009": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0010": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0011": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0012": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0013": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0014": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0015": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0016": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0017": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0018": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0019": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0020": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0021": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0022": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0023": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0024": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0025": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0026": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0027": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0028": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0029": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0030": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0031": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0032": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0033": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0034": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0035": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0036": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0037": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0038": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0039": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0040": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0041": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0042": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0043": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0044": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0045": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0046": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0047": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0048": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0049": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0050": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0051": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0052": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0053": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0054": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0055": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0056": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0057": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0058": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0059": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0060": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0061": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0062": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0063": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0064": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0065": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0066": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0067": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0068": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0069": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0070": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0071": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0072": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0073": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0074": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0075": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0076": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0077": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0078": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0079": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0080": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0081": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0082": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0083": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0084": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0085": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0086": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0087": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0088": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0089": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0090": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0091": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0092": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0093": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0094": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0095": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0096": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0097": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0098": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0099": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0100": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0101": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0102": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0103": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0104": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0105": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0106": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0107": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0108": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0109": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0110": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0111": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0112": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0113": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0114": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0115": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0116": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0117": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0118": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0119": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0120": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0121": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0122": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0123": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0124": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0125": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0126": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0127": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0128": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0129": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0130": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0131": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0132": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0133": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0134": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0135": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0136": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0137": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0138": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0139": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0140": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0141": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0142": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0143": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0144": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0145": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0146": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0147": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0148": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0149": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0150": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0151": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0152": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0153": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0154": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0155": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0156": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0157": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0158": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0159": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0160": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0161": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0162": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0163": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0164": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0165": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0166": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0167": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0168": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0169": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0170": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0171": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0172": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0173": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0174": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0175": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0176": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0177": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "EQ-0178": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "ETHICS-PERSONALLY-IDENTIFIABLE-INFORMATION": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "ETHICS-PROMPT-INJECTION": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "ETHICS-SENSITIVE-ATTRIBUTES": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "MATH-34584-001": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-math/34584/run/published/math-validation-bundle.json"
+  },
+  "MATH-34584-002": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-math/34584/run/published/math-validation-bundle.json"
+  },
+  "MATH-34584-003": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-math/34584/run/published/math-validation-bundle.json"
+  },
+  "MATH-34584-004": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-math/34584/run/published/math-validation-bundle.json"
+  },
+  "MATH-34584-005": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-math/34584/run/published/math-validation-bundle.json"
+  },
+  "MATH-CROSS-001": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-001": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-002": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-003": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-004": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-005": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-006": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-007": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-008": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-009": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-010": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-011": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-012": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-013": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-014": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-015": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-016": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-017": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-018": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-019": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-020": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-021": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-022": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-023": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-024": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-025": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-026": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-027": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-028": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-029": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-030": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-031": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "REF-ID-REF-032": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "SEC-0001": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0002": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0003": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0004": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0005": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0006": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0007": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0008": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0009": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0010": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0011": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0012": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0013": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0014": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0015": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0016": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0017": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0018": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0019": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0020": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0021": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0022": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0023": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0024": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0025": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0026": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0027": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "SEC-0028": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "STAT-BASELINE-001": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "STAT-BREADTH-001": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "STAT-LEAKAGE-001": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "STAT-MULTICOMP-001": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "STAT-SEEDS-001": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "STAT-UNCERTAINTY-001": {
+    "kind": "validation",
+    "source": "tests/fixtures/validators-statref/frozen-validation-bundle.json"
+  },
+  "TAB-0001": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TAB-0002": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TAB-0003": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TAB-0004": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0001": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0002": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0003": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0004": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0005": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0006": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0007": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0008": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0009": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0010": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0011": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0012": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0013": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0014": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0015": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0016": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0017": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0018": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0019": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0020": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0021": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "THM-0022": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0001": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0002": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0003": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0004": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0005": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0006": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0007": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0008": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0009": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0010": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0011": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0012": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0013": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0014": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0015": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0016": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0017": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0018": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0019": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0020": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0021": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0022": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0023": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0024": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0025": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0026": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0027": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0028": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0029": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0030": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0031": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0032": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0033": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0034": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0035": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0036": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0037": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0038": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0039": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0040": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0041": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0042": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0043": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0044": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0045": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0046": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0047": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0048": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0049": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0050": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0051": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0052": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0053": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0054": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0055": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0056": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0057": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0058": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0059": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0060": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0061": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0062": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0063": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0064": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0065": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0066": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0067": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0068": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0069": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0070": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0071": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0072": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0073": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0074": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0075": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0076": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0077": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0078": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0079": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0080": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0081": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0082": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0083": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0084": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0085": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0086": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0087": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0088": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0089": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0090": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0091": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0092": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0093": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0094": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0095": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0096": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0097": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0098": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0099": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0100": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0101": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0102": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0103": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0104": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0105": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0106": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0107": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0108": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0109": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0110": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0111": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0112": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0113": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0114": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0115": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0116": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0117": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0118": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0119": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0120": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0121": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0122": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0123": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0124": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0125": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0126": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0127": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0128": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0129": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0130": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0131": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0132": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0133": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0134": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0135": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0136": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0137": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0138": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0139": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0140": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0141": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0142": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0143": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0144": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0145": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0146": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0147": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0148": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0149": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0150": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0151": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0152": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0153": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0154": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0155": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0156": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0157": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0158": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0159": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0160": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0161": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0162": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0163": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0164": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0165": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0166": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0167": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0168": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0169": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0170": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0171": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0172": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0173": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0174": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0175": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0176": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0177": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0178": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0179": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0180": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0181": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0182": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0183": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0184": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0185": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0186": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0187": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0188": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0189": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0190": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0191": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0192": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0193": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0194": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0195": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0196": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0197": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0198": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0199": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0200": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0201": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0202": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0203": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0204": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0205": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0206": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0207": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0208": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0209": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0210": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0211": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0212": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0213": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0214": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0215": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0216": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0217": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0218": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0219": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0220": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0221": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0222": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0223": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0224": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0225": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0226": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0227": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0228": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0229": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0230": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0231": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0232": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0233": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0234": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0235": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0236": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0237": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0238": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0239": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0240": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0241": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0242": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0243": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0244": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0245": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0246": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0247": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0248": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0249": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0250": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0251": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0252": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0253": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0254": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0255": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0256": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0257": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0258": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0259": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0260": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0261": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0262": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0263": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0264": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0265": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0266": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0267": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0268": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0269": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0270": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0271": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0272": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0273": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0274": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0275": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0276": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0277": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0278": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0279": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0280": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0281": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0282": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0283": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0284": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0285": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0286": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0287": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0288": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0289": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0290": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0291": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0292": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0293": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0294": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0295": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0296": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0297": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0298": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0299": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0300": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0301": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0302": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0303": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0304": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0305": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0306": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0307": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0308": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0309": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0310": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0311": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0312": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0313": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0314": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0315": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0316": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0317": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0318": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0319": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0320": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0321": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0322": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0323": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0324": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0325": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0326": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0327": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0328": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0329": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0330": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0331": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0332": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0333": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0334": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0335": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0336": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0337": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0338": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0339": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0340": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0341": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0342": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0343": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0344": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0345": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0346": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0347": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0348": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0349": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0350": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0351": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0352": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0353": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0354": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0355": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0356": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0357": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0358": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  },
+  "TXT-0359": {
+    "kind": "paper",
+    "source": "tests/fixtures/extraction/34584/paper.md"
+  }
+}

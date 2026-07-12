@@ -1,0 +1,33 @@
+{
+  "REF-REAL": {
+    "artifact_type":"literature_broker_response",
+    "request_id":"REQ-real",
+    "reviewer_id":"validator-references",
+    "packets":[{
+      "source_id":"SRC-real",
+      "title":"Group equivariant convolutional networks",
+      "authors":["Taco S. Cohen","Max Welling"],
+      "first_public_date":"2016-06-01",
+      "source_type":"publisher_page",
+      "canonical_uri":"https://proceedings.mlr.press/v48/cohenc16.html",
+      "content_hash":"sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "admissibility":"admissible_prior_work",
+      "retrieval_reason":"Validate REF-REAL",
+      "supporting_passages":[{"anchor":"retrieved:abstract:1","summary":"Introduces group equivariant convolutional neural networks."}],
+      "verification_status":"full_text_checked"
+    }],
+    "rejected_candidates":[],
+    "created_at":"2026-01-28T12:00:00Z"
+  },
+  "REF-FAKE": {
+    "artifact_type":"literature_broker_refusal",
+    "request_id":"REQ-fake",
+    "reviewer_id":"validator-references",
+    "code":"NO_ADMISSIBLE_SOURCES",
+    "stage":"full_text_retrieval",
+    "message":"No source passed identity and retrieval gates.",
+    "retryable":false,
+    "details":{"absence_confirmed":true,"independent_registry_checks":["crossref","arxiv"]},
+    "created_at":"2026-01-28T12:00:00Z"
+  }
+}

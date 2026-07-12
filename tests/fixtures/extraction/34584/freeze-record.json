@@ -1,0 +1,26 @@
+{
+  "extraction_tool": {
+    "name": "docling",
+    "version": "2.112.0"
+  },
+  "freeze_hash": "sha256:07a113803047b5c2487d48f46867ea48849cf2dd3a5d194ef69cccf9556071ee",
+  "frozen_at": "2026-07-11T11:50:00Z",
+  "inputs": [
+    {
+      "path": "paper.pdf",
+      "sha256": "sha256:7de57c5f431ee13df26d2dd14154b1f0621db001222336bf1a3acce17f13a82a",
+      "size_bytes": 433402
+    },
+    {
+      "path": "submission-manifest.json",
+      "sha256": "sha256:6a08039d037b6e244eb38c86f169165abf9e52479557912d8c9340ac9e801cf2",
+      "size_bytes": 424
+    }
+  ],
+  "literature_cutoff": "2026-07-11T00:00:00Z",
+  "repository_commit": null,
+  "review_start_time": "2026-07-11T11:50:00Z",
+  "run_config_hash": "sha256:d216a7cebd09acdd04cca5c388c0ae494f26baddcda5538d0fd5d194fa65db07",
+  "run_id": "34584",
+  "schema_version": 1
+}

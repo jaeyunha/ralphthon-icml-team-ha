@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "author_id": "author-coordinator",
+  "rows": [
+    {
+      "concern_id":"reviewer-r2-Q1","reviewer_id":"reviewer-r2","concern_type":"robustness_question","requested_evidence":"Seed stability and matched-capacity baseline comparisons.","available_paper_evidence":["TXT-0264","TAB-0004"],"author_evidence_type":"cannot_answer_without_new_research","draft_answer":"The submitted materials contain no per-seed dispersion or matched-capacity sweep, so quantitative stability cannot be claimed in rebuttal.","duplicate_concerns":["reviewer-r2-W1"],"commitments":[],"contradiction_risk":false,"status":"unresolved"
+    },
+    {
+      "concern_id":"reviewer-r2-W1","reviewer_id":"reviewer-r2","concern_type":"claim_evidence_breadth","requested_evidence":"Broader empirical evidence for practical benefit and generalization.","available_paper_evidence":["TXT-0264","TAB-0004","TXT-0281"],"author_evidence_type":"limitation_acknowledged","draft_answer":"Table 2 supports only the reported EMG-IMU setup; broader robustness is not established by the submission.","duplicate_concerns":["reviewer-r2-Q1"],"commitments":["will:narrow the empirical generalization claim to the reported setup","will:clarify Table 2 is a single reported setup"],"contradiction_risk":false,"status":"ready"
+    }
+  ]
+}

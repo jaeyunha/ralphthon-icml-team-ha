@@ -1,0 +1,18 @@
+{
+  "artifact_refs": [
+    "phases/counterexample-search/artifacts/algebra-numerical-confirm.json"
+  ],
+  "claim_id": "CLAIM-ALG",
+  "confidence": 1.0,
+  "confirmation_paths": [],
+  "finding_id": "MATH-PLANTED-ALG-CONFIRM",
+  "limitations": "Bounded search is used only to confirm the symbolic defect.",
+  "method": "Exact rational boundary and adversarial search",
+  "observation": "Boundary/adversarial search found counterexample {'x': '-2', 'y': '-2'}.",
+  "paper_anchors": [
+    "EQ-ALG"
+  ],
+  "severity_candidate": "none",
+  "status": "counterexample_found",
+  "validator_type": "numerical_math"
+}

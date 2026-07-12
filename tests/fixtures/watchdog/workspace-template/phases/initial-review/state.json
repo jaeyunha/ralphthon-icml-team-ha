@@ -1,0 +1,12 @@
+{
+  "agent_id": "reviewer-r2",
+  "run_id": "fixture-run",
+  "role": "reviewer",
+  "phase": "initial-review",
+  "status": "pending",
+  "current_task": "fixture-review",
+  "attempt": 0,
+  "attempt_count": 0,
+  "last_artifact_hash": null,
+  "no_progress_count": 0
+}

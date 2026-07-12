@@ -1,0 +1,2995 @@
+{
+  "ambiguities": [],
+  "baselines": [
+    {
+      "anchor_id": "TAB-0004",
+      "id": "BASE-001",
+      "page": 19,
+      "statement": "Table:   Table 2. EMG-IMU: performance of Grothendieck CENN against the standard Temporal CNN baseline."
+    }
+  ],
+  "claims": [
+    {
+      "anchor_id": "TXT-0001",
+      "id": "CLAIM-001",
+      "page": 1,
+      "statement": "Geometric deep learning exploits symmetries in data to improve the performance and efficiency of deep learning systems."
+    },
+    {
+      "anchor_id": "TXT-0001",
+      "id": "CLAIM-002",
+      "page": 1,
+      "statement": "In addition, we show that OENN can be extended further to CENN, Category-Equivariant Neural Network, which gives the general form of equivariant neural networks as well as of equivariant universal approximation theorems, allowing us to leverage categorical symmetry in data (e.g., noninvertible symmetries on multiple objects with compositional relations on those symmetries)."
+    },
+    {
+      "anchor_id": "TXT-0002",
+      "id": "CLAIM-003",
+      "page": 1,
+      "statement": "Group-equivariant architectures explicitly exploit the symmetries of an index set to share parameters, improve sample efficiency, and en-"
+    },
+    {
+      "anchor_id": "TXT-0005",
+      "id": "CLAIM-004",
+      "page": 1,
+      "statement": "More recently, this principle has been extended to permutation-invariant and permutation-equivariant models such as DeepSets (Zaheer et al., 2017) and graph neural networks GNNs (Gilmer et al., 2017; Xu et al., 2019; Maron et al., 2019), which achieve equivariance with respect to the automorphism group of a graph."
+    },
+    {
+      "anchor_id": "TXT-0009",
+      "id": "CLAIM-005",
+      "page": 2,
+      "statement": "We prove equivariant universal approximation theorems (UATs) for OENNs."
+    },
+    {
+      "anchor_id": "TXT-0109",
+      "id": "CLAIM-006",
+      "page": 9,
+      "statement": "The appendix places OENN inside the more general category-equivariant neural network (CENN) framework, where posets are replaced by categories and action groupoids; this extension connects the present theory to broader category-equivariant models and applications (Maruyama, 2025a;b;c; 2026a;b; Maruyama and Yasuda, 2026), which demonstrate how the extended equivariant models help to improve the experimental performance of classic equivariant models in concrete machine learning tasks."
+    },
+    {
+      "anchor_id": "TXT-0149",
+      "id": "CLAIM-007",
+      "page": 12,
+      "statement": "We show, in particular, that completed OENN input-output maps are embedded into CENN through the action groupoid of the chosen symmetry action, while hidden pair-state and branch constructions may use auxiliary action groupoids built from the same action."
+    },
+    {
+      "anchor_id": "TXT-0264",
+      "id": "CLAIM-008",
+      "page": 19,
+      "statement": "Table 2 shows the experimental results; GrothendieckCENN substantially outperformed both of them."
+    },
+    {
+      "anchor_id": "TXT-0281",
+      "id": "CLAIM-009",
+      "page": 19,
+      "statement": "This yields improved generalization."
+    }
+  ],
+  "contributions": [
+    {
+      "anchor_id": "TXT-0001",
+      "id": "CONTRIB-001",
+      "page": 1,
+      "statement": "Symmetry is everywhere in nature and society. Geometric deep learning exploits symmetries in data to improve the performance and efficiency of deep learning systems. In this paper, we extend geometric deep learning to utilize richer symmetry structures. Specifically, we develop orderequivariant neural networks (OENN), which generalize standard graph message passing and sheaf neural networks via the theory of equivariant bundles over face posets (face categories). We (i) characterize all linear order-equivariant maps, (ii) build OENN layers, and (iii) prove universal approximation theorems (UAT"
+    },
+    {
+      "anchor_id": "TXT-0061",
+      "id": "CONTRIB-002",
+      "page": 5,
+      "statement": "The first class is the analog of ordinary local message passing: messages from neighbors in R are aggregated without a persistent global source label. The pair-state class is the universal local completion used in Section 3.3: it keeps the same communication graph but carries a source index through propagation. The full class allows global orbital affine layers."
+    },
+    {
+      "anchor_id": "THM-0015",
+      "id": "CONTRIB-003",
+      "page": 7,
+      "statement": "Theorem/Assumption:   Theorem 3.5 is a universality theorem for the pair-state local completion. Ordinary message passing aggregates neighbor information without a persistent source label; pair-state propagation stores z q,p and therefore lets the readout at q access the contribution from each source p separately. Some mechanism of this kind (source labels, higher-order states, global attention, or a global broadcast) is unavoidable for worst-case approximation of arbitrary maps in C G ( K,Y ) ."
+    },
+    {
+      "anchor_id": "TXT-0150",
+      "id": "CONTRIB-004",
+      "page": 12,
+      "statement": "We first explain the basics of the CENN formalism. A category serves as an indexing device for the transformations under which a network must be equivariant. Objects are feature sites or feature types, and arrows are admissible changes of viewpoint, restrictions, transports, or symmetries."
+    },
+    {
+      "anchor_id": "TXT-0190",
+      "id": "CONTRIB-005",
+      "page": 14,
+      "statement": "whose first component is α ( r j ) ."
+    },
+    {
+      "anchor_id": "TXT-0232",
+      "id": "CONTRIB-006",
+      "page": 16,
+      "statement": "Expanding the first identity in the H s -source blocks gives exactly the transporter law"
+    },
+    {
+      "anchor_id": "TXT-0244",
+      "id": "CONTRIB-007",
+      "page": 17,
+      "statement": "Consider first an affine CENN layer in the layerwise totalsource form Λ : H ⇒ H ′ over G ⋉ T , where H tot = ⊕ s ∈ S H s . Write"
+    },
+    {
+      "anchor_id": "TXT-0292",
+      "id": "CONTRIB-008",
+      "page": 20,
+      "statement": "The first affine map is"
+    },
+    {
+      "anchor_id": "TXT-0307",
+      "id": "CONTRIB-009",
+      "page": 21,
+      "statement": "Proof of Proposition 2.15. The first claim is Proposition 2.13. For the approximation claim, apply the finitegroup density lemma, Lemma 3.2, to each stabilizerinvariant encoder and each stabilizer-equivariant readout on the finitely many orbit representatives. Since the number of orbits and sites is finite, the resulting errors compose continuously and can be chosen small enough to give uniform approximation on the prescribed compact set."
+    },
+    {
+      "anchor_id": "TXT-0308",
+      "id": "CONTRIB-010",
+      "page": 21,
+      "statement": "Proof of Proposition 2.16. The first inclusion is realized locally as follows. Given a relation-message-passing layer of the form (13), first write the input into a pair-state diagonal seed"
+    },
+    {
+      "anchor_id": "TXT-0314",
+      "id": "CONTRIB-011",
+      "page": 21,
+      "statement": "The standard finite-dimensional MLP universal approximation theorem applies to scalar continuous functions on compact boxes. For vector-valued f , apply the scalar theorem coordinatewise in a basis of V ; for an arbitrary compact set K ⊂ U , first extend each coordinate continuously to a compact box containing K by the Tietze extension theorem. Thus, for the continuous non-polynomial activation σ (Leshno et al., 1993), choose Ψ with"
+    },
+    {
+      "anchor_id": "TXT-0339",
+      "id": "CONTRIB-012",
+      "page": 22,
+      "statement": "First seed each source into its own labeled slot by the diagonal map I : X → Z ,"
+    }
+  ],
+  "datasets": [
+    {
+      "anchor_id": "TXT-0127",
+      "id": "DATA-001",
+      "page": 10,
+      "statement": "Khan, A. M., Khawaja, S. G., Akram, M. U., and Khan, A. S. sEMG dataset of routine activities. Data in Brief , 33:106543, 2020."
+    },
+    {
+      "anchor_id": "TXT-0128",
+      "id": "DATA-002",
+      "page": 10,
+      "statement": "Khan, A. M., Khawaja, S. G., Akram, M. U., and Khan, A. S. Physical Action Dataset. Mendeley Data, V2, 2020. doi:10.17632/bcv9vsxkyc.2."
+    },
+    {
+      "anchor_id": "TXT-0264",
+      "id": "DATA-003",
+      "page": 19,
+      "statement": "EMG-IMU experiments and results. To test the performance of Grothendieck CENN, we consider the EMG-IMU benchmark (Khan et al., 2020b;a), where wearable devices collect both electromyography (EMG) signals and inertial measurement unit (IMU) signals, and the task is to classify actions or gestures from the resulting time-series data. EMG-IMU leverages multimodal signals. We compared GrothendieckCENN against TemporalCNN and InvariantTransformer. Table 2 shows the experimental results; GrothendieckCENN substantially outperformed both of them."
+    }
+  ],
+  "dossier_version": 1,
+  "equations": [
+    {
+      "anchor_id": "EQ-0001",
+      "id": "EQ-001",
+      "page": 2,
+      "statement": "T V γ,p : V p → V γp ( γ ∈ G, p ∈ P )"
+    },
+    {
+      "anchor_id": "EQ-0002",
+      "id": "EQ-002",
+      "page": 2,
+      "statement": "T V γη,p = T V γ,ηp ◦ T V η,p ( γ, η ∈ G,p ∈ P ) ."
+    },
+    {
+      "anchor_id": "EQ-0003",
+      "id": "EQ-003",
+      "page": 2,
+      "statement": "X := ⊕ p ∈ P V p ."
+    },
+    {
+      "anchor_id": "EQ-0004",
+      "id": "EQ-004",
+      "page": 3,
+      "statement": "( ρ X ( γ ) x ) q = T V γ,γ -1 q x γ -1 q . (1)"
+    },
+    {
+      "anchor_id": "EQ-0005",
+      "id": "EQ-005",
+      "page": 3,
+      "statement": "F ( ρ X ( γ ) x ) = ρ Y ( γ ) F ( x ) ( γ ∈ G, x ∈ K ) . (2)"
+    },
+    {
+      "anchor_id": "EQ-0006",
+      "id": "EQ-006",
+      "page": 3,
+      "statement": "( Lx ) q = ∑ p ∈ P K ( q, p ) x p , K ( q, p ) ∈ Hom( V p , W q ) . (3)"
+    },
+    {
+      "anchor_id": "EQ-0007",
+      "id": "EQ-007",
+      "page": 3,
+      "statement": "K ( γq, γp ) T V γ,p = T W γ,q K ( q, p ) ( γ ∈ G,p, q ∈ P ) . (4)"
+    },
+    {
+      "anchor_id": "EQ-0008",
+      "id": "EQ-008",
+      "page": 3,
+      "statement": "H O := { η ∈ G : ηq O = q O , ηp O = p O } ."
+    },
+    {
+      "anchor_id": "EQ-0009",
+      "id": "EQ-009",
+      "page": 3,
+      "statement": "A O ∈ Hom( V p O , W q O )"
+    },
+    {
+      "anchor_id": "EQ-0010",
+      "id": "EQ-010",
+      "page": 3,
+      "statement": "K ( q, p ) := T W γ,q O A O ( T V γ,p O ) -1 (6)"
+    },
+    {
+      "anchor_id": "EQ-0011",
+      "id": "EQ-011",
+      "page": 3,
+      "statement": "dimHom G ( X,Y ) = ∑ O∈ ( P × P ) /G dimHom H O ( V p O , W q O ) ."
+    },
+    {
+      "anchor_id": "EQ-0012",
+      "id": "EQ-012",
+      "page": 3,
+      "statement": "( Lx ) t = ∑ s ∈ S K ( t, s ) x s , K ( t, s ) ∈ Hom( V s , W t ) ,"
+    },
+    {
+      "anchor_id": "EQ-0013",
+      "id": "EQ-013",
+      "page": 3,
+      "statement": "K ( γt, γs ) T V γ,s = T W γ,t K ( t, s ) ( γ ∈ G, s ∈ S, t ∈ T ) ."
+    },
+    {
+      "anchor_id": "EQ-0014",
+      "id": "EQ-014",
+      "page": 3,
+      "statement": "b γq = T W γ,q b q ."
+    },
+    {
+      "anchor_id": "EQ-0015",
+      "id": "EQ-015",
+      "page": 3,
+      "statement": "T W η,q O A O = A O T V η,p O ( η ∈ H O ) . (5)"
+    },
+    {
+      "anchor_id": "EQ-0016",
+      "id": "EQ-016",
+      "page": 4,
+      "statement": "R eq H [Ψ]( u ) := 1 | H | ∑ h ∈ H ( T V h ) -1 Ψ( T U h u ) . (7)"
+    },
+    {
+      "anchor_id": "EQ-0017",
+      "id": "EQ-017",
+      "page": 4,
+      "statement": "R inv H [Ψ]( u ) := 1 | H | ∑ h ∈ H Ψ(( T U h ) -1 u ) . (8)"
+    },
+    {
+      "anchor_id": "EQ-0018",
+      "id": "EQ-018",
+      "page": 4,
+      "statement": "ψ s 0 := R eq G s 0 [Ψ s 0 ] ,"
+    },
+    {
+      "anchor_id": "EQ-0019",
+      "id": "EQ-019",
+      "page": 4,
+      "statement": "ψ s ( e ) := T F γ,s 0 ψ s 0 ( ( T E γ,s 0 ) -1 e ) , e ∈ E s . (9)"
+    },
+    {
+      "anchor_id": "EQ-0020",
+      "id": "EQ-020",
+      "page": 4,
+      "statement": "K ( q, p ) = 0 unless ( q, p ) ∈ R."
+    },
+    {
+      "anchor_id": "EQ-0021",
+      "id": "EQ-021",
+      "page": 4,
+      "statement": "K (( q, p ) , ( r, s )) = 0 unless s = p and ( q, r ) ∈ R."
+    },
+    {
+      "anchor_id": "EQ-0022",
+      "id": "EQ-022",
+      "page": 4,
+      "statement": "R cov := ∆ P ∪ { ( q, p ) : q ≺ p } ∪ { ( q, p ) : p ≺ q } ."
+    },
+    {
+      "anchor_id": "EQ-0023",
+      "id": "EQ-023",
+      "page": 5,
+      "statement": "P/G q = { Ω 1 ( q ) , . . . , Ω R ( q ) ( q ) }"
+    },
+    {
+      "anchor_id": "EQ-0024",
+      "id": "EQ-024",
+      "page": 5,
+      "statement": "O ↦- → Ω O ( q ) := { p ∈ P : ( q, p ) ∈ O} ."
+    },
+    {
+      "anchor_id": "EQ-0025",
+      "id": "EQ-025",
+      "page": 5,
+      "statement": "φ q,p ( v ) := φ O ( ( T V γ,p O ) -1 v ) , v ∈ V p . (10)"
+    },
+    {
+      "anchor_id": "EQ-0026",
+      "id": "EQ-026",
+      "page": 5,
+      "statement": "S O ( q ; x ) := ∑ p ∈ P ( q,p ) ∈O φ q,p ( x p ) ∈ R m O , (11)"
+    },
+    {
+      "anchor_id": "EQ-0027",
+      "id": "EQ-027",
+      "page": 5,
+      "statement": "S O ( τq ; ρ X ( τ ) x ) = S O ( q ; x ) ."
+    },
+    {
+      "anchor_id": "EQ-0028",
+      "id": "EQ-028",
+      "page": 5,
+      "statement": "S R ( q ; x ) := ∑ O⊂ R S O ( q ; x ) = ∑ p ∈ P ( q,p ) ∈ R φ R q,p ( x p ) ."
+    },
+    {
+      "anchor_id": "EQ-0029",
+      "id": "EQ-029",
+      "page": 5,
+      "statement": "ψ q 0 : V q 0 ⊕ ⊕ O∈A ( q 0 ) R m O → W q 0 ,"
+    },
+    {
+      "anchor_id": "EQ-0030",
+      "id": "EQ-030",
+      "page": 5,
+      "statement": "F ( x ) q := T W γ,q 0 ψ q 0 ( ( T V γ,q 0 ) -1 x q , { S O ( q ; x ) } O∈A ( q 0 ) ) . (12)"
+    },
+    {
+      "anchor_id": "EQ-0031",
+      "id": "EQ-031",
+      "page": 5,
+      "statement": "h ′ q = θ q ( h q , { S O ( q ; h ) } O⊆ R ) . (13)"
+    },
+    {
+      "anchor_id": "EQ-0032",
+      "id": "EQ-032",
+      "page": 5,
+      "statement": "OENN R -mp σ ⊆ OENN R -pair σ ⊆ OENN full σ ."
+    },
+    {
+      "anchor_id": "EQ-0033",
+      "id": "EQ-033",
+      "page": 6,
+      "statement": "F ( ρ X ( η ) x ) q = T W η,q F ( x ) q ( x ∈ K ) ."
+    },
+    {
+      "anchor_id": "EQ-0034",
+      "id": "EQ-034",
+      "page": 6,
+      "statement": "ψ ( u ) := 1 | H | ∑ h ∈ H ( T V h ) -1 Ψ( T U h u )"
+    },
+    {
+      "anchor_id": "EQ-0035",
+      "id": "EQ-035",
+      "page": 6,
+      "statement": "sup u ∈ K ‖ ψ ( u ) -f ( u ) ‖ ∗ < ε."
+    },
+    {
+      "anchor_id": "EQ-0036",
+      "id": "EQ-036",
+      "page": 6,
+      "statement": "sup x ∈ K ‖ F ( x ) -f ( x ) ‖ < ε."
+    },
+    {
+      "anchor_id": "EQ-0037",
+      "id": "EQ-037",
+      "page": 6,
+      "statement": "B : X → ⊕ q ∈ P ˜ X q , ˜ X q := X, ( Bx ) q = x,"
+    },
+    {
+      "anchor_id": "EQ-0038",
+      "id": "EQ-038",
+      "page": 7,
+      "statement": "( Lh ) v = ∑ O∈ ( V × V ) / Aut( G ) A O ∑ u ∈ V ( v,u ) ∈O h u . (14)"
+    },
+    {
+      "anchor_id": "EQ-0039",
+      "id": "EQ-039",
+      "page": 7,
+      "statement": "( Lh ) v = A self h v + A adj ∑ u ∈ N ( v ) h u (15)"
+    },
+    {
+      "anchor_id": "EQ-0040",
+      "id": "EQ-040",
+      "page": 7,
+      "statement": "h ′ v = ψ   h v , ∑ u ∈ N ( v ) φ ( h u )   (16)"
+    },
+    {
+      "anchor_id": "EQ-0041",
+      "id": "EQ-041",
+      "page": 7,
+      "statement": "z t +1 v,u = ∑ w ∈ N [ v ] z t w,u ,"
+    },
+    {
+      "anchor_id": "EQ-0042",
+      "id": "EQ-042",
+      "page": 7,
+      "statement": "O ℓ = { ( i, i + ℓ ) : i ∈ Z n } , ℓ ∈ Z n ."
+    },
+    {
+      "anchor_id": "EQ-0043",
+      "id": "EQ-043",
+      "page": 7,
+      "statement": "( Lh ) i = ∑ ℓ ∈ Z n A ℓ h i + ℓ . (17)"
+    },
+    {
+      "anchor_id": "EQ-0044",
+      "id": "EQ-044",
+      "page": 8,
+      "statement": "( Lh ) i = A 0 h i + ∑ 1 ≤ k<n/ 2 A k ( h i + k + h i -k ) + 1 2 | n A n/ 2 h i + n/ 2 . (18)"
+    },
+    {
+      "anchor_id": "EQ-0045",
+      "id": "EQ-045",
+      "page": 8,
+      "statement": "( Lx ) v = A V V, 0 h v + A V V, 1 ∑ u ∈ N ( v ) h u + A V E, inc ∑ e ∋ v z e , (19)"
+    },
+    {
+      "anchor_id": "EQ-0046",
+      "id": "EQ-046",
+      "page": 8,
+      "statement": "R p → q : V p → V q ( q ≤ p ) ,"
+    },
+    {
+      "anchor_id": "EQ-0047",
+      "id": "EQ-047",
+      "page": 8,
+      "statement": "T V γ,q R p → q = R γp → γq T V γ,p ( q ≤ p ) . (20)"
+    },
+    {
+      "anchor_id": "EQ-0048",
+      "id": "EQ-048",
+      "page": 8,
+      "statement": "T V γ,p R ∗ p → q = R ∗ γp → γq T V γ,q ( q ≤ p, γ ∈ G ) . (21)"
+    },
+    {
+      "anchor_id": "EQ-0049",
+      "id": "EQ-049",
+      "page": 8,
+      "statement": "U ◦ := { ( q, p ) : q < p }"
+    },
+    {
+      "anchor_id": "EQ-0050",
+      "id": "EQ-050",
+      "page": 8,
+      "statement": "D ◦ := { ( q, r ) : r < q } ."
+    },
+    {
+      "anchor_id": "EQ-0051",
+      "id": "EQ-051",
+      "page": 8,
+      "statement": "B ↑ O ∈ Hom( V q O , W q O )"
+    },
+    {
+      "anchor_id": "EQ-0052",
+      "id": "EQ-052",
+      "page": 8,
+      "statement": "A ↑ O := B ↑ O R p O → q O ∈ Hom( V p O , W q O ) ."
+    },
+    {
+      "anchor_id": "EQ-0053",
+      "id": "EQ-053",
+      "page": 8,
+      "statement": "T W η,q O B ↑ O = B ↑ O T V η,q O ( η ∈ H O ) ."
+    },
+    {
+      "anchor_id": "EQ-0054",
+      "id": "EQ-054",
+      "page": 8,
+      "statement": "R ∗ q → r : V r → V q ."
+    },
+    {
+      "anchor_id": "EQ-0055",
+      "id": "EQ-055",
+      "page": 8,
+      "statement": "B ↓ O ∈ Hom( V q O , W q O ) , A ↓ O := B ↓ O R ∗ q O → r O ∈ Hom( V r O , W q O ) ,"
+    },
+    {
+      "anchor_id": "EQ-0056",
+      "id": "EQ-056",
+      "page": 8,
+      "statement": "T W η,q O B ↓ O = B ↓ O T V η,q O ( η ∈ H O )"
+    },
+    {
+      "anchor_id": "EQ-0057",
+      "id": "EQ-057",
+      "page": 9,
+      "statement": "x ′ q = K 0 ( q, q ) x q + ∑ p : q<p K ↑ ( q, p ) x p + ∑ r : r<q K ↓ ( q, r ) x r , (22)"
+    },
+    {
+      "anchor_id": "EQ-0058",
+      "id": "EQ-058",
+      "page": 9,
+      "statement": "x ′ q = B 0 x q + ∑ p : q<p B ↑ R p → q x p + ∑ r : r<q B ↓ R ∗ q → r x r , (23)"
+    },
+    {
+      "anchor_id": "EQ-0059",
+      "id": "EQ-059",
+      "page": 12,
+      "statement": "∫ c ∈C F ( c )"
+    },
+    {
+      "anchor_id": "EQ-0060",
+      "id": "EQ-060",
+      "page": 12,
+      "statement": "s ( u ) = b, t ( u ) = a"
+    },
+    {
+      "anchor_id": "EQ-0061",
+      "id": "EQ-061",
+      "page": 12,
+      "statement": "I ( a ) := ⊔ b ∈ Ob( C ) Hom C ( b, a ) , µ a := ⊕ b µ b,a (24)"
+    },
+    {
+      "anchor_id": "EQ-0062",
+      "id": "EQ-062",
+      "page": 12,
+      "statement": "Z : C op -→ Meas ."
+    },
+    {
+      "anchor_id": "EQ-0063",
+      "id": "EQ-063",
+      "page": 12,
+      "statement": "Z ( u ) : Z ( a ) -→ Z ( b ) ,"
+    },
+    {
+      "anchor_id": "EQ-0064",
+      "id": "EQ-064",
+      "page": 12,
+      "statement": "Z (id a ) = id Z ( a ) , Z ( u ◦ v ) = Z ( v ) ◦ Z ( u )"
+    },
+    {
+      "anchor_id": "EQ-0065",
+      "id": "EQ-065",
+      "page": 13,
+      "statement": "Z ( a ) := C (Ω( a ) , E Z ( a )) . (25)"
+    },
+    {
+      "anchor_id": "EQ-0066",
+      "id": "EQ-066",
+      "page": 13,
+      "statement": "π u : Ω( b ) → Ω( a ) , τ u : Ω( a ) → Ω( b ) ,"
+    },
+    {
+      "anchor_id": "EQ-0067",
+      "id": "EQ-067",
+      "page": 13,
+      "statement": "L Z u : E Z ( a ) → E Z ( b ) ."
+    },
+    {
+      "anchor_id": "EQ-0068",
+      "id": "EQ-068",
+      "page": 13,
+      "statement": "π u ◦ v = π u ◦ π v , τ u ◦ v = τ v ◦ τ u , L Z u ◦ v = L Z v ◦ L Z u ,"
+    },
+    {
+      "anchor_id": "EQ-0069",
+      "id": "EQ-069",
+      "page": 13,
+      "statement": "Z ( u ) h := L Z u ◦ h ◦ π u ∈ C (Ω( b ) , E Z ( b )) , h ∈ Z ( a ) . (26)"
+    },
+    {
+      "anchor_id": "EQ-0070",
+      "id": "EQ-070",
+      "page": 13,
+      "statement": "Z ( a ) ∼ = E Z ( a ) , Z ( u ) = L Z u : E Z ( a ) → E Z ( b ) ."
+    },
+    {
+      "anchor_id": "EQ-0071",
+      "id": "EQ-071",
+      "page": 13,
+      "statement": "Φ : X ⇒ Y, Φ = { Φ a : X ( a ) → Y ( a ) } a ∈ Ob( C ) ,"
+    },
+    {
+      "anchor_id": "EQ-0072",
+      "id": "EQ-072",
+      "page": 13,
+      "statement": "X ( a ) Φ a - - → Y ( a ) X ( u ) ↓ ↓ Y ( u ) X ( b ) Φ b - - → Y ( b )"
+    },
+    {
+      "anchor_id": "EQ-0073",
+      "id": "EQ-073",
+      "page": 13,
+      "statement": "Y ( u ) ◦ Φ a = Φ b ◦ X ( u ) . (27)"
+    },
+    {
+      "anchor_id": "EQ-0074",
+      "id": "EQ-074",
+      "page": 13,
+      "statement": "‖ Φ ‖ F, ( K a ) := max a ∈ F sup x ∈ K a ‖ Φ a ( x ) ‖ ∞ . (28)"
+    },
+    {
+      "anchor_id": "EQ-0075",
+      "id": "EQ-075",
+      "page": 13,
+      "statement": "F ( ρ X ( g ) x ) = ρ Y ( g ) F ( x ) ."
+    },
+    {
+      "anchor_id": "EQ-0076",
+      "id": "EQ-076",
+      "page": 13,
+      "statement": "K ( u, y ) : E Z ( b ) → E Z ′ ( a ) ."
+    },
+    {
+      "anchor_id": "EQ-0077",
+      "id": "EQ-077",
+      "page": 13,
+      "statement": "Z ′ ( u ) β a = β b ( u : b → a ) ."
+    },
+    {
+      "anchor_id": "EQ-0078",
+      "id": "EQ-078",
+      "page": 13,
+      "statement": "( ( ˜ L K ) a z ) ( y ) := β a ( y ) + ∫ I ( a ) K ( u, y ) ( Z ( u ) z ) ( τ u y ) dµ a ( u ) . (29)"
+    },
+    {
+      "anchor_id": "EQ-0079",
+      "id": "EQ-079",
+      "page": 13,
+      "statement": "Z ′ ( w )( ˜ L K ) c = ( ˜ L K ) a Z ( w ) . (30)"
+    },
+    {
+      "anchor_id": "EQ-0080",
+      "id": "EQ-080",
+      "page": 14,
+      "statement": "L Z ′ w ∫ I ( c ) K ( u ′ , π w y ) ( Z ( u ′ ) z ) ( τ u ′ π w y ) dµ c ( u ′ ) = ∫ I ( a ) K ( u, y ) ( Z ( w ◦ u ) z ) ( τ u y ) dµ a ( u ) ."
+    },
+    {
+      "anchor_id": "EQ-0081",
+      "id": "EQ-081",
+      "page": 14,
+      "statement": "( ˜ L K ) a z = β a + ∑ u : b → a K ( u ) Z ( u ) z. (31)"
+    },
+    {
+      "anchor_id": "EQ-0082",
+      "id": "EQ-082",
+      "page": 14,
+      "statement": "S ( a ) = C (Ω( a ) , R ) , S ( u ) r = r ◦ π u ,"
+    },
+    {
+      "anchor_id": "EQ-0083",
+      "id": "EQ-083",
+      "page": 14,
+      "statement": "( Σ α,s a z ) ( y ) = α ( s a ( z )( y ) ) z ( y ) . (32)"
+    },
+    {
+      "anchor_id": "EQ-0084",
+      "id": "EQ-084",
+      "page": 14,
+      "statement": "r ↦-→ (1 , r j ) ↦-→ α ( r j )(1 , r j ) ,"
+    },
+    {
+      "anchor_id": "EQ-0085",
+      "id": "EQ-085",
+      "page": 14,
+      "statement": "CENN α ( X,Y ) ."
+    },
+    {
+      "anchor_id": "EQ-0086",
+      "id": "EQ-086",
+      "page": 14,
+      "statement": "CENN α ( X,Y ) ⊆ EqvCont( X,Y ) ."
+    },
+    {
+      "anchor_id": "EQ-0087",
+      "id": "EQ-087",
+      "page": 14,
+      "statement": "CENN α ( X,Y ) = EqvCont( X,Y )"
+    },
+    {
+      "anchor_id": "EQ-0088",
+      "id": "EQ-088",
+      "page": 15,
+      "statement": "max a ∈ F sup x ∈ K a ‖ Φ a ( x ) -Ψ a ( x ) ‖ ∞ < ε."
+    },
+    {
+      "anchor_id": "EQ-0089",
+      "id": "EQ-089",
+      "page": 15,
+      "statement": "X tot = ⊕ p ∈ P V p , Y tot = ⊕ q ∈ P W q"
+    },
+    {
+      "anchor_id": "EQ-0090",
+      "id": "EQ-090",
+      "page": 15,
+      "statement": "A := G ⋉ P."
+    },
+    {
+      "anchor_id": "EQ-0091",
+      "id": "EQ-091",
+      "page": 15,
+      "statement": "( γ, p ) : p -→ γp"
+    },
+    {
+      "anchor_id": "EQ-0092",
+      "id": "EQ-092",
+      "page": 15,
+      "statement": "( η, γp ) ◦ ( γ, p ) = ( ηγ, p ) ."
+    },
+    {
+      "anchor_id": "EQ-0093",
+      "id": "EQ-093",
+      "page": 15,
+      "statement": "V : A op → Meas , V ( p ) = V p , V ( γ, p ) = ( T V γ,p ) -1 : V γp → V p ."
+    },
+    {
+      "anchor_id": "EQ-0094",
+      "id": "EQ-094",
+      "page": 15,
+      "statement": "op"
+    },
+    {
+      "anchor_id": "EQ-0095",
+      "id": "EQ-095",
+      "page": 15,
+      "statement": "X : A → Meas , X ( q ) := X tot , X ( γ, q ) := ρ X ( γ -1 ) : X tot → X tot ,"
+    },
+    {
+      "anchor_id": "EQ-0096",
+      "id": "EQ-096",
+      "page": 15,
+      "statement": "Y : A op → Meas , Y ( q ) := W q , Y ( γ, q ) := ( T W γ,q ) -1 : W γq → W q ."
+    },
+    {
+      "anchor_id": "EQ-0097",
+      "id": "EQ-097",
+      "page": 15,
+      "statement": "H ( t ) := H tot , H ( γ, t ) := ρ H ( γ -1 ) : H tot → H tot ,"
+    },
+    {
+      "anchor_id": "EQ-0098",
+      "id": "EQ-098",
+      "page": 15,
+      "statement": "H ′ ( t ) := H ′ t , H ′ ( γ, t ) := ( T H ′ γ,t ) -1 : H ′ γt → H ′ t ."
+    },
+    {
+      "anchor_id": "EQ-0099",
+      "id": "EQ-099",
+      "page": 15,
+      "statement": "Nat K ( X , Y )"
+    },
+    {
+      "anchor_id": "EQ-0100",
+      "id": "EQ-100",
+      "page": 15,
+      "statement": "F ↦-→ Φ F , Φ F q ( x ) := F ( x ) q ,"
+    },
+    {
+      "anchor_id": "EQ-0101",
+      "id": "EQ-101",
+      "page": 15,
+      "statement": "C G ( K,Y tot ) ∼ = Nat K ( X , Y ) ."
+    },
+    {
+      "anchor_id": "EQ-0102",
+      "id": "EQ-102",
+      "page": 16,
+      "statement": "Y ( γ, q )Φ γq ( x ) = Φ q ( X ( γ, q ) x ) , x ∈ K."
+    },
+    {
+      "anchor_id": "EQ-0103",
+      "id": "EQ-103",
+      "page": 16,
+      "statement": "( T W γ,q ) -1 Φ γq ( x ) = Φ q ( ρ X ( γ -1 ) x ) . (33)"
+    },
+    {
+      "anchor_id": "EQ-0104",
+      "id": "EQ-104",
+      "page": 16,
+      "statement": "Φ γq ( ρ X ( γ ) x ) = T W γ,q Φ q ( x ) . (34)"
+    },
+    {
+      "anchor_id": "EQ-0105",
+      "id": "EQ-105",
+      "page": 16,
+      "statement": "F ( ρ X ( γ ) x ) = ρ Y ( γ ) F ( x ) ."
+    },
+    {
+      "anchor_id": "EQ-0106",
+      "id": "EQ-106",
+      "page": 16,
+      "statement": "max q ∈ P sup x ∈ K ‖ Φ q ( x ) -Ψ q ( x ) ‖ = sup x ∈ K ‖ F Φ ( x ) -F Ψ ( x ) ‖ Y tot , max ,"
+    },
+    {
+      "anchor_id": "EQ-0107",
+      "id": "EQ-107",
+      "page": 16,
+      "statement": "H tot = ⊕ s ∈ S H s , H ′ tot = ⊕ t ∈ T H ′ t"
+    },
+    {
+      "anchor_id": "EQ-0108",
+      "id": "EQ-108",
+      "page": 16,
+      "statement": "A ( h ) t = b t + ∑ s ∈ S K ( t, s ) h s ."
+    },
+    {
+      "anchor_id": "EQ-0109",
+      "id": "EQ-109",
+      "page": 16,
+      "statement": "L t : H tot → H ′ t , L t ( h ) := ∑ s ∈ S K ( t, s ) h s ."
+    },
+    {
+      "anchor_id": "EQ-0110",
+      "id": "EQ-110",
+      "page": 16,
+      "statement": "( T H ′ γ,t ) -1 L γt = L t ρ H ( γ -1 ) , ( T H ′ γ,t ) -1 b γt = b t ."
+    },
+    {
+      "anchor_id": "EQ-0111",
+      "id": "EQ-111",
+      "page": 16,
+      "statement": "L γt ρ H ( γ ) = T H ′ γ,t L t , b γt = T H ′ γ,t b t ."
+    },
+    {
+      "anchor_id": "EQ-0112",
+      "id": "EQ-112",
+      "page": 16,
+      "statement": "K ( γt, γs ) T H γ,s = T H ′ γ,t K ( t, s ) ,"
+    },
+    {
+      "anchor_id": "EQ-0113",
+      "id": "EQ-113",
+      "page": 16,
+      "statement": "K (id t ) := L t , K ( u ) := 0 ( u = id t in I ( t )) ."
+    },
+    {
+      "anchor_id": "EQ-0114",
+      "id": "EQ-114",
+      "page": 16,
+      "statement": "ψ s 0 ( u ) = 1 | G s 0 | ∑ h ∈ G s 0 ( T F h,s 0 ) -1 Ψ s 0 ( T E h,s 0 u )"
+    },
+    {
+      "anchor_id": "EQ-0115",
+      "id": "EQ-115",
+      "page": 17,
+      "statement": "ψ γs 0 ( e ) = T F γ,s 0 ψ s 0 ( ( T E γ,s 0 ) -1 e )"
+    },
+    {
+      "anchor_id": "EQ-0116",
+      "id": "EQ-116",
+      "page": 17,
+      "statement": "K (( q, p ) , ( r, s )) = 0 unless s = p and ( q, r ) ∈ R"
+    },
+    {
+      "anchor_id": "EQ-0117",
+      "id": "EQ-117",
+      "page": 17,
+      "statement": "F Ψ : X tot → Y tot , F Ψ ( x ) q := Ψ q ( x ) ,"
+    },
+    {
+      "anchor_id": "EQ-0118",
+      "id": "EQ-118",
+      "page": 17,
+      "statement": "T Z γ,q := Z ( γ, q ) -1 : Z ( q ) → Z ( γq ) ."
+    },
+    {
+      "anchor_id": "EQ-0119",
+      "id": "EQ-119",
+      "page": 17,
+      "statement": "Λ t ( h ) = c t + ∑ s ∈ S Λ t,s h s , Λ t,s : H s → H ′ t ."
+    },
+    {
+      "anchor_id": "EQ-0120",
+      "id": "EQ-120",
+      "page": 17,
+      "statement": "( T H ′ γ,t ) -1 Λ γt ( h ) = Λ t ( ρ H ( γ -1 ) h ) ."
+    },
+    {
+      "anchor_id": "EQ-0121",
+      "id": "EQ-121",
+      "page": 17,
+      "statement": "Λ γt,γs T H γ,s = T H ′ γ,t Λ t,s , c γt = T H ′ γ,t c t ."
+    },
+    {
+      "anchor_id": "EQ-0122",
+      "id": "EQ-122",
+      "page": 17,
+      "statement": "λ γs T Z γ,s = T Z ′ γ,s λ s , c γs = T Z ′ γ,s c s ,"
+    },
+    {
+      "anchor_id": "EQ-0123",
+      "id": "EQ-123",
+      "page": 18,
+      "statement": "CENN α ( X , Y ) | K"
+    },
+    {
+      "anchor_id": "EQ-0124",
+      "id": "EQ-124",
+      "page": 18,
+      "statement": "CENN α ( X , Y ) | K = Nat K ( X , Y ) ∼ = C G ( K,Y tot )"
+    },
+    {
+      "anchor_id": "EQ-0125",
+      "id": "EQ-125",
+      "page": 18,
+      "statement": "OENN full α ( X tot , Y tot ) | K = C G ( K,Y tot ) ."
+    },
+    {
+      "anchor_id": "EQ-0126",
+      "id": "EQ-126",
+      "page": 18,
+      "statement": "˜ F ( x ) := 1 | G | ∑ γ ∈ G ρ Y ( γ -1 ) H ( ρ X ( γ ) x ) ."
+    },
+    {
+      "anchor_id": "EQ-0127",
+      "id": "EQ-127",
+      "page": 18,
+      "statement": "F ( ρ X ( γ ) x ) = ρ Y ( γ ) F ( x ) ( γ ∈ G ) ,"
+    },
+    {
+      "anchor_id": "EQ-0128",
+      "id": "EQ-128",
+      "page": 18,
+      "statement": "F : B op → Cat , (35)"
+    },
+    {
+      "anchor_id": "EQ-0129",
+      "id": "EQ-129",
+      "page": 18,
+      "statement": "∫ b ∈B F ( b ) , (36)"
+    },
+    {
+      "anchor_id": "EQ-0130",
+      "id": "EQ-130",
+      "page": 19,
+      "statement": "( g, ψ ) ◦ ( f, φ ) = ( g ◦ f, F ( f )( ψ ) ◦ φ ) ."
+    },
+    {
+      "anchor_id": "EQ-0131",
+      "id": "EQ-131",
+      "page": 19,
+      "statement": "F : B op → Cat ,"
+    },
+    {
+      "anchor_id": "EQ-0132",
+      "id": "EQ-132",
+      "page": 19,
+      "statement": "G ACC = G GYR = SO(3) × C T , G EMG = C 8 × C T , G TOT = C T ."
+    },
+    {
+      "anchor_id": "EQ-0133",
+      "id": "EQ-133",
+      "page": 19,
+      "statement": "∫ b ∈B F ( b )"
+    },
+    {
+      "anchor_id": "EQ-0134",
+      "id": "EQ-134",
+      "page": 20,
+      "statement": "( Lρ X ( γ ) x ) q = ∑ p ∈ P K ( q, p ) T V γ,γ -1 p x γ -1 p = ∑ r ∈ P K ( q, γr ) T V γ,r x r ."
+    },
+    {
+      "anchor_id": "EQ-0135",
+      "id": "EQ-135",
+      "page": 20,
+      "statement": "( ρ Y ( γ ) Lx ) q = T W γ,γ -1 q ( Lx ) γ -1 q = ∑ r ∈ P T W γ,γ -1 q K ( γ -1 q, r ) x r ."
+    },
+    {
+      "anchor_id": "EQ-0136",
+      "id": "EQ-136",
+      "page": 20,
+      "statement": "K ( q, γr ) T V γ,r = T W γ,γ -1 q K ( γ -1 q, r ) ( q, r ∈ P ) ."
+    },
+    {
+      "anchor_id": "EQ-0137",
+      "id": "EQ-137",
+      "page": 20,
+      "statement": "T γ W 1 ,q O A O ( T V γ 1 ,p O ) -1 = T γ W 2 ,q O T W η,q O A O ( T V η,p O ) -1 ( T V γ 2 ,p O ) -1 = T γ W 2 ,q O A O ( T V γ 2 ,p O ) -1 ."
+    },
+    {
+      "anchor_id": "EQ-0138",
+      "id": "EQ-138",
+      "page": 20,
+      "statement": "R eq H [Ψ]( T U g u ) = 1 | H | ∑ h ∈ H ( T V h ) -1 Ψ( T U hg u ) = T V g R eq H [Ψ]( u ) ."
+    },
+    {
+      "anchor_id": "EQ-0139",
+      "id": "EQ-139",
+      "page": 20,
+      "statement": "Ψ( u ) = A L σ ( A L -1 σ ( · · · σ ( A 1 u + b 1 ) · · · ) + b L -1 ) + b L ."
+    },
+    {
+      "anchor_id": "EQ-0140",
+      "id": "EQ-140",
+      "page": 20,
+      "statement": "( π i ( g ) z ) h = z hg ."
+    },
+    {
+      "anchor_id": "EQ-0141",
+      "id": "EQ-141",
+      "page": 20,
+      "statement": "( B 1 u ) h = A 1 T U h u + b 1 ,"
+    },
+    {
+      "anchor_id": "EQ-0142",
+      "id": "EQ-142",
+      "page": 20,
+      "statement": "Cz = 1 | H | ∑ h ∈ H ( T V h ) -1 ( A L z h + b L )"
+    },
+    {
+      "anchor_id": "EQ-0143",
+      "id": "EQ-143",
+      "page": 20,
+      "statement": "φ τq,τp ( T V τ,p v ) = φ O ( ( T V τγ,p O ) -1 T V τ,p v ) = φ O ( ( T V γ,p O ) -1 v ) = φ q,p ( v ) ."
+    },
+    {
+      "anchor_id": "EQ-0144",
+      "id": "EQ-144",
+      "page": 20,
+      "statement": "̂ Z ( q,p ) := V p , T ̂ Z τ, ( q,p ) := T V τ,p : ̂ Z ( q,p ) → ̂ Z ( τq,τp ) ."
+    },
+    {
+      "anchor_id": "EQ-0145",
+      "id": "EQ-145",
+      "page": 20,
+      "statement": "B : X → ⊕ ( q,p ) ∈ P × P ̂ Z ( q,p ) , ( Bx ) ( q,p ) := x p ."
+    },
+    {
+      "anchor_id": "EQ-0146",
+      "id": "EQ-146",
+      "page": 20,
+      "statement": "( Bρ X ( τ ) x ) ( q,p ) = T V τ,τ -1 p x τ -1 p = ( ρ ̂ Z ( τ ) Bx ) ( q,p ) ."
+    },
+    {
+      "anchor_id": "EQ-0147",
+      "id": "EQ-147",
+      "page": 21,
+      "statement": "u O ( q,p ) = φ q,p ( x p ) (( q, p ) ∈ O ) ."
+    },
+    {
+      "anchor_id": "EQ-0148",
+      "id": "EQ-148",
+      "page": 21,
+      "statement": "( A O u ) q := ∑ p ∈ P ( q,p ) ∈O u ( q,p ) ."
+    },
+    {
+      "anchor_id": "EQ-0149",
+      "id": "EQ-149",
+      "page": 21,
+      "statement": "A ( q ) := {O : ∃ p ∈ P with ( q, p ) ∈ O} ."
+    },
+    {
+      "anchor_id": "EQ-0150",
+      "id": "EQ-150",
+      "page": 21,
+      "statement": "E q := V q ⊕ ⊕ O∈A ( q ) R m O ,"
+    },
+    {
+      "anchor_id": "EQ-0151",
+      "id": "EQ-151",
+      "page": 21,
+      "statement": "z 0 q,p := { h q , p = q, 0 , p = q,"
+    },
+    {
+      "anchor_id": "EQ-0152",
+      "id": "EQ-152",
+      "page": 21,
+      "statement": "z 1 q,p := ∑ r :( q,r ) ∈ R z 0 r,p ."
+    },
+    {
+      "anchor_id": "EQ-0153",
+      "id": "EQ-153",
+      "page": 21,
+      "statement": "‖ v ‖ ∗ ≤ c ‖ v ‖ 0 ( v ∈ V ) ."
+    },
+    {
+      "anchor_id": "EQ-0154",
+      "id": "EQ-154",
+      "page": 21,
+      "statement": "sup u ∈ K ‖ Ψ( u ) -f ( u ) ‖ 0 < ε/c."
+    },
+    {
+      "anchor_id": "EQ-0155",
+      "id": "EQ-155",
+      "page": 21,
+      "statement": "ψ ( u ) -f ( u ) = 1 | H | ∑ h ∈ H ( T V h ) -1 ( Ψ( T U h u ) -f ( T U h u ) ) ,"
+    },
+    {
+      "anchor_id": "EQ-0156",
+      "id": "EQ-156",
+      "page": 21,
+      "statement": "sup u ∈ K ‖ ψ ( u ) -f ( u ) ‖ ∗ < ε."
+    },
+    {
+      "anchor_id": "EQ-0157",
+      "id": "EQ-157",
+      "page": 22,
+      "statement": "g q 0 : K → W q 0 , g q 0 ( x ) = f ( x ) q 0 ."
+    },
+    {
+      "anchor_id": "EQ-0158",
+      "id": "EQ-158",
+      "page": 22,
+      "statement": "C := max ( 1 , max γ ∈ G, q 0 ∈Q ‖ T W γ,q 0 ‖ op ) ,"
+    },
+    {
+      "anchor_id": "EQ-0159",
+      "id": "EQ-159",
+      "page": 22,
+      "statement": "ψ q 0 : X → W q 0"
+    },
+    {
+      "anchor_id": "EQ-0160",
+      "id": "EQ-160",
+      "page": 22,
+      "statement": "sup x ∈ K ‖ ψ q 0 ( x ) -g q 0 ( x ) ‖ W q 0 < δ. (37)"
+    },
+    {
+      "anchor_id": "EQ-0161",
+      "id": "EQ-161",
+      "page": 22,
+      "statement": "ψ q ( x ) := T W γ,q 0 ψ q 0 ( ρ X ( γ -1 ) x ) . (38)"
+    },
+    {
+      "anchor_id": "EQ-0162",
+      "id": "EQ-162",
+      "page": 22,
+      "statement": "T W η,q 0 ψ q 0 ( ρ X ( η -1 ) v ) = ψ q 0 ( v ) ,"
+    },
+    {
+      "anchor_id": "EQ-0163",
+      "id": "EQ-163",
+      "page": 22,
+      "statement": "F ( ρ X ( τ ) x ) τq = T W τγ,q 0 ψ q 0 ( ρ X ( γ -1 ) x ) = T W τ,q F ( x ) q ."
+    },
+    {
+      "anchor_id": "EQ-0164",
+      "id": "EQ-164",
+      "page": 22,
+      "statement": "f ( x ) q = T W γ,q 0 g q 0 ( ρ X ( γ -1 ) x ) ."
+    },
+    {
+      "anchor_id": "EQ-0165",
+      "id": "EQ-165",
+      "page": 22,
+      "statement": "‖ F ( x ) q -f ( x ) q ‖ W q ≤ ‖ T W γ,q 0 ‖ op δ ≤ Cδ = ε."
+    },
+    {
+      "anchor_id": "EQ-0166",
+      "id": "EQ-166",
+      "page": 22,
+      "statement": "B : X → ⊕ q ∈ P ˜ X q , ( Bx ) q = x, (39)"
+    },
+    {
+      "anchor_id": "EQ-0167",
+      "id": "EQ-167",
+      "page": 22,
+      "statement": "Z ( q,p ) := V p , T Z γ, ( q,p ) := T V γ,p : Z ( q,p ) → Z ( γq,γp ) ."
+    },
+    {
+      "anchor_id": "EQ-0168",
+      "id": "EQ-168",
+      "page": 22,
+      "statement": "( Ix ) q,p := { x p , q = p, 0 , q = p."
+    },
+    {
+      "anchor_id": "EQ-0169",
+      "id": "EQ-169",
+      "page": 22,
+      "statement": "( Mz ) q,p := ∑ r ∈ P ( q,r ) ∈ R z r,p ."
+    },
+    {
+      "anchor_id": "EQ-0170",
+      "id": "EQ-170",
+      "page": 22,
+      "statement": "K (( q, p ) , ( r, s )) = 0 unless s = p and ( q, r ) ∈ R,"
+    },
+    {
+      "anchor_id": "EQ-0171",
+      "id": "EQ-171",
+      "page": 22,
+      "statement": "( M D Ix ) q,p = a q,p x p ,"
+    },
+    {
+      "anchor_id": "EQ-0172",
+      "id": "EQ-172",
+      "page": 23,
+      "statement": "a γq,γp = a q,p ( γ ∈ G ) ."
+    },
+    {
+      "anchor_id": "EQ-0173",
+      "id": "EQ-173",
+      "page": 23,
+      "statement": "( Sz ) q,p := a -1 q,p z q,p"
+    },
+    {
+      "anchor_id": "EQ-0174",
+      "id": "EQ-174",
+      "page": 23,
+      "statement": "( Cz ) q = ( z q,p ) p ∈ P ∈ ⊕ p ∈ P V p = X."
+    },
+    {
+      "anchor_id": "EQ-0175",
+      "id": "EQ-175",
+      "page": 23,
+      "statement": "R ∗ p → q ( T V γ,q ) -1 = ( T V γ,p ) -1 R ∗ γp → γq ,"
+    },
+    {
+      "anchor_id": "EQ-0176",
+      "id": "EQ-176",
+      "page": 23,
+      "statement": "K ↑ ( q, p ) = T W α,q O B ↑ O R p O → q O ( T V α,p O ) -1 ."
+    },
+    {
+      "anchor_id": "EQ-0177",
+      "id": "EQ-177",
+      "page": 23,
+      "statement": "K ↑ ( γq, γp ) T V γ,p = T W γα,q O B ↑ O R p O → q O ( T V γα,p O ) -1 T V γ,p = T W γ,q K ↑ ( q, p ) ."
+    },
+    {
+      "anchor_id": "EQ-0178",
+      "id": "EQ-178",
+      "page": 23,
+      "statement": "B ↑ R γp → γq T V γ,p = B ↑ T V γ,q R p → q ,"
+    }
+  ],
+  "ethical_risk_triggers": [
+    "[TXT-0002] Motivation. Symmetry has long been recognized as a powerful inductive bias in deep learning. Group-equivariant architectures explicitly exploit the symmetries of an index set to share parameters, improve sample efficiency, and en-",
+    "[TXT-0032] Without biases, the UAT fails for common activations such as ReLU and tanh even for a one-point poset and trivial group, since no-bias networks with σ (0) = 0 vanish at the origin. We include equivariant biases to match the usual affine-map formulation of universal approximation.",
+    "[TXT-0180] Assume the standard regularity needed for the integral below: measurability in u , continuity in y , and an L 1 bound over I ( a ) on compact parameter ranges. A bias is a family β a ∈ Z ′ ( a ) satisfying",
+    "[TXT-0184] Written pointwise for z ∈ Z ( c ) and y ∈ Ω( a ) , the non-bias terms satisfy",
+    "[TXT-0233] and the second identity is the OENN fixed-bias law. With counting measure and point bases, define a category kernel supported only at the identity arrow of each target object by"
+  ],
+  "experiments": [
+    {
+      "anchor_id": "TXT-0006",
+      "id": "EXP-001",
+      "page": 1,
+      "statement": "Background and context. The study of equivariance has unified diverse neural architectures under the umbrella of geometric deep learning (Bronstein et al., 2021; Shuman et al., 2013; Bruna et al., 2014; Defferrard et al., 2016). Group- and permutation-equivariant networks (Cohen and Welling, 2016; Zaheer et al., 2017; Gilmer et al., 2017; Xu et al., 2019; Maron et al., 2019) rely on the algebraic structure of groups acting on index sets, while higher-order analogs exploit topological constructions such as simplicial, cellular, or combinatorial complexes (Ebli et al., 2020; Bodnar et al., 2022;"
+    },
+    {
+      "anchor_id": "TXT-0264",
+      "id": "EXP-002",
+      "page": 19,
+      "statement": "EMG-IMU experiments and results. To test the performance of Grothendieck CENN, we consider the EMG-IMU benchmark (Khan et al., 2020b;a), where wearable devices collect both electromyography (EMG) signals and inertial measurement unit (IMU) signals, and the task is to classify actions or gestures from the resulting time-series data. EMG-IMU leverages multimodal signals. We compared GrothendieckCENN against TemporalCNN and InvariantTransformer. Table 2 shows the experimental results; GrothendieckCENN substantially outperformed both of them."
+    },
+    {
+      "anchor_id": "TXT-0270",
+      "id": "EXP-003",
+      "page": 19,
+      "statement": "Intuition for this experiment. The Grothendieck category ∫ b ∈B F ( b ) is a global space that organizes, modality by modality, the allowed nuisance transformations, such as device-pose rotation, temporal misalignment, electrode reindexing, and gain drift. It assigns appropriate featureextraction rules as fibers and integrates only the information required for the final decision into a shared representation. Rather than merely concatenating modality embeddings, it specifies how modalities are glued together by declaring which nuisance transformations should be collapsed and which invariant sig"
+    },
+    {
+      "anchor_id": "TXT-0281",
+      "id": "EXP-004",
+      "page": 19,
+      "statement": "Why does Grothendieck CENN work well? Nuisance factors such as pose, temporal shift, and electrode placement are difficult to learn from limited data. Grothendieck CENN builds the relevant invariances into the representation via categorical equivariance. Otherwise models must acquire such invariances from data and can be misled by superficial differences under finite samples. In contrast, Grothendieck CENN extracts and fuses invariants that persist under these nuisance transformations, such as features insensitive to rotations and reindexings, allowing learning capacity to focus on class-speci"
+    }
+  ],
+  "limitations": [
+    "[TXT-0001] Symmetry is everywhere in nature and society. Geometric deep learning exploits symmetries in data to improve the performance and efficiency of deep learning systems. In this paper, we extend geometric deep learning to utilize richer symmetry structures. Specifically, we develop orderequivariant neural networks (OENN), which generalize standard graph message passing and sheaf neural networks via the theory of equivariant bundles over face posets (face categories). We (i) characterize all linear order-equivariant maps, (ii) build OENN layers, and (iii) prove universal approximation theorems (UAT",
+    "[TXT-0073] There are several remarks. The cover-local relation R cov contains both upward and downward cover incidences. This is necessary for universal approximation of arbitrary equivariant maps X → Y , because an arbitrary output site may depend on features at any other site. If communication is restricted to only one order direction, the directed communication graph of a nontrivial finite poset is generally not strongly connected. In that case one can obtain universality only for maps satisfying the corresponding causal orderdependence restriction."
+  ],
+  "method_graph": [
+    {
+      "bundle": {
+        "bundle_sha256": "sha256:a31c0d544fcd1c2e243a894166eec702c2b240324fb856a68afac87e3d5fdd05",
+        "files": [
+          {
+            "path": "paper.md",
+            "sha256": "sha256:cd8a5da10217e68ed16d80cb1d314ea651910e5d9ab51493bd2cee76359409be",
+            "size_bytes": 121007
+          },
+          {
+            "path": "anchors.json",
+            "sha256": "sha256:5165f75bc1a93f68e67541045ea7dfcf81e77045fc1246311d8efceb5b5a492f",
+            "size_bytes": 239487
+          },
+          {
+            "path": "extraction-report.json",
+            "sha256": "sha256:b42dec25f419fcb2e8a8009d83ea979eea189d7b34839f15bb4d64438ed06a43",
+            "size_bytes": 23099
+          },
+          {
+            "path": "assets/EQ-0001.tex",
+            "sha256": "sha256:6c8d707d1632ce8ae346a41ce4484f68879e787f61c879714e885d3a32c18204",
+            "size_bytes": 47
+          },
+          {
+            "path": "assets/EQ-0002.tex",
+            "sha256": "sha256:b05f3426864d72a199def7b8c22630fcd4ef7e16b39fb95ae65fb0669cabe96f",
+            "size_bytes": 64
+          },
+          {
+            "path": "assets/EQ-0003.tex",
+            "sha256": "sha256:1d42df44d011a1462507df607f9557773a7fe3a22ef31e9c5e47cb0018dc50b8",
+            "size_bytes": 23
+          },
+          {
+            "path": "assets/EQ-0004.tex",
+            "sha256": "sha256:e3110382798e3e3983e6a42e34c64f10c22ec68b8d614618f1aaab99dad5c8fd",
+            "size_bytes": 53
+          },
+          {
+            "path": "assets/EQ-0005.tex",
+            "sha256": "sha256:a8eb2ad62f190c8694c218919978de005474ff584842bfdca2c1d7305fc82b11",
+            "size_bytes": 70
+          },
+          {
+            "path": "assets/EQ-0006.tex",
+            "sha256": "sha256:6d0931de8aad81159aa40fc1b107e6ce619fe096142363e63aaec64c5d041055",
+            "size_bytes": 78
+          },
+          {
+            "path": "assets/EQ-0007.tex",
+            "sha256": "sha256:49784286862ec07b8d92c14e82ce256d8a75d500a2f119f9b5b67a1e05061dd0",
+            "size_bytes": 76
+          },
+          {
+            "path": "assets/EQ-0008.tex",
+            "sha256": "sha256:0478484a1147a7962709c6637a18b61f74ca13b9e5f098ebdd4658de04c401b8",
+            "size_bytes": 50
+          },
+          {
+            "path": "assets/EQ-0009.tex",
+            "sha256": "sha256:98476b8786c9df7ba6eed6e1dd94c4899627291e0a8ba1620f1d5cbd2e1350ad",
+            "size_bytes": 29
+          },
+          {
+            "path": "assets/EQ-0010.tex",
+            "sha256": "sha256:181e18f31febb6240e1f195e356b8702840cd62e40537d7a75bb3fbb624e35b1",
+            "size_bytes": 51
+          },
+          {
+            "path": "assets/EQ-0011.tex",
+            "sha256": "sha256:ef9db59fbf613bc50d091a9fe9e9c53f330da4442d90fe50c8beddd1aa82aeea",
+            "size_bytes": 73
+          },
+          {
+            "path": "assets/EQ-0012.tex",
+            "sha256": "sha256:81db9badcdbc4126f72e8f722934e0981f2b3c5c4361a36cd3d25737466c6a16",
+            "size_bytes": 74
+          },
+          {
+            "path": "assets/EQ-0013.tex",
+            "sha256": "sha256:1dd381fd65c59bef5dd875a3448334d9ee23b1f048323ef943aaf6f3e82ec40e",
+            "size_bytes": 79
+          },
+          {
+            "path": "assets/EQ-0014.tex",
+            "sha256": "sha256:5d6df9ae422ff1b6156cd7c113c4e47de78075c9c24d5fa3fa77204626b80c21",
+            "size_bytes": 23
+          },
+          {
+            "path": "assets/EQ-0015.tex",
+            "sha256": "sha256:d9b7397e4509f39e4a4a2ccfb3acb5d9a1390676b2016181442a6cd14c820208",
+            "size_bytes": 53
+          },
+          {
+            "path": "assets/EQ-0016.tex",
+            "sha256": "sha256:58cc3342531e86dcdc5be16bfe94746aca26ec47a3dec42864d3ae4960023e3c",
+            "size_bytes": 73
+          },
+          {
+            "path": "assets/EQ-0017.tex",
+            "sha256": "sha256:997613ca19716361ca65c25144360ce5fc769e7246753ab7f23c4738f04efd49",
+            "size_bytes": 67
+          },
+          {
+            "path": "assets/EQ-0018.tex",
+            "sha256": "sha256:c58c8794e7672c1cc06c842329746396f6d6281ab6c79beac7c0d6559e0169ef",
+            "size_bytes": 33
+          },
+          {
+            "path": "assets/EQ-0019.tex",
+            "sha256": "sha256:ea635e3ba2f2c36b350c57e0226c1c4e247f58fa3fa33692a670f9f502369d1d",
+            "size_bytes": 74
+          },
+          {
+            "path": "assets/EQ-0020.tex",
+            "sha256": "sha256:67f4df797322699b79c8e0978c5e8a818eebd91c3c7717da252103c81311cb37",
+            "size_bytes": 38
+          },
+          {
+            "path": "assets/EQ-0021.tex",
+            "sha256": "sha256:21cd0587f11ce796bbb27678ba1a2a6967da89aa0814fd581d0e9386bbbb83cb",
+            "size_bytes": 61
+          },
+          {
+            "path": "assets/EQ-0022.tex",
+            "sha256": "sha256:59c34f69a8e134d9b1e40a891e68aafc507f2d448d4ea4dcbe9b2c9aecfe7ccd",
+            "size_bytes": 71
+          },
+          {
+            "path": "assets/EQ-0023.tex",
+            "sha256": "sha256:a57c1f659d4ee7f814690b4c986b08dd1ec6202992bb3888507c3f9a98af8eac",
+            "size_bytes": 52
+          },
+          {
+            "path": "assets/EQ-0024.tex",
+            "sha256": "sha256:315b4490ed2863d6f4b4694db11967f7235774f7d2ab068395d38b70ab9f6704",
+            "size_bytes": 56
+          },
+          {
+            "path": "assets/EQ-0025.tex",
+            "sha256": "sha256:2259baab5d1f2f5930125bf57bfd6eeea7e8e05828d80a9b7b32a7215230557e",
+            "size_bytes": 64
+          },
+          {
+            "path": "assets/EQ-0026.tex",
+            "sha256": "sha256:c59249ac1de93b03f3ac9a5b11a6eca21c5edc76f7ad42b7d3b40b2c8388e4e3",
+            "size_bytes": 74
+          },
+          {
+            "path": "assets/EQ-0027.tex",
+            "sha256": "sha256:80127ea7904f2c3c72f57b3cefb1aaddf716e6a43717dedf2c740c3865c23cc8",
+            "size_bytes": 46
+          },
+          {
+            "path": "assets/EQ-0028.tex",
+            "sha256": "sha256:d3f34986e9e525a831c00f72e9648f1ffa046a926884d66e4ac8d9797a1192ea",
+            "size_bytes": 89
+          },
+          {
+            "path": "assets/EQ-0029.tex",
+            "sha256": "sha256:73984264683e57570e10ec3984c66da0fc29330523e63971147e4ee105e701ec",
+            "size_bytes": 55
+          },
+          {
+            "path": "assets/EQ-0030.tex",
+            "sha256": "sha256:8a24fb6b43c781c94545f4ed7b3951ba3120c7f82cc48341e25f4336a6d256e6",
+            "size_bytes": 98
+          },
+          {
+            "path": "assets/EQ-0031.tex",
+            "sha256": "sha256:b4b89554ad8e62e7685fcc42d84af79fdc8138c4e11050678768d5651645f015",
+            "size_bytes": 57
+          },
+          {
+            "path": "assets/EQ-0032.tex",
+            "sha256": "sha256:58ca6ebe2ee721c4d7f145e3f74a47d085b8b312138e3981b8463a947e0397db",
+            "size_bytes": 53
+          },
+          {
+            "path": "assets/EQ-0033.tex",
+            "sha256": "sha256:24117efb32a0a06bb0909397a2280fe20a97d383973b4ff59f5aadc3958cfe52",
+            "size_bytes": 57
+          },
+          {
+            "path": "assets/EQ-0034.tex",
+            "sha256": "sha256:23770222a9c86227a7ecd59586239987e9e984bd1a7d80d6dcfbbf251590c9df",
+            "size_bytes": 59
+          },
+          {
+            "path": "assets/EQ-0035.tex",
+            "sha256": "sha256:a868c6272773bc07c4d573d8d463f40808dae67bc996f3c0fd720403a61cc952",
+            "size_bytes": 48
+          },
+          {
+            "path": "assets/EQ-0036.tex",
+            "sha256": "sha256:be095eda89340aca170d8819bdfe7a8acdd5d15d0589436eb8ece7a15ae6e80b",
+            "size_bytes": 43
+          },
+          {
+            "path": "assets/EQ-0037.tex",
+            "sha256": "sha256:7abf01cb8118a57b5ec5749807c5f80012572e067dcb728d71ac1641f84fceae",
+            "size_bytes": 58
+          },
+          {
+            "path": "assets/EQ-0038.tex",
+            "sha256": "sha256:01d4db438f8d4cabce020a204cede228818875f63f5fa267f1699365c9bfdccd",
+            "size_bytes": 82
+          },
+          {
+            "path": "assets/EQ-0039.tex",
+            "sha256": "sha256:bf331f9f5290db2cbac5847a3220d97a9551f7fb2362f6bf57c60886bc0ba42e",
+            "size_bytes": 57
+          },
+          {
+            "path": "assets/EQ-0040.tex",
+            "sha256": "sha256:92a40d4e239d0df00a9754ee927a40e14dc3a8417e0de57eb83cd9cbe8939718",
+            "size_bytes": 69
+          },
+          {
+            "path": "assets/EQ-0041.tex",
+            "sha256": "sha256:373ead053390c1367b78426c93f53832c87482f743340df9e96150a2364c0411",
+            "size_bytes": 41
+          },
+          {
+            "path": "assets/EQ-0042.tex",
+            "sha256": "sha256:ef8d79cd580fc1f209ef90674e50c9ff0dda59277fec4dd443c818683cebe16b",
+            "size_bytes": 55
+          },
+          {
+            "path": "assets/EQ-0043.tex",
+            "sha256": "sha256:bdbae43d4e95e1b843cca9b49bacf79d0d9623cb592c8004d5ecd32c723be0d1",
+            "size_bytes": 50
+          },
+          {
+            "path": "assets/EQ-0044.tex",
+            "sha256": "sha256:3cfb452d9c86b2c1558fe642e88f4f8b0552982763a0549eadf52cacb780c2d6",
+            "size_bytes": 98
+          },
+          {
+            "path": "assets/EQ-0045.tex",
+            "sha256": "sha256:73a7809acca08cf43f1dc922345f5b78bae8cad33e481833f6ab2db1075d0dcb",
+            "size_bytes": 93
+          },
+          {
+            "path": "assets/EQ-0046.tex",
+            "sha256": "sha256:b177ba109c4fa8da422f0ab94262f0207b11258484ffe042dc944c7f580392aa",
+            "size_bytes": 38
+          },
+          {
+            "path": "assets/EQ-0047.tex",
+            "sha256": "sha256:248b606d2d6d682194781b7a3c25b86a9a4ffc7d9371c3bf058f1d5d3c37aa86",
+            "size_bytes": 63
+          },
+          {
+            "path": "assets/EQ-0048.tex",
+            "sha256": "sha256:143f3e813e222ebaffc481c4bc161910eb3accb1c2c7f04ac2d0b0ea0154bc23",
+            "size_bytes": 81
+          },
+          {
+            "path": "assets/EQ-0049.tex",
+            "sha256": "sha256:6cdc407fdcebe1beb45cca0b483bbe4ee2170686d7e5a1d94968bef9a6896702",
+            "size_bytes": 30
+          },
+          {
+            "path": "assets/EQ-0050.tex",
+            "sha256": "sha256:e8c8acccc31292eb72479daca24517ea2606874e152fd0527ccea622206fcca9",
+            "size_bytes": 32
+          },
+          {
+            "path": "assets/EQ-0051.tex",
+            "sha256": "sha256:3b9480dc4ad6de6b4f492e961edec79a08f029becb751f29ac2c3849e9ed0d3c",
+            "size_bytes": 33
+          },
+          {
+            "path": "assets/EQ-0052.tex",
+            "sha256": "sha256:c8e4904190ceb943a71d54b2e5d5610609fa54630aab89a15bb98d7e8ed5e4e4",
+            "size_bytes": 60
+          },
+          {
+            "path": "assets/EQ-0053.tex",
+            "sha256": "sha256:4bb8f1eaca4fba08d608ea7096e1e079c43f4745207d9bf2c570d2e9e1cd8010",
+            "size_bytes": 57
+          },
+          {
+            "path": "assets/EQ-0054.tex",
+            "sha256": "sha256:c460c50df1b5bc1b89ebfb592729c57f200c2a02a95f655ee16a4197edcdc7e2",
+            "size_bytes": 30
+          },
+          {
+            "path": "assets/EQ-0055.tex",
+            "sha256": "sha256:4c786fc0db123512f2031509235d145ae79a30c95f02cc49ae1bd274b0c8772e",
+            "size_bytes": 99
+          },
+          {
+            "path": "assets/EQ-0056.tex",
+            "sha256": "sha256:5d4a7a2febbb21fbdb32dfd377f3f06e82c8c50fcb472ec6fffca3dd7a2a49b4",
+            "size_bytes": 55
+          },
+          {
+            "path": "assets/EQ-0057.tex",
+            "sha256": "sha256:90655ff0c103882baff6279716bf5a28928a610549815ef651651e8e10b2ceb7",
+            "size_bytes": 100
+          },
+          {
+            "path": "assets/EQ-0058.tex",
+            "sha256": "sha256:4de3e7bf0eb5bfac32622c7b76f1939ddb81528367fd94f96ed6fcdb81212f14",
+            "size_bytes": 97
+          },
+          {
+            "path": "assets/EQ-0059.tex",
+            "sha256": "sha256:543ab46d67cda81a37026bff5962173da2a98edf1af40b5186adebf22d25577d",
+            "size_bytes": 19
+          },
+          {
+            "path": "assets/EQ-0060.tex",
+            "sha256": "sha256:4ff3ae5f81c0c41d9d177f43b5dd01a1a03693b04ad9769b910c2252451d45e4",
+            "size_bytes": 25
+          },
+          {
+            "path": "assets/EQ-0061.tex",
+            "sha256": "sha256:51b32f4f3a28b0b90da304bf5cf111d567f58e4a1a3f6cba4bbef46f680b8230",
+            "size_bytes": 72
+          },
+          {
+            "path": "assets/EQ-0062.tex",
+            "sha256": "sha256:371c3a62b9011a3716d99a22e139dc7f632aa5fbb1cd06176b59d1295357a537",
+            "size_bytes": 21
+          },
+          {
+            "path": "assets/EQ-0063.tex",
+            "sha256": "sha256:b9a5cfbc095198ea3da7668e3c71cd45146f3e8e95e4838888608a15206a7716",
+            "size_bytes": 33
+          },
+          {
+            "path": "assets/EQ-0064.tex",
+            "sha256": "sha256:091e58f0aefbb7c36eb9ed78f1031c83bf30ba802855debf6554437468a8ad93",
+            "size_bytes": 61
+          },
+          {
+            "path": "assets/EQ-0065.tex",
+            "sha256": "sha256:fd0b33d994c0bac1a911564bd46f74a834fecbdde60f3d4856f2d66d21a70340",
+            "size_bytes": 43
+          },
+          {
+            "path": "assets/EQ-0066.tex",
+            "sha256": "sha256:91cba319df19e85771d73f432aba85d54e0fc8541a1384beadef36151d88480d",
+            "size_bytes": 62
+          },
+          {
+            "path": "assets/EQ-0067.tex",
+            "sha256": "sha256:30f8ac2c7384122bc55cd647c6e6e7dbbb58bc99f94d3cd8f9c9e74a813f8ef6",
+            "size_bytes": 34
+          },
+          {
+            "path": "assets/EQ-0068.tex",
+            "sha256": "sha256:ce7023eb75a9233f8701ecef0cd3501ed920d30c695071c829083a59ea6bcfe6",
+            "size_bytes": 90
+          },
+          {
+            "path": "assets/EQ-0069.tex",
+            "sha256": "sha256:d9a838bf2fd2772d93dc087cffd0bef86288d970f22b232c08929cabe70cdb31",
+            "size_bytes": 86
+          },
+          {
+            "path": "assets/EQ-0070.tex",
+            "sha256": "sha256:4c148f8ad975cce99d76f4defb6cdabcecbe679e3146d0a6f1a0d442af92d168",
+            "size_bytes": 70
+          },
+          {
+            "path": "assets/EQ-0071.tex",
+            "sha256": "sha256:b390d55774d8386f3b61ba9ae5395e918a4c17fbd1cb556de44cf95b0671171a",
+            "size_bytes": 66
+          },
+          {
+            "path": "assets/EQ-0072.tex",
+            "sha256": "sha256:39175a385e717a52dd51769b6d65fc63861a0395e72a0ef0cac547f89e86c747",
+            "size_bytes": 82
+          },
+          {
+            "path": "assets/EQ-0073.tex",
+            "sha256": "sha256:8ebcc4e3599a133fd9dae8d7fe921d94c7452b339567d5add82261249b08ce78",
+            "size_bytes": 43
+          },
+          {
+            "path": "assets/EQ-0074.tex",
+            "sha256": "sha256:89b1396f036f3a73a49ceb55f097caf318ad861b87595f57e6cf6b8b27008bc3",
+            "size_bytes": 81
+          },
+          {
+            "path": "assets/EQ-0075.tex",
+            "sha256": "sha256:a6a4ee17d99a7d1fd8dde1306ba05e25adfea5c3755e21c00cde6eeb889a6e49",
+            "size_bytes": 42
+          },
+          {
+            "path": "assets/EQ-0076.tex",
+            "sha256": "sha256:baeda69b337aa4fd96940b5cee2b34c4bafbde1111eca3b047e111b8b970d6e9",
+            "size_bytes": 43
+          },
+          {
+            "path": "assets/EQ-0077.tex",
+            "sha256": "sha256:80e0a66827609aafe5935c64aa2684545d8c1b439ba885daa0cc51ccb51438d1",
+            "size_bytes": 42
+          },
+          {
+            "path": "assets/EQ-0078.tex",
+            "sha256": "sha256:dc5b1d98c2c47249b849b2dd720cbc06778c25a87cc15e2a58c8fe9af7ae36c3",
+            "size_bytes": 108
+          },
+          {
+            "path": "assets/EQ-0079.tex",
+            "sha256": "sha256:43a190f871b7690d31db8218cbddde6f2bfa70e5c8161eba42ac91ee7cf421b1",
+            "size_bytes": 54
+          },
+          {
+            "path": "assets/EQ-0080.tex",
+            "sha256": "sha256:314ff5952d6f2283f128ef6a62d0e99829a0fa7774f501ed52e160b21cb15d3c",
+            "size_bytes": 167
+          },
+          {
+            "path": "assets/EQ-0081.tex",
+            "sha256": "sha256:4b0be4d0cde9c70dd2c3b8c4bc867f9b972da0301b9e53dacfb524326f9f5142",
+            "size_bytes": 64
+          },
+          {
+            "path": "assets/EQ-0082.tex",
+            "sha256": "sha256:090825ee40b0c3be46687ce810cb979940d2249e24e42a469ce6dd7fac758dd4",
+            "size_bytes": 55
+          },
+          {
+            "path": "assets/EQ-0083.tex",
+            "sha256": "sha256:5bfd3ed7a6b2bbcbbcdf8edcd344d10c1671aab4c6f15e9a22e78118abd17b8f",
+            "size_bytes": 61
+          },
+          {
+            "path": "assets/EQ-0084.tex",
+            "sha256": "sha256:5202a2591d32f48e3c22870558364e8402408f949a0f61c08f9fe4d93fdd5016",
+            "size_bytes": 52
+          },
+          {
+            "path": "assets/EQ-0085.tex",
+            "sha256": "sha256:1371afdcb1f4aeae2e663b949fba958f4fab9729419ffeb7c199de5f4b9a3e16",
+            "size_bytes": 18
+          },
+          {
+            "path": "assets/EQ-0086.tex",
+            "sha256": "sha256:17d37a59b43b80a09cac6887df8f443f01614c1c0c829b1a7a6b4f1263b6111c",
+            "size_bytes": 37
+          },
+          {
+            "path": "assets/EQ-0087.tex",
+            "sha256": "sha256:d8dcab572614dd68b5bf7fba1c6b731b57111825ba4e3e7d438de5d29f2c214a",
+            "size_bytes": 33
+          },
+          {
+            "path": "assets/EQ-0088.tex",
+            "sha256": "sha256:d5be3d408f71f155b49d9b721e52bb4c93042c892c4078b1b437b50dcd90a198",
+            "size_bytes": 67
+          },
+          {
+            "path": "assets/EQ-0089.tex",
+            "sha256": "sha256:7446cd0b6e877a8e7f513ccc32e52a5cdc39c44923a981a8910ab7790fa36871",
+            "size_bytes": 50
+          },
+          {
+            "path": "assets/EQ-0090.tex",
+            "sha256": "sha256:bb888b2ac29b4d48b731cf727ec3d054b5c10fbe0462613780d88f0730b3c9bf",
+            "size_bytes": 14
+          },
+          {
+            "path": "assets/EQ-0091.tex",
+            "sha256": "sha256:19c43cf99dd9d4feb044bedc42cb4f4d318ef97ca1a9822458c000f556518d36",
+            "size_bytes": 23
+          },
+          {
+            "path": "assets/EQ-0092.tex",
+            "sha256": "sha256:654e40fc6333178ac185fb659ec92b0d75feb9a416fedf6ca8c12186ade46558",
+            "size_bytes": 42
+          },
+          {
+            "path": "assets/EQ-0093.tex",
+            "sha256": "sha256:e516ae46a88923e24d4177ce9475435577ec5d874561e5a098dc913cca06eb98",
+            "size_bytes": 84
+          },
+          {
+            "path": "assets/EQ-0094.tex",
+            "sha256": "sha256:24491142bff2885f2b9078df5c5f1859297fae6201f0fbb5472d10c7cb8db2f4",
+            "size_bytes": 3
+          },
+          {
+            "path": "assets/EQ-0095.tex",
+            "sha256": "sha256:4c23320a30e3c625df8f8a6f08d03a7376dd4ac026cfe40b98a9c6d06d4d8d95",
+            "size_bytes": 86
+          },
+          {
+            "path": "assets/EQ-0096.tex",
+            "sha256": "sha256:9fb264346fd6a9c55e5d89fd5e934ffa4037ea011b98eac5ede4c7d91fe28e25",
+            "size_bytes": 86
+          },
+          {
+            "path": "assets/EQ-0097.tex",
+            "sha256": "sha256:aa2503d85d0b1dd7e48d5c7352e880294f2f391b9eb0b47e361c5d15b80f3812",
+            "size_bytes": 69
+          },
+          {
+            "path": "assets/EQ-0098.tex",
+            "sha256": "sha256:dc946111929d1d7dfd5782dabfce495dd3059a0acb9ddb7521be823cf5fdba23",
+            "size_bytes": 90
+          },
+          {
+            "path": "assets/EQ-0099.tex",
+            "sha256": "sha256:9b210b4edc51b33067e62c38cf2ef4d47f3526735329a53b7ccc65fccb0754a8",
+            "size_bytes": 16
+          },
+          {
+            "path": "assets/EQ-0100.tex",
+            "sha256": "sha256:1a0dc09379b321b659e130b309ceea0914305d9832d2606757a93c1e674cef80",
+            "size_bytes": 45
+          },
+          {
+            "path": "assets/EQ-0101.tex",
+            "sha256": "sha256:8b5d19ba787520c7cfe2fa7ee96466668e6f7be5be07c7f626321dcab539d53f",
+            "size_bytes": 40
+          },
+          {
+            "path": "assets/EQ-0102.tex",
+            "sha256": "sha256:86cd6ad59aee88f9e42c06b288dc3d3d042798ca946998dc6e273d7f751e322a",
+            "size_bytes": 60
+          },
+          {
+            "path": "assets/EQ-0103.tex",
+            "sha256": "sha256:9f1248cb263bf0b9a5b56fdf38c2c01fa50dd5880e519ce0ec2092a4abeee13f",
+            "size_bytes": 64
+          },
+          {
+            "path": "assets/EQ-0104.tex",
+            "sha256": "sha256:813e3ac337df3c66d8aa1994fc8a435755496aadfbec189fb76b62814faa4f81",
+            "size_bytes": 54
+          },
+          {
+            "path": "assets/EQ-0105.tex",
+            "sha256": "sha256:08872b207c887af0ee40d80d49541a2c8e9c0ea5c7cb4f1876d555355217bd29",
+            "size_bytes": 44
+          },
+          {
+            "path": "assets/EQ-0106.tex",
+            "sha256": "sha256:da467be2053bf6b20103bc2461cc463af53f9e359bfba0d12aa42bc7f9d0ffc3",
+            "size_bytes": 114
+          },
+          {
+            "path": "assets/EQ-0107.tex",
+            "sha256": "sha256:a30719035342842b3ffb35d27ce075a80bd4503b1f9ba6c0a40f161ce53072e6",
+            "size_bytes": 58
+          },
+          {
+            "path": "assets/EQ-0108.tex",
+            "sha256": "sha256:e9ab8f25ef05be2b7617bd3b38d2686bcdc7104ebe046c917ec65536fc85873d",
+            "size_bytes": 47
+          },
+          {
+            "path": "assets/EQ-0109.tex",
+            "sha256": "sha256:a498573c77d95da0a0679218eb556088f972aee705d513b71c116ed13969f679",
+            "size_bytes": 68
+          },
+          {
+            "path": "assets/EQ-0110.tex",
+            "sha256": "sha256:d5ce99f149e6c5fa5f26d7ac56a1ca0b3ed1dddb627e17b7c2dea4b6f09d6a4d",
+            "size_bytes": 83
+          },
+          {
+            "path": "assets/EQ-0111.tex",
+            "sha256": "sha256:41ed27683dbff56df6d0b46ac5d14c43e40fe80ef2a99df959160b1302494812",
+            "size_bytes": 66
+          },
+          {
+            "path": "assets/EQ-0112.tex",
+            "sha256": "sha256:ab1fda020d6709ebb112c21e55859a7b34a03fed5d372611891374abed265e35",
+            "size_bytes": 52
+          },
+          {
+            "path": "assets/EQ-0113.tex",
+            "sha256": "sha256:fbdf4eb877a2602204020544e5796cb4a8b1fd7caf1ba34cac6d19de22b697e8",
+            "size_bytes": 57
+          },
+          {
+            "path": "assets/EQ-0114.tex",
+            "sha256": "sha256:08cc55ed34db312fc4fe1493f58288ab0a42cfdc10447c2c29d752c1f07e781e",
+            "size_bytes": 83
+          },
+          {
+            "path": "assets/EQ-0115.tex",
+            "sha256": "sha256:d578cc735f3a49d793089c9124476c765c5998072062910b553ce170e05dadc7",
+            "size_bytes": 59
+          },
+          {
+            "path": "assets/EQ-0116.tex",
+            "sha256": "sha256:a3e9028572883efd9fe5d230bedb452b2e63c60e2218f7574b23f9b12ff47e19",
+            "size_bytes": 60
+          },
+          {
+            "path": "assets/EQ-0117.tex",
+            "sha256": "sha256:ccdc7cbc2239b5717b301c4892cdc7291ce1987b4dd2c9fdd62886cc534a5da5",
+            "size_bytes": 54
+          },
+          {
+            "path": "assets/EQ-0118.tex",
+            "sha256": "sha256:e10ab311090c547f0265ad1b7add8ce0a5067a350eb661aff17069f1d62e6ba5",
+            "size_bytes": 53
+          },
+          {
+            "path": "assets/EQ-0119.tex",
+            "sha256": "sha256:63b5939fcafc1f8106d875677d70f106b7d751075ad58412d6a74c920d1c2d30",
+            "size_bytes": 71
+          },
+          {
+            "path": "assets/EQ-0120.tex",
+            "sha256": "sha256:3734afb684c4ff09e186c723ec61be6b01b6453b24ed01c3910274ef274e32b5",
+            "size_bytes": 63
+          },
+          {
+            "path": "assets/EQ-0121.tex",
+            "sha256": "sha256:817b5d77453b421e5c2c795e841b15f624d8a431826a38c4e8bd7c15f5169d78",
+            "size_bytes": 71
+          },
+          {
+            "path": "assets/EQ-0122.tex",
+            "sha256": "sha256:d6cfe9d382a212e0a8a41a4dc4628af047d9437f2e4c7e470346516cea42b7ad",
+            "size_bytes": 65
+          },
+          {
+            "path": "assets/EQ-0123.tex",
+            "sha256": "sha256:8339f40e72ef71b824ff26b937eebe8639c561a7e7de9370edaa89e0aee4c2f9",
+            "size_bytes": 22
+          },
+          {
+            "path": "assets/EQ-0124.tex",
+            "sha256": "sha256:ab0cd8c9f975383d56e7ba40a94b5442b958d65597f6a081a833e44cb1c65015",
+            "size_bytes": 62
+          },
+          {
+            "path": "assets/EQ-0125.tex",
+            "sha256": "sha256:b41da4041e3737ff6ec468822a8e276675461142abfb4b8d9f6d159e4c372e5e",
+            "size_bytes": 55
+          },
+          {
+            "path": "assets/EQ-0126.tex",
+            "sha256": "sha256:9655fc6c48d4a9d65e4a1b2b73a74280b311f758243e63e09ab1045068c57d85",
+            "size_bytes": 72
+          },
+          {
+            "path": "assets/EQ-0127.tex",
+            "sha256": "sha256:a7d81b47fe1bb1f44c9d14b4fb6e19a71ad5c82677ae0fe3d3f4782a34f5ae1c",
+            "size_bytes": 57
+          },
+          {
+            "path": "assets/EQ-0128.tex",
+            "sha256": "sha256:f8e81b70313036c05fb3dec8ce0a38173071d7a6b0538a87637a247dde47071f",
+            "size_bytes": 24
+          },
+          {
+            "path": "assets/EQ-0129.tex",
+            "sha256": "sha256:d1b43ef09a1630f4dd58907a17f6fdd50a45cd8c12f36e1fcedf92b25ecb54cc",
+            "size_bytes": 26
+          },
+          {
+            "path": "assets/EQ-0130.tex",
+            "sha256": "sha256:a321deb7690291c655c4b0ac454d5cc162a7bedc66312e798d9a2dd45c464a52",
+            "size_bytes": 62
+          },
+          {
+            "path": "assets/EQ-0131.tex",
+            "sha256": "sha256:bbb2682e379a9917113274f27f192a4455fee5e555329c83fff5b4a30c2cadbd",
+            "size_bytes": 19
+          },
+          {
+            "path": "assets/EQ-0132.tex",
+            "sha256": "sha256:158f6b52fa489cc9b2fd0aeb7fbc971c3dc1ad324dd5e35428472ee688a73949",
+            "size_bytes": 66
+          },
+          {
+            "path": "assets/EQ-0133.tex",
+            "sha256": "sha256:4588ce4512653fac0e46363f15bd3cd38dc645cf4231aead8865ab7e72183d1d",
+            "size_bytes": 19
+          },
+          {
+            "path": "assets/EQ-0134.tex",
+            "sha256": "sha256:fa7382069ed0e4ba698990324b7220868c0b0aa21b829ff14248829151919983",
+            "size_bytes": 113
+          },
+          {
+            "path": "assets/EQ-0135.tex",
+            "sha256": "sha256:840dd42ddbf8a1217dddda85b84b8e02b14c5e2a84499a3740873ac47ba17cc6",
+            "size_bytes": 105
+          },
+          {
+            "path": "assets/EQ-0136.tex",
+            "sha256": "sha256:24cecd9489512bb523ece8e6f1c2ca085811364992cb232763908a4a34435160",
+            "size_bytes": 73
+          },
+          {
+            "path": "assets/EQ-0137.tex",
+            "sha256": "sha256:3551c55251386fd84b77d3b598bf67fd677b087a1632a35ea3f9a7f62bc3d2f7",
+            "size_bytes": 152
+          },
+          {
+            "path": "assets/EQ-0138.tex",
+            "sha256": "sha256:68d272a12135adfe14dc9238ef99d398b6b4c26e9ea0a65f3a5a3d475b16c309",
+            "size_bytes": 100
+          },
+          {
+            "path": "assets/EQ-0139.tex",
+            "sha256": "sha256:13d6df93c2bee7b6b6109eabaa2fe8412e481e808b42d53a69b6d19dc6777eb9",
+            "size_bytes": 89
+          },
+          {
+            "path": "assets/EQ-0140.tex",
+            "sha256": "sha256:30412923ae6bd6fca4ef6696a6a96d74b436d7df623078811d94a9016911b451",
+            "size_bytes": 28
+          },
+          {
+            "path": "assets/EQ-0141.tex",
+            "sha256": "sha256:d217e67bf581772a34636fff176519ee576bb05df841aad2ce9b7e177a63dd5a",
+            "size_bytes": 34
+          },
+          {
+            "path": "assets/EQ-0142.tex",
+            "sha256": "sha256:e8b60a8373ebf9c88104c6544b39150c18f4c209354f2cb892e58dffd081740a",
+            "size_bytes": 56
+          },
+          {
+            "path": "assets/EQ-0143.tex",
+            "sha256": "sha256:c7790553a7dd035a8933719da4da5dc542eee8373a8eacfbe0de10ebc47436cd",
+            "size_bytes": 116
+          },
+          {
+            "path": "assets/EQ-0144.tex",
+            "sha256": "sha256:bd746a2aca2adab109f065273e91fa42dcdcc4b6d317bfdd1c7dc8660fca3e3a",
+            "size_bytes": 91
+          },
+          {
+            "path": "assets/EQ-0145.tex",
+            "sha256": "sha256:176811d8be338cbb8c2360c2f21e278800ac365d4c3091b05697676341801bd5",
+            "size_bytes": 72
+          },
+          {
+            "path": "assets/EQ-0146.tex",
+            "sha256": "sha256:82c26ef047ddf702212ae06626cb686d4fbdb39596dfbcd54fe50f257318ebf6",
+            "size_bytes": 88
+          },
+          {
+            "path": "assets/EQ-0147.tex",
+            "sha256": "sha256:3eeab91b1717d275ccf298e7a6cce81941c87d94310b12aa4a98c941dae3f763",
+            "size_bytes": 49
+          },
+          {
+            "path": "assets/EQ-0148.tex",
+            "sha256": "sha256:46ee44d34ab89d4b5e56a1eaa4a0eb9b2d8a78878a4e262ec1e5d14cdd0bf612",
+            "size_bytes": 52
+          },
+          {
+            "path": "assets/EQ-0149.tex",
+            "sha256": "sha256:832c158ab2b4a0d2fef43c2b3b0b3cb639565209dd70e2860f19b4da8e2ee47c",
+            "size_bytes": 51
+          },
+          {
+            "path": "assets/EQ-0150.tex",
+            "sha256": "sha256:8e840808fd142eacd5cc9ffe9610cab0f7e26f9ee612903f5086197385d61b5d",
+            "size_bytes": 39
+          },
+          {
+            "path": "assets/EQ-0151.tex",
+            "sha256": "sha256:82e11a752af7270b3d741807c0f0d6f3ecc358d9c23418c4e74031902003628a",
+            "size_bytes": 37
+          },
+          {
+            "path": "assets/EQ-0152.tex",
+            "sha256": "sha256:fe08e6bdbb2c243b8d7b093449790819807fe037f25633c5b1a57a79847a06ec",
+            "size_bytes": 42
+          },
+          {
+            "path": "assets/EQ-0153.tex",
+            "sha256": "sha256:1c85bb4c0f0523a45f99bbbfd4d0b3eea66bb7a9b4e087a5535d7ebe1aa68c00",
+            "size_bytes": 46
+          },
+          {
+            "path": "assets/EQ-0154.tex",
+            "sha256": "sha256:b95bfa0389f247efdebbb64bb4033b7a3eea523af88f1a274fdfbc30f71e4dc9",
+            "size_bytes": 47
+          },
+          {
+            "path": "assets/EQ-0155.tex",
+            "sha256": "sha256:49a8c7ce2ff233e69280f95b260c539182f5b59fcc912650d61bbc14311fcb5b",
+            "size_bytes": 88
+          },
+          {
+            "path": "assets/EQ-0156.tex",
+            "sha256": "sha256:a868c6272773bc07c4d573d8d463f40808dae67bc996f3c0fd720403a61cc952",
+            "size_bytes": 48
+          },
+          {
+            "path": "assets/EQ-0157.tex",
+            "sha256": "sha256:0c9cee90cd4e78e49211d160a9a8db315bc006987f4a86a6e531412d2cc49f3d",
+            "size_bytes": 50
+          },
+          {
+            "path": "assets/EQ-0158.tex",
+            "sha256": "sha256:fd7d424ff9d47d3d40b749cb556a5dd5c2f14b8944c5e96f0b2026c85536fa50",
+            "size_bytes": 64
+          },
+          {
+            "path": "assets/EQ-0159.tex",
+            "sha256": "sha256:046f084b4737b50748502f1eb22c996454ef4e9533b1d8967275e73053f70bb1",
+            "size_bytes": 21
+          },
+          {
+            "path": "assets/EQ-0160.tex",
+            "sha256": "sha256:322ff1a035689166fa821c410a8294143f6dbdf98e639c27f49396cf30810d34",
+            "size_bytes": 63
+          },
+          {
+            "path": "assets/EQ-0161.tex",
+            "sha256": "sha256:ca9bc468352334acc4d0f0cc8991065ec0f8aa6685e8c4d6d21c0bb503e4fd94",
+            "size_bytes": 60
+          },
+          {
+            "path": "assets/EQ-0162.tex",
+            "sha256": "sha256:028bdf77e9947916fba9ecbbe43f941a3416b64a67cdb6164b517ef6563f49aa",
+            "size_bytes": 56
+          },
+          {
+            "path": "assets/EQ-0163.tex",
+            "sha256": "sha256:18386d4a74ecc040f4833c8ddd80dc0f9ef4439eeb7b4d3e0f583dcf15b69f61",
+            "size_bytes": 90
+          },
+          {
+            "path": "assets/EQ-0164.tex",
+            "sha256": "sha256:afad6f75a99c875aa233b7cff90176a10e1d34cc5985a7ff01af1488fcde490f",
+            "size_bytes": 52
+          },
+          {
+            "path": "assets/EQ-0165.tex",
+            "sha256": "sha256:fd15b80cc67c405f3655e352c2950b5e76e499f7951cc617f68d142736977482",
+            "size_bytes": 76
+          },
+          {
+            "path": "assets/EQ-0166.tex",
+            "sha256": "sha256:8c7c5e897c00590cbd0d993e75aedbc47731100894306d6a1928885cf4120852",
+            "size_bytes": 50
+          },
+          {
+            "path": "assets/EQ-0167.tex",
+            "sha256": "sha256:0e419a34bfbc4fb197b43d0c9b324e99be024ff298b49ba035442673edc43c20",
+            "size_bytes": 79
+          },
+          {
+            "path": "assets/EQ-0168.tex",
+            "sha256": "sha256:ae3f8d7949bed0ee6c3a207c62cc2161b91fc7e8e29d76923d61d5649222c1d3",
+            "size_bytes": 40
+          },
+          {
+            "path": "assets/EQ-0169.tex",
+            "sha256": "sha256:bb9db3ecb7d48df1bbd223cdf6af6c0806b5913d415c8d4cfba8218a08261396",
+            "size_bytes": 48
+          },
+          {
+            "path": "assets/EQ-0170.tex",
+            "sha256": "sha256:fc3bf0aac0c0056ab40c41cbb1f3fadccd96a6c4490fda20cc6c10cd6954fd2f",
+            "size_bytes": 61
+          },
+          {
+            "path": "assets/EQ-0171.tex",
+            "sha256": "sha256:4f056640663f35e101bbbb8e53f9ec3d5f2b5bdec012b747b94fa23fba5d0aa2",
+            "size_bytes": 29
+          },
+          {
+            "path": "assets/EQ-0172.tex",
+            "sha256": "sha256:a09d3a2dd453719667e06847f16a73148290bd8a9c5d806071c7f5de7ccb74df",
+            "size_bytes": 33
+          },
+          {
+            "path": "assets/EQ-0173.tex",
+            "sha256": "sha256:3d39ce91e8483ef4cfbc9f5e9d8f5e782af92654e9f7850a135b8736873591e1",
+            "size_bytes": 29
+          },
+          {
+            "path": "assets/EQ-0174.tex",
+            "sha256": "sha256:329a9b00e157320960370df6e81027aaa921d42b99cf17a2ebe85a36c829f231",
+            "size_bytes": 54
+          },
+          {
+            "path": "assets/EQ-0175.tex",
+            "sha256": "sha256:4fe339a57e83432610e13904d40f50a031c8ebf65e8291be2fa7040364c9f5d5",
+            "size_bytes": 68
+          },
+          {
+            "path": "assets/EQ-0176.tex",
+            "sha256": "sha256:163e9c5a6aa58680ab132c84d382307f5413d200dab330d8f1959144dcbd180c",
+            "size_bytes": 70
+          },
+          {
+            "path": "assets/EQ-0177.tex",
+            "sha256": "sha256:b991766ae8b337c989f535e4582e51a90a309ca65094dd5413e562aedb80246d",
+            "size_bytes": 122
+          },
+          {
+            "path": "assets/EQ-0178.tex",
+            "sha256": "sha256:2b11e0affa8b5744b6b0f60c8e020116f5d2a3c91180d13bbf5873c6fb56e2e3",
+            "size_bytes": 58
+          },
+          {
+            "path": "assets/TAB-0001.csv",
+            "sha256": "sha256:d5e641fa97280b0872f410bf4607238b79f4c1ffdbe4fba7c91bdff64a7831e5",
+            "size_bytes": 419
+          },
+          {
+            "path": "assets/TAB-0001.json",
+            "sha256": "sha256:1f4f25b3b2ffc79ad53edf2ad11480d35a82dad43bf742e2191df675659cab40",
+            "size_bytes": 824
+          },
+          {
+            "path": "assets/TAB-0002.csv",
+            "sha256": "sha256:a8d94deea9ed719654790d1026f5f416ac9bd57a44d712714be194d1454e47cb",
+            "size_bytes": 51
+          },
+          {
+            "path": "assets/TAB-0002.json",
+            "sha256": "sha256:ec856e8c636f394056d5a8dc377cf2b8d606c5df2a821df913a2c2295c04755e",
+            "size_bytes": 183
+          },
+          {
+            "path": "assets/TAB-0003.csv",
+            "sha256": "sha256:9893816e459b21d3d0a88e6dd5d2c783db96348b69352986451ab8c537c79fc3",
+            "size_bytes": 120
+          },
+          {
+            "path": "assets/TAB-0003.json",
+            "sha256": "sha256:6419a2bc0b779640f42f4658e62e3e987ff87cbdfbcf8ddeb89a132b17ab1ba6",
+            "size_bytes": 335
+          },
+          {
+            "path": "assets/TAB-0004.csv",
+            "sha256": "sha256:9ea2bf6c03fdc4702ef8b9171b11b7be1eb4475c7a958a1199279c1f476c13c2",
+            "size_bytes": 96
+          },
+          {
+            "path": "assets/TAB-0004.json",
+            "sha256": "sha256:0b408ed7b8082ef91fb019ab6b99c947b38bfaaf1dafb730b06c2088418ee7d1",
+            "size_bytes": 273
+          }
+        ]
+      },
+      "kind": "verified_bundle"
+    },
+    {
+      "edges": [],
+      "kind": "methods",
+      "nodes": [
+        {
+          "anchor_id": "TXT-0001",
+          "id": "METHOD-001",
+          "page": 1,
+          "statement": "Symmetry is everywhere in nature and society. Geometric deep learning exploits symmetries in data to improve the performance and efficiency of deep learning systems. In this paper, we extend geometric deep learning to utilize richer symmetry structures. Specifically, we develop orderequivariant neural networks (OENN), which generalize standard graph message passing and sheaf neural networks via the theory of equivariant bundles over face posets (face categories). We (i) characterize all linear order-equivariant maps, (ii) build OENN layers, and (iii) prove universal approximation theorems (UAT"
+        },
+        {
+          "anchor_id": "TXT-0008",
+          "id": "METHOD-002",
+          "page": 2,
+          "statement": "We turn this linear theory into a nonlinear architecture. OENN layers combine orbital affine maps, equivariant biases, pointwise Reynolds blocks, and pairorbit aggregation, so nonlinearities remain equivariant even when stabilizers act nontrivially on fibers. This yields a hierarchy containing ordinary relationmessage-passing OENNs, source-labeled pair-state OENNs, and full OENNs, and it recovers DeepSets, fixed-graph message passing, vertex-edge incidence updates, and cellular or simplicial sheaf layers as special or further-tied cases (Zaheer et al., 2017; Gilmer et al., 2017; Xu et al., 201"
+        },
+        {
+          "anchor_id": "TXT-0011",
+          "id": "METHOD-003",
+          "page": 2,
+          "statement": "Relation to prior work. Our results can be viewed as a natural extension of the known UATs for permutation- and groupequivariant architectures (Zaheer et al., 2017; Maron et al., 2019; Xu et al., 2019; Cohen and Welling, 2016; Satorras et al., 2021), bringing them under a single formulation that also subsumes sheaf neural networks (Curry, 2014; Hansen and Gebhart, 2020; Barbero et al., 2022; Bodnar et al., 2022). Combinatorial-complex neural networks assign features to cells of a combinatorial complex and update them through incidence, adjacency, or coadjacency relations (Hajij et al., 2022); "
+        },
+        {
+          "anchor_id": "TXT-0012",
+          "id": "METHOD-004",
+          "page": 2,
+          "statement": "Organization. Section 2 introduces the formal setting of order-equivariant bundles and the construction of OENN layers. Section 3 presents equivariant universal approximation theorems for various types of OENNs. Section 4 illustrates the framework on graphs and sheaves, showing how OENN unifies message-passing and sheaf neural networks. The paper concludes with a brief discussion of significance and applicability. The appendix presents CENN and its relation with OENN as well as all omitted proofs."
+        },
+        {
+          "anchor_id": "TXT-0041",
+          "id": "METHOD-005",
+          "page": 4,
+          "statement": "When no locality mask is imposed on the orbital affine layers, we call the resulting architecture class the full OENN class. Scalar activations are applied inside ordinary MLP branches, and equivariance for arbitrary stabilizer representations is enforced by Reynolds averaging. In the special case of permutation-only bundles, pointwise Reynolds layers reduce to the usual shared coordinatewise MLP layers."
+        },
+        {
+          "anchor_id": "THM-0008",
+          "id": "METHOD-006",
+          "page": 5,
+          "statement": "Theorem/Assumption:   Proposition 2.16 (Architecture hierarchy) . For every G -invariant relation R ⊆ P × P containing the diagonal and every activation σ used in the OENN layers,"
+        },
+        {
+          "anchor_id": "TXT-0069",
+          "id": "METHOD-007",
+          "page": 6,
+          "statement": "(i) Lower bound. Fix L ≥ 0 . Consider any architecture whose input feature at site p is initially available only at p , whose inter-site layers have support contained in R , and whose remaining operations are pointwise nonlinearities, carrier-diagonal equivariant maps, or finite parallel concatenations. Then the output at q after at most L inter-site layers depends only on input sites p with d R ( p, q ) ≤ L . Consequently, if d R ( p, q )   L , then even for trivial G , scalar fibers, and compact domain [0 , 1] P , no such L -local architecture can uniformly approximate the continuous map who"
+        },
+        {
+          "anchor_id": "TXT-0082",
+          "id": "METHOD-008",
+          "page": 7,
+          "statement": "where N [ v ] includes the self-loop, followed by an equivariant rescaling after diameter-many steps. This is a secondorder/source-aware message-passing architecture on V × V . The ordinary MPNN (16) is recovered by discarding the persistent source label and tying messages by the adjacency relation; that tied anonymous subclass is not universal for arbitrary continuous equivariant maps on a fixed graph."
+        },
+        {
+          "anchor_id": "TXT-0107",
+          "id": "METHOD-009",
+          "page": 9,
+          "statement": "We have developed order-equivariant neural networks (OENNs) as a unified framework for learning on structured domains whose coordinates are organized not only by a set or a graph, but by an ordered incidence geometry. We have shown that equivariant deep learning can be formulated in terms of equivariant bundles over posets: symmetries move sites, transports move local feature coordinates, and neural layers are precisely constrained by the resulting compatibility laws. This viewpoint simultaneously recovers familiar graph message passing, higher-order vertex-edge interactions, and cellular or s"
+        },
+        {
+          "anchor_id": "TXT-0108",
+          "id": "METHOD-010",
+          "page": 9,
+          "statement": "Beyond the unification of architectures, we have shown that full OENNs give universal approximation for continuous order-equivariant maps on compact invariant domains, while the local theory separates genuine locality from mere parameter tying: bounded-depth local message passing is not universally expressive in general, but source-aware pairstate propagation restores universality once information can traverse the Hasse graph. Thus the framework supplies a principled methodology for choosing architectures: use coarse relation-message passing when the task only requires tied local aggregation, "
+        },
+        {
+          "anchor_id": "TXT-0109",
+          "id": "METHOD-011",
+          "page": 9,
+          "statement": "The broader applicability of OENN is not limited to the examples treated explicitly here. Many scientific and geometric data sets are naturally indexed by cells, regions, events, sensors, strata, or multiscale components equipped with incidence or restriction relations. In such settings, the present theory suggests a systematic route from domain structure to architecture: specify the ordered or categorical index space, lift the relevant symmetries to feature fibers, and derive equivariant layers from transporter and stabilizer constraints rather than by ad hoc sharing rules. The appendix place"
+        },
+        {
+          "anchor_id": "TXT-0124",
+          "id": "METHOD-012",
+          "page": 10,
+          "statement": "Hajij, M., Bastian, L., Osentoski, S., Kabaria, H., Davenport, J. L., Dawood, S., Cherukuri, B., Kocheemoolayil, J. G., Shahmansouri, N., Lew, A., Papamarkou, T., and Birdal, T. Copresheaf topological neural networks: A generalized deep learning framework. In Advances in Neural Information Processing Systems , volume 38, pages 149759-149803, 2025."
+        },
+        {
+          "anchor_id": "TXT-0143",
+          "id": "METHOD-013",
+          "page": 11,
+          "statement": "This appendix presents the framework of categoryequivariant neural networks (CENNs) and explains how the OENN framework is obtained from it; some experimental results are provided as well (Maruyama, 2025a;b;c; 2026a;b; Maruyama and Yasuda, 2026). CENN is concerned with categorical equivariance with respect to transformations beyond invertible symmetries (i.e., non-invertible symmetries on/between multiple objects). Non-invertible categorical symmetry is extensively studied in the recent development of mathematical and theoretical physics. CENN explores the same idea of non-invertible categoric"
+        },
+        {
+          "anchor_id": "TXT-0163",
+          "id": "METHOD-014",
+          "page": 13,
+          "statement": "The analytic CENN model realizes these measurable spaces as Borel spaces underlying topological vector spaces of continuous local fields. For every object a , choose a compact base space Ω( a ) and a finite-dimensional real fiber E Z ( a ) , and set"
+        },
+        {
+          "anchor_id": "TXT-0250",
+          "id": "METHOD-015",
+          "page": 17,
+          "statement": "It remains only to check nonlinearities. We use the finite UAT construction in branch-MLP form: scalar gates are used only for coordinates that are trivial natural scalar channels, as described after (32). Branch spaces carrying a nontrivial permutation action are not treated as if their individual coordinate projections were natural for the trivial scalar functor. When the same scalar activation is applied coordinatewise to such an equivariant array, it is used as a vector-valued equivariant branch operation, not as a scalar gate into S ; in the OENN realization used here, it is placed inside"
+        },
+        {
+          "anchor_id": "TXT-0261",
+          "id": "METHOD-016",
+          "page": 18,
+          "statement": "Grothendieck CENN: integrating symmetries. The Grothendieck construction is a fundamental composition method in the theory of fibrations: it packages a family of categories that varies over a base context category into a single total category. Formally, given a functor valued in the category of small categories"
+        }
+      ]
+    },
+    {
+      "edges": [],
+      "kind": "claim_graph",
+      "nodes": [
+        {
+          "anchor_id": "TXT-0001",
+          "centrality": "major",
+          "dependencies": [
+            "METHOD-001",
+            "METHOD-002",
+            "ASSUMPTION-001",
+            "ASSUMPTION-002"
+          ],
+          "id": "CLAIM-001",
+          "page": 1,
+          "scope": "unspecified",
+          "statement": "Geometric deep learning exploits symmetries in data to improve the performance and efficiency of deep learning systems.",
+          "supporting_items": [
+            "EXP-001",
+            "EXP-002",
+            "EXP-003"
+          ],
+          "type": "theoretical"
+        },
+        {
+          "anchor_id": "TXT-0001",
+          "centrality": "major",
+          "dependencies": [
+            "METHOD-001",
+            "METHOD-002",
+            "ASSUMPTION-001",
+            "ASSUMPTION-002"
+          ],
+          "id": "CLAIM-002",
+          "page": 1,
+          "scope": "unspecified",
+          "statement": "In addition, we show that OENN can be extended further to CENN, Category-Equivariant Neural Network, which gives the general form of equivariant neural networks as well as of equivariant universal approximation theorems, allowing us to leverage categorical symmetry in data (e.g., noninvertible symmetries on multiple objects with compositional relations on those symmetries).",
+          "supporting_items": [
+            "EXP-001",
+            "EXP-002",
+            "EXP-003"
+          ],
+          "type": "theoretical"
+        },
+        {
+          "anchor_id": "TXT-0002",
+          "centrality": "major",
+          "dependencies": [
+            "METHOD-001",
+            "METHOD-002",
+            "ASSUMPTION-001",
+            "ASSUMPTION-002"
+          ],
+          "id": "CLAIM-003",
+          "page": 1,
+          "scope": "unspecified",
+          "statement": "Group-equivariant architectures explicitly exploit the symmetries of an index set to share parameters, improve sample efficiency, and en-",
+          "supporting_items": [
+            "EXP-001",
+            "EXP-002",
+            "EXP-003"
+          ],
+          "type": "theoretical"
+        },
+        {
+          "anchor_id": "TXT-0005",
+          "centrality": "major",
+          "dependencies": [
+            "METHOD-001",
+            "METHOD-002",
+            "ASSUMPTION-001",
+            "ASSUMPTION-002"
+          ],
+          "id": "CLAIM-004",
+          "page": 1,
+          "scope": "unspecified",
+          "statement": "More recently, this principle has been extended to permutation-invariant and permutation-equivariant models such as DeepSets (Zaheer et al., 2017) and graph neural networks GNNs (Gilmer et al., 2017; Xu et al., 2019; Maron et al., 2019), which achieve equivariance with respect to the automorphism group of a graph.",
+          "supporting_items": [
+            "EXP-001",
+            "EXP-002",
+            "EXP-003"
+          ],
+          "type": "empirical"
+        },
+        {
+          "anchor_id": "TXT-0009",
+          "centrality": "major",
+          "dependencies": [
+            "METHOD-001",
+            "METHOD-002",
+            "ASSUMPTION-001",
+            "ASSUMPTION-002"
+          ],
+          "id": "CLAIM-005",
+          "page": 2,
+          "scope": "unspecified",
+          "statement": "We prove equivariant universal approximation theorems (UATs) for OENNs.",
+          "supporting_items": [
+            "EXP-001",
+            "EXP-002",
+            "EXP-003"
+          ],
+          "type": "theoretical"
+        },
+        {
+          "anchor_id": "TXT-0109",
+          "centrality": "major",
+          "dependencies": [
+            "METHOD-001",
+            "METHOD-002",
+            "ASSUMPTION-001",
+            "ASSUMPTION-002"
+          ],
+          "id": "CLAIM-006",
+          "page": 9,
+          "scope": "unspecified",
+          "statement": "The appendix places OENN inside the more general category-equivariant neural network (CENN) framework, where posets are replaced by categories and action groupoids; this extension connects the present theory to broader category-equivariant models and applications (Maruyama, 2025a;b;c; 2026a;b; Maruyama and Yasuda, 2026), which demonstrate how the extended equivariant models help to improve the experimental performance of classic equivariant models in concrete machine learning tasks.",
+          "supporting_items": [
+            "EXP-001",
+            "EXP-002",
+            "EXP-003"
+          ],
+          "type": "theoretical"
+        },
+        {
+          "anchor_id": "TXT-0149",
+          "centrality": "major",
+          "dependencies": [
+            "METHOD-001",
+            "METHOD-002",
+            "ASSUMPTION-001",
+            "ASSUMPTION-002"
+          ],
+          "id": "CLAIM-007",
+          "page": 12,
+          "scope": "unspecified",
+          "statement": "We show, in particular, that completed OENN input-output maps are embedded into CENN through the action groupoid of the chosen symmetry action, while hidden pair-state and branch constructions may use auxiliary action groupoids built from the same action.",
+          "supporting_items": [
+            "EXP-001",
+            "EXP-002",
+            "EXP-003"
+          ],
+          "type": "other"
+        },
+        {
+          "anchor_id": "TXT-0264",
+          "centrality": "major",
+          "dependencies": [
+            "METHOD-001",
+            "METHOD-002",
+            "ASSUMPTION-001",
+            "ASSUMPTION-002"
+          ],
+          "id": "CLAIM-008",
+          "page": 19,
+          "scope": "unspecified",
+          "statement": "Table 2 shows the experimental results; GrothendieckCENN substantially outperformed both of them.",
+          "supporting_items": [
+            "EXP-001",
+            "EXP-002",
+            "EXP-003"
+          ],
+          "type": "empirical"
+        },
+        {
+          "anchor_id": "TXT-0281",
+          "centrality": "major",
+          "dependencies": [
+            "METHOD-001",
+            "METHOD-002",
+            "ASSUMPTION-001",
+            "ASSUMPTION-002"
+          ],
+          "id": "CLAIM-009",
+          "page": 19,
+          "scope": "unspecified",
+          "statement": "This yields improved generalization.",
+          "supporting_items": [
+            "EXP-001",
+            "EXP-002",
+            "EXP-003"
+          ],
+          "type": "theoretical"
+        }
+      ]
+    },
+    {
+      "assumptions": [
+        {
+          "anchor_id": "THM-0012",
+          "id": "ASSUMPTION-001",
+          "page": 6,
+          "statement": "Theorem/Assumption:   Corollary 3.4 (Permutation-only UAT) . Assume that the original input and output transports are identity maps between canonically identified fibers, so that G acts by block permutations. Then the linear part of OENN specializes to affine layers whose blocks and biases are tied on G -orbits. Ordinary sitewise pointwise layers reduce to shared MLPs on site-orbits, while stabilizer-equivariant readouts on auxiliary broadcast fibers are finite Reynolds averages over permutation representations. Consequently, Theorem 3.3 specializes to universal approximation of continuous G -"
+        },
+        {
+          "anchor_id": "TXT-0090",
+          "id": "ASSUMPTION-002",
+          "page": 8,
+          "statement": "compatible along chains. We use this contravariant faceposet convention throughout: q ≤ p means that q is a face of p , and restrictions point from the larger cell to the face. Reversing the poset recovers the opposite convention used in some neural-sheaf formulations. Suppose this G -action lifts to the sheaf, meaning"
+        },
+        {
+          "anchor_id": "TXT-0180",
+          "id": "ASSUMPTION-003",
+          "page": 13,
+          "statement": "Assume the standard regularity needed for the integral below: measurability in u , continuity in y , and an L 1 bound over I ( a ) on compact parameter ranges. A bias is a family β a ∈ Z ′ ( a ) satisfying"
+        },
+        {
+          "anchor_id": "THM-0018",
+          "id": "ASSUMPTION-004",
+          "page": 14,
+          "statement": "Theorem/Assumption:   Theorem A.3 (CENN UAT) . Assume the standard CENN hypotheses above, with X and Y fi eld-type Meas -valued functors whose object spaces carry the topologies and norms used in the compact-open seminorms. Let α : R → R be continuous, non-polynomial, and globally Lipschitz. Then"
+        }
+      ],
+      "edges": [
+        {
+          "from": "ASSUMPTION-001",
+          "to": "THEOREM-012",
+          "type": "assumption_supports_theorem"
+        },
+        {
+          "from": "ASSUMPTION-004",
+          "to": "THEOREM-018",
+          "type": "assumption_supports_theorem"
+        }
+      ],
+      "kind": "theorem_assumption_graph"
+    }
+  ],
+  "metrics": [],
+  "references": [
+    {
+      "anchor_id": "TXT-0111",
+      "id": "REF-001",
+      "page": 10,
+      "statement": "Bamberger, J., Barbero, F., Dong, X., and Bronstein, M. M. Bundle Neural Network for message diffusion on graphs. In The Thirteenth International Conference on Learning Representations , 2025."
+    },
+    {
+      "anchor_id": "TXT-0112",
+      "id": "REF-002",
+      "page": 10,
+      "statement": "Barbero, F., Bodnar, C., S´ aez de Oc´ ariz Borde, H., Bronstein, M., Veliˇ ckovi´ c, P., and Li  o, P. Sheaf Neural Networks with Connection Laplacians. In Proceedings of Topological, Algebraic, and Geometric Learning Workshops 2022 , volume 196 of Proceedings of Machine Learning Research , pages 28-36. PMLR, 2022."
+    },
+    {
+      "anchor_id": "TXT-0113",
+      "id": "REF-003",
+      "page": 10,
+      "statement": "Battiloro, C., Karaismailo˘ glu, E., Tec, M., Dasoulas, G., Audirac, M., and Dominici, F. E ( n ) -equivariant topological neural networks. In The Thirteenth International Conference on Learning Representations , 2025."
+    },
+    {
+      "anchor_id": "TXT-0114",
+      "id": "REF-004",
+      "page": 10,
+      "statement": "Bodnar, C., Di Giovanni, F., Chamberlain, B. P., Li  o, P., and Bronstein, M. M. Neural sheaf diffusion: A topological perspective on heterophily and oversmoothing in GNNs. In Advances in Neural Information Processing Systems , volume 35, pages 18527-18541, 2022."
+    },
+    {
+      "anchor_id": "TXT-0115",
+      "id": "REF-005",
+      "page": 10,
+      "statement": "Bronstein, M. M., Bruna, J., Cohen, T., and Veliˇ ckovi´ c, P. Geometric deep learning: Grids, groups, graphs, geodesics, and gauges. arXiv:2104.13478, 2021."
+    },
+    {
+      "anchor_id": "TXT-0116",
+      "id": "REF-006",
+      "page": 10,
+      "statement": "Bruna, J., Zaremba, W., Szlam, A., and LeCun, Y. Spectral networks and locally connected networks on graphs. In International Conference on Learning Representations , 2014."
+    },
+    {
+      "anchor_id": "TXT-0117",
+      "id": "REF-007",
+      "page": 10,
+      "statement": "Cohen, T. S. and Welling, M. Group equivariant convolutional networks. In Proceedings of the 33rd International Conference on Machine Learning , volume 48 of Proceedings of Machine Learning Research , pages 2990-2999. PMLR, 2016."
+    },
+    {
+      "anchor_id": "TXT-0118",
+      "id": "REF-008",
+      "page": 10,
+      "statement": "Cohen, T. S. and Welling, M. Steerable CNNs. In International Conference on Learning Representations , 2017."
+    },
+    {
+      "anchor_id": "TXT-0119",
+      "id": "REF-009",
+      "page": 10,
+      "statement": "Curry, J. Sheaves, Cosheaves and Applications . PhD thesis, University of Pennsylvania, 2014."
+    },
+    {
+      "anchor_id": "TXT-0120",
+      "id": "REF-010",
+      "page": 10,
+      "statement": "Defferrard, M., Bresson, X., and Vandergheynst, P. Convolutional neural networks on graphs with fast localized spectral filtering. In Advances in Neural Information Processing Systems , volume 29, pages 3844-3852, 2016."
+    },
+    {
+      "anchor_id": "TXT-0121",
+      "id": "REF-011",
+      "page": 10,
+      "statement": "Ebli, S., Defferrard, M., and Spreemann, G. Simplicial neural networks. In NeurIPS 2020 Workshop on Topological Data Analysis and Beyond , 2020."
+    },
+    {
+      "anchor_id": "TXT-0122",
+      "id": "REF-012",
+      "page": 10,
+      "statement": "Fuchs, F. B., Worrall, D. E., Fischer, V., and Welling, M. SE(3)-transformers: 3D roto-translation equivariant attention networks. In Advances in Neural Information Processing Systems , volume 33, pages 1970-1981, 2020."
+    },
+    {
+      "anchor_id": "TXT-0123",
+      "id": "REF-013",
+      "page": 10,
+      "statement": "Gilmer, J., Schoenholz, S. S., Riley, P. F., Vinyals, O., and Dahl, G. E. Neural message passing for quantum chemistry. In Proceedings of the 34th International Conference on Machine Learning , volume 70 of Proceedings of Machine Learning Research , pages 1263-1272. PMLR, 2017."
+    },
+    {
+      "anchor_id": "TXT-0124",
+      "id": "REF-014",
+      "page": 10,
+      "statement": "Hajij, M., Bastian, L., Osentoski, S., Kabaria, H., Davenport, J. L., Dawood, S., Cherukuri, B., Kocheemoolayil, J. G., Shahmansouri, N., Lew, A., Papamarkou, T., and Birdal, T. Copresheaf topological neural networks: A generalized deep learning framework. In Advances in Neural Information Processing Systems , volume 38, pages 149759-149803, 2025."
+    },
+    {
+      "anchor_id": "TXT-0125",
+      "id": "REF-015",
+      "page": 10,
+      "statement": "Hajij, M., Zamzmi, G., Papamarkou, T., Miolane, N., Guzm´ an-S´ aenz, A., Ramamurthy, K. N., Birdal, T., Dey, T. K., Mukherjee, S., Samaga, S. N., Livesay, N., Walters, R., Rosen, P., and Schaub, M. T. Topological deep learning: Going beyond graph data. arXiv:2206.00606, 2022."
+    },
+    {
+      "anchor_id": "TXT-0126",
+      "id": "REF-016",
+      "page": 10,
+      "statement": "Hansen, J. and Gebhart, T. Sheaf neural networks. In NeurIPS 2020 Workshop on Topological Data Analysis and Beyond , 2020."
+    },
+    {
+      "anchor_id": "TXT-0127",
+      "id": "REF-017",
+      "page": 10,
+      "statement": "Khan, A. M., Khawaja, S. G., Akram, M. U., and Khan, A. S. sEMG dataset of routine activities. Data in Brief , 33:106543, 2020."
+    },
+    {
+      "anchor_id": "TXT-0128",
+      "id": "REF-018",
+      "page": 10,
+      "statement": "Khan, A. M., Khawaja, S. G., Akram, M. U., and Khan, A. S. Physical Action Dataset. Mendeley Data, V2, 2020. doi:10.17632/bcv9vsxkyc.2."
+    },
+    {
+      "anchor_id": "TXT-0129",
+      "id": "REF-019",
+      "page": 10,
+      "statement": "Leshno, M., Lin, V. Y., Pinkus, A., and Schocken, S. Multilayer feedforward networks with a nonpolynomial activation function can approximate any function. Neural Networks , 6(6):861-867, 1993."
+    },
+    {
+      "anchor_id": "TXT-0130",
+      "id": "REF-020",
+      "page": 10,
+      "statement": "Maron, H., Ben-Hamu, H., Shamir, N., and Lipman, Y. Invariant and equivariant graph networks. In International Conference on Learning Representations , 2019."
+    },
+    {
+      "anchor_id": "TXT-0131",
+      "id": "REF-021",
+      "page": 10,
+      "statement": "Maruyama, Y. Categorical equivariant deep learning: Category-equivariant neural networks and universal approximation theorems. arXiv:2511.18417, 2025."
+    },
+    {
+      "anchor_id": "TXT-0132",
+      "id": "REF-022",
+      "page": 10,
+      "statement": "Maruyama, Y. Learning with category-equivariant representations for human activity recognition. arXiv:2511.00900, 2025."
+    },
+    {
+      "anchor_id": "TXT-0133",
+      "id": "REF-023",
+      "page": 11,
+      "statement": "Maruyama, Y. Learning with category-equivariant architectures for human activity recognition. arXiv:2511.01139, 2025."
+    },
+    {
+      "anchor_id": "TXT-0134",
+      "id": "REF-024",
+      "page": 11,
+      "statement": "Maruyama, Y. Category-equivariant regularization for fewshot multirate time-series learning. In Proceedings of the International Joint Conference on Neural Networks , 2026."
+    },
+    {
+      "anchor_id": "TXT-0135",
+      "id": "REF-025",
+      "page": 11,
+      "statement": "Maruyama, Y. Infinity-Categorical Deep Learning for Human Activity Recognition. Accepted for publication in Lecture Notes in Computer Science . Springer, 2026."
+    },
+    {
+      "anchor_id": "TXT-0136",
+      "id": "REF-026",
+      "page": 11,
+      "statement": "Maruyama, Y. and Yasuda, A. Grothendieck categoryequivariant neural networks for human activity recognition. In Lecture Notes in Computer Science . Springer, 2026."
+    },
+    {
+      "anchor_id": "TXT-0137",
+      "id": "REF-027",
+      "page": 11,
+      "statement": "Nasu, R. and Maruyama, Y. Mathematical foundations of monoid-equivariant neural networks. In Proceedings of the 28th International Conference on Pattern Recognition , 2026."
+    },
+    {
+      "anchor_id": "TXT-0138",
+      "id": "REF-028",
+      "page": 11,
+      "statement": "Satorras, V. G., Hoogeboom, E., and Welling, M. E(n) equivariant graph neural networks. In Proceedings of the 38th International Conference on Machine Learning , volume 139 of Proceedings of Machine Learning Research , pages 9323-9332. PMLR, 2021."
+    },
+    {
+      "anchor_id": "TXT-0139",
+      "id": "REF-029",
+      "page": 11,
+      "statement": "Shuman, D. I., Narang, S. K., Frossard, P., Ortega, A., and Vandergheynst, P. The emerging field of signal processing on graphs: Extending high-dimensional data analysis to networks and other irregular domains. IEEE Signal Processing Magazine , 30(3):83-98, 2013."
+    },
+    {
+      "anchor_id": "TXT-0140",
+      "id": "REF-030",
+      "page": 11,
+      "statement": "Weiler, M. and Cesa, G. General E(2)-equivariant steerable CNNs. In Advances in Neural Information Processing Systems , volume 32, pages 14334-14345, 2019."
+    },
+    {
+      "anchor_id": "TXT-0141",
+      "id": "REF-031",
+      "page": 11,
+      "statement": "Xu, K., Hu, W., Leskovec, J., and Jegelka, S. How powerful are graph neural networks? In International Conference on Learning Representations , 2019."
+    },
+    {
+      "anchor_id": "TXT-0142",
+      "id": "REF-032",
+      "page": 11,
+      "statement": "Zaheer, M., Kottur, S., Ravanbakhsh, S., P´ oczos, B., Salakhutdinov, R. R., and Smola, A. J. Deep Sets. In Advances in Neural Information Processing Systems , volume 30, pages 3391-3401, 2017."
+    }
+  ],
+  "reported_results": [
+    {
+      "anchor_id": "TXT-0001",
+      "id": "RESULT-001",
+      "page": 1,
+      "statement": "Geometric deep learning exploits symmetries in data to improve the performance and efficiency of deep learning systems."
+    },
+    {
+      "anchor_id": "TXT-0002",
+      "id": "RESULT-002",
+      "page": 1,
+      "statement": "Group-equivariant architectures explicitly exploit the symmetries of an index set to share parameters, improve sample efficiency, and en-"
+    },
+    {
+      "anchor_id": "TXT-0005",
+      "id": "RESULT-003",
+      "page": 1,
+      "statement": "More recently, this principle has been extended to permutation-invariant and permutation-equivariant models such as DeepSets (Zaheer et al., 2017) and graph neural networks GNNs (Gilmer et al., 2017; Xu et al., 2019; Maron et al., 2019), which achieve equivariance with respect to the automorphism group of a graph."
+    },
+    {
+      "anchor_id": "TXT-0011",
+      "id": "RESULT-004",
+      "page": 2,
+      "statement": "The framework of categorical equivariant deep learning develops category-equivariant neural networks in general form, providing both equivariant universality theorems and experimental performance gains (Maruyama, 2025a;b;c; 2026a;b; Maruyama and Yasuda, 2026; Nasu and Maruyama, 2026)."
+    },
+    {
+      "anchor_id": "TXT-0109",
+      "id": "RESULT-005",
+      "page": 9,
+      "statement": "The appendix places OENN inside the more general category-equivariant neural network (CENN) framework, where posets are replaced by categories and action groupoids; this extension connects the present theory to broader category-equivariant models and applications (Maruyama, 2025a;b;c; 2026a;b; Maruyama and Yasuda, 2026), which demonstrate how the extended equivariant models help to improve the experimental performance of classic equivariant models in concrete machine learning tasks."
+    },
+    {
+      "anchor_id": "TXT-0264",
+      "id": "RESULT-006",
+      "page": 19,
+      "statement": "Table 2 shows the experimental results; GrothendieckCENN substantially outperformed both of them."
+    },
+    {
+      "anchor_id": "TXT-0270",
+      "id": "RESULT-007",
+      "page": 19,
+      "statement": "The Grothendieck category ∫ b ∈B F ( b ) is a global space that organizes, modality by modality, the allowed nuisance transformations, such as device-pose rotation, temporal misalignment, electrode reindexing, and gain drift."
+    },
+    {
+      "anchor_id": "TXT-0281",
+      "id": "RESULT-008",
+      "page": 19,
+      "statement": "This yields improved generalization."
+    }
+  ],
+  "reproducibility": [
+    {
+      "anchor_id": "TXT-0010",
+      "id": "REPRO-001",
+      "page": 2,
+      "statement": "Weshow in the appendix that OENN can be extended further to infinitary domains, in particular to CENN, CategoryEquivariant Neural Network, which gives the general form of equivariant neural networks as well as of equivariant universal approximation theorems."
+    },
+    {
+      "anchor_id": "TXT-0012",
+      "id": "REPRO-002",
+      "page": 2,
+      "statement": "Organization. Section 2 introduces the formal setting of order-equivariant bundles and the construction of OENN layers. Section 3 presents equivariant universal approximation theorems for various types of OENNs. Section 4 illustrates the framework on graphs and sheaves, showing how OENN unifies message-passing and sheaf neural networks. The paper concludes with a brief discussion of significance and applicability. The appendix presents CENN and its relation with OENN as well as all omitted proofs."
+    },
+    {
+      "anchor_id": "TXT-0109",
+      "id": "REPRO-003",
+      "page": 9,
+      "statement": "The broader applicability of OENN is not limited to the examples treated explicitly here. Many scientific and geometric data sets are naturally indexed by cells, regions, events, sensors, strata, or multiscale components equipped with incidence or restriction relations. In such settings, the present theory suggests a systematic route from domain structure to architecture: specify the ordered or categorical index space, lift the relevant symmetries to feature fibers, and derive equivariant layers from transporter and stabilizer constraints rather than by ad hoc sharing rules. The appendix place"
+    },
+    {
+      "anchor_id": "TXT-0143",
+      "id": "REPRO-004",
+      "page": 11,
+      "statement": "This appendix presents the framework of categoryequivariant neural networks (CENNs) and explains how the OENN framework is obtained from it; some experimental results are provided as well (Maruyama, 2025a;b;c; 2026a;b; Maruyama and Yasuda, 2026). CENN is concerned with categorical equivariance with respect to transformations beyond invertible symmetries (i.e., non-invertible symmetries on/between multiple objects). Non-invertible categorical symmetry is extensively studied in the recent development of mathematical and theoretical physics. CENN explores the same idea of non-invertible categoric"
+    },
+    {
+      "anchor_id": "TXT-0149",
+      "id": "REPRO-005",
+      "page": 12,
+      "statement": "In the following subsections of the appendix, we give a more formal account of CENN and analyze the relation between CENN and OENN. We show, in particular, that completed OENN input-output maps are embedded into CENN through the action groupoid of the chosen symmetry action, while hidden pair-state and branch constructions may use auxiliary action groupoids built from the same action. Note that they are not embedded through the thin poset category alone. The poset order supplies incidence, masks, covers, and sheaf-type restriction structure; the equivariance in OENN is supplied by the group ac"
+    },
+    {
+      "anchor_id": "TXT-0282",
+      "id": "REPRO-006",
+      "page": 20,
+      "statement": "This appendix provides the proofs of the results stated in Sections 2-4. The numbering below refers to the corresponding statements in the main text."
+    },
+    {
+      "anchor_id": "TXT-0308",
+      "id": "REPRO-007",
+      "page": 21,
+      "statement": "Proof of Proposition 2.16. The first inclusion is realized locally as follows. Given a relation-message-passing layer of the form (13), first write the input into a pair-state diagonal seed"
+    },
+    {
+      "anchor_id": "TXT-0311",
+      "id": "REPRO-008",
+      "page": 21,
+      "statement": "Since z 0 r,p is nonzero only when r = p , this gives z 1 q,p = h p for ( q, p ) ∈ R and z 1 q,p = 0 otherwise. Thus the apparent off-diagonal lift is implemented by an allowed diagonal seed followed by one pair-state local propagation. Apply the transported invariant encoders slotwise on the relevant pair-orbits O ⊆ R , sum the resulting features over source slots at fixed carrier q by a carrier-local affine map, and apply the carrier-local Reynolds readout θ q . Thus every relationmessage-passing layer belongs to OENN R -pair σ . The second inclusion follows because pair-state bundles are au"
+    },
+    {
+      "anchor_id": "TXT-0339",
+      "id": "REPRO-009",
+      "page": 22,
+      "statement": "First seed each source into its own labeled slot by the diagonal map I : X → Z ,"
+    },
+    {
+      "anchor_id": "TXT-0349",
+      "id": "REPRO-010",
+      "page": 23,
+      "statement": "The transports on Z and ˜ X make C equivariant. Hence CSM D I = B , proving that the broadcast is exactly compiled by D pair-state local inter-site propagation layers plus carrier-local seed, rescaling, and collection maps."
+    }
+  ],
+  "submission_id": "34584",
+  "theorems": [
+    {
+      "anchor_id": "THM-0001",
+      "id": "THEOREM-001",
+      "page": 3,
+      "statement": "Theorem/Assumption:   Proposition 2.3 (Transporter law) . A linear map L : X → Y with kernels K ( q, p ) is order-equivariant if and only if"
+    },
+    {
+      "anchor_id": "THM-0002",
+      "id": "THEOREM-002",
+      "page": 3,
+      "statement": "Theorem/Assumption:   Proposition 2.4 (Orbit parametrization) . For each pairorbit O , choose"
+    },
+    {
+      "anchor_id": "THM-0003",
+      "id": "THEOREM-003",
+      "page": 3,
+      "statement": "Theorem/Assumption:   Corollary 2.5 (Permutation-only case) . If the input and output bundles are permutation-only, so that source fibers and target fibers in each site-orbit are canonically identified and all transports are identities under these identifications, then the stabilizer constraint is vacuous and, after the same canonical identifications, K ( q, p ) is constant on each pairorbit."
+    },
+    {
+      "anchor_id": "THM-0004",
+      "id": "THEOREM-004",
+      "page": 4,
+      "statement": "Theorem/Assumption:   Lemma 2.8 (Equivariance and branch realization) . The map (7) is H -equivariant. Moreover, it is realizable by equivariant affine maps and coordinatewise activations on hidden branch spaces whose H -action is by permutation of branches."
+    },
+    {
+      "anchor_id": "THM-0005",
+      "id": "THEOREM-005",
+      "page": 5,
+      "statement": "Theorem/Assumption:   Lemma 2.12 (Equivariance of pair summaries) . For all τ ∈ G ,"
+    },
+    {
+      "anchor_id": "THM-0006",
+      "id": "THEOREM-006",
+      "page": 5,
+      "statement": "Theorem/Assumption:   Proposition 2.13 (Pair-orbit aggregation is an OENN layer) . The map F in (12) is order-equivariant and is realizable as an OENN layer stack."
+    },
+    {
+      "anchor_id": "THM-0007",
+      "id": "THEOREM-007",
+      "page": 5,
+      "statement": "Theorem/Assumption:   Proposition 2.15 (Message-passing-compatible updates) . Every relation-message-passing OENN layer is an orderequivariant OENN stack. Conversely, any continuous update of the form (13) whose encoders are stabilizer-invariant and whose readouts are stabilizer-equivariant can be uniformly approximated on compact invariant sets by relationmessage-passing OENN layers with any continuous nonpolynomial activation σ ."
+    },
+    {
+      "anchor_id": "THM-0008",
+      "id": "THEOREM-008",
+      "page": 5,
+      "statement": "Theorem/Assumption:   Proposition 2.16 (Architecture hierarchy) . For every G -invariant relation R ⊆ P × P containing the diagonal and every activation σ used in the OENN layers,"
+    },
+    {
+      "anchor_id": "THM-0009",
+      "id": "THEOREM-009",
+      "page": 6,
+      "statement": "Theorem/Assumption:   Lemma 3.1 (Sitewise stabilizer equivariance) . Let K ⊆ X be G -invariant. If F ∈ C G ( K,Y ) , then for every q ∈ P and every η ∈ G q := Stab G ( q ) ,"
+    },
+    {
+      "anchor_id": "THM-0010",
+      "id": "THEOREM-010",
+      "page": 6,
+      "statement": "Theorem/Assumption:   Lemma 3.2 (Equivariant density for finite groups) . Let H be a finite group acting linearly on finite-dimensional real vector spaces U and V by T U and T V . Let K ⊂ U be compact and H -invariant, and let f : K → V be continuous and H -equivariant. If σ : R → R is continuous and non-polynomial, then for every norm ‖ · ‖ ∗ on V and every ε   0 there is an ordinary MLP Ψ : U → V with activation σ such that"
+    },
+    {
+      "anchor_id": "THM-0011",
+      "id": "THEOREM-011",
+      "page": 6,
+      "statement": "Theorem/Assumption:   Theorem 3.3 (Full OENN UAT) . Let ( P, ≤ ) be finite and let G be a finite group acting on P by order automorphisms. Let X = ⊕ p ∈ P V p and Y = ⊕ q ∈ P W q be G -equivariant bundles. Let K ⊂ X be compact and G -invariant, and let σ : R → R be continuous and non-polynomial. Then OENN full σ ( X,Y ) is dense in C G ( K,Y ) in the uniform norm. Equivalently, for every f ∈ C G ( K,Y ) and every ε   0 , there exists a full OENN F : X → Y such that"
+    },
+    {
+      "anchor_id": "THM-0012",
+      "id": "THEOREM-012",
+      "page": 6,
+      "statement": "Theorem/Assumption:   Corollary 3.4 (Permutation-only UAT) . Assume that the original input and output transports are identity maps between canonically identified fibers, so that G acts by block permutations. Then the linear part of OENN specializes to affine layers whose blocks and biases are tied on G -orbits. Ordinary sitewise pointwise layers reduce to shared MLPs on site-orbits, while stabilizer-equivariant readouts on auxiliary broadcast fibers are finite Reynolds averages over permutation representations. Consequently, Theorem 3.3 specializes to universal approximation of continuous G -"
+    },
+    {
+      "anchor_id": "THM-0013",
+      "id": "THEOREM-013",
+      "page": 6,
+      "statement": "Theorem/Assumption:   Theorem 3.5 (Diameter-sharp pair-state local universality) . Let R ⊆ P × P be a G -invariant relation containing the diagonal, and let Γ R and d R be as above."
+    },
+    {
+      "anchor_id": "THM-0014",
+      "id": "THEOREM-014",
+      "page": 7,
+      "statement": "Theorem/Assumption:   Corollary 3.6 (Pair-state cover-local OENN UAT) . Let R cov be the cover-local relation from Definition 2.11. If the undirected Hasse graph of P is connected, then OENN R cov -pair σ ( X,Y ) is dense in C G ( K,Y ) in the uniform norm."
+    },
+    {
+      "anchor_id": "THM-0015",
+      "id": "THEOREM-015",
+      "page": 7,
+      "statement": "Theorem/Assumption:   Theorem 3.5 is a universality theorem for the pair-state local completion. Ordinary message passing aggregates neighbor information without a persistent source label; pair-state propagation stores z q,p and therefore lets the readout at q access the contribution from each source p separately. Some mechanism of this kind (source labels, higher-order states, global attention, or a global broadcast) is unavoidable for worst-case approximation of arbitrary maps in C G ( K,Y ) ."
+    },
+    {
+      "anchor_id": "THM-0016",
+      "id": "THEOREM-016",
+      "page": 8,
+      "statement": "Theorem/Assumption:   Lemma 4.1 (Invariant fiber metrics and sheaf adjoints) . For every finite lifted action satisfying (20) , there exist inner products on all fibers V p for which every transport T V γ,p : V p → V γp is an isometry. With respect to any such invariant inner products, the adjoints of the restriction maps satisfy"
+    },
+    {
+      "anchor_id": "THM-0017",
+      "id": "THEOREM-017",
+      "page": 9,
+      "statement": "Theorem/Assumption:   Lemma 4.2 (Sheaf orbital transporter law) . The self, upward, and downward kernels in (22) , transported from the orbit representatives as in (6) and satisfying the stabilizer conditions above, satisfy the transporter law (4) . Hence (22) is order-equivariant."
+    },
+    {
+      "anchor_id": "THM-0018",
+      "id": "THEOREM-018",
+      "page": 14,
+      "statement": "Theorem/Assumption:   Theorem A.3 (CENN UAT) . Assume the standard CENN hypotheses above, with X and Y fi eld-type Meas -valued functors whose object spaces carry the topologies and norms used in the compact-open seminorms. Let α : R → R be continuous, non-polynomial, and globally Lipschitz. Then"
+    },
+    {
+      "anchor_id": "THM-0019",
+      "id": "THEOREM-019",
+      "page": 15,
+      "statement": "Theorem/Assumption:   Proposition A.4 (OENN equivariance as CENN naturality) . The assignment"
+    },
+    {
+      "anchor_id": "THM-0020",
+      "id": "THEOREM-020",
+      "page": 16,
+      "statement": "Theorem/Assumption:   Proposition A.5 (OENN primitives as finite CENN primitives) . With the primitivewise typing convention above, each completed OENN primitive, viewed through its site-output family after assembly, is represented by finite point-base CENN primitives over action groupoids of the finite G -sets indexing that primitive and its auxiliary branch states. Thus the primitive-level comparison uses action groupoids G ⋉ S for auxiliary finite G -sets S that occur in the OENN stack, rather than forcing every hidden primitive to live literally over the single object set P ."
+    },
+    {
+      "anchor_id": "THM-0021",
+      "id": "THEOREM-021",
+      "page": 17,
+      "statement": "Theorem/Assumption:   Lemma A.6 (Finite CENN UAT layers are OENN-realizable) . Let A = G ⋉ P be the finite action groupoid above, with point bases and finite-dimensional Borel feature spaces. The finite CENN approximants needed in the CENN UAT proof over A can be chosen to be realizable by full OENN primitives after allowing the auxiliary finite G -sets already permitted in Definition 2.10. Consequently, if Ψ is one of these chosen finite action-groupoid CENN approximants from Theorem A.3, then the assembled map"
+    },
+    {
+      "anchor_id": "THM-0022",
+      "id": "THEOREM-022",
+      "page": 17,
+      "statement": "Theorem/Assumption:   Corollary A.7 (CENN UAT and OENN UAT) . For the action groupoid A = G ⋉ P and the global-input/site- output functors X , Y above, write"
+    }
+  ]
+}

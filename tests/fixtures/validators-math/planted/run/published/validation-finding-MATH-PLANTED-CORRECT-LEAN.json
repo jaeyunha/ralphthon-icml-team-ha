@@ -1,0 +1,18 @@
+{
+  "artifact_refs": [
+    "phases/formalization/artifacts/correct-lean-lemma.json"
+  ],
+  "claim_id": "LEMMA-CORRECT",
+  "confidence": 1.0,
+  "confirmation_paths": [],
+  "finding_id": "MATH-PLANTED-CORRECT-LEAN",
+  "limitations": "Fixture lemma only.",
+  "method": "Lean 4 formalization, alignment audit, proof attempt, and pinned-container compilation",
+  "observation": "The aligned Lean formalization compiled in the pinned network-disabled container.",
+  "paper_anchors": [
+    "THM-CORRECT"
+  ],
+  "severity_candidate": "none",
+  "status": "verified_formally",
+  "validator_type": "formal_math"
+}

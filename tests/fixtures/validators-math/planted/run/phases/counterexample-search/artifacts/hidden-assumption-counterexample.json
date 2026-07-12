@@ -1,0 +1,17 @@
+{
+  "counterexample": {
+    "x": "-3"
+  },
+  "interval_residual": "[-3.0, 6.0]",
+  "left_value": "3.0000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "methods": [
+    "exact-rational-grid",
+    "80-digit-evaluation",
+    "interval-arithmetic-enclosure",
+    "deterministic-property-sweep",
+    "exhaustive-small-cases",
+    "boundary-and-adversarial-points"
+  ],
+  "right_value": "-3.0000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "samples_checked": 1
+}

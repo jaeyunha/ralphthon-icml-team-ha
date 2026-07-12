@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "phase": "initial-review",
+  "tasks": [
+    {
+      "id": "fixture-review",
+      "status": "retrying"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "fixture_version": 1,
+  "purpose": "W1 J-DATABASE projector and snapshot verification fixtures",
+  "contract_status": "w0-frozen-event-envelope",
+  "authoritative_requirements": [
+    "RALPH_REVIEW_AGENT_SYSTEM_PLAN_AND_TECHNICAL_SPEC_V2.md §22, §28.J",
+    "PHASED_ROLE_ARCHITECTURE_AND_AGENT_CONTRACTS.md R2.13, R2.14"
+  ],
+  "w0_contract": {
+    "event_envelope": {
+      "required_fields": [
+        "event_id",
+        "run_id",
+        "sequence",
+        "occurred_at",
+        "type",
+        "actor",
+        "payload"
+      ],
+      "actor_fields": [
+        "agent_id",
+        "role",
+        "phase"
+      ],
+      "id_semantics": "Globally unique immutable event identifier.",
+      "sequence_semantics": "Positive integer, unique and strictly increasing per run.",
+      "type_semantics": "Exactly three phase-qualified dot segments matching actor.role and normalized actor.phase.",
+      "payload_semantics": "Event-specific JSON object persisted without lossy transformation.",
+      "schema": "packages/schemas/schemas/event-envelope.schema.json"
+    },
+    "sequence_allocator": "packages/contracts EventSequenceAllocator owns durable per-run allocation; the emitter serializes allocation plus append on the event log guard.",
+    "timestamps": "RFC 3339 occurred_at strings are stored as PostgreSQL timestamptz without changing instants.",
+    "identities": "actor.agent_id is the persistent logical identity. Phase changes never create another agents row.",
+    "notifications": "One post-commit run_events notification is emitted only for a newly inserted event. Replay conflicts produce no additional notification.",
+    "cursor": "The durable cursor records byte offset, last sequence, and last event id in the same transaction as projections."
+  },
+  "projection_tables": [
+    "runs",
+    "agents",
+    "agent_phase_runs",
+    "events",
+    "notes",
+    "score_history",
+    "artifacts",
+    "discussion_issues",
+    "execution_jobs",
+    "decisions"
+  ],
+  "scenarios": [
+    {
+      "name": "canonical",
+      "event_log": "canonical/events.ndjson",
+      "expected_snapshot": "canonical/expected.snapshot.json",
+      "expected_notifications": "canonical/expected.notifications.ndjson",
+      "covers": [
+        "all core projections",
+        "phase-qualified event names",
+        "one reviewer identity across initial_review, followup, and discussion",
+        "OpenReview parent/thread note tree",
+        "append-only score history",
+        "post-commit notifications"
+      ]
+    },
+    {
+      "name": "duplicate-replay",
+      "scenario": "duplicate-replay/scenario.json",
+      "covers": [
+        "idempotent double replay",
+        "global event id conflict handling",
+        "per-run sequence conflict handling",
+        "no duplicate notifications"
+      ]
+    },
+    {
+      "name": "out-of-order",
+      "event_log": "out-of-order/events.ndjson",
+      "expected_result": "out-of-order/expected-result.json",
+      "covers": [
+        "strict monotonic source validation",
+        "transactional rejection without projection or notification"
+      ]
+    },
+    {
+      "name": "crash-restart",
+      "event_log": "crash-restart/events.ndjson",
+      "scenario": "crash-restart/scenario.json",
+      "expected_snapshot": "crash-restart/expected.snapshot.json",
+      "expected_notifications": "crash-restart/expected.notifications.ndjson",
+      "covers": [
+        "database commit before cursor checkpoint",
+        "restart replay of the committed event",
+        "no loss, duplication, or duplicate notification"
+      ]
+    }
+  ]
+}

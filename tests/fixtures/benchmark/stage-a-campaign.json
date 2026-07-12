@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "stage": "A",
+  "fixture_only": true,
+  "campaign_id": "stage-a-synthetic",
+  "arms": [
+    {
+      "arm_id": "arm-v1",
+      "profile_id": "v1",
+      "bundle_hash": "sha256:6bd29370e95d7d9a749f7b501559a92be15d27569a96c4dac4d38b1d00dd457e"
+    },
+    {
+      "arm_id": "arm-v2",
+      "profile_id": "v2",
+      "bundle_hash": "sha256:a4e4a1a21bb8359175cb5c8ca88fda7c0b63c23ca7dc8bd30b45addf2c4b7b64"
+    }
+  ],
+  "paper_slots": [
+    {"paper_slot": 1, "paper_id": "synthetic-paper-1", "fixture": true},
+    {"paper_slot": 2, "paper_id": "synthetic-paper-2", "fixture": true},
+    {"paper_slot": 3, "paper_id": "synthetic-paper-3", "fixture": true},
+    {"paper_slot": 4, "paper_id": "synthetic-paper-4", "fixture": true},
+    {"paper_slot": 5, "paper_id": "synthetic-paper-5", "fixture": true},
+    {"paper_slot": 6, "paper_id": "synthetic-paper-6", "fixture": true},
+    {"paper_slot": 7, "paper_id": "synthetic-paper-7", "fixture": true}
+  ],
+  "execution_policy": {
+    "model_generation": false,
+    "outcome_reveal": false,
+    "retrospective_scoring": false
+  }
+}

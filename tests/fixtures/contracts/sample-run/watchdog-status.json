@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "status": "RUNNING",
+  "run_state": "PRELIMINARY_REVIEW",
+  "reason": null,
+  "started_at": "2026-07-11T12:00:00Z",
+  "updated_at": "2026-07-11T12:05:00Z",
+  "watchdog_pid": 4242,
+  "budget": {
+    "deadline_at": "2026-07-12T12:00:00Z",
+    "spent_usd": 1.25,
+    "max_budget_usd": 20,
+    "restart_count": 1,
+    "no_progress_count": 0,
+    "discussion_rounds": 0
+  }
+}

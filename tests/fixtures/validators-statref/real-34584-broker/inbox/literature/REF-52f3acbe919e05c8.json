@@ -1,0 +1,47 @@
+{
+  "artifact_type": "literature_broker_response",
+  "request_id": "REF-52f3acbe919e05c8",
+  "reviewer_id": "validator-references",
+  "packets": [
+    {
+      "source_id": "SRC-D62097105B8DD60A",
+      "title": "SE(3)-bi-equivariant Transformers for Point Cloud Assembly",
+      "authors": [
+        "Ziming Wang",
+        "Rebecka Jörnsten"
+      ],
+      "first_public_date": "2024-01-01",
+      "source_type": "metadata_registry",
+      "canonical_uri": "https://doi.org/10.52202/079017-3692",
+      "content_hash": "sha256:fc3d3019b706b17fb6fed8928bb2f2a475c4461caab346a0ae774ff7dcb39ea9",
+      "admissibility": "admissible_prior_work",
+      "retrieval_reason": "Validate bibliography identity for REF-012",
+      "supporting_passages": [
+        {
+          "anchor": "retrieved:sentence:1",
+          "summary": "SE(3)-bi-equivariant Transformers for Point Cloud Assembly - proceedings.com Skip to main content Toggle menu Search Browse Publisher By Letter a b c d e f g h i j k l m n o p q r s t u v w x y z # 35th IGC Organizing Committee Abo Akademi University, Thermal and Flow Engineering Laboratory Academic Conferences Ltd ACCM-7 Organizing Committee Acoustical Society Of America (ASA) ACS Division of Environmental Chemistry ACS Division of Fuel Chemistry ACS Northeast Regional Meeting (NERM) ACTA Press Advanced Automotive Batteries (AAB) Advanced Laser Applications Conference (ALAC) AF3P Agustawes..."
+        },
+        {
+          "anchor": "retrieved:sentence:2",
+          "summary": "American Chemistry Council (ACC) American College of Veterinary Internal Medicine (ACVIM) American College of Veterinary Pathologists (ACVP) American Concrete Institute (ACI) American Crystallographic Association (ACA) American Filtration and Separations Society (AFS) American Fire Safety Council (AFSC) American Forage and Grassland Council (AFGC) American Foundry Society (AFS) American Fuel and Petrochemical Manufacturers (AFPM) American Gas Association (AGA) American Institute for Aeronautics and Astronautics (AIAA) American Institute of Chemical Engineers (AIChE) American Institute of Ma..."
+        },
+        {
+          "anchor": "retrieved:sentence:3",
+          "summary": "Antenna Symposium Applied Mechanics Laboratory ASHRAE Inc Asian Association on Remote Sensing (AARS) Asian Australasian Association for Composite Materials (AACM) ASM International ASN Events Asociacion de Acusticos Argentinos Asociacion Latinoamericana de Fabricantes de Refractarios (ALAFAR) Associacao Brasileira de Energia Nuclear (ABEN) Associacao Brasileira de Metalurgia Materiais e Mineracao (ABM) Associacao Brasileira Tecnica de Celulose e Papel (ABTCP) Association Aeronautique et Astronautique de France Association for Computational Linguistics (ACL) Association for Environmental Hea..."
+        }
+      ],
+      "verification_status": "abstract_checked"
+    }
+  ],
+  "rejected_candidates": [
+    {
+      "canonical_uri": "https://doi.org/10.1016/j.media.2020.101849",
+      "reason": "Retrieved source contains no sanitized abstract or full-text passage."
+    },
+    {
+      "canonical_uri": "https://doi.org/10.1109/tro.2025.3543267/mm1",
+      "reason": "identity: canonical page title coverage 0.00 is below 0.60"
+    }
+  ],
+  "created_at": "2026-07-11T15:02:53.719Z"
+}

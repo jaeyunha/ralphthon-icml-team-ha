@@ -1,0 +1,60 @@
+{
+  "runId": "icml-2026-0421",
+  "generatedAt": "2026-06-18T16:04:12.000Z",
+  "process": [
+    {"id":"reviewer-r2","role":"Reviewer R2","phase":"final-justification","status":"completed","completedTasks":8,"totalTasks":8,"lastEventSequence":6},
+    {"id":"reviewer-r4","role":"Reviewer R4","phase":"final-justification","status":"completed","completedTasks":7,"totalTasks":7,"lastEventSequence":5},
+    {"id":"validator-math-1","role":"Math validator","phase":"bundle-publication","status":"completed","completedTasks":4,"totalTasks":4,"lastEventSequence":3},
+    {"id":"validator-code-1","role":"Code validator","phase":"bundle-publication","status":"completed","completedTasks":5,"totalTasks":5,"lastEventSequence":5},
+    {"id":"area-chair-17","role":"Area Chair","phase":"meta-review","status":"completed","completedTasks":6,"totalTasks":6,"lastEventSequence":9},
+    {"id":"sac-3","role":"Senior Area Chair","phase":"calibration","status":"completed","completedTasks":3,"totalTasks":3,"lastEventSequence":10},
+    {"id":"program-chairs","role":"Program Chairs","phase":"finalization","status":"completed","completedTasks":2,"totalTasks":2,"lastEventSequence":12}
+  ],
+  "discussion": [
+    {
+      "id": "DISC-001",
+      "title": "Does Proposition 2 require bounded density ratios?",
+      "status": "resolved",
+      "openedBy": "area-chair-17",
+      "participants": ["reviewer-r2", "reviewer-r4", "area-chair-17", "author-coordinator"],
+      "summary": "The initial statement omitted an assumption used in the concentration step.",
+      "resolution": "The assumption is now explicit; the math validator confirmed the corrected proof constant and the AC marked the concern resolved.",
+      "evidenceIds": ["EVID-MATH-12", "EVID-PAPER-PROP2"]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "EVID-PAPER-PROP2",
+      "kind": "paper_anchor",
+      "label": "Proposition 2, page 6",
+      "status": "qualified",
+      "summary": "The original proposition omitted the bounded density-ratio assumption used on proof line 14.",
+      "source": "paper.pdf#page=6&selection=prop-2",
+      "artifactId": "paper-anchor-prop2"
+    },
+    {
+      "id": "EVID-MATH-12",
+      "kind": "math_validation",
+      "label": "MATH-12 proof patch verification",
+      "status": "confirmed",
+      "summary": "Symbolic and manual checks confirm the revised constant under the newly explicit ratio bound.",
+      "source": "validator-math-1",
+      "artifactId": "math-validation-12"
+    },
+    {
+      "id": "EVID-CODE-07",
+      "kind": "code_validation",
+      "label": "Restart ablation reproduction",
+      "status": "confirmed",
+      "summary": "The supplied seeds reproduce the 0.8 versus 2.7 point shifted-accuracy comparison within reported intervals.",
+      "source": "validator-code-1",
+      "artifactId": "rebuttal-ablation"
+    }
+  ],
+  "audit": {
+    "stateHash": "sha256:23b006a91d17f4be7d5c89a620ef6c66ef10dcd684455a5d87815eb1ac01ca4a",
+    "inputManifestHash": "sha256:f4904622fecc9d0c5fb779dc22691ddf2d824f49a23dd26ec67aefc535597395",
+    "projectedThroughSequence": 12,
+    "exportArtifactIds": ["official-review-r2", "final-review-r2", "math-validation-12", "rebuttal-ablation", "audit-export"]
+  }
+}

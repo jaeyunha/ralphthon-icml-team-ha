@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "model_snapshot": {
+    "provider": "codex-provider",
+    "model_identifier": "codex",
+    "snapshot_identifier": "codex-2026-07-01",
+    "attestation_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "attested_at": "2026-07-11T00:00:00Z"
+  },
+  "model_snapshot_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+  "reasoning_settings": {"effort": "high"},
+  "tool_settings": {"ever": true, "shell": false},
+  "context_settings": {"max_tokens": 100000},
+  "queue_semantics": "fifo_adjacent_pair",
+  "invocation_deadline_seconds": 1800,
+  "phase_deadline_seconds": 7200,
+  "heartbeat_interval_seconds": 30,
+  "lease_timeout_seconds": 90,
+  "invocation_retries": 1,
+  "phase_retries": 1,
+  "no_progress_limit": 2,
+  "concurrency": 2,
+  "provider_usage_mapping": {
+    "input_tokens_field": "input",
+    "output_tokens_field": "output",
+    "cached_input_tokens_field": "cached"
+  },
+  "rate_card_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+  "caps": {
+    "paper_tokens": 2000000,
+    "paper_usd": "75",
+    "paper_job_hours": "10",
+    "arm_tokens": 200000,
+    "arm_usd": "10",
+    "arm_job_hours": "2",
+    "campaign_tokens": 28400000,
+    "campaign_usd": "1070",
+    "campaign_job_hours": "144",
+    "campaign_wall_hours": "72"
+  },
+  "settings_hash": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+}

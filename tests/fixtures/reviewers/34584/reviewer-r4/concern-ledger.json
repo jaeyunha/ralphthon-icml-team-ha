@@ -1,0 +1,143 @@
+{
+  "concerns": [
+    {
+      "affected_claims": [
+        "CLAIM-008",
+        "CLAIM-009"
+      ],
+      "anchors": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "STAT-BASELINE-001",
+        "STAT-BREADTH-001",
+        "STAT-LEAKAGE-001",
+        "STAT-MULTICOMP-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "REF-ID-REF-021",
+        "REF-ID-REF-023",
+        "REF-ID-REF-024",
+        "REF-ID-REF-026",
+        "REF-ID-REF-027"
+      ],
+      "id": "reviewer-r4-W1",
+      "severity": "major",
+      "status": "open",
+      "text": "The empirical claims are not reliable as submitted. The frozen audit found an exact subject identifier shared between training and held-out data, and it found that TemporalCNN was compared under different compute, tuning, split, and metric conditions. It also found fewer than two recorded seeds, no uncertainty estimates, and eight comparisons without multiplicity correction. The submission itself provides little protocol detail beyond the result paragraph and table. These findings do not refute the OENN theory, but they leave the claims of substantial outperformance and improved generalization unsupported. Resolution requires a subject-disjoint split manifest, like-for-like baseline reruns, run-level results across multiple seeds, uncertainty reporting, and a declared multiplicity policy."
+    },
+    {
+      "affected_claims": [
+        "CLAIM-005",
+        "CLAIM-006"
+      ],
+      "anchors": [
+        "TXT-0071",
+        "TXT-0345",
+        "TXT-0349",
+        "TXT-0106"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "STAT-BASELINE-001",
+        "STAT-BREADTH-001",
+        "STAT-LEAKAGE-001",
+        "STAT-MULTICOMP-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "REF-ID-REF-021",
+        "REF-ID-REF-023",
+        "REF-ID-REF-024",
+        "REF-ID-REF-026",
+        "REF-ID-REF-027"
+      ],
+      "id": "reviewer-r4-W2",
+      "severity": "minor",
+      "status": "open",
+      "text": "The local universality construction is communication-local but not resource-local: every carrier stores source-labeled slots whose width equals the entire input dimension, propagation uses diameter-many inter-site layers, and exact compilation uses graph-specific length-D walk-count rescaling. The paper states the width cost but gives no parameter, memory, or runtime bounds, no orbit/stabilizer construction algorithm, and no implementation demonstrating feasibility. This limits the practical significance of the pair-state result even if the existence proof is correct. A complexity analysis and an executable example comparing pair-state OENN with lower-order alternatives would resolve the concern."
+    },
+    {
+      "affected_claims": [
+        "CLAIM-002",
+        "CLAIM-006",
+        "CLAIM-007"
+      ],
+      "anchors": [
+        "TXT-0192",
+        "TXT-0195",
+        "THM-0018",
+        "TXT-0252"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "STAT-BASELINE-001",
+        "STAT-BREADTH-001",
+        "STAT-LEAKAGE-001",
+        "STAT-MULTICOMP-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "REF-ID-REF-021",
+        "REF-ID-REF-023",
+        "REF-ID-REF-024",
+        "REF-ID-REF-026",
+        "REF-ID-REF-027"
+      ],
+      "id": "reviewer-r4-W3",
+      "severity": "major",
+      "status": "open",
+      "text": "The broader CENN contribution is not self-contained enough to support the strongest 'general form' claims. Definition A.2 delegates essential arrow-bundle generators to a recent external work, Theorem A.3 invokes standard CENN hypotheses and a prior UAT, and the OENN-CENN equivalence then relies on choosing approximants from that construction. Moreover, the controlled reference audit could not confirm admissible identities for several central CENN self-citations; its findings are not proof of nonexistence, but they prevent independent verification here. The paper should state all required generators and analytic hypotheses precisely, provide a self-contained finite-groupoid theorem or proof, and supply verifiable source identities for the cited CENN results."
+    },
+    {
+      "affected_claims": [
+        "CLAIM-005",
+        "CLAIM-007"
+      ],
+      "anchors": [
+        "TXT-0005",
+        "THM-0011",
+        "TXT-0149",
+        "TXT-0259"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "STAT-BASELINE-001",
+        "STAT-BREADTH-001",
+        "STAT-LEAKAGE-001",
+        "STAT-MULTICOMP-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "REF-ID-REF-021",
+        "REF-ID-REF-023",
+        "REF-ID-REF-024",
+        "REF-ID-REF-026",
+        "REF-ID-REF-027"
+      ],
+      "id": "reviewer-r4-W4",
+      "severity": "major",
+      "status": "open",
+      "text": "The novelty boundary of 'order equivariance' is insufficiently sharp. Definition 2.2 and the full UAT concern ordinary finite-group equivariance on the total feature space, and the proof obtains universality by broadcasting the complete input and applying stabilizer-equivariant MLPs; the order is not used in that argument. The paper later correctly explains that equivariance comes from the action groupoid while the poset supplies masks, covers, incidence, and sheaf structure. The introduction and contribution claims should therefore distinguish generic finite-group equivariant approximation from the genuinely order-specific locality and sheaf constructions, and compare each part against verified prior finite-group and higher-order equivariant UAT results."
+    }
+  ],
+  "ledger_version": 1,
+  "official_review_version": 1,
+  "reviewer_id": "reviewer-r4"
+}

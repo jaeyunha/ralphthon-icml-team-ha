@@ -1,0 +1,13 @@
+{
+  "concern_id": "R2-W3",
+  "reviewer_id": "R2",
+  "concern_type": "missing_ablation",
+  "requested_evidence": "Component-removal experiment",
+  "available_paper_evidence": ["appendix:C.2"],
+  "author_evidence_type": "already_in_paper",
+  "draft_answer": "The requested ablation is reported in Appendix C.2.",
+  "duplicate_concerns": ["R3-Q2"],
+  "commitments": ["clarify table caption"],
+  "contradiction_risk": false,
+  "status": "ready"
+}

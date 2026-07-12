@@ -1,0 +1,16 @@
+[
+  {
+    "finding_id": "CODE-CONFORMANCE-001",
+    "validator_type": "conformance",
+    "claim_id": "CLAIM-MASKED-LOSS",
+    "status": "equation_code_mismatch",
+    "severity_candidate": "major",
+    "paper_anchors": ["paper:34783:equation:3"],
+    "method": "Four-way paper/official/clean-room/observed structured comparison",
+    "observation": "equation_code_divergence at equations.masked_loss: paper='mean(abs(prediction - stop_gradient(target)))'; official='mean(square(prediction - stop_gradient(target)))'; clean_room='mean(abs(prediction - stop_gradient(target)))'; observed='mean(square(prediction - stop_gradient(target)))'.",
+    "limitations": "Comparator checks declared structured values, not semantic equivalence of arbitrary code.",
+    "confirmation_paths": ["official-source-inspection", "clean-room-independent-implementation"],
+    "confidence": 0.95,
+    "artifact_refs": ["fixture:planted-discrepancy"]
+  }
+]

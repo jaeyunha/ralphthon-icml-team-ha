@@ -1,0 +1,18 @@
+{
+  "artifact_refs": [
+    "phases/symbolic-validation/artifacts/block-kernel-shape.json"
+  ],
+  "claim_id": "EQ-006",
+  "confidence": 0.98,
+  "confirmation_paths": [],
+  "finding_id": "MATH-34584-004",
+  "limitations": "Checks the declared Hom(V_p,W_q) application shape for a representative finite-dimensional fiber pair.",
+  "method": "Exact block-kernel dimension propagation",
+  "observation": "All declared tensor operations and output dimensions are shape-consistent.",
+  "paper_anchors": [
+    "EQ-0006"
+  ],
+  "severity_candidate": "none",
+  "status": "verified_exactly",
+  "validator_type": "exact_math"
+}

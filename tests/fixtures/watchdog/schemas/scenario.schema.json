@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.local/schemas/watchdog-fixture-scenarios.json",
+  "title": "Watchdog fake Codex scenario set",
+  "type": "object",
+  "required": ["version", "scenarios"],
+  "properties": {
+    "version": {"const": 1},
+    "scenarios": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["expected_status", "responses"],
+        "properties": {
+          "expected_status": {
+            "enum": ["SUCCESS", "INCOMPLETE", "STALLED", "BLOCKED", "FAILED", "TIME_EXHAUSTED", "BUDGET_EXHAUSTED", "POLICY_BLOCKED"]
+          },
+          "gate_open": {"type": "boolean"},
+          "no_progress_threshold": {"type": "integer", "minimum": 1},
+          "expected_feedback": {"type": "string"},
+          "responses": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "exit_code": {"type": "integer", "minimum": 0, "maximum": 255},
+                "sleep_seconds": {"type": "number", "minimum": 0},
+                "promise": {"type": "string"},
+                "artifact_path": {"type": "string"},
+                "artifact": {"type": "object"},
+                "artifact_raw": {"type": "string"},
+                "read_path": {"type": "string"},
+                "stderr": {"type": "string"}
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

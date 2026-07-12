@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "agent_id": "reviewer-r2",
+  "version": 1,
+  "entries": [
+    {
+      "query_id": "lit-001",
+      "query": "verified prior work on equivariant graph learning",
+      "reason": "Check the novelty claim against pre-cutoff literature",
+      "status": "completed",
+      "requested_at": "2026-07-11T12:00:00Z",
+      "completed_at": "2026-07-11T12:02:00Z",
+      "failure_reason": null,
+      "results": [
+        {
+          "source_id": "SRC-108",
+          "title": "Verified Prior Work",
+          "canonical_uri": "arxiv:2510.12345",
+          "first_public_date": "2025-10-12",
+          "content_hash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+          "admissibility": "admissible_prior_work",
+          "verification_status": "full_text_checked",
+          "evidence_packet_path": "agents/reviewer-r2/evidence/SRC-108.json"
+        }
+      ]
+    }
+  ]
+}

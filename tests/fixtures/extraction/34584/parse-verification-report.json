@@ -1,0 +1,1285 @@
+{
+  "checks": [
+    {
+      "duplicates": [],
+      "name": "inline_anchor_resolution",
+      "status": "passed",
+      "unresolved": []
+    },
+    {
+      "name": "anchor_inventory",
+      "orphaned": [],
+      "status": "passed"
+    },
+    {
+      "malformed": [],
+      "name": "provenance_records",
+      "status": "passed"
+    },
+    {
+      "missing": [],
+      "name": "asset_resolution",
+      "status": "passed",
+      "unsafe": []
+    },
+    {
+      "failures": [],
+      "name": "heading_equation_table_structure",
+      "status": "passed"
+    },
+    {
+      "failed_anchor_ids": [],
+      "minimum_overlap": 0.55,
+      "name": "sampled_text_overlap",
+      "reason": null,
+      "samples": [
+        {
+          "anchor_id": "SEC-0001",
+          "overlap": 1.0,
+          "page": 1,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0006",
+          "overlap": 0.849206,
+          "page": 1,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "SEC-0006",
+          "overlap": 1.0,
+          "page": 2,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0020",
+          "overlap": 0.727273,
+          "page": 3,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0026",
+          "overlap": 0.857143,
+          "page": 3,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "SEC-0009",
+          "overlap": 1.0,
+          "page": 4,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0040",
+          "overlap": 0.923077,
+          "page": 4,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0048",
+          "overlap": 0.777778,
+          "page": 4,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0055",
+          "overlap": 0.974359,
+          "page": 5,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0061",
+          "overlap": 0.952381,
+          "page": 5,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0065",
+          "overlap": 0.842105,
+          "page": 6,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0069",
+          "overlap": 0.923077,
+          "page": 6,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "SEC-0016",
+          "overlap": 1.0,
+          "page": 7,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0083",
+          "overlap": 0.9375,
+          "page": 7,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "THM-0016",
+          "overlap": 0.868421,
+          "page": 8,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0098",
+          "overlap": 1.0,
+          "page": 8,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0106",
+          "overlap": 0.929293,
+          "page": 9,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0112",
+          "overlap": 0.971429,
+          "page": 10,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0120",
+          "overlap": 0.92,
+          "page": 10,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0129",
+          "overlap": 0.894737,
+          "page": 10,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0138",
+          "overlap": 1.0,
+          "page": 11,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0145",
+          "overlap": 0.930556,
+          "page": 11,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0153",
+          "overlap": 1.0,
+          "page": 12,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0162",
+          "overlap": 0.942857,
+          "page": 13,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0170",
+          "overlap": 0.894737,
+          "page": 13,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0179",
+          "overlap": 0.9,
+          "page": 13,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0188",
+          "overlap": 1.0,
+          "page": 14,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0196",
+          "overlap": 0.941176,
+          "page": 14,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0203",
+          "overlap": 0.75,
+          "page": 15,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0212",
+          "overlap": 1.0,
+          "page": 15,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0219",
+          "overlap": 0.857143,
+          "page": 16,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0227",
+          "overlap": 0.833333,
+          "page": 16,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0236",
+          "overlap": 0.8,
+          "page": 16,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0243",
+          "overlap": 1.0,
+          "page": 17,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0251",
+          "overlap": 1.0,
+          "page": 18,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "SEC-0024",
+          "overlap": 1.0,
+          "page": 18,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0268",
+          "overlap": 1.0,
+          "page": 19,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0276",
+          "overlap": 1.0,
+          "page": 19,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0283",
+          "overlap": 1.0,
+          "page": 20,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0292",
+          "overlap": 0.6,
+          "page": 20,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0300",
+          "overlap": 1.0,
+          "page": 20,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0309",
+          "overlap": 1.0,
+          "page": 21,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0317",
+          "overlap": 1.0,
+          "page": 21,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0325",
+          "overlap": 1.0,
+          "page": 22,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0334",
+          "overlap": 0.9,
+          "page": 22,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0343",
+          "overlap": 0.933333,
+          "page": 22,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0351",
+          "overlap": 0.871795,
+          "page": 23,
+          "status": "checked"
+        },
+        {
+          "anchor_id": "TXT-0359",
+          "overlap": 0.966667,
+          "page": 23,
+          "status": "checked"
+        }
+      ],
+      "status": "passed"
+    }
+  ],
+  "failed_checks": [],
+  "orphan_anchor_ids": [],
+  "sample_size": 48,
+  "schema_version": "1.0",
+  "status": "passed",
+  "unresolved_anchor_count": 0,
+  "unresolved_anchor_ids": [],
+  "verified_bundle": {
+    "bundle_sha256": "sha256:a31c0d544fcd1c2e243a894166eec702c2b240324fb856a68afac87e3d5fdd05",
+    "files": [
+      {
+        "path": "paper.md",
+        "sha256": "sha256:cd8a5da10217e68ed16d80cb1d314ea651910e5d9ab51493bd2cee76359409be",
+        "size_bytes": 121007
+      },
+      {
+        "path": "anchors.json",
+        "sha256": "sha256:5165f75bc1a93f68e67541045ea7dfcf81e77045fc1246311d8efceb5b5a492f",
+        "size_bytes": 239487
+      },
+      {
+        "path": "extraction-report.json",
+        "sha256": "sha256:b42dec25f419fcb2e8a8009d83ea979eea189d7b34839f15bb4d64438ed06a43",
+        "size_bytes": 23099
+      },
+      {
+        "path": "assets/EQ-0001.tex",
+        "sha256": "sha256:6c8d707d1632ce8ae346a41ce4484f68879e787f61c879714e885d3a32c18204",
+        "size_bytes": 47
+      },
+      {
+        "path": "assets/EQ-0002.tex",
+        "sha256": "sha256:b05f3426864d72a199def7b8c22630fcd4ef7e16b39fb95ae65fb0669cabe96f",
+        "size_bytes": 64
+      },
+      {
+        "path": "assets/EQ-0003.tex",
+        "sha256": "sha256:1d42df44d011a1462507df607f9557773a7fe3a22ef31e9c5e47cb0018dc50b8",
+        "size_bytes": 23
+      },
+      {
+        "path": "assets/EQ-0004.tex",
+        "sha256": "sha256:e3110382798e3e3983e6a42e34c64f10c22ec68b8d614618f1aaab99dad5c8fd",
+        "size_bytes": 53
+      },
+      {
+        "path": "assets/EQ-0005.tex",
+        "sha256": "sha256:a8eb2ad62f190c8694c218919978de005474ff584842bfdca2c1d7305fc82b11",
+        "size_bytes": 70
+      },
+      {
+        "path": "assets/EQ-0006.tex",
+        "sha256": "sha256:6d0931de8aad81159aa40fc1b107e6ce619fe096142363e63aaec64c5d041055",
+        "size_bytes": 78
+      },
+      {
+        "path": "assets/EQ-0007.tex",
+        "sha256": "sha256:49784286862ec07b8d92c14e82ce256d8a75d500a2f119f9b5b67a1e05061dd0",
+        "size_bytes": 76
+      },
+      {
+        "path": "assets/EQ-0008.tex",
+        "sha256": "sha256:0478484a1147a7962709c6637a18b61f74ca13b9e5f098ebdd4658de04c401b8",
+        "size_bytes": 50
+      },
+      {
+        "path": "assets/EQ-0009.tex",
+        "sha256": "sha256:98476b8786c9df7ba6eed6e1dd94c4899627291e0a8ba1620f1d5cbd2e1350ad",
+        "size_bytes": 29
+      },
+      {
+        "path": "assets/EQ-0010.tex",
+        "sha256": "sha256:181e18f31febb6240e1f195e356b8702840cd62e40537d7a75bb3fbb624e35b1",
+        "size_bytes": 51
+      },
+      {
+        "path": "assets/EQ-0011.tex",
+        "sha256": "sha256:ef9db59fbf613bc50d091a9fe9e9c53f330da4442d90fe50c8beddd1aa82aeea",
+        "size_bytes": 73
+      },
+      {
+        "path": "assets/EQ-0012.tex",
+        "sha256": "sha256:81db9badcdbc4126f72e8f722934e0981f2b3c5c4361a36cd3d25737466c6a16",
+        "size_bytes": 74
+      },
+      {
+        "path": "assets/EQ-0013.tex",
+        "sha256": "sha256:1dd381fd65c59bef5dd875a3448334d9ee23b1f048323ef943aaf6f3e82ec40e",
+        "size_bytes": 79
+      },
+      {
+        "path": "assets/EQ-0014.tex",
+        "sha256": "sha256:5d6df9ae422ff1b6156cd7c113c4e47de78075c9c24d5fa3fa77204626b80c21",
+        "size_bytes": 23
+      },
+      {
+        "path": "assets/EQ-0015.tex",
+        "sha256": "sha256:d9b7397e4509f39e4a4a2ccfb3acb5d9a1390676b2016181442a6cd14c820208",
+        "size_bytes": 53
+      },
+      {
+        "path": "assets/EQ-0016.tex",
+        "sha256": "sha256:58cc3342531e86dcdc5be16bfe94746aca26ec47a3dec42864d3ae4960023e3c",
+        "size_bytes": 73
+      },
+      {
+        "path": "assets/EQ-0017.tex",
+        "sha256": "sha256:997613ca19716361ca65c25144360ce5fc769e7246753ab7f23c4738f04efd49",
+        "size_bytes": 67
+      },
+      {
+        "path": "assets/EQ-0018.tex",
+        "sha256": "sha256:c58c8794e7672c1cc06c842329746396f6d6281ab6c79beac7c0d6559e0169ef",
+        "size_bytes": 33
+      },
+      {
+        "path": "assets/EQ-0019.tex",
+        "sha256": "sha256:ea635e3ba2f2c36b350c57e0226c1c4e247f58fa3fa33692a670f9f502369d1d",
+        "size_bytes": 74
+      },
+      {
+        "path": "assets/EQ-0020.tex",
+        "sha256": "sha256:67f4df797322699b79c8e0978c5e8a818eebd91c3c7717da252103c81311cb37",
+        "size_bytes": 38
+      },
+      {
+        "path": "assets/EQ-0021.tex",
+        "sha256": "sha256:21cd0587f11ce796bbb27678ba1a2a6967da89aa0814fd581d0e9386bbbb83cb",
+        "size_bytes": 61
+      },
+      {
+        "path": "assets/EQ-0022.tex",
+        "sha256": "sha256:59c34f69a8e134d9b1e40a891e68aafc507f2d448d4ea4dcbe9b2c9aecfe7ccd",
+        "size_bytes": 71
+      },
+      {
+        "path": "assets/EQ-0023.tex",
+        "sha256": "sha256:a57c1f659d4ee7f814690b4c986b08dd1ec6202992bb3888507c3f9a98af8eac",
+        "size_bytes": 52
+      },
+      {
+        "path": "assets/EQ-0024.tex",
+        "sha256": "sha256:315b4490ed2863d6f4b4694db11967f7235774f7d2ab068395d38b70ab9f6704",
+        "size_bytes": 56
+      },
+      {
+        "path": "assets/EQ-0025.tex",
+        "sha256": "sha256:2259baab5d1f2f5930125bf57bfd6eeea7e8e05828d80a9b7b32a7215230557e",
+        "size_bytes": 64
+      },
+      {
+        "path": "assets/EQ-0026.tex",
+        "sha256": "sha256:c59249ac1de93b03f3ac9a5b11a6eca21c5edc76f7ad42b7d3b40b2c8388e4e3",
+        "size_bytes": 74
+      },
+      {
+        "path": "assets/EQ-0027.tex",
+        "sha256": "sha256:80127ea7904f2c3c72f57b3cefb1aaddf716e6a43717dedf2c740c3865c23cc8",
+        "size_bytes": 46
+      },
+      {
+        "path": "assets/EQ-0028.tex",
+        "sha256": "sha256:d3f34986e9e525a831c00f72e9648f1ffa046a926884d66e4ac8d9797a1192ea",
+        "size_bytes": 89
+      },
+      {
+        "path": "assets/EQ-0029.tex",
+        "sha256": "sha256:73984264683e57570e10ec3984c66da0fc29330523e63971147e4ee105e701ec",
+        "size_bytes": 55
+      },
+      {
+        "path": "assets/EQ-0030.tex",
+        "sha256": "sha256:8a24fb6b43c781c94545f4ed7b3951ba3120c7f82cc48341e25f4336a6d256e6",
+        "size_bytes": 98
+      },
+      {
+        "path": "assets/EQ-0031.tex",
+        "sha256": "sha256:b4b89554ad8e62e7685fcc42d84af79fdc8138c4e11050678768d5651645f015",
+        "size_bytes": 57
+      },
+      {
+        "path": "assets/EQ-0032.tex",
+        "sha256": "sha256:58ca6ebe2ee721c4d7f145e3f74a47d085b8b312138e3981b8463a947e0397db",
+        "size_bytes": 53
+      },
+      {
+        "path": "assets/EQ-0033.tex",
+        "sha256": "sha256:24117efb32a0a06bb0909397a2280fe20a97d383973b4ff59f5aadc3958cfe52",
+        "size_bytes": 57
+      },
+      {
+        "path": "assets/EQ-0034.tex",
+        "sha256": "sha256:23770222a9c86227a7ecd59586239987e9e984bd1a7d80d6dcfbbf251590c9df",
+        "size_bytes": 59
+      },
+      {
+        "path": "assets/EQ-0035.tex",
+        "sha256": "sha256:a868c6272773bc07c4d573d8d463f40808dae67bc996f3c0fd720403a61cc952",
+        "size_bytes": 48
+      },
+      {
+        "path": "assets/EQ-0036.tex",
+        "sha256": "sha256:be095eda89340aca170d8819bdfe7a8acdd5d15d0589436eb8ece7a15ae6e80b",
+        "size_bytes": 43
+      },
+      {
+        "path": "assets/EQ-0037.tex",
+        "sha256": "sha256:7abf01cb8118a57b5ec5749807c5f80012572e067dcb728d71ac1641f84fceae",
+        "size_bytes": 58
+      },
+      {
+        "path": "assets/EQ-0038.tex",
+        "sha256": "sha256:01d4db438f8d4cabce020a204cede228818875f63f5fa267f1699365c9bfdccd",
+        "size_bytes": 82
+      },
+      {
+        "path": "assets/EQ-0039.tex",
+        "sha256": "sha256:bf331f9f5290db2cbac5847a3220d97a9551f7fb2362f6bf57c60886bc0ba42e",
+        "size_bytes": 57
+      },
+      {
+        "path": "assets/EQ-0040.tex",
+        "sha256": "sha256:92a40d4e239d0df00a9754ee927a40e14dc3a8417e0de57eb83cd9cbe8939718",
+        "size_bytes": 69
+      },
+      {
+        "path": "assets/EQ-0041.tex",
+        "sha256": "sha256:373ead053390c1367b78426c93f53832c87482f743340df9e96150a2364c0411",
+        "size_bytes": 41
+      },
+      {
+        "path": "assets/EQ-0042.tex",
+        "sha256": "sha256:ef8d79cd580fc1f209ef90674e50c9ff0dda59277fec4dd443c818683cebe16b",
+        "size_bytes": 55
+      },
+      {
+        "path": "assets/EQ-0043.tex",
+        "sha256": "sha256:bdbae43d4e95e1b843cca9b49bacf79d0d9623cb592c8004d5ecd32c723be0d1",
+        "size_bytes": 50
+      },
+      {
+        "path": "assets/EQ-0044.tex",
+        "sha256": "sha256:3cfb452d9c86b2c1558fe642e88f4f8b0552982763a0549eadf52cacb780c2d6",
+        "size_bytes": 98
+      },
+      {
+        "path": "assets/EQ-0045.tex",
+        "sha256": "sha256:73a7809acca08cf43f1dc922345f5b78bae8cad33e481833f6ab2db1075d0dcb",
+        "size_bytes": 93
+      },
+      {
+        "path": "assets/EQ-0046.tex",
+        "sha256": "sha256:b177ba109c4fa8da422f0ab94262f0207b11258484ffe042dc944c7f580392aa",
+        "size_bytes": 38
+      },
+      {
+        "path": "assets/EQ-0047.tex",
+        "sha256": "sha256:248b606d2d6d682194781b7a3c25b86a9a4ffc7d9371c3bf058f1d5d3c37aa86",
+        "size_bytes": 63
+      },
+      {
+        "path": "assets/EQ-0048.tex",
+        "sha256": "sha256:143f3e813e222ebaffc481c4bc161910eb3accb1c2c7f04ac2d0b0ea0154bc23",
+        "size_bytes": 81
+      },
+      {
+        "path": "assets/EQ-0049.tex",
+        "sha256": "sha256:6cdc407fdcebe1beb45cca0b483bbe4ee2170686d7e5a1d94968bef9a6896702",
+        "size_bytes": 30
+      },
+      {
+        "path": "assets/EQ-0050.tex",
+        "sha256": "sha256:e8c8acccc31292eb72479daca24517ea2606874e152fd0527ccea622206fcca9",
+        "size_bytes": 32
+      },
+      {
+        "path": "assets/EQ-0051.tex",
+        "sha256": "sha256:3b9480dc4ad6de6b4f492e961edec79a08f029becb751f29ac2c3849e9ed0d3c",
+        "size_bytes": 33
+      },
+      {
+        "path": "assets/EQ-0052.tex",
+        "sha256": "sha256:c8e4904190ceb943a71d54b2e5d5610609fa54630aab89a15bb98d7e8ed5e4e4",
+        "size_bytes": 60
+      },
+      {
+        "path": "assets/EQ-0053.tex",
+        "sha256": "sha256:4bb8f1eaca4fba08d608ea7096e1e079c43f4745207d9bf2c570d2e9e1cd8010",
+        "size_bytes": 57
+      },
+      {
+        "path": "assets/EQ-0054.tex",
+        "sha256": "sha256:c460c50df1b5bc1b89ebfb592729c57f200c2a02a95f655ee16a4197edcdc7e2",
+        "size_bytes": 30
+      },
+      {
+        "path": "assets/EQ-0055.tex",
+        "sha256": "sha256:4c786fc0db123512f2031509235d145ae79a30c95f02cc49ae1bd274b0c8772e",
+        "size_bytes": 99
+      },
+      {
+        "path": "assets/EQ-0056.tex",
+        "sha256": "sha256:5d4a7a2febbb21fbdb32dfd377f3f06e82c8c50fcb472ec6fffca3dd7a2a49b4",
+        "size_bytes": 55
+      },
+      {
+        "path": "assets/EQ-0057.tex",
+        "sha256": "sha256:90655ff0c103882baff6279716bf5a28928a610549815ef651651e8e10b2ceb7",
+        "size_bytes": 100
+      },
+      {
+        "path": "assets/EQ-0058.tex",
+        "sha256": "sha256:4de3e7bf0eb5bfac32622c7b76f1939ddb81528367fd94f96ed6fcdb81212f14",
+        "size_bytes": 97
+      },
+      {
+        "path": "assets/EQ-0059.tex",
+        "sha256": "sha256:543ab46d67cda81a37026bff5962173da2a98edf1af40b5186adebf22d25577d",
+        "size_bytes": 19
+      },
+      {
+        "path": "assets/EQ-0060.tex",
+        "sha256": "sha256:4ff3ae5f81c0c41d9d177f43b5dd01a1a03693b04ad9769b910c2252451d45e4",
+        "size_bytes": 25
+      },
+      {
+        "path": "assets/EQ-0061.tex",
+        "sha256": "sha256:51b32f4f3a28b0b90da304bf5cf111d567f58e4a1a3f6cba4bbef46f680b8230",
+        "size_bytes": 72
+      },
+      {
+        "path": "assets/EQ-0062.tex",
+        "sha256": "sha256:371c3a62b9011a3716d99a22e139dc7f632aa5fbb1cd06176b59d1295357a537",
+        "size_bytes": 21
+      },
+      {
+        "path": "assets/EQ-0063.tex",
+        "sha256": "sha256:b9a5cfbc095198ea3da7668e3c71cd45146f3e8e95e4838888608a15206a7716",
+        "size_bytes": 33
+      },
+      {
+        "path": "assets/EQ-0064.tex",
+        "sha256": "sha256:091e58f0aefbb7c36eb9ed78f1031c83bf30ba802855debf6554437468a8ad93",
+        "size_bytes": 61
+      },
+      {
+        "path": "assets/EQ-0065.tex",
+        "sha256": "sha256:fd0b33d994c0bac1a911564bd46f74a834fecbdde60f3d4856f2d66d21a70340",
+        "size_bytes": 43
+      },
+      {
+        "path": "assets/EQ-0066.tex",
+        "sha256": "sha256:91cba319df19e85771d73f432aba85d54e0fc8541a1384beadef36151d88480d",
+        "size_bytes": 62
+      },
+      {
+        "path": "assets/EQ-0067.tex",
+        "sha256": "sha256:30f8ac2c7384122bc55cd647c6e6e7dbbb58bc99f94d3cd8f9c9e74a813f8ef6",
+        "size_bytes": 34
+      },
+      {
+        "path": "assets/EQ-0068.tex",
+        "sha256": "sha256:ce7023eb75a9233f8701ecef0cd3501ed920d30c695071c829083a59ea6bcfe6",
+        "size_bytes": 90
+      },
+      {
+        "path": "assets/EQ-0069.tex",
+        "sha256": "sha256:d9a838bf2fd2772d93dc087cffd0bef86288d970f22b232c08929cabe70cdb31",
+        "size_bytes": 86
+      },
+      {
+        "path": "assets/EQ-0070.tex",
+        "sha256": "sha256:4c148f8ad975cce99d76f4defb6cdabcecbe679e3146d0a6f1a0d442af92d168",
+        "size_bytes": 70
+      },
+      {
+        "path": "assets/EQ-0071.tex",
+        "sha256": "sha256:b390d55774d8386f3b61ba9ae5395e918a4c17fbd1cb556de44cf95b0671171a",
+        "size_bytes": 66
+      },
+      {
+        "path": "assets/EQ-0072.tex",
+        "sha256": "sha256:39175a385e717a52dd51769b6d65fc63861a0395e72a0ef0cac547f89e86c747",
+        "size_bytes": 82
+      },
+      {
+        "path": "assets/EQ-0073.tex",
+        "sha256": "sha256:8ebcc4e3599a133fd9dae8d7fe921d94c7452b339567d5add82261249b08ce78",
+        "size_bytes": 43
+      },
+      {
+        "path": "assets/EQ-0074.tex",
+        "sha256": "sha256:89b1396f036f3a73a49ceb55f097caf318ad861b87595f57e6cf6b8b27008bc3",
+        "size_bytes": 81
+      },
+      {
+        "path": "assets/EQ-0075.tex",
+        "sha256": "sha256:a6a4ee17d99a7d1fd8dde1306ba05e25adfea5c3755e21c00cde6eeb889a6e49",
+        "size_bytes": 42
+      },
+      {
+        "path": "assets/EQ-0076.tex",
+        "sha256": "sha256:baeda69b337aa4fd96940b5cee2b34c4bafbde1111eca3b047e111b8b970d6e9",
+        "size_bytes": 43
+      },
+      {
+        "path": "assets/EQ-0077.tex",
+        "sha256": "sha256:80e0a66827609aafe5935c64aa2684545d8c1b439ba885daa0cc51ccb51438d1",
+        "size_bytes": 42
+      },
+      {
+        "path": "assets/EQ-0078.tex",
+        "sha256": "sha256:dc5b1d98c2c47249b849b2dd720cbc06778c25a87cc15e2a58c8fe9af7ae36c3",
+        "size_bytes": 108
+      },
+      {
+        "path": "assets/EQ-0079.tex",
+        "sha256": "sha256:43a190f871b7690d31db8218cbddde6f2bfa70e5c8161eba42ac91ee7cf421b1",
+        "size_bytes": 54
+      },
+      {
+        "path": "assets/EQ-0080.tex",
+        "sha256": "sha256:314ff5952d6f2283f128ef6a62d0e99829a0fa7774f501ed52e160b21cb15d3c",
+        "size_bytes": 167
+      },
+      {
+        "path": "assets/EQ-0081.tex",
+        "sha256": "sha256:4b0be4d0cde9c70dd2c3b8c4bc867f9b972da0301b9e53dacfb524326f9f5142",
+        "size_bytes": 64
+      },
+      {
+        "path": "assets/EQ-0082.tex",
+        "sha256": "sha256:090825ee40b0c3be46687ce810cb979940d2249e24e42a469ce6dd7fac758dd4",
+        "size_bytes": 55
+      },
+      {
+        "path": "assets/EQ-0083.tex",
+        "sha256": "sha256:5bfd3ed7a6b2bbcbbcdf8edcd344d10c1671aab4c6f15e9a22e78118abd17b8f",
+        "size_bytes": 61
+      },
+      {
+        "path": "assets/EQ-0084.tex",
+        "sha256": "sha256:5202a2591d32f48e3c22870558364e8402408f949a0f61c08f9fe4d93fdd5016",
+        "size_bytes": 52
+      },
+      {
+        "path": "assets/EQ-0085.tex",
+        "sha256": "sha256:1371afdcb1f4aeae2e663b949fba958f4fab9729419ffeb7c199de5f4b9a3e16",
+        "size_bytes": 18
+      },
+      {
+        "path": "assets/EQ-0086.tex",
+        "sha256": "sha256:17d37a59b43b80a09cac6887df8f443f01614c1c0c829b1a7a6b4f1263b6111c",
+        "size_bytes": 37
+      },
+      {
+        "path": "assets/EQ-0087.tex",
+        "sha256": "sha256:d8dcab572614dd68b5bf7fba1c6b731b57111825ba4e3e7d438de5d29f2c214a",
+        "size_bytes": 33
+      },
+      {
+        "path": "assets/EQ-0088.tex",
+        "sha256": "sha256:d5be3d408f71f155b49d9b721e52bb4c93042c892c4078b1b437b50dcd90a198",
+        "size_bytes": 67
+      },
+      {
+        "path": "assets/EQ-0089.tex",
+        "sha256": "sha256:7446cd0b6e877a8e7f513ccc32e52a5cdc39c44923a981a8910ab7790fa36871",
+        "size_bytes": 50
+      },
+      {
+        "path": "assets/EQ-0090.tex",
+        "sha256": "sha256:bb888b2ac29b4d48b731cf727ec3d054b5c10fbe0462613780d88f0730b3c9bf",
+        "size_bytes": 14
+      },
+      {
+        "path": "assets/EQ-0091.tex",
+        "sha256": "sha256:19c43cf99dd9d4feb044bedc42cb4f4d318ef97ca1a9822458c000f556518d36",
+        "size_bytes": 23
+      },
+      {
+        "path": "assets/EQ-0092.tex",
+        "sha256": "sha256:654e40fc6333178ac185fb659ec92b0d75feb9a416fedf6ca8c12186ade46558",
+        "size_bytes": 42
+      },
+      {
+        "path": "assets/EQ-0093.tex",
+        "sha256": "sha256:e516ae46a88923e24d4177ce9475435577ec5d874561e5a098dc913cca06eb98",
+        "size_bytes": 84
+      },
+      {
+        "path": "assets/EQ-0094.tex",
+        "sha256": "sha256:24491142bff2885f2b9078df5c5f1859297fae6201f0fbb5472d10c7cb8db2f4",
+        "size_bytes": 3
+      },
+      {
+        "path": "assets/EQ-0095.tex",
+        "sha256": "sha256:4c23320a30e3c625df8f8a6f08d03a7376dd4ac026cfe40b98a9c6d06d4d8d95",
+        "size_bytes": 86
+      },
+      {
+        "path": "assets/EQ-0096.tex",
+        "sha256": "sha256:9fb264346fd6a9c55e5d89fd5e934ffa4037ea011b98eac5ede4c7d91fe28e25",
+        "size_bytes": 86
+      },
+      {
+        "path": "assets/EQ-0097.tex",
+        "sha256": "sha256:aa2503d85d0b1dd7e48d5c7352e880294f2f391b9eb0b47e361c5d15b80f3812",
+        "size_bytes": 69
+      },
+      {
+        "path": "assets/EQ-0098.tex",
+        "sha256": "sha256:dc946111929d1d7dfd5782dabfce495dd3059a0acb9ddb7521be823cf5fdba23",
+        "size_bytes": 90
+      },
+      {
+        "path": "assets/EQ-0099.tex",
+        "sha256": "sha256:9b210b4edc51b33067e62c38cf2ef4d47f3526735329a53b7ccc65fccb0754a8",
+        "size_bytes": 16
+      },
+      {
+        "path": "assets/EQ-0100.tex",
+        "sha256": "sha256:1a0dc09379b321b659e130b309ceea0914305d9832d2606757a93c1e674cef80",
+        "size_bytes": 45
+      },
+      {
+        "path": "assets/EQ-0101.tex",
+        "sha256": "sha256:8b5d19ba787520c7cfe2fa7ee96466668e6f7be5be07c7f626321dcab539d53f",
+        "size_bytes": 40
+      },
+      {
+        "path": "assets/EQ-0102.tex",
+        "sha256": "sha256:86cd6ad59aee88f9e42c06b288dc3d3d042798ca946998dc6e273d7f751e322a",
+        "size_bytes": 60
+      },
+      {
+        "path": "assets/EQ-0103.tex",
+        "sha256": "sha256:9f1248cb263bf0b9a5b56fdf38c2c01fa50dd5880e519ce0ec2092a4abeee13f",
+        "size_bytes": 64
+      },
+      {
+        "path": "assets/EQ-0104.tex",
+        "sha256": "sha256:813e3ac337df3c66d8aa1994fc8a435755496aadfbec189fb76b62814faa4f81",
+        "size_bytes": 54
+      },
+      {
+        "path": "assets/EQ-0105.tex",
+        "sha256": "sha256:08872b207c887af0ee40d80d49541a2c8e9c0ea5c7cb4f1876d555355217bd29",
+        "size_bytes": 44
+      },
+      {
+        "path": "assets/EQ-0106.tex",
+        "sha256": "sha256:da467be2053bf6b20103bc2461cc463af53f9e359bfba0d12aa42bc7f9d0ffc3",
+        "size_bytes": 114
+      },
+      {
+        "path": "assets/EQ-0107.tex",
+        "sha256": "sha256:a30719035342842b3ffb35d27ce075a80bd4503b1f9ba6c0a40f161ce53072e6",
+        "size_bytes": 58
+      },
+      {
+        "path": "assets/EQ-0108.tex",
+        "sha256": "sha256:e9ab8f25ef05be2b7617bd3b38d2686bcdc7104ebe046c917ec65536fc85873d",
+        "size_bytes": 47
+      },
+      {
+        "path": "assets/EQ-0109.tex",
+        "sha256": "sha256:a498573c77d95da0a0679218eb556088f972aee705d513b71c116ed13969f679",
+        "size_bytes": 68
+      },
+      {
+        "path": "assets/EQ-0110.tex",
+        "sha256": "sha256:d5ce99f149e6c5fa5f26d7ac56a1ca0b3ed1dddb627e17b7c2dea4b6f09d6a4d",
+        "size_bytes": 83
+      },
+      {
+        "path": "assets/EQ-0111.tex",
+        "sha256": "sha256:41ed27683dbff56df6d0b46ac5d14c43e40fe80ef2a99df959160b1302494812",
+        "size_bytes": 66
+      },
+      {
+        "path": "assets/EQ-0112.tex",
+        "sha256": "sha256:ab1fda020d6709ebb112c21e55859a7b34a03fed5d372611891374abed265e35",
+        "size_bytes": 52
+      },
+      {
+        "path": "assets/EQ-0113.tex",
+        "sha256": "sha256:fbdf4eb877a2602204020544e5796cb4a8b1fd7caf1ba34cac6d19de22b697e8",
+        "size_bytes": 57
+      },
+      {
+        "path": "assets/EQ-0114.tex",
+        "sha256": "sha256:08cc55ed34db312fc4fe1493f58288ab0a42cfdc10447c2c29d752c1f07e781e",
+        "size_bytes": 83
+      },
+      {
+        "path": "assets/EQ-0115.tex",
+        "sha256": "sha256:d578cc735f3a49d793089c9124476c765c5998072062910b553ce170e05dadc7",
+        "size_bytes": 59
+      },
+      {
+        "path": "assets/EQ-0116.tex",
+        "sha256": "sha256:a3e9028572883efd9fe5d230bedb452b2e63c60e2218f7574b23f9b12ff47e19",
+        "size_bytes": 60
+      },
+      {
+        "path": "assets/EQ-0117.tex",
+        "sha256": "sha256:ccdc7cbc2239b5717b301c4892cdc7291ce1987b4dd2c9fdd62886cc534a5da5",
+        "size_bytes": 54
+      },
+      {
+        "path": "assets/EQ-0118.tex",
+        "sha256": "sha256:e10ab311090c547f0265ad1b7add8ce0a5067a350eb661aff17069f1d62e6ba5",
+        "size_bytes": 53
+      },
+      {
+        "path": "assets/EQ-0119.tex",
+        "sha256": "sha256:63b5939fcafc1f8106d875677d70f106b7d751075ad58412d6a74c920d1c2d30",
+        "size_bytes": 71
+      },
+      {
+        "path": "assets/EQ-0120.tex",
+        "sha256": "sha256:3734afb684c4ff09e186c723ec61be6b01b6453b24ed01c3910274ef274e32b5",
+        "size_bytes": 63
+      },
+      {
+        "path": "assets/EQ-0121.tex",
+        "sha256": "sha256:817b5d77453b421e5c2c795e841b15f624d8a431826a38c4e8bd7c15f5169d78",
+        "size_bytes": 71
+      },
+      {
+        "path": "assets/EQ-0122.tex",
+        "sha256": "sha256:d6cfe9d382a212e0a8a41a4dc4628af047d9437f2e4c7e470346516cea42b7ad",
+        "size_bytes": 65
+      },
+      {
+        "path": "assets/EQ-0123.tex",
+        "sha256": "sha256:8339f40e72ef71b824ff26b937eebe8639c561a7e7de9370edaa89e0aee4c2f9",
+        "size_bytes": 22
+      },
+      {
+        "path": "assets/EQ-0124.tex",
+        "sha256": "sha256:ab0cd8c9f975383d56e7ba40a94b5442b958d65597f6a081a833e44cb1c65015",
+        "size_bytes": 62
+      },
+      {
+        "path": "assets/EQ-0125.tex",
+        "sha256": "sha256:b41da4041e3737ff6ec468822a8e276675461142abfb4b8d9f6d159e4c372e5e",
+        "size_bytes": 55
+      },
+      {
+        "path": "assets/EQ-0126.tex",
+        "sha256": "sha256:9655fc6c48d4a9d65e4a1b2b73a74280b311f758243e63e09ab1045068c57d85",
+        "size_bytes": 72
+      },
+      {
+        "path": "assets/EQ-0127.tex",
+        "sha256": "sha256:a7d81b47fe1bb1f44c9d14b4fb6e19a71ad5c82677ae0fe3d3f4782a34f5ae1c",
+        "size_bytes": 57
+      },
+      {
+        "path": "assets/EQ-0128.tex",
+        "sha256": "sha256:f8e81b70313036c05fb3dec8ce0a38173071d7a6b0538a87637a247dde47071f",
+        "size_bytes": 24
+      },
+      {
+        "path": "assets/EQ-0129.tex",
+        "sha256": "sha256:d1b43ef09a1630f4dd58907a17f6fdd50a45cd8c12f36e1fcedf92b25ecb54cc",
+        "size_bytes": 26
+      },
+      {
+        "path": "assets/EQ-0130.tex",
+        "sha256": "sha256:a321deb7690291c655c4b0ac454d5cc162a7bedc66312e798d9a2dd45c464a52",
+        "size_bytes": 62
+      },
+      {
+        "path": "assets/EQ-0131.tex",
+        "sha256": "sha256:bbb2682e379a9917113274f27f192a4455fee5e555329c83fff5b4a30c2cadbd",
+        "size_bytes": 19
+      },
+      {
+        "path": "assets/EQ-0132.tex",
+        "sha256": "sha256:158f6b52fa489cc9b2fd0aeb7fbc971c3dc1ad324dd5e35428472ee688a73949",
+        "size_bytes": 66
+      },
+      {
+        "path": "assets/EQ-0133.tex",
+        "sha256": "sha256:4588ce4512653fac0e46363f15bd3cd38dc645cf4231aead8865ab7e72183d1d",
+        "size_bytes": 19
+      },
+      {
+        "path": "assets/EQ-0134.tex",
+        "sha256": "sha256:fa7382069ed0e4ba698990324b7220868c0b0aa21b829ff14248829151919983",
+        "size_bytes": 113
+      },
+      {
+        "path": "assets/EQ-0135.tex",
+        "sha256": "sha256:840dd42ddbf8a1217dddda85b84b8e02b14c5e2a84499a3740873ac47ba17cc6",
+        "size_bytes": 105
+      },
+      {
+        "path": "assets/EQ-0136.tex",
+        "sha256": "sha256:24cecd9489512bb523ece8e6f1c2ca085811364992cb232763908a4a34435160",
+        "size_bytes": 73
+      },
+      {
+        "path": "assets/EQ-0137.tex",
+        "sha256": "sha256:3551c55251386fd84b77d3b598bf67fd677b087a1632a35ea3f9a7f62bc3d2f7",
+        "size_bytes": 152
+      },
+      {
+        "path": "assets/EQ-0138.tex",
+        "sha256": "sha256:68d272a12135adfe14dc9238ef99d398b6b4c26e9ea0a65f3a5a3d475b16c309",
+        "size_bytes": 100
+      },
+      {
+        "path": "assets/EQ-0139.tex",
+        "sha256": "sha256:13d6df93c2bee7b6b6109eabaa2fe8412e481e808b42d53a69b6d19dc6777eb9",
+        "size_bytes": 89
+      },
+      {
+        "path": "assets/EQ-0140.tex",
+        "sha256": "sha256:30412923ae6bd6fca4ef6696a6a96d74b436d7df623078811d94a9016911b451",
+        "size_bytes": 28
+      },
+      {
+        "path": "assets/EQ-0141.tex",
+        "sha256": "sha256:d217e67bf581772a34636fff176519ee576bb05df841aad2ce9b7e177a63dd5a",
+        "size_bytes": 34
+      },
+      {
+        "path": "assets/EQ-0142.tex",
+        "sha256": "sha256:e8b60a8373ebf9c88104c6544b39150c18f4c209354f2cb892e58dffd081740a",
+        "size_bytes": 56
+      },
+      {
+        "path": "assets/EQ-0143.tex",
+        "sha256": "sha256:c7790553a7dd035a8933719da4da5dc542eee8373a8eacfbe0de10ebc47436cd",
+        "size_bytes": 116
+      },
+      {
+        "path": "assets/EQ-0144.tex",
+        "sha256": "sha256:bd746a2aca2adab109f065273e91fa42dcdcc4b6d317bfdd1c7dc8660fca3e3a",
+        "size_bytes": 91
+      },
+      {
+        "path": "assets/EQ-0145.tex",
+        "sha256": "sha256:176811d8be338cbb8c2360c2f21e278800ac365d4c3091b05697676341801bd5",
+        "size_bytes": 72
+      },
+      {
+        "path": "assets/EQ-0146.tex",
+        "sha256": "sha256:82c26ef047ddf702212ae06626cb686d4fbdb39596dfbcd54fe50f257318ebf6",
+        "size_bytes": 88
+      },
+      {
+        "path": "assets/EQ-0147.tex",
+        "sha256": "sha256:3eeab91b1717d275ccf298e7a6cce81941c87d94310b12aa4a98c941dae3f763",
+        "size_bytes": 49
+      },
+      {
+        "path": "assets/EQ-0148.tex",
+        "sha256": "sha256:46ee44d34ab89d4b5e56a1eaa4a0eb9b2d8a78878a4e262ec1e5d14cdd0bf612",
+        "size_bytes": 52
+      },
+      {
+        "path": "assets/EQ-0149.tex",
+        "sha256": "sha256:832c158ab2b4a0d2fef43c2b3b0b3cb639565209dd70e2860f19b4da8e2ee47c",
+        "size_bytes": 51
+      },
+      {
+        "path": "assets/EQ-0150.tex",
+        "sha256": "sha256:8e840808fd142eacd5cc9ffe9610cab0f7e26f9ee612903f5086197385d61b5d",
+        "size_bytes": 39
+      },
+      {
+        "path": "assets/EQ-0151.tex",
+        "sha256": "sha256:82e11a752af7270b3d741807c0f0d6f3ecc358d9c23418c4e74031902003628a",
+        "size_bytes": 37
+      },
+      {
+        "path": "assets/EQ-0152.tex",
+        "sha256": "sha256:fe08e6bdbb2c243b8d7b093449790819807fe037f25633c5b1a57a79847a06ec",
+        "size_bytes": 42
+      },
+      {
+        "path": "assets/EQ-0153.tex",
+        "sha256": "sha256:1c85bb4c0f0523a45f99bbbfd4d0b3eea66bb7a9b4e087a5535d7ebe1aa68c00",
+        "size_bytes": 46
+      },
+      {
+        "path": "assets/EQ-0154.tex",
+        "sha256": "sha256:b95bfa0389f247efdebbb64bb4033b7a3eea523af88f1a274fdfbc30f71e4dc9",
+        "size_bytes": 47
+      },
+      {
+        "path": "assets/EQ-0155.tex",
+        "sha256": "sha256:49a8c7ce2ff233e69280f95b260c539182f5b59fcc912650d61bbc14311fcb5b",
+        "size_bytes": 88
+      },
+      {
+        "path": "assets/EQ-0156.tex",
+        "sha256": "sha256:a868c6272773bc07c4d573d8d463f40808dae67bc996f3c0fd720403a61cc952",
+        "size_bytes": 48
+      },
+      {
+        "path": "assets/EQ-0157.tex",
+        "sha256": "sha256:0c9cee90cd4e78e49211d160a9a8db315bc006987f4a86a6e531412d2cc49f3d",
+        "size_bytes": 50
+      },
+      {
+        "path": "assets/EQ-0158.tex",
+        "sha256": "sha256:fd7d424ff9d47d3d40b749cb556a5dd5c2f14b8944c5e96f0b2026c85536fa50",
+        "size_bytes": 64
+      },
+      {
+        "path": "assets/EQ-0159.tex",
+        "sha256": "sha256:046f084b4737b50748502f1eb22c996454ef4e9533b1d8967275e73053f70bb1",
+        "size_bytes": 21
+      },
+      {
+        "path": "assets/EQ-0160.tex",
+        "sha256": "sha256:322ff1a035689166fa821c410a8294143f6dbdf98e639c27f49396cf30810d34",
+        "size_bytes": 63
+      },
+      {
+        "path": "assets/EQ-0161.tex",
+        "sha256": "sha256:ca9bc468352334acc4d0f0cc8991065ec0f8aa6685e8c4d6d21c0bb503e4fd94",
+        "size_bytes": 60
+      },
+      {
+        "path": "assets/EQ-0162.tex",
+        "sha256": "sha256:028bdf77e9947916fba9ecbbe43f941a3416b64a67cdb6164b517ef6563f49aa",
+        "size_bytes": 56
+      },
+      {
+        "path": "assets/EQ-0163.tex",
+        "sha256": "sha256:18386d4a74ecc040f4833c8ddd80dc0f9ef4439eeb7b4d3e0f583dcf15b69f61",
+        "size_bytes": 90
+      },
+      {
+        "path": "assets/EQ-0164.tex",
+        "sha256": "sha256:afad6f75a99c875aa233b7cff90176a10e1d34cc5985a7ff01af1488fcde490f",
+        "size_bytes": 52
+      },
+      {
+        "path": "assets/EQ-0165.tex",
+        "sha256": "sha256:fd15b80cc67c405f3655e352c2950b5e76e499f7951cc617f68d142736977482",
+        "size_bytes": 76
+      },
+      {
+        "path": "assets/EQ-0166.tex",
+        "sha256": "sha256:8c7c5e897c00590cbd0d993e75aedbc47731100894306d6a1928885cf4120852",
+        "size_bytes": 50
+      },
+      {
+        "path": "assets/EQ-0167.tex",
+        "sha256": "sha256:0e419a34bfbc4fb197b43d0c9b324e99be024ff298b49ba035442673edc43c20",
+        "size_bytes": 79
+      },
+      {
+        "path": "assets/EQ-0168.tex",
+        "sha256": "sha256:ae3f8d7949bed0ee6c3a207c62cc2161b91fc7e8e29d76923d61d5649222c1d3",
+        "size_bytes": 40
+      },
+      {
+        "path": "assets/EQ-0169.tex",
+        "sha256": "sha256:bb9db3ecb7d48df1bbd223cdf6af6c0806b5913d415c8d4cfba8218a08261396",
+        "size_bytes": 48
+      },
+      {
+        "path": "assets/EQ-0170.tex",
+        "sha256": "sha256:fc3bf0aac0c0056ab40c41cbb1f3fadccd96a6c4490fda20cc6c10cd6954fd2f",
+        "size_bytes": 61
+      },
+      {
+        "path": "assets/EQ-0171.tex",
+        "sha256": "sha256:4f056640663f35e101bbbb8e53f9ec3d5f2b5bdec012b747b94fa23fba5d0aa2",
+        "size_bytes": 29
+      },
+      {
+        "path": "assets/EQ-0172.tex",
+        "sha256": "sha256:a09d3a2dd453719667e06847f16a73148290bd8a9c5d806071c7f5de7ccb74df",
+        "size_bytes": 33
+      },
+      {
+        "path": "assets/EQ-0173.tex",
+        "sha256": "sha256:3d39ce91e8483ef4cfbc9f5e9d8f5e782af92654e9f7850a135b8736873591e1",
+        "size_bytes": 29
+      },
+      {
+        "path": "assets/EQ-0174.tex",
+        "sha256": "sha256:329a9b00e157320960370df6e81027aaa921d42b99cf17a2ebe85a36c829f231",
+        "size_bytes": 54
+      },
+      {
+        "path": "assets/EQ-0175.tex",
+        "sha256": "sha256:4fe339a57e83432610e13904d40f50a031c8ebf65e8291be2fa7040364c9f5d5",
+        "size_bytes": 68
+      },
+      {
+        "path": "assets/EQ-0176.tex",
+        "sha256": "sha256:163e9c5a6aa58680ab132c84d382307f5413d200dab330d8f1959144dcbd180c",
+        "size_bytes": 70
+      },
+      {
+        "path": "assets/EQ-0177.tex",
+        "sha256": "sha256:b991766ae8b337c989f535e4582e51a90a309ca65094dd5413e562aedb80246d",
+        "size_bytes": 122
+      },
+      {
+        "path": "assets/EQ-0178.tex",
+        "sha256": "sha256:2b11e0affa8b5744b6b0f60c8e020116f5d2a3c91180d13bbf5873c6fb56e2e3",
+        "size_bytes": 58
+      },
+      {
+        "path": "assets/TAB-0001.csv",
+        "sha256": "sha256:d5e641fa97280b0872f410bf4607238b79f4c1ffdbe4fba7c91bdff64a7831e5",
+        "size_bytes": 419
+      },
+      {
+        "path": "assets/TAB-0001.json",
+        "sha256": "sha256:1f4f25b3b2ffc79ad53edf2ad11480d35a82dad43bf742e2191df675659cab40",
+        "size_bytes": 824
+      },
+      {
+        "path": "assets/TAB-0002.csv",
+        "sha256": "sha256:a8d94deea9ed719654790d1026f5f416ac9bd57a44d712714be194d1454e47cb",
+        "size_bytes": 51
+      },
+      {
+        "path": "assets/TAB-0002.json",
+        "sha256": "sha256:ec856e8c636f394056d5a8dc377cf2b8d606c5df2a821df913a2c2295c04755e",
+        "size_bytes": 183
+      },
+      {
+        "path": "assets/TAB-0003.csv",
+        "sha256": "sha256:9893816e459b21d3d0a88e6dd5d2c783db96348b69352986451ab8c537c79fc3",
+        "size_bytes": 120
+      },
+      {
+        "path": "assets/TAB-0003.json",
+        "sha256": "sha256:6419a2bc0b779640f42f4658e62e3e987ff87cbdfbcf8ddeb89a132b17ab1ba6",
+        "size_bytes": 335
+      },
+      {
+        "path": "assets/TAB-0004.csv",
+        "sha256": "sha256:9ea2bf6c03fdc4702ef8b9171b11b7be1eb4475c7a958a1199279c1f476c13c2",
+        "size_bytes": 96
+      },
+      {
+        "path": "assets/TAB-0004.json",
+        "sha256": "sha256:0b408ed7b8082ef91fb019ab6b99c947b38bfaaf1dafb730b06c2088418ee7d1",
+        "size_bytes": 273
+      }
+    ]
+  }
+}

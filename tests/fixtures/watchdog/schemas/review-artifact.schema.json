@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.local/schemas/watchdog-fixture-review-artifact.json",
+  "title": "Minimal schema-gated watchdog fixture artifact",
+  "type": "object",
+  "required": ["schema_version", "agent_id", "phase", "artifact_version", "decision"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "agent_id": {"const": "reviewer-r2"},
+    "phase": {"const": "initial-review"},
+    "artifact_version": {"type": "integer", "minimum": 1},
+    "decision": {"enum": ["continue", "complete", "blocked"]},
+    "evidence": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

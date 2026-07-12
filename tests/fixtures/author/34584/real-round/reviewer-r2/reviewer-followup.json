@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "reviewer_id": "reviewer-r2",
+  "official_review_version": 1,
+  "rebuttal_version": 1,
+  "concern_resolutions": [
+    {
+      "concern_id": "reviewer-r2-W1",
+      "original_severity": "major",
+      "status": "resolved",
+      "original_resolution_standard": "Narrow the order-specific and sheaf-network claims and terminology to the proved finite-group-equivariant scope, or provide an order- or restriction-natural universality result with a precise comparison to prior finite-group equivariant UATs.",
+      "response_evidence_refs": [
+        "rebuttal-r2.json#responses[concern_id=reviewer-r2-W1]"
+      ],
+      "paper_evidence_refs": [
+        "EQ-0005",
+        "THM-0011",
+        "THM-0013",
+        "TXT-0105",
+        "TXT-0106",
+        "TXT-0258",
+        "TXT-0259"
+      ],
+      "assessment": "The response accepts the original scope diagnosis: input-output order-equivariance is finite-group equivariance on the total feature spaces, the full UAT does not impose order or sheaf-restriction naturality, and the sheaf consequence is realized by full mixing or the source-labeled pair-state completion rather than conventional local sheaf diffusion. The commitment to narrow the terminology and claims is exactly one of the two remedies stated in the original weakness, so the claim-evidence mismatch is resolved without requiring a new theorem.",
+      "remaining_gap": "The response adds no theorem-level order- or sheaf-specific universality result and no precise prior-UAT comparison. Those were alternative ways to strengthen the contribution, not requirements after the authors chose claim narrowing. The remaining consequence is that the narrower theorem provides no basis to raise originality or significance.",
+      "score_effect": "Supports raising soundness from 2 to 3 and presentation from 2 to 3 because the response removes a central scope overclaim and makes the architecture/target distinction explicit. It does not change significance or originality."
+    },
+    {
+      "concern_id": "reviewer-r2-W2",
+      "original_severity": "major",
+      "status": "resolved",
+      "original_resolution_standard": "Either define the intended unrestricted-depth architecture and prove an indistinguishability counterexample, or restrict the claim to the proved depth-versus-distance obstruction and stop asserting unrestricted-depth non-universality or necessity of persistent source labels.",
+      "response_evidence_refs": [
+        "rebuttal-r2.json#responses[concern_id=reviewer-r2-W2]"
+      ],
+      "paper_evidence_refs": [
+        "THM-0013",
+        "TXT-0069",
+        "THM-0015",
+        "TXT-0082",
+        "TXT-0335"
+      ],
+      "assessment": "The response explicitly agrees that the lower bound is limited to at most L inter-site layers, that it does not establish unrestricted-depth non-universality, and that source labels are a sufficient completion rather than a uniquely necessary mechanism. The commitment to remove the broader necessity and non-universality wording exactly follows the narrowing option in the original weakness.",
+      "remaining_gap": "There is still no unrestricted-depth counterexample or necessity theorem, but no such result is needed once those claims are removed. The pair-state construction should be presented only as a sufficient universal completion.",
+      "score_effect": "Supports raising soundness from 2 to 3 by eliminating the unsupported extrapolation from the finite-depth theorem. It does not increase significance or originality because no stronger lower bound is supplied."
+    },
+    {
+      "concern_id": "reviewer-r2-W3",
+      "original_severity": "major",
+      "status": "partially_resolved",
+      "original_resolution_standard": "Supply the delegated CENN generator definitions, exact analytic hypotheses, and a self-contained proof dependency for the finite realization, or clearly demote the broad CENN claims to imported background.",
+      "response_evidence_refs": [
+        "rebuttal-r2.json#responses[concern_id=reviewer-r2-W3]"
+      ],
+      "paper_evidence_refs": [
+        "TXT-0149",
+        "TXT-0192",
+        "TXT-0193",
+        "TXT-0195",
+        "THM-0018",
+        "THM-0019",
+        "THM-0021",
+        "TXT-0249",
+        "TXT-0250",
+        "TXT-0252"
+      ],
+      "assessment": "The response candidly identifies Definition A.2 and Theorem A.3 as imported prior-work dependencies and commits to separating them from the finite action-groupoid/OENN results developed in the submission. That resolves the broad general-form overclaim in principle. However, the response retains a selected finite-realization statement while supplying neither the missing generator definitions and analytic hypotheses nor a new self-contained argument for the OENN-primitive selection dependency highlighted in the original concern.",
+      "remaining_gap": "The revised text must make the imported dependency boundary explicit and avoid presenting the general CENN UAT as a self-contained contribution. The exact dependency supporting the retained finite-realization statement remains insufficiently auditable from the submitted evidence, so that statement cannot receive full soundness or presentation credit.",
+      "score_effect": "The clarified scope contributes to the soundness and presentation increases to 3, but the residual self-containedness gap keeps both dimensions below 4. Imported CENN results do not raise significance or originality."
+    },
+    {
+      "concern_id": "reviewer-r2-W4",
+      "original_severity": "major",
+      "status": "partially_resolved",
+      "original_resolution_standard": "Provide a subject-disjoint, protocol-matched comparison with identical metrics, matched tuning and compute, repeated seeds, uncertainty estimates, and a multiplicity policy; absent that evidence, withdraw the claims of substantial outperformance and improved generalization.",
+      "response_evidence_refs": [
+        "rebuttal-r2.json#responses[concern_id=reviewer-r2-W4]"
+      ],
+      "paper_evidence_refs": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281"
+      ],
+      "supporting_validation_refs": [
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "assessment": "The response does not contest any of the protocol, leakage, seed, uncertainty, multiplicity, or breadth defects and expressly concedes that the submitted experiment cannot support substantial-outperformance or improved-generalization claims. The commitment to remove those claims would resolve the claim-evidence mismatch, but the alternative wording 'or sharply qualify' and the absence of revised text leave uncertainty about whether the unsupported conclusion will be fully withdrawn.",
+      "remaining_gap": "No corrected experiment, split provenance, repeated-seed analysis, uncertainty interval, or multiplicity analysis is supplied. The appendix may remain only as a limited descriptive result with all protocol defects explicit; it cannot support comparative performance or generalization conclusions.",
+      "score_effect": "No increase to significance is warranted, and the lack of reliable empirical support continues to constrain the overall recommendation. The concession and planned claim withdrawal help claim calibration but do not create new evidence."
+    }
+  ],
+  "scores": {
+    "soundness": 3,
+    "presentation": 3,
+    "significance": 2,
+    "originality": 2,
+    "overall": 3
+  },
+  "confidence": 4,
+  "score_change_rationale": "Soundness changes from 2 to 3 because the rebuttal accepts and commits to remove the W1 scope overclaim and the W2 unrestricted-depth/necessity extrapolation, while also bounding the W3 CENN and W4 empirical claims; this leaves the central finite-group transporter and UAT results substantially better aligned with their evidence. Soundness remains below 4 because W3's retained finite-realization dependency is not fully self-contained and W4 has no corrected empirical evidence. Presentation changes from 2 to 3 because the response states the previously missing distinctions among total-space equivariance, order/sheaf structure, sufficient pair-state completion, and imported CENN background, with concrete revision commitments; it remains below 4 because the revised manuscript text is not available and the CENN dependency is still not fully auditable. Significance remains 2 because narrowing is appropriate but leaves a finite-group UAT whose order/sheaf-specific importance is not established, and the empirical appendix cannot support generalization or comparative-performance claims. Originality remains 2 because the response supplies neither an order- or sheaf-specific universality theorem nor a precise prior finite-group-UAT comparison, and it correctly removes imported broad CENN results from the claimed contribution. Overall remains 3: the rebuttal materially improves correctness and calibration, but the narrowed contribution, residual CENN dependency, and unusable comparative experiment still leave a marginally negative case. Confidence remains 4 because the formal scope and dependency boundaries are now clearer, but the response adds no new proof or empirical verification and does not remove the reviewer's stated systems-scalability blind spot.",
+  "new_questions": [],
+  "summary": "The rebuttal is responsive and does not attempt to defend the four overextended claims. W1 and W2 are resolved through the exact narrowing alternatives identified in the official review. W3 is only partially resolved because the broad CENN material will be demoted, but the retained finite-realization dependency remains non-self-contained. W4 is partially resolved at the claim-calibration level, with no corrected evidence and some ambiguity between removing and merely qualifying the unsupported claims. I therefore raise soundness and presentation to 3, keep significance and originality at 2, and keep the overall recommendation at 3 with confidence 4.",
+  "evidence_refs": [
+    "rebuttal-r2.json#responses[concern_id=reviewer-r2-W1]",
+    "rebuttal-r2.json#responses[concern_id=reviewer-r2-W2]",
+    "rebuttal-r2.json#responses[concern_id=reviewer-r2-W3]",
+    "rebuttal-r2.json#responses[concern_id=reviewer-r2-W4]",
+    "EQ-0005",
+    "THM-0011",
+    "THM-0013",
+    "TXT-0069",
+    "THM-0015",
+    "TXT-0082",
+    "TXT-0105",
+    "TXT-0106",
+    "TXT-0149",
+    "TXT-0192",
+    "TXT-0193",
+    "TXT-0195",
+    "THM-0018",
+    "THM-0019",
+    "THM-0021",
+    "TXT-0249",
+    "TXT-0250",
+    "TXT-0252",
+    "TXT-0258",
+    "TXT-0259",
+    "TXT-0264",
+    "TAB-0004",
+    "TXT-0281",
+    "TXT-0335",
+    "STAT-BASELINE-001",
+    "STAT-LEAKAGE-001",
+    "STAT-SEEDS-001",
+    "STAT-UNCERTAINTY-001",
+    "STAT-MULTICOMP-001",
+    "STAT-BREADTH-001"
+  ]
+}

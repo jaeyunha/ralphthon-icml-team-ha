@@ -1,0 +1,11 @@
+[
+  {
+    "finding_id":"REF-SUPPORT-PLANTED",
+    "claim_id":"CLAIM-004",
+    "anchor":"TXT-0005",
+    "attached_claim":"The cited work proves universal approximation for arbitrary category-equivariant neural networks.",
+    "source_text":"We introduce convolutional networks equivariant to discrete group actions and evaluate them on image classification.",
+    "observation":"The source discusses group-equivariant convolutions and never states the attached category-equivariant universal-approximation claim.",
+    "artifact_refs":["broker://REQ-real/SRC-real"]
+  }
+]

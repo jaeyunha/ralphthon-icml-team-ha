@@ -1,0 +1,166 @@
+{
+  "dossier": {
+    "dossier_version": 1,
+    "submission_id": "synthetic-stage-a",
+    "claims": [
+      {
+        "claim_id": "CLAIM-001",
+        "normalized_proposition": "The method preserves equivariance under the declared group action.",
+        "scope": "theory",
+        "anchor_ids": ["THM-0001"]
+      },
+      {
+        "claim_id": "CLAIM-002",
+        "normalized_proposition": "The reported improvement holds on the frozen evaluation split.",
+        "scope": "empirical",
+        "anchor_ids": ["EXP-0001"]
+      },
+      {
+        "claim_id": "CLAIM-003",
+        "normalized_proposition": "The implementation details are sufficient for reproduction.",
+        "scope": "reproducibility",
+        "anchor_ids": ["SEC-0004"]
+      }
+    ]
+  },
+  "annotators": {
+    "annotator-a": [
+      {
+        "annotation_id": "A-001",
+        "claim_id": "CLAIM-001",
+        "kind": "strength",
+        "severity": 3,
+        "normalized_proposition": "The method is equivariant under the declared group action.",
+        "scope": "theory",
+        "anchors": ["THM-0001"],
+        "valid_anchors": ["THM-0001"]
+      },
+      {
+        "annotation_id": "A-002",
+        "claim_id": "CLAIM-002",
+        "kind": "concern",
+        "severity": 2,
+        "normalized_proposition": "The improvement may not hold on the frozen evaluation split.",
+        "scope": "empirical",
+        "anchors": ["EXP-0001"],
+        "valid_anchors": ["EXP-0001"],
+        "terminal_resolution_status": "resolved"
+      },
+      {
+        "annotation_id": "A-003",
+        "claim_id": "CLAIM-003",
+        "kind": "neutral",
+        "severity": null,
+        "normalized_proposition": "The reproduction detail is neither a strength nor a concern.",
+        "scope": "reproducibility",
+        "anchors": ["SEC-0004"],
+        "valid_anchors": ["SEC-0004"],
+        "material_assertion": false
+      }
+    ],
+    "annotator-b": [
+      {
+        "annotation_id": "B-001",
+        "claim_id": "CLAIM-001",
+        "kind": "strength",
+        "severity": 3,
+        "normalized_proposition": "The declared group action is preserved.",
+        "scope": "theory",
+        "anchors": ["THM-0001"],
+        "valid_anchors": ["THM-0001"]
+      },
+      {
+        "annotation_id": "B-002",
+        "claim_id": "CLAIM-002",
+        "kind": "concern",
+        "severity": 2,
+        "normalized_proposition": "The evaluation-split improvement requires scrutiny.",
+        "scope": "empirical",
+        "anchors": ["EXP-0001"],
+        "valid_anchors": ["EXP-0001"],
+        "terminal_resolution_status": "resolved"
+      },
+      {
+        "annotation_id": "B-003",
+        "claim_id": "CLAIM-003",
+        "kind": "neutral",
+        "severity": null,
+        "normalized_proposition": "The reproduction detail is neutral.",
+        "scope": "reproducibility",
+        "anchors": ["SEC-0004"],
+        "valid_anchors": ["SEC-0004"],
+        "material_assertion": false
+      }
+    ]
+  },
+  "generated": [
+    {
+      "annotation_id": "GEN-1A",
+      "claim_id": "CLAIM-001",
+      "kind": "strength",
+      "severity": 3,
+      "normalized_proposition": "The construction preserves equivariance.",
+      "scope": "theory",
+      "anchors": ["THM-0001"],
+      "valid_anchors": ["THM-0001"]
+    },
+    {
+      "annotation_id": "GEN-1B",
+      "claim_id": "CLAIM-001",
+      "kind": "strength",
+      "severity": 3,
+      "normalized_proposition": "Equivariance is preserved.",
+      "scope": "theory",
+      "anchors": ["THM-0001"],
+      "valid_anchors": [],
+      "material_assertion": false
+    },
+    {
+      "annotation_id": "GEN-2",
+      "claim_id": "CLAIM-002",
+      "kind": "concern",
+      "severity": 3,
+      "normalized_proposition": "The evaluation improvement may be split-specific.",
+      "scope": "empirical",
+      "anchors": ["EXP-0001"],
+      "valid_anchors": [],
+      "is_new_followup_question": true,
+      "answer_induced": false,
+      "terminal_resolution_status": "resolved"
+    },
+    {
+      "annotation_id": "GEN-3",
+      "claim_id": "CLAIM-003",
+      "kind": "neutral",
+      "severity": null,
+      "normalized_proposition": "The reproduction detail remains neutral.",
+      "scope": "reproducibility",
+      "anchors": ["SEC-0004"],
+      "valid_anchors": ["SEC-0004"],
+      "material_assertion": false
+    }
+  ],
+  "judgments": [
+    {"gold_id": "A-001", "generated_id": "GEN-1A", "relation": "equivalent"},
+    {"gold_id": "A-001", "generated_id": "GEN-1B", "relation": "equivalent"},
+    {"gold_id": "A-002", "generated_id": "GEN-2", "relation": "gold_entails_generated"},
+    {"gold_id": "A-003", "generated_id": "GEN-3", "relation": "equivalent"}
+  ],
+  "expected": {
+    "matches": [
+      ["A-001", "GEN-1A", 10],
+      ["A-002", "GEN-2", 8],
+      ["A-003", "GEN-3", 10]
+    ],
+    "semantic": {
+      "strength_recall": 1.0,
+      "concern_recall": 1.0,
+      "unsupported_assertion_count": 1,
+      "unsupported_assertion_rate": 0.5,
+      "anchor_correctness": 0.5,
+      "moving_goalpost_rate": 1.0,
+      "issue_resolution_quality": 0.5,
+      "completion": 1.0
+    }
+  }
+}

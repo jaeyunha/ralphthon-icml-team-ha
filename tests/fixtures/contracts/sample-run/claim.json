@@ -1,0 +1,10 @@
+{
+  "claim_id": "C3",
+  "type": "empirical_generalization",
+  "statement": "The method generalizes across graph-learning tasks.",
+  "anchor": "page:5 section:4.2",
+  "supporting_items": ["E1", "E2", "E3"],
+  "dependencies": ["M1", "A2"],
+  "scope": "broad",
+  "centrality": "major"
+}

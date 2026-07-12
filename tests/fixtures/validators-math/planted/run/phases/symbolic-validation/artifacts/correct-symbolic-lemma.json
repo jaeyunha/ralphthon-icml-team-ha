@@ -1,0 +1,7 @@
+{
+  "equivalent": true,
+  "left": "n",
+  "right": "n",
+  "simplified_difference": "0",
+  "tool": "sympy-1.14.0"
+}

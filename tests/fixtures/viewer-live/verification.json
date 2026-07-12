@@ -1,0 +1,61 @@
+{
+  "date": "2026-07-11",
+  "database": {
+    "engine": "PostgreSQL 16",
+    "test_port": 55439,
+    "snapshot_command": "TEST_DATABASE_URL=postgres://ralph:ralph@127.0.0.1:55439/ralph_review bun test packages/db/test/database.test.ts",
+    "result": "4 passed, 0 failed"
+  },
+  "playwright": {
+    "command": "DATABASE_URL=postgres://ralph:ralph@127.0.0.1:55439/ralph_review VIEWER_DATA_SOURCE=database VIEWER_ARTIFACT_ROOT=/Users/jaeyunha/dev/ralphthon-icml VIEWER_SSE_MAX_EVENTS=2 bun x playwright test tests/e2e/live-viewer.e2e.ts --project=chromium",
+    "result": "3 passed",
+    "suite_duration": "13.0s",
+    "live_update": {
+      "assertion": "rendered forum update became visible in less than 2000ms",
+      "projector": "production createPostgresJsPool adapter + NdjsonProjector + PostgresProjectionStore + projectCoreReadModels + W0 event adapter",
+      "projector_result": {
+        "inserted": 1,
+        "notified": 1,
+        "caught_up": true
+      }
+    },
+    "reconnect": {
+      "forced_disconnect_every_events": 2,
+      "server_replay_cursors": [1, 3, 5],
+      "rendered_sequences": [2, 3, 4, 5, 6],
+      "gaps": 0,
+      "duplicates": 0
+    }
+  },
+  "m2_real_paper": {
+    "run_id": "m2-34584",
+    "command": "DATABASE_URL=postgres://ralph:ralph@127.0.0.1:55439/ralph_review VIEWER_DATA_SOURCE=database VIEWER_ARTIFACT_ROOT=/Users/jaeyunha/dev/ralphthon-icml VIEWER_SSE_MAX_EVENTS=20 bun x playwright test tests/e2e/m2-live-viewer.e2e.ts --project=chromium",
+    "result": "2 passed",
+    "suite_duration": "12.3s",
+    "projected": {
+      "base_events": 93,
+      "agents": 12,
+      "phase_runs": 17,
+      "notes": 16,
+      "score_rows": 8,
+      "artifacts": 21
+    },
+    "live_append": {
+      "sequence": 94,
+      "inserted": 1,
+      "notified": 1,
+      "caught_up": true,
+      "visible_without_refresh_under_ms": 2000
+    }
+  },
+  "fixture_regression": {
+    "command": "VIEWER_DATA_SOURCE=fixture bun x playwright test tests/e2e/viewer.e2e.ts --project=chromium",
+    "result": "7 passed",
+    "suite_duration": "4.3s"
+  },
+  "unit_and_build": {
+    "viewer_tests": "22 passed, 0 failed",
+    "typecheck": "passed",
+    "production_build": "passed"
+  }
+}

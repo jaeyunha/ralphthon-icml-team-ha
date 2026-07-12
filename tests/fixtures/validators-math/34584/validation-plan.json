@@ -1,0 +1,77 @@
+{
+  "run_id": "math-34584-real-001",
+  "agent_id": "validator-mathematics-34584",
+  "jobs": [
+    {
+      "job_id": "uat-assumption-audit",
+      "kind": "assumption_audit",
+      "finding_id": "MATH-34584-001",
+      "validator_type": "exact_math",
+      "claim_id": "THEOREM-011",
+      "paper_anchors": ["THM-0011"],
+      "required_phrases": ["finite", "compact", "invariant", "continuous", "non-polynomial"],
+      "symbols": ["G", "K", "σ"],
+      "method": "Explicit theorem-scope and dependency audit",
+      "limitations": "This structural audit checks whether the dossier statement exposes central hypotheses; it does not verify the omitted proof.",
+      "confidence": 0.95
+    },
+    {
+      "job_id": "reynolds-c2-symbolic",
+      "kind": "symbolic_identity",
+      "finding_id": "MATH-34584-002",
+      "validator_type": "symbolic_math",
+      "claim_id": "EQ-016",
+      "paper_anchors": ["EQ-0016", "THM-0004"],
+      "variables": ["u"],
+      "left": "((u**3 + 2*u**2 + 1) - ((-u)**3 + 2*(-u)**2 + 1))/2",
+      "right": "u**3",
+      "method": "SymPy expansion of the paper's Reynolds operator for the C2 sign representation",
+      "limitations": "This verifies a representative finite-group instantiation, not Lemma 2.8 for every group, representation, and MLP.",
+      "confidence": 0.94
+    },
+    {
+      "job_id": "transporter-c2-smt",
+      "kind": "smt_implication",
+      "finding_id": "MATH-34584-003",
+      "validator_type": "exact_math",
+      "claim_id": "EQ-007",
+      "paper_anchors": ["EQ-0007", "THM-0001"],
+      "variables": {"k01": "real", "k10": "real"},
+      "constraints": ["k01 == k10"],
+      "conclusion": "k10 - k01 == 0",
+      "method": "Z3 negated-implication check for the two-site permutation-only transporter constraint",
+      "limitations": "This is an exact finite two-site specialization, not a proof of Proposition 2.3 for arbitrary bundles.",
+      "confidence": 0.91
+    },
+    {
+      "job_id": "block-kernel-shape",
+      "kind": "shape",
+      "finding_id": "MATH-34584-004",
+      "validator_type": "exact_math",
+      "claim_id": "EQ-006",
+      "paper_anchors": ["EQ-0006"],
+      "shapes": {"K_qp": [5, 3], "x_p": [3, 1]},
+      "operations": [{"op": "matmul", "left": "K_qp", "right": "x_p", "out": "term_q"}],
+      "output": "term_q",
+      "expected": [5, 1],
+      "method": "Exact block-kernel dimension propagation",
+      "limitations": "Checks the declared Hom(V_p,W_q) application shape for a representative finite-dimensional fiber pair.",
+      "confidence": 0.98
+    },
+    {
+      "job_id": "reynolds-c2-numerical",
+      "kind": "numerical_property",
+      "finding_id": "MATH-34584-005",
+      "validator_type": "numerical_math",
+      "claim_id": "EQ-016",
+      "paper_anchors": ["EQ-0016", "THM-0004"],
+      "variables": {"u": {"min": -8, "max": 8, "points": 65}},
+      "left": "((u**3 + 2*u**2 + 1) - ((-u)**3 + 2*(-u)**2 + 1))/2",
+      "right": "u**3",
+      "relation": "==",
+      "method": "Exact rational and 80-digit boundary/adversarial replay of the C2 Reynolds instance",
+      "limitations": "Bounded numerical support duplicates the same representative instance and is not a general proof.",
+      "confidence": 0.9
+    }
+  ]
+}

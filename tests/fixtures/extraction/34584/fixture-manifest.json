@@ -1,0 +1,67 @@
+{
+  "artifacts": [
+    {
+      "path": "freeze-record.json",
+      "sha256": "sha256:3f0c40f917ee717aaeb4c6e8e6ca55488cc83e74be48e94212011e9ecb15a001",
+      "size_bytes": 819
+    },
+    {
+      "path": "paper.md",
+      "sha256": "sha256:cd8a5da10217e68ed16d80cb1d314ea651910e5d9ab51493bd2cee76359409be",
+      "size_bytes": 121007
+    },
+    {
+      "path": "anchors.json",
+      "sha256": "sha256:5165f75bc1a93f68e67541045ea7dfcf81e77045fc1246311d8efceb5b5a492f",
+      "size_bytes": 239487
+    },
+    {
+      "path": "extraction-report.json",
+      "sha256": "sha256:b42dec25f419fcb2e8a8009d83ea979eea189d7b34839f15bb4d64438ed06a43",
+      "size_bytes": 23099
+    },
+    {
+      "path": "parse-verification-report.json",
+      "sha256": "sha256:eb91ac8ecb7e17bc29db66d9d5bd6ed303ddf89eeb5ad3ffb4767b5242a4fd27",
+      "size_bytes": 40330
+    },
+    {
+      "path": "paper-dossier.json",
+      "sha256": "sha256:8ccc7f3e6b7fc55db2e80ac78bc873e8ac43de94a890e64d35c7d13055208000",
+      "size_bytes": 124809
+    }
+  ],
+  "assets": {
+    "file_count": 186,
+    "total_size_bytes": 12888,
+    "tree_sha256": "sha256:d9d6bbace5859ed0151db0e7d9bd949242d4138fb8b0f2cd3932cee4026f053a"
+  },
+  "dossier_summary": {
+    "assumptions": 4,
+    "equations": 178,
+    "experiments": 4,
+    "claims": 9,
+    "references": 32,
+    "theorems": 22
+  },
+  "fixture_id": "extraction-34584",
+  "paper_id": "34584",
+  "schema_version": 1,
+  "source": {
+    "pdf_committed": false,
+    "pdf_filename": "34584_Foundations_of_Equivaria.pdf",
+    "pdf_sha256": "sha256:7de57c5f431ee13df26d2dd14154b1f0621db001222336bf1a3acce17f13a82a",
+    "size_bytes": 433402
+  },
+  "state": "golden",
+  "tool": {
+    "name": "docling",
+    "version": "2.112.0"
+  },
+  "verification": {
+    "sample_size": 48,
+    "status": "passed",
+    "unresolved_anchor_count": 0
+  },
+  "verified_bundle_sha256": "sha256:a31c0d544fcd1c2e243a894166eec702c2b240324fb856a68afac87e3d5fdd05"
+}

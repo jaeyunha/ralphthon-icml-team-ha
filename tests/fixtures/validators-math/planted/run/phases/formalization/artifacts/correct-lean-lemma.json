@@ -1,0 +1,20 @@
+{
+  "claim_id": "LEMMA-CORRECT",
+  "compiler_exit_code": 0,
+  "compiler_stderr": "",
+  "compiler_stdout": "",
+  "formalization_fidelity": "aligned",
+  "formalization_sha256": "sha256:71dfaa4626ac947e2c6f528ae8bf04118ee28f20286e3e1ca7205e9e5398310a",
+  "paper_anchors": [
+    "THM-CORRECT"
+  ],
+  "proof_attempted": true,
+  "proof_compiled": true,
+  "proof_validity": "accepted",
+  "protocol_note": "Lean proof accepted does not imply that the paper theorem was verified.",
+  "statement_alignment": "aligned",
+  "statement_alignment_checked": true,
+  "statement_alignment_evidence": "The binder, Nat domain, addition operation, zero constant, and equality direction match the fixture lemma.",
+  "toolchain_image": "leanprovercommunity/lean4@sha256:d61f7052fa82e7e726db46984ef4f11c84525eabd4a8d1d20ba80f1ccee34018",
+  "toolchain_version": "4.10.0"
+}

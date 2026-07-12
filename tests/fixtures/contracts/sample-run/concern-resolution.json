@@ -1,0 +1,10 @@
+{
+  "concern_id": "R2-W3",
+  "resolution": "partially_resolved",
+  "response_evidence": ["rebuttal:R2:L40-L52"],
+  "remaining_gap": "No comparison with baseline X",
+  "score_effect": {
+    "soundness": "unchanged",
+    "overall": "3_to_4"
+  }
+}

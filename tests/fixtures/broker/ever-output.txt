@@ -1,0 +1,26 @@
+{
+  "ok": true,
+  "sessionId": "cli-repl-fixture",
+  "sessionKey": "default",
+  "freshSession": true,
+  "value": {
+    "ok": true,
+    "value": [
+      {
+        "canonicalUri": "https://arxiv.org/abs/2105.04026v2",
+        "fullTextUri": "https://arxiv.org/pdf/2105.04026v2",
+        "arxivId": "2105.04026v2",
+        "title": "Equivariant Neural Networks and Equivariant Maps",
+        "authors": ["Alex Example", "Bea Example"],
+        "submitted": "Submitted 10 May, 2021; originally announced May 2021."
+      }
+    ],
+    "serialized": "fixture-page-eval-result",
+    "sizeBytes": 322
+  },
+  "serialized": "fixture-repl-result",
+  "logs": [],
+  "timedOut": false,
+  "timeoutMs": 60000,
+  "durationMs": 250
+}

@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "phase": "initial-review",
+  "tasks": [
+    {"id": "fixture-review", "status": "in_progress", "description": "Produce one schema-valid review artifact"}
+  ]
+}

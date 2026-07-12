@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "reviewer_id": "reviewer-r4",
+  "official_review_version": 1,
+  "rebuttal_version": 1,
+  "concern_resolutions": [
+    {
+      "concern_id": "reviewer-r4-W1",
+      "original_severity": "major",
+      "status": "partially_resolved",
+      "assessment": "The response directly accepts the original protocol findings and withdraws the evidentiary force of the claimed substantial outperformance and improved generalization. This is a meaningful correction of claim scope, but it does not validate the submitted experiment or provide a corrected result.",
+      "rebuttal_evidence": [
+        "rebuttal-r4.json response for reviewer-r4-W1",
+        "rebuttal-r4.json responses for reviewer-r4-Q1 and reviewer-r4-Q2"
+      ],
+      "paper_evidence": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281"
+      ],
+      "supporting_evidence_refs": [
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "remaining_gap": "No exact subject-level split manifest or provenance, subject-disjoint rerun, like-for-like baseline evaluation, run-level multi-seed results, uncertainty interval, or multiplicity policy is supplied. The promised removal or qualification is not present in the frozen paper artifact, so the empirical claims remain unsupported as submitted.",
+      "score_effect": "The concession prevents a lower assessment for defending invalid empirical claims, but supplies none of the evidence required for an increase. Soundness remains 2, significance remains 2, and overall remains 3."
+    },
+    {
+      "concern_id": "reviewer-r4-W2",
+      "original_severity": "minor",
+      "status": "partially_resolved",
+      "assessment": "The response confirms the original reading that pair-state universality is an existential communication-local construction with global-width source slots, diameter-scale propagation, and graph-specific walk-count rescaling. Explicitly disclaiming practical efficiency narrows the interpretation appropriately, but does not answer the requested resource analysis.",
+      "rebuttal_evidence": [
+        "rebuttal-r4.json response for reviewer-r4-W2",
+        "rebuttal-r4.json response for reviewer-r4-Q5"
+      ],
+      "paper_evidence": [
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0106",
+        "TXT-0345",
+        "TXT-0349"
+      ],
+      "supporting_evidence_refs": [],
+      "remaining_gap": "There is still no parameter-count, peak-memory, runtime, orbit/stabilizer construction-cost, sample-complexity, optimization, or stability analysis, and no executable comparison with lower-order alternatives. The promised scope clarification does not establish feasibility.",
+      "score_effect": "The theorem's existential scope is now explicit, so the concern does not increase in severity; however, the missing practical evidence remains. Significance stays 2 and overall stays 3."
+    },
+    {
+      "concern_id": "reviewer-r4-W3",
+      "original_severity": "major",
+      "status": "partially_resolved",
+      "assessment": "The response agrees that the general CENN framework and UAT are imported rather than established self-containedly, and it narrows the claimed contribution to the finite action-groupoid/OENN correspondence and selected finite-realization statements. This addresses overstatement of scope, but it does not repair the missing proof chain or source verification in the submitted artifact.",
+      "rebuttal_evidence": [
+        "rebuttal-r4.json response for reviewer-r4-W3",
+        "rebuttal-r4.json response for reviewer-r4-Q3"
+      ],
+      "paper_evidence": [
+        "TXT-0149",
+        "TXT-0192",
+        "TXT-0193",
+        "TXT-0195",
+        "THM-0018",
+        "THM-0019",
+        "THM-0021",
+        "TXT-0249",
+        "TXT-0250",
+        "TXT-0252"
+      ],
+      "supporting_evidence_refs": [
+        "REF-ID-REF-021",
+        "REF-ID-REF-023",
+        "REF-ID-REF-024",
+        "REF-ID-REF-026",
+        "REF-ID-REF-027"
+      ],
+      "remaining_gap": "The response provides neither complete arrow-bundle generators and analytic hypotheses nor a self-contained finite-groupoid theorem or proof for the broad CENN UAT, and the central cited identities remain unverified. The promised separation of imported background from submitted contributions is not yet observable in the paper.",
+      "score_effect": "Scope narrowing mitigates overclaiming but adds no proof or verifiable source evidence. Soundness remains 2, presentation remains 2, originality remains 2, and overall remains 3."
+    },
+    {
+      "concern_id": "reviewer-r4-W4",
+      "original_severity": "major",
+      "status": "partially_resolved",
+      "assessment": "The response supplies the requested conceptual distinction: the input-output condition is finite-group equivariance on the total bundle, whereas the order contributes invariant incidence relations, masks, covers, pair-state communication, and sheaf structure. That resolves the definitional part of the concern, but not the comparative novelty part.",
+      "rebuttal_evidence": [
+        "rebuttal-r4.json response for reviewer-r4-W4",
+        "rebuttal-r4.json response for reviewer-r4-Q4"
+      ],
+      "paper_evidence": [
+        "TXT-0005",
+        "EQ-0005",
+        "TXT-0019",
+        "TXT-0061",
+        "THM-0011",
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0149",
+        "TXT-0258",
+        "TXT-0259"
+      ],
+      "supporting_evidence_refs": [],
+      "remaining_gap": "No verified theorem-by-theorem comparison with the closest finite-group equivariant, higher-order GNN, or sheaf-network universality results is supplied, and the framing changes remain promised rather than present in the frozen paper. The novelty boundary therefore remains insufficiently evidenced.",
+      "score_effect": "The clarification prevents further penalty for conflating order structure with a distinct equivariance equation, but it does not establish stronger novelty or broader significance. Originality remains 2, significance remains 2, presentation remains 2, and overall remains 3."
+    }
+  ],
+  "scores": {
+    "soundness": 2,
+    "presentation": 2,
+    "significance": 2,
+    "originality": 2,
+    "overall": 3
+  },
+  "confidence": 3,
+  "score_change_rationale": "Score history from official review v1 is preserved as follows. Soundness 2 -> 2: the response concedes the unsupported empirical claims and imported CENN dependencies but supplies no corrected experiment, self-contained proof, or verified references; planned narrowing improves calibration but not the submitted evidence. Presentation 2 -> 2: the response states the needed distinctions clearly, but the frozen manuscript still contains the broad framing and delegated definitions. Significance 2 -> 2: the empirical advantage is withdrawn and the pair-state result remains existential without resource or implementation evidence. Originality 2 -> 2: the generic finite-group versus order-structured distinction is clarified, but no verified closest-work comparison or theorem-level separation is provided. Overall 3 -> 3: the explicit linear, locality, sheaf, and finite action-groupoid results remain meaningful, while the unresolved evidence, self-containedness, efficiency, and novelty-boundary gaps still outweigh an acceptance case; the honest concessions prevent a decrease but do not justify an increase. Confidence 3 -> 3: no new executable artifact, run-level data, proof verification, or literature verification was supplied, and the reviewer's stated proof-theoretic blind spot remains relevant.",
+  "new_questions": [],
+  "summary": "All four original weaknesses are partially resolved at the level of scope calibration, and none is fully resolved or invalidated by the response. The authors accurately acknowledge the empirical, resource, self-containedness, and novelty-boundary limitations and commit to narrowing the corresponding claims. Because the rebuttal supplies no corrected runs, complexity analysis, self-contained CENN proof, verified source identities, or closest-work comparison, the original evidence gaps remain and all scores are unchanged.",
+  "evidence_refs": [
+    "TXT-0264",
+    "TAB-0004",
+    "TXT-0281",
+    "STAT-BASELINE-001",
+    "STAT-LEAKAGE-001",
+    "STAT-SEEDS-001",
+    "STAT-UNCERTAINTY-001",
+    "STAT-MULTICOMP-001",
+    "STAT-BREADTH-001",
+    "THM-0013",
+    "TXT-0071",
+    "TXT-0072",
+    "TXT-0106",
+    "TXT-0345",
+    "TXT-0349",
+    "TXT-0149",
+    "TXT-0192",
+    "TXT-0193",
+    "TXT-0195",
+    "THM-0018",
+    "THM-0019",
+    "THM-0021",
+    "TXT-0249",
+    "TXT-0250",
+    "TXT-0252",
+    "REF-ID-REF-021",
+    "REF-ID-REF-023",
+    "REF-ID-REF-024",
+    "REF-ID-REF-026",
+    "REF-ID-REF-027",
+    "TXT-0005",
+    "EQ-0005",
+    "TXT-0019",
+    "TXT-0061",
+    "THM-0011",
+    "TXT-0258",
+    "TXT-0259"
+  ]
+}

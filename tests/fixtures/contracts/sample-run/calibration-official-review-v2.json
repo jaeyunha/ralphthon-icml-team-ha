@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "profile_id": "v2",
+  "reviewer_id": "reviewer-r1",
+  "summary": "The paper gives a formal result under explicit assumptions.",
+  "strengths": [{"text": "The main theorem is stated precisely.", "anchors": ["THM-1"]}],
+  "weaknesses": [],
+  "scores": {"soundness": 4, "presentation": 4, "significance": 3, "originality": 3, "overall": 5},
+  "overall_judgment": {
+    "acceptance_case": {"text": "The verified formal contribution is publishable.", "anchors": ["THM-1"]},
+    "rejection_case": {"text": "The contribution has bounded scope.", "anchors": ["TXT-2"]},
+    "dominant_case": "acceptance",
+    "dominance_rationale": "The verified result outweighs the bounded scope limitation.",
+    "significance_basis": {"text": "The theorem clarifies a relevant model class.", "anchors": ["THM-1"]}
+  },
+  "key_questions": [],
+  "limitations": "No independent formalization was attempted.",
+  "confidence": 4,
+  "ethical_concerns": [],
+  "evidence_refs": []
+}

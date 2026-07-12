@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "reviewer_id": "reviewer-r2",
+  "summary": "The submission studies neural maps on finite posets equipped with finite-group actions and equivariant fiber transports. It derives a transporter-law and orbit-stabilizer parameterization of linear maps, constructs nonlinear layers using Reynolds-averaged pointwise blocks and pair-orbit aggregation, and proves a full universal approximation result by broadcasting the total input to each output site and applying stabilizer-equivariant MLPs. It also gives a source-labeled pair-state construction that realizes this broadcast over a strongly connected local relation in directed-diameter depth, specializes the constructions to fixed graphs and sheaf-indexed fibers, and relates the resulting finite action-groupoid formulation to a broader category-equivariant neural network framework. An appendix reports an EMG-IMU comparison for a Grothendieck CENN.",
+  "strengths": [
+    {
+      "text": "The linear theory is cleanly formulated at the bundle level: the transporter law handles nontrivial fiber transports, and the orbit parameterization correctly isolates pair-stabilizer intertwiner constraints. The accompanying proofs are concise, and the mathematics validator provides appropriately limited exact support for a representative specialization.",
+      "anchors": [
+        "THM-0001",
+        "THM-0002"
+      ]
+    },
+    {
+      "text": "The main finite-group UAT is constructive and explicit about its central assumptions: finite-dimensional fibers, a compact invariant domain, and a continuous non-polynomial activation. The broadcast-plus-Reynolds proof is easy to audit, and the validator separately supports the theorem-scope statement and representative Reynolds calculations without overstating those checks as general proofs.",
+      "anchors": [
+        "THM-0010",
+        "THM-0011"
+      ]
+    },
+    {
+      "text": "The pair-state local compilation is a concrete and useful construction. It exposes both the exact directed-diameter propagation depth and the source-labeled memory cost rather than hiding the global information requirement behind informal locality language.",
+      "anchors": [
+        "THM-0013",
+        "TXT-0071"
+      ]
+    },
+    {
+      "text": "The sheaf specialization carefully distinguishes lifted group actions, invariant fiber metrics, adjoint naturality, and stabilizer conditions. This is substantially more precise than simply asserting that a familiar sheaf update is equivariant.",
+      "anchors": [
+        "THM-0016",
+        "THM-0017",
+        "TXT-0105"
+      ]
+    }
+  ],
+  "weaknesses": [
+    {
+      "id": "reviewer-r2-W1",
+      "text": "The central notion called order-equivariance is, at the input-output level, ordinary equivariance for the finite-group representations on the total feature spaces: equation (2) contains no order or restriction map. Correspondingly, the full UAT uses only a global broadcast and stabilizer-equivariant approximation, and the stated sheaf-indexed consequence approximates all G-equivariant maps on total fibers rather than maps required to respect sheaf restrictions. Thus the theorem appears mathematically sound at its stated finite-group scope, but the advertised order-specific and sheaf-neural-network novelty is not established. This can be resolved by narrowing the claims and terminology, or by proving a universality result for a target class or architecture in which order or sheaf naturality is essential, together with a precise comparison to existing finite-group equivariant UATs.",
+      "severity": "major",
+      "affected_claims": [
+        "CLAIM-005"
+      ],
+      "anchors": [
+        "EQ-0005",
+        "THM-0011",
+        "TXT-0106",
+        "TXT-0258"
+      ]
+    },
+    {
+      "id": "reviewer-r2-W2",
+      "text": "Theorem 3.5 proves an information-propagation lower bound for architectures with at most L inter-site layers when a relevant source is farther than L. It does not prove that the defined relation-message-passing class is non-universal at unrestricted depth, nor that persistent source labels are necessary for universality. Moreover, the paper's orbit-wise relation-message-passing encoders can be richer than the additionally tied anonymous MPNN special case. Statements that anonymous aggregation is not universal in general and that a source-label-like mechanism is unavoidable therefore exceed the proved result. A precise unrestricted-depth architecture definition plus an indistinguishability counterexample would resolve this; otherwise the claims should be restricted to the established depth-versus-distance obstruction.",
+      "severity": "major",
+      "affected_claims": [
+        "CLAIM-005"
+      ],
+      "anchors": [
+        "TXT-0009",
+        "THM-0013",
+        "THM-0015",
+        "TXT-0082",
+        "TXT-0335"
+      ]
+    },
+    {
+      "id": "reviewer-r2-W3",
+      "text": "The finite action-groupoid naturality equivalence is understandable, but the broader CENN claims are not self-contained. Definition A.2 delegates the arrow-bundle generators to external work, Theorem A.3 invokes standard CENN hypotheses without a complete formal statement or proof here, and Lemma A.6 relies on properties of the externally defined UAT construction to assert that the needed approximants can be chosen as OENN primitives. Consequently, the claims that CENN gives the general form and that its UAT yields the asserted finite realization cannot be independently verified from this submission. The paper should supply complete generator definitions, exact analytic hypotheses, and a self-contained proof dependency, or clearly demote these statements to background from prior work.",
+      "severity": "major",
+      "affected_claims": [
+        "CLAIM-002",
+        "CLAIM-006"
+      ],
+      "anchors": [
+        "TXT-0192",
+        "THM-0018",
+        "THM-0021",
+        "TXT-0249"
+      ]
+    },
+    {
+      "id": "reviewer-r2-W4",
+      "text": "The empirical evidence does not support the stated generalization conclusion. The code validator reports that one recorded key result reproduces, but the statistical validator finds that the TemporalCNN comparison uses materially different compute and tuning budgets, a different split, and a different metric definition; it also identifies subject-2 in both training and held-out data. Fewer than two recorded seeds, absent uncertainty estimates, and uncorrected multiple comparisons add further uncertainty. Reproducing a recorded number does not resolve these design defects. The claims require a subject-disjoint common split, identical metric definitions, matched resource and tuning budgets, repeated seeds, uncertainty reporting, and an explicit multiplicity policy.",
+      "severity": "major",
+      "affected_claims": [
+        "CLAIM-008",
+        "CLAIM-009"
+      ],
+      "anchors": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281"
+      ]
+    }
+  ],
+  "scores": {
+    "soundness": 2,
+    "presentation": 2,
+    "significance": 2,
+    "originality": 2,
+    "overall": 3
+  },
+  "key_questions": [
+    {
+      "id": "reviewer-r2-Q1",
+      "question": "What precise approximation target or architectural constraint makes the main result order- or sheaf-specific, rather than a finite-group equivariant UAT applied to a poset-indexed direct sum?",
+      "possible_score_impact": "A theorem in which order or restriction naturality is essential, plus a precise comparison to existing finite-group UATs, could raise originality and significance; a careful narrowing would resolve overclaiming but would leave the present novelty scores largely unchanged."
+    },
+    {
+      "id": "reviewer-r2-Q2",
+      "question": "Can the authors provide an unrestricted-depth counterexample proving non-universality of the exact anonymous or relation-message-passing class they intend, rather than only the L-step propagation-radius lower bound?",
+      "possible_score_impact": "A valid counterexample could improve soundness substantially. Without one, the necessity and non-universality statements should be removed or narrowed, and the soundness score would remain limited."
+    },
+    {
+      "id": "reviewer-r2-Q3",
+      "question": "Can the authors state all CENN arrow-bundle primitives and analytic hypotheses used in Theorem A.3 and prove, within the submission, the selection claim needed by Lemma A.6?",
+      "possible_score_impact": "A complete formalization and dependency proof could improve soundness and presentation; otherwise the broad CENN UAT and general-form claims should not contribute to acceptance."
+    },
+    {
+      "id": "reviewer-r2-Q4",
+      "question": "Can the EMG-IMU comparison be rerun with subject-disjoint identical splits, identical metrics, matched compute and tuning budgets, multiple seeds, uncertainty estimates, and a declared multiple-comparison policy?",
+      "possible_score_impact": "A clean rerun could restore the empirical support and modestly improve significance. Persistent leakage or protocol mismatch would require withdrawing the claims of substantial outperformance and improved generalization."
+    }
+  ],
+  "limitations": "The theory is restricted to fixed finite posets and finite groups. Full universality uses a global broadcast, while local universality requires strong connectivity, diameter-scale depth, and source-labeled memory whose per-carrier width is the total input dimension. The submission does not establish scalability to large or varying-size structures, continuous or infinite symmetry groups, robustness, or practical gains for OENN itself. The only empirical appendix concerns a narrow wearable-sensor CENN setting and is not reliable under the reported validation findings.",
+  "confidence": 4,
+  "ethical_concerns": [],
+  "evidence_refs": [
+    "MATH-34584-001",
+    "MATH-34584-002",
+    "MATH-34584-003",
+    "MATH-34584-004",
+    "MATH-34584-005",
+    "CODE-CROSS-001",
+    "STAT-BASELINE-001",
+    "STAT-BREADTH-001",
+    "STAT-LEAKAGE-001",
+    "STAT-MULTICOMP-001",
+    "STAT-SEEDS-001",
+    "STAT-UNCERTAINTY-001",
+    "THM-0011",
+    "THM-0013",
+    "THM-0018",
+    "TXT-0264"
+  ]
+}

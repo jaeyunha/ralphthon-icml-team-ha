@@ -1,0 +1,24 @@
+{
+  "history_id": "scores-reviewer-r2",
+  "reviewer_id": "R2",
+  "version": 1,
+  "append_only": true,
+  "prior_version_hash": null,
+  "entries": [
+    {
+      "entry_id": "score-r2-v1",
+      "recorded_at": "2026-07-11T18:42:12Z",
+      "phase": "initial_review",
+      "scores": {
+        "soundness": 3,
+        "presentation": 3,
+        "significance": 3,
+        "originality": 3,
+        "overall": 5
+      },
+      "confidence": 4,
+      "rationale": "Initial official review scores.",
+      "previous_entry_hash": null
+    }
+  ]
+}

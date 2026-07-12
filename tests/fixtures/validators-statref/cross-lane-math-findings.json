@@ -1,0 +1,16 @@
+[
+  {
+    "finding_id":"MATH-CROSS-001",
+    "validator_type":"symbolic_math",
+    "claim_id":"CLAIM-X",
+    "status":"statement_mismatch",
+    "severity_candidate":"major",
+    "paper_anchors":["THM-0001"],
+    "method":"Compared the symbolic statement with the stated assumptions and independently checked a constructed countermodel.",
+    "observation":"The stated claim omits a condition needed by the symbolic derivation.",
+    "limitations":"The finding concerns the supplied theorem statement, not every possible reformulation.",
+    "confirmation_paths":["symbolic derivation audit","independent countermodel construction"],
+    "confidence":0.97,
+    "artifact_refs":["fixture://g2/symbolic.json"]
+  }
+]

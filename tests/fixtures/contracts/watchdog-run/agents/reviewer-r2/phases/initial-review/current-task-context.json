@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "task_id": "fixture-review",
+  "task": "Produce one schema-valid review artifact",
+  "type": "review",
+  "phase": "initial-review",
+  "inputs": ["frozen/paper.json"],
+  "output_path": "agents/reviewer-r2/phases/initial-review/artifacts/review.json",
+  "output_schema": "official-review.schema.json",
+  "completion_predicate": "A schema-valid review artifact exists and COMPLETE is promised",
+  "retry_feedback": "Artifact validation failed; retry with exact feedback",
+  "attempt": 1,
+  "max_attempts": 3
+}

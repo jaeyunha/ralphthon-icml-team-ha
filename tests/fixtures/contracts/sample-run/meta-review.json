@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "ac_id": "AC1",
+  "main_contribution": "A graph-learning method with a formal analysis.",
+  "agreed_strengths": ["Clear motivation"],
+  "decisive_concerns": ["THM-2 assumption scope"],
+  "rebuttal_effect": "The response clarified intent but did not alter the frozen submission.",
+  "remaining_issues": ["The theorem statement remains ambiguous."],
+  "reviewer_disagreement": "R1 views novelty more favorably than R2.",
+  "validation_evidence": "MATH-12 documents the statement mismatch.",
+  "recommendation": "accept",
+  "confidence": 4,
+  "constructive_next_steps": ["State the bounded-input assumption explicitly."],
+  "evidence_refs": ["REV-R2-V1", "MATH-12", "DISC-D001"],
+  "published_at": "2026-07-12T17:00:00Z"
+}

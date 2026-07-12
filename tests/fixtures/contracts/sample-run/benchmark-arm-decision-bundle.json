@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "campaign_id": "campaign-1",
+  "arm_cohort_id": "arm-v1",
+  "pc_id": "pc-arm-v1",
+  "status": "failed",
+  "decisions": [
+    {"version": 1, "campaign_id": "campaign-1", "arm_cohort_id": "arm-v1", "paper_slot": 1, "paper_id": "paper-1", "pc_id": "pc-arm-v1", "outcome": "failed", "reason": "Synthetic failure.", "evidence_refs": [], "meta_review_ref": null, "sac_ref": "published/calibration-bundle.json", "terminal_failure_code": "sac_phase_failed", "unresolved_dissent": [], "finalized_at": "2026-07-11T00:00:00Z", "decision_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111"},
+    {"version": 1, "campaign_id": "campaign-1", "arm_cohort_id": "arm-v1", "paper_slot": 2, "paper_id": "paper-2", "pc_id": "pc-arm-v1", "outcome": "failed", "reason": "Synthetic failure.", "evidence_refs": [], "meta_review_ref": null, "sac_ref": "published/calibration-bundle.json", "terminal_failure_code": "sac_phase_failed", "unresolved_dissent": [], "finalized_at": "2026-07-11T00:00:00Z", "decision_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222"},
+    {"version": 1, "campaign_id": "campaign-1", "arm_cohort_id": "arm-v1", "paper_slot": 3, "paper_id": "paper-3", "pc_id": "pc-arm-v1", "outcome": "failed", "reason": "Synthetic failure.", "evidence_refs": [], "meta_review_ref": null, "sac_ref": "published/calibration-bundle.json", "terminal_failure_code": "sac_phase_failed", "unresolved_dissent": [], "finalized_at": "2026-07-11T00:00:00Z", "decision_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333"},
+    {"version": 1, "campaign_id": "campaign-1", "arm_cohort_id": "arm-v1", "paper_slot": 4, "paper_id": "paper-4", "pc_id": "pc-arm-v1", "outcome": "failed", "reason": "Synthetic failure.", "evidence_refs": [], "meta_review_ref": null, "sac_ref": "published/calibration-bundle.json", "terminal_failure_code": "sac_phase_failed", "unresolved_dissent": [], "finalized_at": "2026-07-11T00:00:00Z", "decision_hash": "sha256:4444444444444444444444444444444444444444444444444444444444444444"},
+    {"version": 1, "campaign_id": "campaign-1", "arm_cohort_id": "arm-v1", "paper_slot": 5, "paper_id": "paper-5", "pc_id": "pc-arm-v1", "outcome": "failed", "reason": "Synthetic failure.", "evidence_refs": [], "meta_review_ref": null, "sac_ref": "published/calibration-bundle.json", "terminal_failure_code": "sac_phase_failed", "unresolved_dissent": [], "finalized_at": "2026-07-11T00:00:00Z", "decision_hash": "sha256:5555555555555555555555555555555555555555555555555555555555555555"},
+    {"version": 1, "campaign_id": "campaign-1", "arm_cohort_id": "arm-v1", "paper_slot": 6, "paper_id": "paper-6", "pc_id": "pc-arm-v1", "outcome": "failed", "reason": "Synthetic failure.", "evidence_refs": [], "meta_review_ref": null, "sac_ref": "published/calibration-bundle.json", "terminal_failure_code": "sac_phase_failed", "unresolved_dissent": [], "finalized_at": "2026-07-11T00:00:00Z", "decision_hash": "sha256:6666666666666666666666666666666666666666666666666666666666666666"},
+    {"version": 1, "campaign_id": "campaign-1", "arm_cohort_id": "arm-v1", "paper_slot": 7, "paper_id": "paper-7", "pc_id": "pc-arm-v1", "outcome": "failed", "reason": "Synthetic failure.", "evidence_refs": [], "meta_review_ref": null, "sac_ref": "published/calibration-bundle.json", "terminal_failure_code": "sac_phase_failed", "unresolved_dissent": [], "finalized_at": "2026-07-11T00:00:00Z", "decision_hash": "sha256:7777777777777777777777777777777777777777777777777777777777777777"}
+  ],
+  "sac_bundle_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "sac_action_history_ref": "sac/action-history.json",
+  "paper_ledger_hashes": [
+    "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+    "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+    "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+    "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+    "sha256:7777777777777777777777777777777777777777777777777777777777777777"
+  ],
+  "runtime_evidence_roots": {
+    "broker_snapshot_hash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "runtime_packet_ledger_root": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  },
+  "reconciliation_roots": {
+    "provenance": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "custody": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "metering": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+  },
+  "finalized_at": "2026-07-11T00:00:00Z",
+  "bundle_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

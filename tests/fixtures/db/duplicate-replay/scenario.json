@@ -1,0 +1,9 @@
+{
+  "expected_conflict_noops": 36,
+  "expected_inserted_event_rows": 36,
+  "expected_notifications": 36,
+  "expected_snapshot": "../canonical/expected.snapshot.json",
+  "input_event_log": "../canonical/events.ndjson",
+  "invariant": "The second replay changes no projection and emits no notification.",
+  "replay_passes": 2
+}

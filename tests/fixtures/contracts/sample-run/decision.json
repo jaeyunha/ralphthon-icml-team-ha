@@ -1,0 +1,12 @@
+{
+  "mode": "single_paper",
+  "ac_recommendation": "accept",
+  "sac_action": "confirmed",
+  "final_decision": "accept",
+  "spotlight_candidate": true,
+  "pc_rationale": "The contribution is strong after accounting for the documented limitation.",
+  "unresolved_dissent": [
+    "R2 considers the novelty incremental."
+  ],
+  "evidence_refs": ["META-1", "DISC-D001"]
+}

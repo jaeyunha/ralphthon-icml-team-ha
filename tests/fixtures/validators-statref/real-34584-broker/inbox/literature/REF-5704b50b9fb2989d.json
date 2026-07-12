@@ -1,0 +1,47 @@
+{
+  "artifact_type": "literature_broker_response",
+  "request_id": "REF-5704b50b9fb2989d",
+  "reviewer_id": "validator-references",
+  "packets": [
+    {
+      "source_id": "SRC-98FA2B15BF729514",
+      "title": "Quasi-Equivariant D-Modules, Equivariant Derived Category, and Representations of Reductive Lie Groups",
+      "authors": [
+        "Masaki Kashiwara",
+        "Wilfried Schmid"
+      ],
+      "first_public_date": "1994-01-01",
+      "source_type": "metadata_registry",
+      "canonical_uri": "https://doi.org/10.1007/978-1-4612-0261-5_16",
+      "content_hash": "sha256:a42927967d8eb7cc617e1ae52fd52dc9485252d1a037765d83f6b4ee20dfa4ae",
+      "admissibility": "admissible_prior_work",
+      "retrieval_reason": "Validate bibliography identity for REF-022",
+      "supporting_passages": [
+        {
+          "anchor": "retrieved:sentence:1",
+          "summary": "Quasi-Equivariant D-Modules, Equivariant Derived Category, and Representations of Reductive Lie Groups | Springer Nature Link Skip to main content Advertisement Log in Menu Find a journal Publish with us Track your research Search Saved research Cart Home Lie Theory and Geometry Chapter Quasi-Equivariant D -Modules, Equivariant Derived Category, and Representations of Reductive Lie Groups Chapter pp 457–488 Cite this chapter Save chapter View saved research Lie Theory and Geometry Masaki Kashiwara 3 & Wilfried Schmid 4 Part of the book series: Progress in Mathematics ((PM,volume 123)) 1923..."
+        },
+        {
+          "anchor": "retrieved:sentence:2",
+          "summary": "Our methods have applications beyond the conjectures themselves: unified proofs of the basic properties of the maximal and minimal globalizations of Harish-Chandra modules, and a criterion which insures that the solutions of a G R -invariant system of linear differential equations constitute a representation of finite length."
+        },
+        {
+          "anchor": "retrieved:sentence:3",
+          "summary": "This is a preview of subscription content, log in via an institution to check access."
+        }
+      ],
+      "verification_status": "abstract_checked"
+    }
+  ],
+  "rejected_candidates": [
+    {
+      "canonical_uri": "https://doi.org/10.1349/ddlp.959",
+      "reason": "identity: canonical page title coverage 0.00 is below 0.60"
+    },
+    {
+      "canonical_uri": "https://doi.org/10.1109/icassp49660.2025.10888558",
+      "reason": "identity: canonical page title coverage 0.00 is below 0.60"
+    }
+  ],
+  "created_at": "2026-07-11T15:02:58.460Z"
+}

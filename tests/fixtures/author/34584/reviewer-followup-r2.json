@@ -1,0 +1,13 @@
+{
+  "version":1,
+  "reviewer_id":"reviewer-r2",
+  "official_review_version":1,
+  "rebuttal_version":1,
+  "concern_resolutions":[{"concern_id":"reviewer-r2-W1","resolution":"partially_resolved","response_evidence":["rebuttal:reviewer-r2-W1"],"remaining_gap":"No multi-seed or matched-capacity experiment is available."}],
+  "scores":{"soundness":3,"presentation":3,"significance":2,"originality":3,"overall":3},
+  "confidence":4,
+  "score_change_rationale":"The response appropriately narrows the claim but provides no new empirical evidence, so the significance and overall scores remain unchanged.",
+  "new_questions":["Will the final text explicitly limit the generalization claim to the reported EMG-IMU setup?"],
+  "summary":"The rebuttal is truthful and partially addresses the breadth concern by narrowing the claim; empirical robustness remains unresolved.",
+  "evidence_refs":["rebuttal:reviewer-r2-W1","TXT-0264","TAB-0004"]
+}

@@ -1,0 +1,46 @@
+{
+  "artifact_type": "literature_broker_response",
+  "request_id": "REF-94470700178bdc43",
+  "reviewer_id": "validator-references",
+  "packets": [
+    {
+      "source_id": "SRC-8E69B6624DB05FEC",
+      "title": "Routine Activities",
+      "authors": [
+        "Billy Henson"
+      ],
+      "first_public_date": "2020-06-06",
+      "source_type": "metadata_registry",
+      "canonical_uri": "https://doi.org/10.1007/978-3-319-78440-3_23",
+      "content_hash": "sha256:b4720e43bcf6b7a244409ba67c23e7aae0a64ad037ea26863e71086968e31697",
+      "admissibility": "admissible_prior_work",
+      "retrieval_reason": "Validate bibliography identity for REF-017",
+      "supporting_passages": [
+        {
+          "anchor": "retrieved:sentence:1",
+          "summary": "Routine Activities | Springer Nature Link Skip to main content Advertisement Log in Menu Find a journal Publish with us Track your research Search Saved research Cart Home The Palgrave Handbook of International Cybercrime and Cyberdeviance Reference work entry Routine Activities Reference work entry First Online: 06 June 2020 pp 469–489 Cite this reference work entry Save reference work entry View saved research The Palgrave Handbook of International Cybercrime and Cyberdeviance Billy Henson 3 11k Accesses 4 Citations Abstract The growth of technology, and specifically the Internet, has had..."
+        },
+        {
+          "anchor": "retrieved:sentence:2",
+          "summary": "Nowhere has this been more evident than with the progression of crime and victimization."
+        },
+        {
+          "anchor": "retrieved:sentence:3",
+          "summary": "As a result of the development of technology and the Internet, traditional crimes have begun to evolve, while new forms of crime have also been born."
+        }
+      ],
+      "verification_status": "abstract_checked"
+    }
+  ],
+  "rejected_candidates": [
+    {
+      "canonical_uri": "https://doi.org/10.1037/t76226-000",
+      "reason": "identity: canonical page title coverage 0.00 is below 0.60"
+    },
+    {
+      "canonical_uri": "https://doi.org/10.1016/j.dib.2020.106543",
+      "reason": "Retrieved source contains no sanitized abstract or full-text passage."
+    }
+  ],
+  "created_at": "2026-07-11T15:03:19.563Z"
+}

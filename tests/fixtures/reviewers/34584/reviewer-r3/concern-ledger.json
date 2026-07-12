@@ -1,0 +1,149 @@
+{
+  "concerns": [
+    {
+      "affected_claims": [
+        "CLAIM-002",
+        "CLAIM-005"
+      ],
+      "anchors": [
+        "TXT-0020",
+        "EQ-0005",
+        "TXT-0258",
+        "TXT-0259"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "id": "reviewer-r3-W1",
+      "severity": "major",
+      "status": "open",
+      "text": "The central order-equivariant framing is broader than the actual equivariance constraint established in the main theory. Definition 2.2 is ordinary equivariance for a finite group acting on the total poset-indexed bundle, and the paper later explicitly states that the thin poset category does not provide the OENN embedding. The order supplies useful masks, incidences, covers, and sheaf structure, but the full UAT itself is not visibly order-dependent. This creates a major originality and significance uncertainty: the authors should identify the theorem content that is genuinely beyond a generic finite-group equivariant UAT, compare it theorem-by-theorem with the closest such results, or narrow the claims. I do not view this as a demonstrated algebraic error in Theorem 3.3."
+    },
+    {
+      "affected_claims": [
+        "CLAIM-002",
+        "CLAIM-006"
+      ],
+      "anchors": [
+        "TXT-0192",
+        "TXT-0193",
+        "THM-0018",
+        "TXT-0250"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "id": "reviewer-r3-W2",
+      "severity": "major",
+      "status": "open",
+      "text": "The general CENN claim is not independently assessable from this submission at the advertised scope. The CENN definition delegates the arrow-bundle generators to prior work, Theorem A.3 invokes standard CENN hypotheses without a proof here, and the later finite-realization argument carefully limits itself to selected finite action-groupoid approximants. The OENN-to-action-groupoid correspondence is useful, but the stronger statements that CENN gives the general form of equivariant networks and infinitary UATs require the complete primitive definitions, assumptions, and proof, or substantially narrower wording that treats them as imported background."
+    },
+    {
+      "affected_claims": [
+        "CLAIM-008",
+        "CLAIM-009"
+      ],
+      "anchors": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "id": "reviewer-r3-W3",
+      "severity": "major",
+      "status": "open",
+      "text": "The EMG-IMU comparison does not currently support the claim of substantial outperformance or improved generalization. The statistical validator found that TemporalCNN used a different split and metric, received less than two-thirds of the proposed method's compute budget and materially fewer tuning trials, and that subject-2 appeared in both training and held-out data. These are not like-for-like conditions, and the subject overlap is a direct threat to held-out validity. Resolution requires a subject-disjoint fixed split, identical preprocessing and metric definitions, matched or sensitivity-tested compute and tuning budgets, and complete run-level protocol disclosure before interpreting the performance gap."
+    },
+    {
+      "affected_claims": [
+        "CLAIM-008",
+        "CLAIM-009"
+      ],
+      "anchors": [
+        "TXT-0264",
+        "TXT-0281"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "id": "reviewer-r3-W4",
+      "severity": "minor",
+      "status": "open",
+      "text": "Even after repairing split and baseline parity, the empirical evidence is too thin for a generalization claim: fewer than two distinct seeds are recorded, no uncertainty estimate is reported, eight comparisons lack a multiplicity correction, and the tested evidence does not cover distribution shift or hardware variation. Repeated independent runs with per-run values and confidence intervals, a declared primary comparison or justified correction, and narrower scope would resolve this concern."
+    },
+    {
+      "affected_claims": [
+        "CLAIM-001",
+        "CLAIM-005"
+      ],
+      "anchors": [
+        "TXT-0071",
+        "TXT-0106",
+        "TXT-0332",
+        "TXT-0349"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "id": "reviewer-r3-W5",
+      "severity": "minor",
+      "status": "open",
+      "text": "The universality constructions do not establish practical or sample efficiency. The pair-state local construction stores a source-indexed copy of the total input at every carrier and needs diameter-many propagation layers, while the full proof uses a global broadcast. A complexity analysis and experiments comparing memory, parameter count, runtime, and accuracy against ordinary and higher-order message passing would clarify when the additional expressivity is usable rather than only existential."
+    }
+  ],
+  "ledger_version": 1,
+  "official_review_version": 1,
+  "reviewer_id": "reviewer-r3"
+}

@@ -1,0 +1,39 @@
+{
+  "artifact_type": "literature_broker_response",
+  "request_id": "REF-f8b249f748e8f3b7",
+  "reviewer_id": "validator-references",
+  "packets": [
+    {
+      "source_id": "SRC-427FE97ED0C2D71E",
+      "title": "Implicit Convolutional Kernels for Steerable CNNs",
+      "authors": [
+        "Maksim Zhdanov",
+        "Nico Hoffmann",
+        "Gabriele Cesa"
+      ],
+      "first_public_date": "2023-01-01",
+      "source_type": "metadata_registry",
+      "canonical_uri": "https://doi.org/10.52202/075280-0763",
+      "content_hash": "sha256:a8dfadacd6af6c585635033726e6fc741d09b11467fd7e1518b3136cd0f09678",
+      "admissibility": "admissible_prior_work",
+      "retrieval_reason": "Validate bibliography identity for REF-008",
+      "supporting_passages": [
+        {
+          "anchor": "retrieved:sentence:1",
+          "summary": "Implicit Convolutional Kernels for Steerable CNNs - proceedings.com Skip to main content Toggle menu Search Browse Publisher By Letter a b c d e f g h i j k l m n o p q r s t u v w x y z # 35th IGC Organizing Committee Abo Akademi University, Thermal and Flow Engineering Laboratory Academic Conferences Ltd ACCM-7 Organizing Committee Acoustical Society Of America (ASA) ACS Division of Environmental Chemistry ACS Division of Fuel Chemistry ACS Northeast Regional Meeting (NERM) ACTA Press Advanced Automotive Batteries (AAB) Advanced Laser Applications Conference (ALAC) AF3P Agustawestland AIC..."
+        },
+        {
+          "anchor": "retrieved:sentence:2",
+          "summary": "American Chemistry Council (ACC) American College of Veterinary Internal Medicine (ACVIM) American College of Veterinary Pathologists (ACVP) American Concrete Institute (ACI) American Crystallographic Association (ACA) American Filtration and Separations Society (AFS) American Fire Safety Council (AFSC) American Forage and Grassland Council (AFGC) American Foundry Society (AFS) American Fuel and Petrochemical Manufacturers (AFPM) American Gas Association (AGA) American Institute for Aeronautics and Astronautics (AIAA) American Institute of Chemical Engineers (AIChE) American Institute of Ma..."
+        },
+        {
+          "anchor": "retrieved:sentence:3",
+          "summary": "Antenna Symposium Applied Mechanics Laboratory ASHRAE Inc Asian Association on Remote Sensing (AARS) Asian Australasian Association for Composite Materials (AACM) ASM International ASN Events Asociacion de Acusticos Argentinos Asociacion Latinoamericana de Fabricantes de Refractarios (ALAFAR) Associacao Brasileira de Energia Nuclear (ABEN) Associacao Brasileira de Metalurgia Materiais e Mineracao (ABM) Associacao Brasileira Tecnica de Celulose e Papel (ABTCP) Association Aeronautique et Astronautique de France Association for Computational Linguistics (ACL) Association for Environmental Hea..."
+        }
+      ],
+      "verification_status": "abstract_checked"
+    }
+  ],
+  "rejected_candidates": [],
+  "created_at": "2026-07-11T15:03:36.077Z"
+}

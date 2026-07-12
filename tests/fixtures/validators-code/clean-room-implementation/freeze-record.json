@@ -1,0 +1,9 @@
+{
+  "phase": "clean-room-reimplementation",
+  "identity_id": "code-validator-planted",
+  "implementation": "loss.py",
+  "implementation_sha256": "sha256:4ef3908535129a1de8dcfab6668c83d79bed5233a00794755ee0f06a0120520d",
+  "frozen_before_comparison": true,
+  "verification_status": "independently_reimplemented",
+  "allowed_input_kinds": ["paper", "equations", "environment"]
+}

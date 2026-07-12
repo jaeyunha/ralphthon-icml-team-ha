@@ -1,0 +1,7 @@
+{
+  "equivalent": false,
+  "left": "(x + y)**2",
+  "right": "x**2 + y**2",
+  "simplified_difference": "2*x*y",
+  "tool": "sympy-1.14.0"
+}

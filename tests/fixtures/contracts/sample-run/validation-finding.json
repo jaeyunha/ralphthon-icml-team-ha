@@ -1,0 +1,13 @@
+{
+  "finding_id": "MATH-12",
+  "validator_type": "formal_math",
+  "claim_id": "THM-2",
+  "status": "statement_mismatch",
+  "severity_candidate": "major",
+  "paper_anchors": ["theorem:2", "appendix:B.2"],
+  "method": "Lean formalization plus statement-alignment audit",
+  "observation": "The formalized statement requires a stronger assumption.",
+  "limitations": "Only the central theorem was formalized.",
+  "confirmation_paths": ["symbolic-check-3"],
+  "confidence": 0.92
+}

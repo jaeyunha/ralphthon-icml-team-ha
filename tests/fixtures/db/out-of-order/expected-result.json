@@ -1,0 +1,9 @@
+{
+  "actual_sequence": 2,
+  "error_code": "non_monotonic_sequence",
+  "line": 3,
+  "notifications": [],
+  "previous_sequence": 3,
+  "projection_effect": "none",
+  "result": "rejected"
+}

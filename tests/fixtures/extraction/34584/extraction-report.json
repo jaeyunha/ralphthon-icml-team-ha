@@ -1,0 +1,1304 @@
+{
+  "assets": [
+    {
+      "anchor_id": "EQ-0001",
+      "paths": [
+        "assets/EQ-0001.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0002",
+      "paths": [
+        "assets/EQ-0002.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0003",
+      "paths": [
+        "assets/EQ-0003.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0004",
+      "paths": [
+        "assets/EQ-0004.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0005",
+      "paths": [
+        "assets/EQ-0005.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0006",
+      "paths": [
+        "assets/EQ-0006.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0007",
+      "paths": [
+        "assets/EQ-0007.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0008",
+      "paths": [
+        "assets/EQ-0008.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0009",
+      "paths": [
+        "assets/EQ-0009.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0010",
+      "paths": [
+        "assets/EQ-0010.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0011",
+      "paths": [
+        "assets/EQ-0011.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0012",
+      "paths": [
+        "assets/EQ-0012.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0013",
+      "paths": [
+        "assets/EQ-0013.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0014",
+      "paths": [
+        "assets/EQ-0014.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0015",
+      "paths": [
+        "assets/EQ-0015.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0016",
+      "paths": [
+        "assets/EQ-0016.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0017",
+      "paths": [
+        "assets/EQ-0017.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0018",
+      "paths": [
+        "assets/EQ-0018.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0019",
+      "paths": [
+        "assets/EQ-0019.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0020",
+      "paths": [
+        "assets/EQ-0020.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0021",
+      "paths": [
+        "assets/EQ-0021.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0022",
+      "paths": [
+        "assets/EQ-0022.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0023",
+      "paths": [
+        "assets/EQ-0023.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0024",
+      "paths": [
+        "assets/EQ-0024.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0025",
+      "paths": [
+        "assets/EQ-0025.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0026",
+      "paths": [
+        "assets/EQ-0026.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0027",
+      "paths": [
+        "assets/EQ-0027.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0028",
+      "paths": [
+        "assets/EQ-0028.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0029",
+      "paths": [
+        "assets/EQ-0029.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0030",
+      "paths": [
+        "assets/EQ-0030.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0031",
+      "paths": [
+        "assets/EQ-0031.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0032",
+      "paths": [
+        "assets/EQ-0032.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0033",
+      "paths": [
+        "assets/EQ-0033.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0034",
+      "paths": [
+        "assets/EQ-0034.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0035",
+      "paths": [
+        "assets/EQ-0035.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0036",
+      "paths": [
+        "assets/EQ-0036.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0037",
+      "paths": [
+        "assets/EQ-0037.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0038",
+      "paths": [
+        "assets/EQ-0038.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0039",
+      "paths": [
+        "assets/EQ-0039.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0040",
+      "paths": [
+        "assets/EQ-0040.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0041",
+      "paths": [
+        "assets/EQ-0041.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0042",
+      "paths": [
+        "assets/EQ-0042.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0043",
+      "paths": [
+        "assets/EQ-0043.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0044",
+      "paths": [
+        "assets/EQ-0044.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0045",
+      "paths": [
+        "assets/EQ-0045.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0046",
+      "paths": [
+        "assets/EQ-0046.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0047",
+      "paths": [
+        "assets/EQ-0047.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0048",
+      "paths": [
+        "assets/EQ-0048.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0049",
+      "paths": [
+        "assets/EQ-0049.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0050",
+      "paths": [
+        "assets/EQ-0050.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0051",
+      "paths": [
+        "assets/EQ-0051.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0052",
+      "paths": [
+        "assets/EQ-0052.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0053",
+      "paths": [
+        "assets/EQ-0053.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0054",
+      "paths": [
+        "assets/EQ-0054.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0055",
+      "paths": [
+        "assets/EQ-0055.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0056",
+      "paths": [
+        "assets/EQ-0056.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0057",
+      "paths": [
+        "assets/EQ-0057.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0058",
+      "paths": [
+        "assets/EQ-0058.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "TAB-0001",
+      "paths": [
+        "assets/TAB-0001.json",
+        "assets/TAB-0001.csv"
+      ],
+      "type": "table"
+    },
+    {
+      "anchor_id": "TAB-0002",
+      "paths": [
+        "assets/TAB-0002.json",
+        "assets/TAB-0002.csv"
+      ],
+      "type": "table"
+    },
+    {
+      "anchor_id": "EQ-0059",
+      "paths": [
+        "assets/EQ-0059.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0060",
+      "paths": [
+        "assets/EQ-0060.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0061",
+      "paths": [
+        "assets/EQ-0061.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0062",
+      "paths": [
+        "assets/EQ-0062.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0063",
+      "paths": [
+        "assets/EQ-0063.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0064",
+      "paths": [
+        "assets/EQ-0064.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0065",
+      "paths": [
+        "assets/EQ-0065.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0066",
+      "paths": [
+        "assets/EQ-0066.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0067",
+      "paths": [
+        "assets/EQ-0067.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0068",
+      "paths": [
+        "assets/EQ-0068.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0069",
+      "paths": [
+        "assets/EQ-0069.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0070",
+      "paths": [
+        "assets/EQ-0070.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0071",
+      "paths": [
+        "assets/EQ-0071.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0072",
+      "paths": [
+        "assets/EQ-0072.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0073",
+      "paths": [
+        "assets/EQ-0073.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0074",
+      "paths": [
+        "assets/EQ-0074.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0075",
+      "paths": [
+        "assets/EQ-0075.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0076",
+      "paths": [
+        "assets/EQ-0076.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0077",
+      "paths": [
+        "assets/EQ-0077.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0078",
+      "paths": [
+        "assets/EQ-0078.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0079",
+      "paths": [
+        "assets/EQ-0079.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0080",
+      "paths": [
+        "assets/EQ-0080.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0081",
+      "paths": [
+        "assets/EQ-0081.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0082",
+      "paths": [
+        "assets/EQ-0082.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0083",
+      "paths": [
+        "assets/EQ-0083.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0084",
+      "paths": [
+        "assets/EQ-0084.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0085",
+      "paths": [
+        "assets/EQ-0085.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0086",
+      "paths": [
+        "assets/EQ-0086.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0087",
+      "paths": [
+        "assets/EQ-0087.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0088",
+      "paths": [
+        "assets/EQ-0088.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0089",
+      "paths": [
+        "assets/EQ-0089.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0090",
+      "paths": [
+        "assets/EQ-0090.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0091",
+      "paths": [
+        "assets/EQ-0091.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0092",
+      "paths": [
+        "assets/EQ-0092.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0093",
+      "paths": [
+        "assets/EQ-0093.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0094",
+      "paths": [
+        "assets/EQ-0094.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0095",
+      "paths": [
+        "assets/EQ-0095.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0096",
+      "paths": [
+        "assets/EQ-0096.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0097",
+      "paths": [
+        "assets/EQ-0097.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0098",
+      "paths": [
+        "assets/EQ-0098.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0099",
+      "paths": [
+        "assets/EQ-0099.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0100",
+      "paths": [
+        "assets/EQ-0100.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0101",
+      "paths": [
+        "assets/EQ-0101.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0102",
+      "paths": [
+        "assets/EQ-0102.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0103",
+      "paths": [
+        "assets/EQ-0103.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0104",
+      "paths": [
+        "assets/EQ-0104.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0105",
+      "paths": [
+        "assets/EQ-0105.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0106",
+      "paths": [
+        "assets/EQ-0106.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0107",
+      "paths": [
+        "assets/EQ-0107.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0108",
+      "paths": [
+        "assets/EQ-0108.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0109",
+      "paths": [
+        "assets/EQ-0109.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0110",
+      "paths": [
+        "assets/EQ-0110.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0111",
+      "paths": [
+        "assets/EQ-0111.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0112",
+      "paths": [
+        "assets/EQ-0112.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0113",
+      "paths": [
+        "assets/EQ-0113.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0114",
+      "paths": [
+        "assets/EQ-0114.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0115",
+      "paths": [
+        "assets/EQ-0115.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0116",
+      "paths": [
+        "assets/EQ-0116.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0117",
+      "paths": [
+        "assets/EQ-0117.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0118",
+      "paths": [
+        "assets/EQ-0118.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0119",
+      "paths": [
+        "assets/EQ-0119.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0120",
+      "paths": [
+        "assets/EQ-0120.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0121",
+      "paths": [
+        "assets/EQ-0121.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0122",
+      "paths": [
+        "assets/EQ-0122.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0123",
+      "paths": [
+        "assets/EQ-0123.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0124",
+      "paths": [
+        "assets/EQ-0124.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0125",
+      "paths": [
+        "assets/EQ-0125.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0126",
+      "paths": [
+        "assets/EQ-0126.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0127",
+      "paths": [
+        "assets/EQ-0127.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0128",
+      "paths": [
+        "assets/EQ-0128.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0129",
+      "paths": [
+        "assets/EQ-0129.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "TAB-0003",
+      "paths": [
+        "assets/TAB-0003.json",
+        "assets/TAB-0003.csv"
+      ],
+      "type": "table"
+    },
+    {
+      "anchor_id": "TAB-0004",
+      "paths": [
+        "assets/TAB-0004.json",
+        "assets/TAB-0004.csv"
+      ],
+      "type": "table"
+    },
+    {
+      "anchor_id": "EQ-0130",
+      "paths": [
+        "assets/EQ-0130.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0131",
+      "paths": [
+        "assets/EQ-0131.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0132",
+      "paths": [
+        "assets/EQ-0132.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0133",
+      "paths": [
+        "assets/EQ-0133.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0134",
+      "paths": [
+        "assets/EQ-0134.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0135",
+      "paths": [
+        "assets/EQ-0135.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0136",
+      "paths": [
+        "assets/EQ-0136.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0137",
+      "paths": [
+        "assets/EQ-0137.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0138",
+      "paths": [
+        "assets/EQ-0138.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0139",
+      "paths": [
+        "assets/EQ-0139.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0140",
+      "paths": [
+        "assets/EQ-0140.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0141",
+      "paths": [
+        "assets/EQ-0141.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0142",
+      "paths": [
+        "assets/EQ-0142.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0143",
+      "paths": [
+        "assets/EQ-0143.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0144",
+      "paths": [
+        "assets/EQ-0144.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0145",
+      "paths": [
+        "assets/EQ-0145.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0146",
+      "paths": [
+        "assets/EQ-0146.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0147",
+      "paths": [
+        "assets/EQ-0147.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0148",
+      "paths": [
+        "assets/EQ-0148.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0149",
+      "paths": [
+        "assets/EQ-0149.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0150",
+      "paths": [
+        "assets/EQ-0150.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0151",
+      "paths": [
+        "assets/EQ-0151.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0152",
+      "paths": [
+        "assets/EQ-0152.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0153",
+      "paths": [
+        "assets/EQ-0153.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0154",
+      "paths": [
+        "assets/EQ-0154.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0155",
+      "paths": [
+        "assets/EQ-0155.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0156",
+      "paths": [
+        "assets/EQ-0156.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0157",
+      "paths": [
+        "assets/EQ-0157.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0158",
+      "paths": [
+        "assets/EQ-0158.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0159",
+      "paths": [
+        "assets/EQ-0159.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0160",
+      "paths": [
+        "assets/EQ-0160.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0161",
+      "paths": [
+        "assets/EQ-0161.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0162",
+      "paths": [
+        "assets/EQ-0162.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0163",
+      "paths": [
+        "assets/EQ-0163.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0164",
+      "paths": [
+        "assets/EQ-0164.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0165",
+      "paths": [
+        "assets/EQ-0165.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0166",
+      "paths": [
+        "assets/EQ-0166.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0167",
+      "paths": [
+        "assets/EQ-0167.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0168",
+      "paths": [
+        "assets/EQ-0168.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0169",
+      "paths": [
+        "assets/EQ-0169.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0170",
+      "paths": [
+        "assets/EQ-0170.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0171",
+      "paths": [
+        "assets/EQ-0171.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0172",
+      "paths": [
+        "assets/EQ-0172.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0173",
+      "paths": [
+        "assets/EQ-0173.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0174",
+      "paths": [
+        "assets/EQ-0174.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0175",
+      "paths": [
+        "assets/EQ-0175.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0176",
+      "paths": [
+        "assets/EQ-0176.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0177",
+      "paths": [
+        "assets/EQ-0177.tex"
+      ],
+      "type": "equation"
+    },
+    {
+      "anchor_id": "EQ-0178",
+      "paths": [
+        "assets/EQ-0178.tex"
+      ],
+      "type": "equation"
+    }
+  ],
+  "extractor": {
+    "name": "docling",
+    "version": "2.112.0"
+  },
+  "parse_verification": {
+    "report_path": "parse-verification-report.json",
+    "status": "passed",
+    "unresolved_anchor_count": 0
+  },
+  "schema_version": "1.0",
+  "source": {
+    "pdf_path": "paper.pdf",
+    "pdf_sha256": "7de57c5f431ee13df26d2dd14154b1f0621db001222336bf1a3acce17f13a82a"
+  },
+  "summary": {
+    "anchor_count": 591,
+    "asset_count": 182,
+    "mean_confidence": 0.85,
+    "minimum_confidence": 0.85
+  },
+  "suspicious_instruction_evidence": [],
+  "uncertain_regions": []
+}

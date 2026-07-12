@@ -1,0 +1,26 @@
+{
+  "anchor_id": "TAB-0003",
+  "caption": "",
+  "rows": [
+    [
+      "Model",
+      "Accuracy",
+      "F1"
+    ],
+    [
+      "TemporalCNN",
+      "0 . 428",
+      "0 . 399"
+    ],
+    [
+      "InvariantTransformer",
+      "0 . 646",
+      "0 . 592"
+    ],
+    [
+      "GrothendieckCENN",
+      "0 . 904",
+      "0 . 903"
+    ]
+  ]
+}

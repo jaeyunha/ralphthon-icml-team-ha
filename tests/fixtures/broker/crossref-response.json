@@ -1,0 +1,23 @@
+{
+  "status": "ok",
+  "message": {
+    "items": [
+      {
+        "DOI": "10.5555/equivariant.2020.1",
+        "title": ["A General Theory of Equivariant Representations"],
+        "author": [
+          {"given": "Ada", "family": "Researcher"},
+          {"given": "Ben", "family": "Scholar"}
+        ],
+        "published-online": {"date-parts": [[2020, 9, 3]]},
+        "abstract": "<jats:p>We describe representation-theoretic tools for equivariant learning systems.</jats:p>",
+        "link": [
+          {
+            "URL": "https://publisher.example/equivariant-2020.pdf",
+            "content-type": "application/pdf"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "reviewer_id": "R2",
+  "official_review_version": 1,
+  "final_scores": {
+    "soundness": 3,
+    "presentation": 3,
+    "significance": 4,
+    "originality": 4,
+    "overall": 5
+  },
+  "confidence": 4,
+  "final_justification": "The revised Proposition 2 states the bounded-ratio assumption, the proof artifact checks the corrected constant, and the new ablation supports the claimed contribution of the restart rule.",
+  "resolved_concerns": ["R2-W1"],
+  "remaining_concerns": [],
+  "discussion_refs": ["DISC-001"],
+  "evidence_refs": ["EVID-PAPER-PROP2", "EVID-MATH-12", "EVID-CODE-07"],
+  "frozen_at": "2026-06-03T09:18:20.000Z"
+}

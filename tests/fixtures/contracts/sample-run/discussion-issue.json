@@ -1,0 +1,10 @@
+{
+  "issue_id": "D-001",
+  "topic": "Novelty relative to prior work",
+  "status": "open",
+  "decisive": true,
+  "ac_question": "Does the predecessor already contain verification-before-reuse?",
+  "expected_respondents": ["R1", "R2"],
+  "positions": [],
+  "resolution": null
+}

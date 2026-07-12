@@ -1,0 +1,64 @@
+{
+  "artifacts": [
+    {
+      "id": "official-review-r2",
+      "runId": "icml-2026-0421",
+      "kind": "official_review",
+      "filename": "official-review-r2.json",
+      "mediaType": "application/json; charset=utf-8",
+      "sha256": "2646828ac1b0bc95fce5d8fb48a1432ab9c082ac4896a0f2ebfb739db9389094",
+      "publishedAt": "2026-05-19T10:08:31.000Z",
+      "path": "official-review-r2.json"
+    },
+    {
+      "id": "final-review-r2",
+      "runId": "icml-2026-0421",
+      "kind": "final_review",
+      "filename": "final-review-r2.json",
+      "mediaType": "application/json; charset=utf-8",
+      "sha256": "dc26d629750c27e95bd8f8e9ae98f050186e23f9521026efb6dac32768bb94d8",
+      "publishedAt": "2026-06-03T09:18:20.000Z",
+      "path": "final-review-r2.json"
+    },
+    {
+      "id": "math-validation-12",
+      "runId": "icml-2026-0421",
+      "kind": "math_validation",
+      "filename": "math-validation-12.json",
+      "mediaType": "application/json; charset=utf-8",
+      "sha256": "4fb346ce4fa4c0692a3b96f11e0ecb2d883a3cc64d46c3af6416f8f7529288f6",
+      "publishedAt": "2026-05-15T13:40:09.000Z",
+      "path": "math-validation-12.json"
+    },
+    {
+      "id": "rebuttal-ablation",
+      "runId": "icml-2026-0421",
+      "kind": "code_validation",
+      "filename": "rebuttal-ablation.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "sha256": "cc595754ba8cef01d1163b5048e79a6db69d1ace50a3190a734ca81b9540ab3f",
+      "publishedAt": "2026-05-27T14:21:10.000Z",
+      "path": "rebuttal-ablation.csv"
+    },
+    {
+      "id": "paper-anchor-prop2",
+      "runId": "icml-2026-0421",
+      "kind": "paper_anchor",
+      "filename": "paper-anchor-prop2.json",
+      "mediaType": "application/json; charset=utf-8",
+      "sha256": "348ddabdd52728f0a172595fcf08f38e6e8ed00c6d31d40a417f38e9c902c233",
+      "publishedAt": "2026-05-27T14:21:10.000Z",
+      "path": "paper-anchor-prop2.json"
+    },
+    {
+      "id": "audit-export",
+      "runId": "icml-2026-0421",
+      "kind": "audit_export",
+      "filename": "audit-export.json",
+      "mediaType": "application/json; charset=utf-8",
+      "sha256": "914cd46ef661c52794b3b0e4d701f3d46ae315d3e8b1d4929d812473c36ac7d5",
+      "publishedAt": "2026-06-18T16:04:12.000Z",
+      "path": "audit-export.json"
+    }
+  ]
+}

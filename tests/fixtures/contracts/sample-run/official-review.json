@@ -1,0 +1,37 @@
+{
+  "reviewer_id": "R2",
+  "summary": "The paper presents a graph-learning method.",
+  "strengths": [
+    {
+      "text": "The method is clearly motivated.",
+      "anchors": ["page:3 section:2.1"]
+    }
+  ],
+  "weaknesses": [
+    {
+      "id": "R2-W1",
+      "text": "The theorem statement omits an assumption.",
+      "severity": "major",
+      "affected_claims": ["C1"],
+      "anchors": ["equation:7", "table:2"]
+    }
+  ],
+  "scores": {
+    "soundness": 3,
+    "presentation": 3,
+    "significance": 3,
+    "originality": 3,
+    "overall": 5
+  },
+  "key_questions": [
+    {
+      "id": "R2-Q1",
+      "question": "Does the theorem require bounded inputs?",
+      "possible_score_impact": "Could raise Soundness from 2 to 3."
+    }
+  ],
+  "limitations": "The review did not reproduce all experiments.",
+  "confidence": 4,
+  "ethical_concerns": [],
+  "evidence_refs": ["SRC-12", "MATH-4", "CODE-9"]
+}

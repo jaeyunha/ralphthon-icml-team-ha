@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "phase": "initial-review",
+  "current_task_id": "fixture-review",
+  "tasks": [
+    {
+      "id": "fixture-review",
+      "type": "review",
+      "status": "in_progress",
+      "description": "Produce one schema-valid review artifact",
+      "inputs": ["frozen/paper.json", "agents/reviewer-r2/persona.json"],
+      "output_path": "agents/reviewer-r2/phases/initial-review/artifacts/review.json",
+      "completion_predicate": "A schema-valid review artifact exists and COMPLETE is promised",
+      "retry_feedback": null,
+      "attempt_count": 0,
+      "blocked_reason": null,
+      "completed_at": null
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "reviewer_id": "R2",
+  "official_review_version": 1,
+  "responses": [
+    {
+      "concern_id": "R2-W1",
+      "response_label": "clarification",
+      "response": "The bounded-input assumption is stated in Appendix B.2.",
+      "evidence_refs": ["appendix:B.2"]
+    }
+  ],
+  "evidence_refs": ["appendix:B.2"],
+  "commitments": ["Clarify the theorem statement."],
+  "limitations_acknowledged": ["The main-text statement is ambiguous."],
+  "published_at": "2026-07-12T12:00:00Z"
+}

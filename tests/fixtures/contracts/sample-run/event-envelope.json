@@ -1,0 +1,15 @@
+{
+  "event_id": "evt-fixture-001",
+  "run_id": "run-fixture-001",
+  "sequence": 1,
+  "occurred_at": "2026-07-11T18:42:12Z",
+  "type": "reviewer.initial_review.task_started",
+  "actor": {
+    "agent_id": "reviewer-r2",
+    "role": "reviewer",
+    "phase": "initial_review"
+  },
+  "payload": {
+    "task_id": "theory-audit"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "claims": [
+    {"id": "S-C1", "statement": "The distributed training system improves throughput while bounding memory use.", "anchor_id": "S-A1"},
+    {"id": "S-C2", "statement": "The implementation scales to multiple workers under the stated deployment topology.", "anchor_id": "S-A2"}
+  ],
+  "systems": [
+    {"id": "S-SYS1", "statement": "The system reports latency, throughput, memory, and scalability measurements."}
+  ],
+  "artifacts": [
+    {"id": "S-ART1", "statement": "The artifact includes source code, deployment configuration, and reproducibility instructions."}
+  ]
+}

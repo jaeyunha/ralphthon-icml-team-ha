@@ -1,0 +1,17 @@
+{
+  "agent_id": "validator-mathematics-34584",
+  "allowed_input_manifest_hash": "sha256:d57c91011e64d041d8ba56501f0b8144163519341f8d38fc08a5274f9a613441",
+  "attempt": 1,
+  "attempt_count": 1,
+  "completed_at": "2026-07-11T15:01:43.599302Z",
+  "current_task": null,
+  "input_manifest_hash": "sha256:d57c91011e64d041d8ba56501f0b8144163519341f8d38fc08a5274f9a613441",
+  "last_artifact_hash": null,
+  "no_progress_count": 0,
+  "phase": "counterexample-search",
+  "phase_run_id": "math-34584-real-001:validator-mathematics-34584:counterexample-search",
+  "role": "validator",
+  "run_id": "math-34584-real-001",
+  "started_at": "2026-07-11T15:01:43.590329Z",
+  "status": "completed"
+}

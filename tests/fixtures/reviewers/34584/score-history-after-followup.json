@@ -1,0 +1,41 @@
+{
+  "append_only": true,
+  "entries": [
+    {
+      "confidence": 3,
+      "entry_hash": "sha256:2465f57b579d476915089299789813ee86e0a129aa1e84aa14ab6d8247a7a313",
+      "entry_id": "reviewer-r2-score-1",
+      "phase": "initial_review",
+      "previous_entry_hash": null,
+      "rationale": "Initial official-review score state from the completed paper 34584 queue.",
+      "recorded_at": "2026-07-11T16:11:46.763671Z",
+      "scores": {
+        "originality": 2,
+        "overall": 3,
+        "presentation": 2,
+        "significance": 3,
+        "soundness": 2
+      }
+    },
+    {
+      "confidence": 3,
+      "entry_hash": "sha256:c0bb7de70d90165d38d94202eac2b6d5f032557d531429b1d98b32c82c16ef83",
+      "entry_id": "reviewer-r2-score-2",
+      "phase": "followup",
+      "previous_entry_hash": "sha256:2465f57b579d476915089299789813ee86e0a129aa1e84aa14ab6d8247a7a313",
+      "rationale": "Scores remain unchanged because the response acknowledges W6 but provides no new submitted evidence and does not address the other concerns.",
+      "recorded_at": "2026-07-11T16:16:00Z",
+      "scores": {
+        "originality": 2,
+        "overall": 3,
+        "presentation": 2,
+        "significance": 3,
+        "soundness": 2
+      }
+    }
+  ],
+  "history_id": "reviewer-r2-scores",
+  "prior_version_hash": "sha256:78c39d801799d5844516f9d34600b012cbb1769a6d8259f096cc5be794c5e92b",
+  "reviewer_id": "reviewer-r2",
+  "version": 3
+}

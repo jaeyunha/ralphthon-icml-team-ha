@@ -1,0 +1,21 @@
+{
+  "actor": {
+    "agent_id": "author-coordinator",
+    "phase": "final_followup",
+    "role": "author"
+  },
+  "event_id": "evt-m2-34584-094",
+  "occurred_at": "2026-07-11T18:01:34Z",
+  "payload": {
+    "artifact_id": null,
+    "content": "{\"title\":\"Live projection confirmation\",\"text\":\"M2 real-paper event projected through PostgreSQL NOTIFY without refreshing the viewer.\"}",
+    "created_at": "2026-07-11T18:01:34Z",
+    "kind": "author_final_followup",
+    "note_id": "note-m2-live-confirmation",
+    "parent_id": "note-reviewer-r4-final",
+    "thread_id": "note-reviewer-r4-review"
+  },
+  "run_id": "m2-34584",
+  "sequence": 94,
+  "type": "author.final_followup.note_published"
+}

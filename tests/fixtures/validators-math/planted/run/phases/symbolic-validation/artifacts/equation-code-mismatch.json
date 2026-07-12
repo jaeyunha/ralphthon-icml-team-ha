@@ -1,0 +1,10 @@
+{
+  "conformant": false,
+  "counterexample": {
+    "x": "-2"
+  },
+  "g1_artifact_ref": null,
+  "interval_residual": "[-4.0, 4.0]",
+  "samples_checked": 1,
+  "simplified_difference": "2*x"
+}

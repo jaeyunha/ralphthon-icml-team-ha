@@ -1,0 +1,14 @@
+{
+  "agent_id": "reviewer-r2",
+  "completed_phases": [
+    "initial-review"
+  ],
+  "concern_ledger_version": 1,
+  "current_phase": "initial-review",
+  "current_review_version": 1,
+  "official_review_version": 1,
+  "persona_version": 1,
+  "role": "reviewer",
+  "score_history_version": 2,
+  "status": "completed"
+}

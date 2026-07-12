@@ -1,0 +1,19 @@
+{
+  "dossier_version": 1,
+  "submission_id": "sub_01fixture",
+  "contributions": [{}],
+  "claims": [{}],
+  "method_graph": [{}],
+  "equations": [],
+  "theorems": [{}],
+  "experiments": [{}],
+  "datasets": [{}],
+  "baselines": [{}],
+  "metrics": [{}],
+  "reported_results": [{}],
+  "reproducibility": [{}],
+  "references": [{}],
+  "limitations": ["Single benchmark family."],
+  "ethical_risk_triggers": [],
+  "ambiguities": ["Theorem assumption scope."]
+}

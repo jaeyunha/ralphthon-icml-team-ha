@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "fixture_id": "extraction-34584",
+  "paper_id": "34584",
+  "state": "golden",
+  "generated_artifacts_present": true,
+  "source": {
+    "pdf_committed": false,
+    "pdf_available_in_checkout": true,
+    "sha256": "sha256:invalid",
+    "note": "Invalid source hash."
+  },
+  "expected_artifacts": [],
+  "required_invariants": [],
+  "promotion_requirements": {
+    "real_production_run": true,
+    "manual_placeholder_content_forbidden": true,
+    "all_expected_artifacts_present": true,
+    "all_required_invariants_validated": true,
+    "state_after_promotion": "golden"
+  }
+}

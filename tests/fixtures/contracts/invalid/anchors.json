@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "anchors": {
+    "TAB-0001": {
+      "anchor_id": "TAB-0001",
+      "asset_paths": ["assets/TAB-0001.json"],
+      "bbox": [10.0, 20.0, 30.0, 40.0],
+      "confidence": 0.99,
+      "content_sha256": "not-a-sha256",
+      "page": 1,
+      "source_ref": "#/tables/0",
+      "type": "table"
+    }
+  }
+}

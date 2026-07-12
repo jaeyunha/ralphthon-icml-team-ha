@@ -1,0 +1,9 @@
+{
+  "anchors": {
+    "EQ-ALG": {"type": "equation", "page": 1},
+    "THM-HIDDEN": {"type": "theorem", "page": 1},
+    "THM-CORRECT": {"type": "theorem", "page": 2},
+    "THM-MISMATCH-ANCHOR": {"type": "theorem", "page": 2},
+    "EQ-CODE-ANCHOR": {"type": "equation", "page": 3}
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "artifact_type": "literature_broker_refusal",
+  "request_id": "REF-9cf018be44089924",
+  "reviewer_id": "validator-references",
+  "code": "TARGET_TITLE_LEAKAGE",
+  "stage": "target_fingerprint_filter",
+  "message": "The query overlaps the frozen target-paper fingerprint.",
+  "retryable": false,
+  "created_at": "2026-07-11T15:03:27.612Z",
+  "details": {
+    "match_kind": "title",
+    "match_score": 0.041666666666666664
+  }
+}

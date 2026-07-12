@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "campaign_id": "campaign-1",
+  "state": "planned",
+  "history": ["planned"],
+  "prerequisites": null,
+  "quarantine_reason": null,
+  "reveal_count": 0,
+  "state_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+}

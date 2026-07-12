@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "fixture_id": "extraction-34584",
+  "paper_id": "34584",
+  "state": "golden",
+  "generated_artifacts_present": true,
+  "source": {
+    "pdf_committed": false,
+    "pdf_available_in_checkout": true,
+    "sha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "note": "Generated from the real gitignored benchmark PDF; the PDF remains uncommitted."
+  },
+  "expected_artifacts": [
+    {
+      "path": "fixture-manifest.json",
+      "kind": "observed-hash-manifest",
+      "required_for_golden": true,
+      "present": true
+    },
+    {
+      "path": "anchors.json",
+      "kind": "anchor-provenance-map",
+      "required_for_golden": true,
+      "present": true
+    },
+    {
+      "path": "assets/",
+      "kind": "extracted-figure-table-assets",
+      "required_for_golden": true,
+      "present": true
+    },
+    {
+      "path": "extraction-report.json",
+      "kind": "extraction-confidence-and-safety-report",
+      "required_for_golden": true,
+      "present": true
+    },
+    {
+      "path": "parse-verification-report.json",
+      "kind": "passing-verification-gate",
+      "required_for_golden": true,
+      "present": true
+    }
+  ],
+  "required_invariants": [
+    "Every inline anchor resolves exactly once.",
+    "Fixture manifest hashes match the committed generated artifact bytes."
+  ],
+  "promotion_requirements": {
+    "real_production_run": true,
+    "manual_placeholder_content_forbidden": true,
+    "all_expected_artifacts_present": true,
+    "all_required_invariants_validated": true,
+    "state_after_promotion": "golden"
+  }
+}

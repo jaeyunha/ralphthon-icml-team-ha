@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer_id": "R2",
+  "official_review_version": 1,
+  "rebuttal_version": 1,
+  "concern_resolutions": [
+    {
+      "concern_id": "R2-W1",
+      "resolution": "partially_resolved"
+    }
+  ],
+  "scores": {
+    "soundness": 3,
+    "presentation": 3,
+    "significance": 3,
+    "originality": 3,
+    "overall": 5
+  },
+  "confidence": 4,
+  "score_change_rationale": "Scores remain unchanged because the paper text is still ambiguous.",
+  "new_questions": [],
+  "summary": "The rebuttal clarifies the intended assumption.",
+  "evidence_refs": ["rebuttal:R2:L40-L52"]
+}

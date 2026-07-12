@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <entry>
+    <id>https://arxiv.org/abs/2105.04026v2</id>
+    <updated>2022-02-10T12:00:00Z</updated>
+    <published>2021-05-10T18:00:00Z</published>
+    <title>Equivariant Neural Networks and Equivariant Maps</title>
+    <summary>We study neural architectures that respect group actions and characterize approximation properties for continuous equivariant maps.</summary>
+    <author><name>Alex Example</name></author>
+    <author><name>Bea Example</name></author>
+  </entry>
+</feed>

@@ -1,0 +1,1147 @@
+{
+  "version": 1,
+  "author_id": "author-coordinator",
+  "rows": [
+    {
+      "concern_id": "reviewer-r1-W1",
+      "reviewer_id": "reviewer-r1",
+      "concern_type": "weakness",
+      "requested_evidence": "Clarify the theorem-level novelty beyond finite-group equivariance and the role of order, including small or trivial automorphism groups.",
+      "available_paper_evidence": [
+        "EQ-0005",
+        "TXT-0019",
+        "TXT-0061",
+        "THM-0011",
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0149",
+        "TXT-0258",
+        "TXT-0259"
+      ],
+      "author_evidence_type": "planned_revision",
+      "draft_answer": "We agree that the equivariance condition in Definition 2.2 is finite-group equivariance on the total direct-sum bundle, not naturality with respect to the thin poset category. The submitted paper already states that the order supplies invariant incidence relations, masks, covers, pair-state communication, and sheaf restrictions, while the action groupoid supplies equivariance; the full UAT itself uses a global broadcast. The submitted evidence does not establish a literature-wide theorem-level separation from generic finite-group equivariant UATs, especially when the automorphism group is trivial. We will narrow the framing and present the order-specific content as the structured/local architecture classes, diameter-depth compilation, and sheaf constructions rather than as a different input-output symmetry condition.",
+      "duplicate_concerns": [
+        "reviewer-r1-Q1",
+        "reviewer-r2-W1",
+        "reviewer-r2-Q1",
+        "reviewer-r3-W1",
+        "reviewer-r3-Q1",
+        "reviewer-r4-W4",
+        "reviewer-r4-Q4"
+      ],
+      "commitments": [
+        "will: clarify that OENN input-output equivariance is finite-group equivariance on the total bundle, while the poset order supplies invariant incidence, masks, covers, pair-state communication, and sheaf restriction structure"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r1-W2",
+      "reviewer_id": "reviewer-r1",
+      "concern_type": "weakness",
+      "requested_evidence": "Reconcile the sheaf UAT headline with the actually universal full and pair-state architecture classes.",
+      "available_paper_evidence": [
+        "THM-0011",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0105",
+        "TXT-0106",
+        "TXT-0349"
+      ],
+      "author_evidence_type": "planned_revision",
+      "draft_answer": "The exact class covered by the submitted sheaf UAT is the full OENN on total sheaf-valued fibers, which permits global orbital mixing, and, under connectedness, its cover-local source-labeled pair-state compilation with diameter-scale depth. The paper explicitly distinguishes these from ordinary restriction/adjoint-based local sheaf diffusion or message passing, which is not claimed universal. We agree the headline wording is too broad and will narrow it to this sheaf-indexed OENN completion.",
+      "duplicate_concerns": [
+        "reviewer-r1-Q2",
+        "reviewer-r2-W1",
+        "reviewer-r2-Q1"
+      ],
+      "commitments": [
+        "will: narrow the sheaf universality wording to the proved full or source-labeled pair-state OENN completion and distinguish it from conventional local sheaf diffusion"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r1-W3",
+      "reviewer_id": "reviewer-r1",
+      "concern_type": "weakness",
+      "requested_evidence": "Separate imported CENN results from submitted results and make the claimed scope self-contained or narrower.",
+      "available_paper_evidence": [
+        "TXT-0149",
+        "TXT-0192",
+        "TXT-0193",
+        "TXT-0195",
+        "THM-0018",
+        "THM-0019",
+        "THM-0021",
+        "TXT-0249",
+        "TXT-0250",
+        "TXT-0252"
+      ],
+      "author_evidence_type": "planned_revision",
+      "draft_answer": "The submission is not self-contained for the broad CENN framework: Definition A.2 delegates the arrow-bundle generators and Theorem A.3 imports the general UAT hypotheses. What is developed in the submitted text is the finite action-groupoid account of completed OENN equivariance and a selected finite-realization statement; the text also limits the claim to approximants chosen inside the OENN primitive class rather than arbitrary CENN scalar gates. We will mark the general CENN material as imported background, separate it from the finite OENN/action-groupoid results developed here, and narrow the general-form wording.",
+      "duplicate_concerns": [
+        "reviewer-r1-Q3",
+        "reviewer-r2-W3",
+        "reviewer-r2-Q3",
+        "reviewer-r3-W2",
+        "reviewer-r3-Q3",
+        "reviewer-r4-W3",
+        "reviewer-r4-Q3"
+      ],
+      "commitments": [
+        "will: separate the finite action-groupoid OENN correspondence developed in this submission from broader CENN definitions and UAT results imported from prior work, and narrow the general-form wording"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r1-W4",
+      "reviewer_id": "reviewer-r1",
+      "concern_type": "weakness",
+      "requested_evidence": "Address the subject overlap, non-like-for-like baseline comparison, missing repeated seeds, uncertainty, and multiplicity control.",
+      "available_paper_evidence": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281",
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "author_evidence_type": "limitation_acknowledged",
+      "draft_answer": "We acknowledge that the submitted EMG-IMU evidence does not support the stated claims of substantial outperformance or improved generalization. The author-visible validation catalog identifies a non-like-for-like baseline protocol, subject overlap between training and held-out data, fewer than two recorded seeds, no uncertainty estimate, no multiplicity correction, and limited validation breadth. The paper provides only the result paragraph and table for these claims. We will remove or sharply qualify the outperformance and generalization language; we do not claim a corrected result.",
+      "duplicate_concerns": [
+        "reviewer-r1-Q4",
+        "reviewer-r2-W4",
+        "reviewer-r2-Q4",
+        "reviewer-r3-W3",
+        "reviewer-r3-W4",
+        "reviewer-r3-Q2",
+        "reviewer-r4-W1",
+        "reviewer-r4-Q1",
+        "reviewer-r4-Q2"
+      ],
+      "commitments": [
+        "will: remove or sharply qualify the claims of substantial outperformance and improved generalization because the submitted evidence does not establish them"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r1-W5",
+      "reviewer_id": "reviewer-r1",
+      "concern_type": "weakness",
+      "requested_evidence": "Quantify or qualify the memory, depth, rescaling, compute, sample, optimization, and stability costs of local universality.",
+      "available_paper_evidence": [
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0106",
+        "TXT-0345",
+        "TXT-0349"
+      ],
+      "author_evidence_type": "limitation_acknowledged",
+      "draft_answer": "The submitted theorem is existential and already states its main structural cost: pair-state variables indexed by carrier and source, per-carrier hidden width equal to the total input dimension, diameter-many inter-site propagation layers, and graph-specific walk-count rescaling in the exact broadcast compilation. We acknowledge that the submission provides no parameter, runtime, sample-complexity, optimization, stability, or implementation study. We will make clear that universality does not establish practical efficiency.",
+      "duplicate_concerns": [
+        "reviewer-r3-W5",
+        "reviewer-r3-Q4",
+        "reviewer-r4-W2",
+        "reviewer-r4-Q5"
+      ],
+      "commitments": [
+        "will: state that the pair-state universality result is existential and does not provide parameter, runtime, sample-complexity, optimization, or stability guarantees"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r1-Q1",
+      "reviewer_id": "reviewer-r1",
+      "concern_type": "key_question",
+      "requested_evidence": "Provide a precise theorem-by-theorem novelty comparison with closest finite-group equivariant work and explain the role of order.",
+      "available_paper_evidence": [
+        "EQ-0005",
+        "TXT-0019",
+        "TXT-0061",
+        "THM-0011",
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0149",
+        "TXT-0258",
+        "TXT-0259"
+      ],
+      "author_evidence_type": "cannot_answer_without_new_research",
+      "draft_answer": "The submitted evidence supports a scope distinction but not a new verified theorem-by-theorem comparison with all closest finite-group or higher-order UATs. The full theorem approximates continuous G-equivariant maps for a finite group acting on a poset-indexed bundle; the order enters through invariant relations, locality, cover propagation, and sheaf structure, not through a stronger equivariance equation. A broader novelty comparison would require new literature research, so we will not manufacture it and will instead narrow the manuscript claims.",
+      "duplicate_concerns": [
+        "reviewer-r1-W1",
+        "reviewer-r2-W1",
+        "reviewer-r2-Q1",
+        "reviewer-r3-W1",
+        "reviewer-r3-Q1",
+        "reviewer-r4-W4",
+        "reviewer-r4-Q4"
+      ],
+      "commitments": [
+        "will: clarify that OENN input-output equivariance is finite-group equivariance on the total bundle, while the poset order supplies invariant incidence, masks, covers, pair-state communication, and sheaf restriction structure"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r1-Q2",
+      "reviewer_id": "reviewer-r1",
+      "concern_type": "key_question",
+      "requested_evidence": "Identify the exact existing sheaf-network class covered by the UAT.",
+      "available_paper_evidence": [
+        "THM-0011",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0105",
+        "TXT-0106",
+        "TXT-0349"
+      ],
+      "author_evidence_type": "planned_revision",
+      "draft_answer": "Universality is not proved for conventional local sheaf diffusion alone. It is proved for the full sheaf-indexed OENN and for the source-labeled pair-state cover-local completion under the stated connectedness, depth, and memory conditions. We will make that exact architecture class explicit wherever the sheaf UAT is summarized.",
+      "duplicate_concerns": [
+        "reviewer-r1-W2",
+        "reviewer-r2-W1",
+        "reviewer-r2-Q1"
+      ],
+      "commitments": [
+        "will: narrow the sheaf universality wording to the proved full or source-labeled pair-state OENN completion and distinguish it from conventional local sheaf diffusion"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r1-Q3",
+      "reviewer_id": "reviewer-r1",
+      "concern_type": "key_question",
+      "requested_evidence": "Identify submitted versus imported CENN definitions and theorems and provide complete generators and hypotheses.",
+      "available_paper_evidence": [
+        "TXT-0149",
+        "TXT-0192",
+        "TXT-0193",
+        "TXT-0195",
+        "THM-0018",
+        "THM-0019",
+        "THM-0021",
+        "TXT-0249",
+        "TXT-0250",
+        "TXT-0252"
+      ],
+      "author_evidence_type": "cannot_answer_without_new_research",
+      "draft_answer": "Within the manuscript, Definition A.2 and Theorem A.3 are imported from prior CENN work, while Proposition A.4, Lemma A.6, and Corollary A.7 form the submitted finite action-groupoid/OENN development. This identifies the manuscript's dependency boundary, not a verified literature-wide novelty claim. The submitted evidence does not contain complete definitions of all arrow-bundle generators or a self-contained proof of the general CENN UAT, so supplying that formalization or a new proof in rebuttal would exceed the evidence boundary. We will make the imported dependency explicit and confine the claimed contribution accordingly.",
+      "duplicate_concerns": [
+        "reviewer-r1-W3",
+        "reviewer-r2-W3",
+        "reviewer-r2-Q3",
+        "reviewer-r3-W2",
+        "reviewer-r3-Q3",
+        "reviewer-r4-W3",
+        "reviewer-r4-Q3"
+      ],
+      "commitments": [
+        "will: separate the finite action-groupoid OENN correspondence developed in this submission from broader CENN definitions and UAT results imported from prior work, and narrow the general-form wording"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r1-Q4",
+      "reviewer_id": "reviewer-r1",
+      "concern_type": "key_question",
+      "requested_evidence": "Provide a subject-disjoint, protocol-matched, multiple-seed rerun and explain the reported subject overlap.",
+      "available_paper_evidence": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281",
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "author_evidence_type": "cannot_answer_without_new_research",
+      "draft_answer": "The requested subject-disjoint, protocol-matched rerun, exact split manifest, multiple-seed results, uncertainty intervals, and multiplicity analysis are not present in the submitted paper or author-visible catalog. We therefore cannot answer with a corrected performance claim or explain the reported subject overlap without new research and provenance. We will not speculate and will instead remove or sharply qualify the affected manuscript claims.",
+      "duplicate_concerns": [
+        "reviewer-r1-W4",
+        "reviewer-r2-W4",
+        "reviewer-r2-Q4",
+        "reviewer-r3-W3",
+        "reviewer-r3-W4",
+        "reviewer-r3-Q2",
+        "reviewer-r4-W1",
+        "reviewer-r4-Q1",
+        "reviewer-r4-Q2"
+      ],
+      "commitments": [
+        "will: remove or sharply qualify the claims of substantial outperformance and improved generalization because the submitted evidence does not establish them"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r2-W1",
+      "reviewer_id": "reviewer-r2",
+      "concern_type": "weakness",
+      "requested_evidence": "Clarify whether the full target is genuinely order- or sheaf-specific and narrow terminology or theorem scope.",
+      "available_paper_evidence": [
+        "EQ-0005",
+        "TXT-0019",
+        "TXT-0061",
+        "THM-0011",
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0149",
+        "TXT-0258",
+        "TXT-0259",
+        "TXT-0105",
+        "TXT-0106",
+        "TXT-0349"
+      ],
+      "author_evidence_type": "planned_revision",
+      "draft_answer": "We agree. Equation (2) is finite-group equivariance on the total feature spaces, and the full UAT is not restricted by order or sheaf naturality. The sheaf consequence targets continuous G-equivariant maps on total sheaf fibers and is realized by full global orbital mixing or by the source-labeled pair-state completion, not by conventional local sheaf diffusion alone. We will narrow both the order-specific and sheaf-network wording to match those proved classes.",
+      "duplicate_concerns": [
+        "reviewer-r1-W1",
+        "reviewer-r1-Q1",
+        "reviewer-r2-Q1",
+        "reviewer-r3-W1",
+        "reviewer-r3-Q1",
+        "reviewer-r4-W4",
+        "reviewer-r4-Q4",
+        "reviewer-r1-W2",
+        "reviewer-r1-Q2"
+      ],
+      "commitments": [
+        "will: clarify that OENN input-output equivariance is finite-group equivariance on the total bundle, while the poset order supplies invariant incidence, masks, covers, pair-state communication, and sheaf restriction structure",
+        "will: narrow the sheaf universality wording to the proved full or source-labeled pair-state OENN completion and distinguish it from conventional local sheaf diffusion"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r2-W2",
+      "reviewer_id": "reviewer-r2",
+      "concern_type": "weakness",
+      "requested_evidence": "Correct claims that exceed the finite-depth propagation lower bound for anonymous or relation message passing.",
+      "available_paper_evidence": [
+        "THM-0013",
+        "TXT-0069",
+        "THM-0015",
+        "TXT-0082",
+        "TXT-0335"
+      ],
+      "author_evidence_type": "planned_revision",
+      "draft_answer": "We agree that the submitted lower bound is explicitly depth-limited: after at most L inter-site layers, an output depends only on its L-step in-neighborhood. It does not prove unrestricted-depth non-universality of the full relation-message-passing class or that persistent source labels are uniquely necessary. The pair-state construction is a sufficient universal completion. We will restrict the text to the depth-versus-distance obstruction and remove the unsupported unrestricted-depth and necessity wording.",
+      "duplicate_concerns": [
+        "reviewer-r2-Q2"
+      ],
+      "commitments": [
+        "will: restrict the anonymous-message-passing claim to the proved depth-versus-distance obstruction and remove unsupported unrestricted-depth necessity wording"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r2-W3",
+      "reviewer_id": "reviewer-r2",
+      "concern_type": "weakness",
+      "requested_evidence": "Make the CENN generators, hypotheses, and finite selection dependency self-contained or narrow the claims.",
+      "available_paper_evidence": [
+        "TXT-0149",
+        "TXT-0192",
+        "TXT-0193",
+        "TXT-0195",
+        "THM-0018",
+        "THM-0019",
+        "THM-0021",
+        "TXT-0249",
+        "TXT-0250",
+        "TXT-0252"
+      ],
+      "author_evidence_type": "planned_revision",
+      "draft_answer": "The submission is not self-contained for the broad CENN framework: Definition A.2 delegates the arrow-bundle generators and Theorem A.3 imports the general UAT hypotheses. What is developed in the submitted text is the finite action-groupoid account of completed OENN equivariance and a selected finite-realization statement; the text also limits the claim to approximants chosen inside the OENN primitive class rather than arbitrary CENN scalar gates. We will mark the general CENN material as imported background, separate it from the finite OENN/action-groupoid results developed here, and narrow the general-form wording.",
+      "duplicate_concerns": [
+        "reviewer-r1-W3",
+        "reviewer-r1-Q3",
+        "reviewer-r2-Q3",
+        "reviewer-r3-W2",
+        "reviewer-r3-Q3",
+        "reviewer-r4-W3",
+        "reviewer-r4-Q3"
+      ],
+      "commitments": [
+        "will: separate the finite action-groupoid OENN correspondence developed in this submission from broader CENN definitions and UAT results imported from prior work, and narrow the general-form wording"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r2-W4",
+      "reviewer_id": "reviewer-r2",
+      "concern_type": "weakness",
+      "requested_evidence": "Address baseline parity, subject overlap, seeds, uncertainty, and multiplicity before making empirical generalization claims.",
+      "available_paper_evidence": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281",
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "author_evidence_type": "limitation_acknowledged",
+      "draft_answer": "We acknowledge that the submitted EMG-IMU evidence does not support the stated claims of substantial outperformance or improved generalization. The author-visible validation catalog identifies a non-like-for-like baseline protocol, subject overlap between training and held-out data, fewer than two recorded seeds, no uncertainty estimate, no multiplicity correction, and limited validation breadth. The paper provides only the result paragraph and table for these claims. We will remove or sharply qualify the outperformance and generalization language; we do not claim a corrected result.",
+      "duplicate_concerns": [
+        "reviewer-r1-W4",
+        "reviewer-r1-Q4",
+        "reviewer-r2-Q4",
+        "reviewer-r3-W3",
+        "reviewer-r3-W4",
+        "reviewer-r3-Q2",
+        "reviewer-r4-W1",
+        "reviewer-r4-Q1",
+        "reviewer-r4-Q2"
+      ],
+      "commitments": [
+        "will: remove or sharply qualify the claims of substantial outperformance and improved generalization because the submitted evidence does not establish them"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r2-Q1",
+      "reviewer_id": "reviewer-r2",
+      "concern_type": "key_question",
+      "requested_evidence": "State the precise approximation target or architectural constraint that is order- or sheaf-specific.",
+      "available_paper_evidence": [
+        "EQ-0005",
+        "TXT-0019",
+        "TXT-0061",
+        "THM-0011",
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0149",
+        "TXT-0258",
+        "TXT-0259",
+        "TXT-0105",
+        "TXT-0106",
+        "TXT-0349"
+      ],
+      "author_evidence_type": "planned_revision",
+      "draft_answer": "The exact target of the full theorem is all continuous G-equivariant maps between the total bundles; it is not further constrained by order arrows or sheaf restriction naturality. Order and sheaf structure enter through the selected invariant masks, cover-local communication, and sheaf-type layer constructions, while universality uses either full mixing or source-labeled pair states. We will make that distinction explicit.",
+      "duplicate_concerns": [
+        "reviewer-r1-W1",
+        "reviewer-r1-Q1",
+        "reviewer-r2-W1",
+        "reviewer-r3-W1",
+        "reviewer-r3-Q1",
+        "reviewer-r4-W4",
+        "reviewer-r4-Q4",
+        "reviewer-r1-W2",
+        "reviewer-r1-Q2"
+      ],
+      "commitments": [
+        "will: clarify that OENN input-output equivariance is finite-group equivariance on the total bundle, while the poset order supplies invariant incidence, masks, covers, pair-state communication, and sheaf restriction structure",
+        "will: narrow the sheaf universality wording to the proved full or source-labeled pair-state OENN completion and distinguish it from conventional local sheaf diffusion"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r2-Q2",
+      "reviewer_id": "reviewer-r2",
+      "concern_type": "key_question",
+      "requested_evidence": "Provide an unrestricted-depth non-universality counterexample for the exact anonymous or relation-message-passing class.",
+      "available_paper_evidence": [
+        "THM-0013",
+        "TXT-0069",
+        "THM-0015",
+        "TXT-0082",
+        "TXT-0335"
+      ],
+      "author_evidence_type": "cannot_answer_without_new_research",
+      "draft_answer": "No unrestricted-depth indistinguishability counterexample is contained in the submitted evidence. Producing one would be a new proof, so we cannot provide it in rebuttal. We will narrow the claim to Theorem 3.5's established finite-depth dependency lower bound.",
+      "duplicate_concerns": [
+        "reviewer-r2-W2"
+      ],
+      "commitments": [
+        "will: restrict the anonymous-message-passing claim to the proved depth-versus-distance obstruction and remove unsupported unrestricted-depth necessity wording"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r2-Q3",
+      "reviewer_id": "reviewer-r2",
+      "concern_type": "key_question",
+      "requested_evidence": "State all CENN primitives and hypotheses and prove the selection claim used by the finite realization.",
+      "available_paper_evidence": [
+        "TXT-0149",
+        "TXT-0192",
+        "TXT-0193",
+        "TXT-0195",
+        "THM-0018",
+        "THM-0019",
+        "THM-0021",
+        "TXT-0249",
+        "TXT-0250",
+        "TXT-0252"
+      ],
+      "author_evidence_type": "cannot_answer_without_new_research",
+      "draft_answer": "Within the manuscript, Definition A.2 and Theorem A.3 are imported from prior CENN work, while Proposition A.4, Lemma A.6, and Corollary A.7 form the submitted finite action-groupoid/OENN development. This identifies the manuscript's dependency boundary, not a verified literature-wide novelty claim. The submitted evidence does not contain complete definitions of all arrow-bundle generators or a self-contained proof of the general CENN UAT, so supplying that formalization or a new proof in rebuttal would exceed the evidence boundary. We will make the imported dependency explicit and confine the claimed contribution accordingly.",
+      "duplicate_concerns": [
+        "reviewer-r1-W3",
+        "reviewer-r1-Q3",
+        "reviewer-r2-W3",
+        "reviewer-r3-W2",
+        "reviewer-r3-Q3",
+        "reviewer-r4-W3",
+        "reviewer-r4-Q3"
+      ],
+      "commitments": [
+        "will: separate the finite action-groupoid OENN correspondence developed in this submission from broader CENN definitions and UAT results imported from prior work, and narrow the general-form wording"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r2-Q4",
+      "reviewer_id": "reviewer-r2",
+      "concern_type": "key_question",
+      "requested_evidence": "Provide a subject-disjoint, identical-protocol, multiple-seed rerun with uncertainty and multiplicity policy.",
+      "available_paper_evidence": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281",
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "author_evidence_type": "cannot_answer_without_new_research",
+      "draft_answer": "The requested subject-disjoint, protocol-matched rerun, exact split manifest, multiple-seed results, uncertainty intervals, and multiplicity analysis are not present in the submitted paper or author-visible catalog. We therefore cannot answer with a corrected performance claim or explain the reported subject overlap without new research and provenance. We will not speculate and will instead remove or sharply qualify the affected manuscript claims.",
+      "duplicate_concerns": [
+        "reviewer-r1-W4",
+        "reviewer-r1-Q4",
+        "reviewer-r2-W4",
+        "reviewer-r3-W3",
+        "reviewer-r3-W4",
+        "reviewer-r3-Q2",
+        "reviewer-r4-W1",
+        "reviewer-r4-Q1",
+        "reviewer-r4-Q2"
+      ],
+      "commitments": [
+        "will: remove or sharply qualify the claims of substantial outperformance and improved generalization because the submitted evidence does not establish them"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r3-W1",
+      "reviewer_id": "reviewer-r3",
+      "concern_type": "weakness",
+      "requested_evidence": "Identify order-dependent theorem content beyond generic finite-group equivariance or narrow the claims.",
+      "available_paper_evidence": [
+        "EQ-0005",
+        "TXT-0019",
+        "TXT-0061",
+        "THM-0011",
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0149",
+        "TXT-0258",
+        "TXT-0259"
+      ],
+      "author_evidence_type": "planned_revision",
+      "draft_answer": "We agree that the equivariance condition in Definition 2.2 is finite-group equivariance on the total direct-sum bundle, not naturality with respect to the thin poset category. The submitted paper already states that the order supplies invariant incidence relations, masks, covers, pair-state communication, and sheaf restrictions, while the action groupoid supplies equivariance; the full UAT itself uses a global broadcast. The submitted evidence does not establish a literature-wide theorem-level separation from generic finite-group equivariant UATs, especially when the automorphism group is trivial. We will narrow the framing and present the order-specific content as the structured/local architecture classes, diameter-depth compilation, and sheaf constructions rather than as a different input-output symmetry condition.",
+      "duplicate_concerns": [
+        "reviewer-r1-W1",
+        "reviewer-r1-Q1",
+        "reviewer-r2-W1",
+        "reviewer-r2-Q1",
+        "reviewer-r3-Q1",
+        "reviewer-r4-W4",
+        "reviewer-r4-Q4"
+      ],
+      "commitments": [
+        "will: clarify that OENN input-output equivariance is finite-group equivariance on the total bundle, while the poset order supplies invariant incidence, masks, covers, pair-state communication, and sheaf restriction structure"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r3-W2",
+      "reviewer_id": "reviewer-r3",
+      "concern_type": "weakness",
+      "requested_evidence": "Make broad CENN claims independently assessable or mark them as imported background.",
+      "available_paper_evidence": [
+        "TXT-0149",
+        "TXT-0192",
+        "TXT-0193",
+        "TXT-0195",
+        "THM-0018",
+        "THM-0019",
+        "THM-0021",
+        "TXT-0249",
+        "TXT-0250",
+        "TXT-0252"
+      ],
+      "author_evidence_type": "planned_revision",
+      "draft_answer": "The submission is not self-contained for the broad CENN framework: Definition A.2 delegates the arrow-bundle generators and Theorem A.3 imports the general UAT hypotheses. What is developed in the submitted text is the finite action-groupoid account of completed OENN equivariance and a selected finite-realization statement; the text also limits the claim to approximants chosen inside the OENN primitive class rather than arbitrary CENN scalar gates. We will mark the general CENN material as imported background, separate it from the finite OENN/action-groupoid results developed here, and narrow the general-form wording.",
+      "duplicate_concerns": [
+        "reviewer-r1-W3",
+        "reviewer-r1-Q3",
+        "reviewer-r2-W3",
+        "reviewer-r2-Q3",
+        "reviewer-r3-Q3",
+        "reviewer-r4-W3",
+        "reviewer-r4-Q3"
+      ],
+      "commitments": [
+        "will: separate the finite action-groupoid OENN correspondence developed in this submission from broader CENN definitions and UAT results imported from prior work, and narrow the general-form wording"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r3-W3",
+      "reviewer_id": "reviewer-r3",
+      "concern_type": "weakness",
+      "requested_evidence": "Resolve split, metric, compute, tuning, and subject-overlap defects before interpreting the empirical gap.",
+      "available_paper_evidence": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281",
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "author_evidence_type": "limitation_acknowledged",
+      "draft_answer": "We acknowledge that the submitted EMG-IMU evidence does not support the stated claims of substantial outperformance or improved generalization. The author-visible validation catalog identifies a non-like-for-like baseline protocol, subject overlap between training and held-out data, fewer than two recorded seeds, no uncertainty estimate, no multiplicity correction, and limited validation breadth. The paper provides only the result paragraph and table for these claims. We will remove or sharply qualify the outperformance and generalization language; we do not claim a corrected result.",
+      "duplicate_concerns": [
+        "reviewer-r1-W4",
+        "reviewer-r1-Q4",
+        "reviewer-r2-W4",
+        "reviewer-r2-Q4",
+        "reviewer-r3-W4",
+        "reviewer-r3-Q2",
+        "reviewer-r4-W1",
+        "reviewer-r4-Q1",
+        "reviewer-r4-Q2"
+      ],
+      "commitments": [
+        "will: remove or sharply qualify the claims of substantial outperformance and improved generalization because the submitted evidence does not establish them"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r3-W4",
+      "reviewer_id": "reviewer-r3",
+      "concern_type": "weakness",
+      "requested_evidence": "Address insufficient seeds, uncertainty, multiplicity control, and robustness breadth for the generalization claim.",
+      "available_paper_evidence": [
+        "TXT-0264",
+        "TXT-0281",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "author_evidence_type": "limitation_acknowledged",
+      "draft_answer": "We acknowledge that fewer than two recorded seeds, absent uncertainty estimates, uncorrected multiple comparisons, and limited validation breadth prevent the submitted experiment from supporting a generalization claim, even apart from the split and baseline-parity concerns. We will remove or sharply qualify that claim; no repeated-run or uncertainty result is available in the submitted evidence.",
+      "duplicate_concerns": [
+        "reviewer-r1-W4",
+        "reviewer-r1-Q4",
+        "reviewer-r2-W4",
+        "reviewer-r2-Q4",
+        "reviewer-r3-W3",
+        "reviewer-r3-Q2",
+        "reviewer-r4-W1",
+        "reviewer-r4-Q1",
+        "reviewer-r4-Q2"
+      ],
+      "commitments": [
+        "will: remove or sharply qualify the claims of substantial outperformance and improved generalization because the submitted evidence does not establish them"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r3-W5",
+      "reviewer_id": "reviewer-r3",
+      "concern_type": "weakness",
+      "requested_evidence": "Qualify practical and sample efficiency given global broadcast and source-labeled diameter-depth state.",
+      "available_paper_evidence": [
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0106",
+        "TXT-0345",
+        "TXT-0349"
+      ],
+      "author_evidence_type": "limitation_acknowledged",
+      "draft_answer": "The submitted theorem is existential and already states its main structural cost: pair-state variables indexed by carrier and source, per-carrier hidden width equal to the total input dimension, diameter-many inter-site propagation layers, and graph-specific walk-count rescaling in the exact broadcast compilation. We acknowledge that the submission provides no parameter, runtime, sample-complexity, optimization, stability, or implementation study. We will make clear that universality does not establish practical efficiency.",
+      "duplicate_concerns": [
+        "reviewer-r1-W5",
+        "reviewer-r3-Q4",
+        "reviewer-r4-W2",
+        "reviewer-r4-Q5"
+      ],
+      "commitments": [
+        "will: state that the pair-state universality result is existential and does not provide parameter, runtime, sample-complexity, optimization, or stability guarantees"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r3-Q1",
+      "reviewer_id": "reviewer-r3",
+      "concern_type": "key_question",
+      "requested_evidence": "Identify the exact order-dependent property and compare it with closest finite-group equivariant UATs.",
+      "available_paper_evidence": [
+        "EQ-0005",
+        "TXT-0019",
+        "TXT-0061",
+        "THM-0011",
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0149",
+        "TXT-0258",
+        "TXT-0259"
+      ],
+      "author_evidence_type": "cannot_answer_without_new_research",
+      "draft_answer": "The submitted evidence supports a scope distinction but not a new verified theorem-by-theorem comparison with all closest finite-group or higher-order UATs. The full theorem approximates continuous G-equivariant maps for a finite group acting on a poset-indexed bundle; the order enters through invariant relations, locality, cover propagation, and sheaf structure, not through a stronger equivariance equation. A broader novelty comparison would require new literature research, so we will not manufacture it and will instead narrow the manuscript claims.",
+      "duplicate_concerns": [
+        "reviewer-r1-W1",
+        "reviewer-r1-Q1",
+        "reviewer-r2-W1",
+        "reviewer-r2-Q1",
+        "reviewer-r3-W1",
+        "reviewer-r4-W4",
+        "reviewer-r4-Q4"
+      ],
+      "commitments": [
+        "will: clarify that OENN input-output equivariance is finite-group equivariance on the total bundle, while the poset order supplies invariant incidence, masks, covers, pair-state communication, and sheaf restriction structure"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r3-Q2",
+      "reviewer_id": "reviewer-r3",
+      "concern_type": "key_question",
+      "requested_evidence": "Provide a subject-disjoint, matched-protocol, multiple-seed EMG-IMU rerun with uncertainty.",
+      "available_paper_evidence": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281",
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "author_evidence_type": "cannot_answer_without_new_research",
+      "draft_answer": "The requested subject-disjoint, protocol-matched rerun, exact split manifest, multiple-seed results, uncertainty intervals, and multiplicity analysis are not present in the submitted paper or author-visible catalog. We therefore cannot answer with a corrected performance claim or explain the reported subject overlap without new research and provenance. We will not speculate and will instead remove or sharply qualify the affected manuscript claims.",
+      "duplicate_concerns": [
+        "reviewer-r1-W4",
+        "reviewer-r1-Q4",
+        "reviewer-r2-W4",
+        "reviewer-r2-Q4",
+        "reviewer-r3-W3",
+        "reviewer-r3-W4",
+        "reviewer-r4-W1",
+        "reviewer-r4-Q1",
+        "reviewer-r4-Q2"
+      ],
+      "commitments": [
+        "will: remove or sharply qualify the claims of substantial outperformance and improved generalization because the submitted evidence does not establish them"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r3-Q3",
+      "reviewer_id": "reviewer-r3",
+      "concern_type": "key_question",
+      "requested_evidence": "State all CENN primitives and hypotheses and separate submitted from imported results.",
+      "available_paper_evidence": [
+        "TXT-0149",
+        "TXT-0192",
+        "TXT-0193",
+        "TXT-0195",
+        "THM-0018",
+        "THM-0019",
+        "THM-0021",
+        "TXT-0249",
+        "TXT-0250",
+        "TXT-0252"
+      ],
+      "author_evidence_type": "cannot_answer_without_new_research",
+      "draft_answer": "Within the manuscript, Definition A.2 and Theorem A.3 are imported from prior CENN work, while Proposition A.4, Lemma A.6, and Corollary A.7 form the submitted finite action-groupoid/OENN development. This identifies the manuscript's dependency boundary, not a verified literature-wide novelty claim. The submitted evidence does not contain complete definitions of all arrow-bundle generators or a self-contained proof of the general CENN UAT, so supplying that formalization or a new proof in rebuttal would exceed the evidence boundary. We will make the imported dependency explicit and confine the claimed contribution accordingly.",
+      "duplicate_concerns": [
+        "reviewer-r1-W3",
+        "reviewer-r1-Q3",
+        "reviewer-r2-W3",
+        "reviewer-r2-Q3",
+        "reviewer-r3-W2",
+        "reviewer-r4-W3",
+        "reviewer-r4-Q3"
+      ],
+      "commitments": [
+        "will: separate the finite action-groupoid OENN correspondence developed in this submission from broader CENN definitions and UAT results imported from prior work, and narrow the general-form wording"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r3-Q4",
+      "reviewer_id": "reviewer-r3",
+      "concern_type": "key_question",
+      "requested_evidence": "Provide asymptotic and measured memory, parameter, and runtime comparisons for pair-state OENN.",
+      "available_paper_evidence": [
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0106",
+        "TXT-0345",
+        "TXT-0349"
+      ],
+      "author_evidence_type": "cannot_answer_without_new_research",
+      "draft_answer": "Only the submitted structural facts are available: source-labeled pair states replicate the total input dimension at each carrier and the exact compilation uses diameter-scale propagation plus walk-count rescaling. Exact parameter count, peak memory beyond the stated hidden width, runtime, orbit/stabilizer construction cost, and measured comparisons are not provided. Answering them would require new derivations, implementation, or experiments, so we cannot supply them as rebuttal evidence and will limit the practical claim.",
+      "duplicate_concerns": [
+        "reviewer-r1-W5",
+        "reviewer-r3-W5",
+        "reviewer-r4-W2",
+        "reviewer-r4-Q5"
+      ],
+      "commitments": [
+        "will: state that the pair-state universality result is existential and does not provide parameter, runtime, sample-complexity, optimization, or stability guarantees"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r4-W1",
+      "reviewer_id": "reviewer-r4",
+      "concern_type": "weakness",
+      "requested_evidence": "Resolve subject overlap, protocol mismatch, seeds, uncertainty, and multiplicity before retaining empirical claims.",
+      "available_paper_evidence": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281",
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "author_evidence_type": "limitation_acknowledged",
+      "draft_answer": "We acknowledge that the submitted EMG-IMU evidence does not support the stated claims of substantial outperformance or improved generalization. The author-visible validation catalog identifies a non-like-for-like baseline protocol, subject overlap between training and held-out data, fewer than two recorded seeds, no uncertainty estimate, no multiplicity correction, and limited validation breadth. The paper provides only the result paragraph and table for these claims. We will remove or sharply qualify the outperformance and generalization language; we do not claim a corrected result.",
+      "duplicate_concerns": [
+        "reviewer-r1-W4",
+        "reviewer-r1-Q4",
+        "reviewer-r2-W4",
+        "reviewer-r2-Q4",
+        "reviewer-r3-W3",
+        "reviewer-r3-W4",
+        "reviewer-r3-Q2",
+        "reviewer-r4-Q1",
+        "reviewer-r4-Q2"
+      ],
+      "commitments": [
+        "will: remove or sharply qualify the claims of substantial outperformance and improved generalization because the submitted evidence does not establish them"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r4-W2",
+      "reviewer_id": "reviewer-r4",
+      "concern_type": "weakness",
+      "requested_evidence": "Qualify the communication-local but resource-global pair-state construction and missing feasibility analysis.",
+      "available_paper_evidence": [
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0106",
+        "TXT-0345",
+        "TXT-0349"
+      ],
+      "author_evidence_type": "limitation_acknowledged",
+      "draft_answer": "The submitted theorem is existential and already states its main structural cost: pair-state variables indexed by carrier and source, per-carrier hidden width equal to the total input dimension, diameter-many inter-site propagation layers, and graph-specific walk-count rescaling in the exact broadcast compilation. We acknowledge that the submission provides no parameter, runtime, sample-complexity, optimization, stability, or implementation study. We will make clear that universality does not establish practical efficiency.",
+      "duplicate_concerns": [
+        "reviewer-r1-W5",
+        "reviewer-r3-W5",
+        "reviewer-r3-Q4",
+        "reviewer-r4-Q5"
+      ],
+      "commitments": [
+        "will: state that the pair-state universality result is existential and does not provide parameter, runtime, sample-complexity, optimization, or stability guarantees"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r4-W3",
+      "reviewer_id": "reviewer-r4",
+      "concern_type": "weakness",
+      "requested_evidence": "Make CENN claims self-contained, narrow them, and address unverified central reference identities.",
+      "available_paper_evidence": [
+        "TXT-0149",
+        "TXT-0192",
+        "TXT-0193",
+        "TXT-0195",
+        "THM-0018",
+        "THM-0019",
+        "THM-0021",
+        "TXT-0249",
+        "TXT-0250",
+        "TXT-0252",
+        "REF-ID-REF-021",
+        "REF-ID-REF-023",
+        "REF-ID-REF-024",
+        "REF-ID-REF-026",
+        "REF-ID-REF-027"
+      ],
+      "author_evidence_type": "planned_revision",
+      "draft_answer": "The submission is not self-contained for the broad CENN framework: Definition A.2 delegates the arrow-bundle generators and Theorem A.3 imports the general UAT hypotheses. The author-visible catalog also flags several central cited identities as unconfirmed; that is not evidence of nonexistence, but we cannot present them as independently verified. What is developed in the submitted text is the finite action-groupoid account of completed OENN equivariance and a selected finite-realization statement. We will mark the general CENN material as imported background, separate it from the finite OENN/action-groupoid results developed here, and narrow the general-form wording.",
+      "duplicate_concerns": [
+        "reviewer-r1-W3",
+        "reviewer-r1-Q3",
+        "reviewer-r2-W3",
+        "reviewer-r2-Q3",
+        "reviewer-r3-W2",
+        "reviewer-r3-Q3",
+        "reviewer-r4-Q3"
+      ],
+      "commitments": [
+        "will: separate the finite action-groupoid OENN correspondence developed in this submission from broader CENN definitions and UAT results imported from prior work, and narrow the general-form wording"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r4-W4",
+      "reviewer_id": "reviewer-r4",
+      "concern_type": "weakness",
+      "requested_evidence": "Sharpen the novelty boundary between generic finite-group approximation and order-specific locality and sheaf constructions.",
+      "available_paper_evidence": [
+        "EQ-0005",
+        "TXT-0019",
+        "TXT-0061",
+        "THM-0011",
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0149",
+        "TXT-0258",
+        "TXT-0259"
+      ],
+      "author_evidence_type": "planned_revision",
+      "draft_answer": "We agree that the equivariance condition in Definition 2.2 is finite-group equivariance on the total direct-sum bundle, not naturality with respect to the thin poset category. The submitted paper already states that the order supplies invariant incidence relations, masks, covers, pair-state communication, and sheaf restrictions, while the action groupoid supplies equivariance; the full UAT itself uses a global broadcast. The submitted evidence does not establish a literature-wide theorem-level separation from generic finite-group equivariant UATs, especially when the automorphism group is trivial. We will narrow the framing and present the order-specific content as the structured/local architecture classes, diameter-depth compilation, and sheaf constructions rather than as a different input-output symmetry condition.",
+      "duplicate_concerns": [
+        "reviewer-r1-W1",
+        "reviewer-r1-Q1",
+        "reviewer-r2-W1",
+        "reviewer-r2-Q1",
+        "reviewer-r3-W1",
+        "reviewer-r3-Q1",
+        "reviewer-r4-Q4"
+      ],
+      "commitments": [
+        "will: clarify that OENN input-output equivariance is finite-group equivariance on the total bundle, while the poset order supplies invariant incidence, masks, covers, pair-state communication, and sheaf restriction structure"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r4-Q1",
+      "reviewer_id": "reviewer-r4",
+      "concern_type": "key_question",
+      "requested_evidence": "Provide the exact subject manifest, explain the subject overlap, and rerun on a subject-disjoint split.",
+      "available_paper_evidence": [
+        "TXT-0264",
+        "TAB-0004",
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001"
+      ],
+      "author_evidence_type": "cannot_answer_without_new_research",
+      "draft_answer": "The author-visible catalog establishes a reported subject overlap and protocol mismatch, but it does not contain the exact subject-level manifest or provenance needed to explain that overlap, nor a corrected subject-disjoint rerun. Providing those items would require new research. We will not speculate and will remove or sharply qualify the affected empirical claims.",
+      "duplicate_concerns": [
+        "reviewer-r1-W4",
+        "reviewer-r1-Q4",
+        "reviewer-r2-W4",
+        "reviewer-r2-Q4",
+        "reviewer-r3-W3",
+        "reviewer-r3-W4",
+        "reviewer-r3-Q2",
+        "reviewer-r4-W1",
+        "reviewer-r4-Q2"
+      ],
+      "commitments": [
+        "will: remove or sharply qualify the claims of substantial outperformance and improved generalization because the submitted evidence does not establish them"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r4-Q2",
+      "reviewer_id": "reviewer-r4",
+      "concern_type": "key_question",
+      "requested_evidence": "Rerun all empirical methods with identical splits, metrics, resources, seeds, uncertainty, and multiplicity policy.",
+      "available_paper_evidence": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281",
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "author_evidence_type": "cannot_answer_without_new_research",
+      "draft_answer": "The requested subject-disjoint, protocol-matched rerun, exact split manifest, multiple-seed results, uncertainty intervals, and multiplicity analysis are not present in the submitted paper or author-visible catalog. We therefore cannot answer with a corrected performance claim or explain the reported subject overlap without new research and provenance. We will not speculate and will instead remove or sharply qualify the affected manuscript claims.",
+      "duplicate_concerns": [
+        "reviewer-r1-W4",
+        "reviewer-r1-Q4",
+        "reviewer-r2-W4",
+        "reviewer-r2-Q4",
+        "reviewer-r3-W3",
+        "reviewer-r3-W4",
+        "reviewer-r3-Q2",
+        "reviewer-r4-W1",
+        "reviewer-r4-Q1"
+      ],
+      "commitments": [
+        "will: remove or sharply qualify the claims of substantial outperformance and improved generalization because the submitted evidence does not establish them"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r4-Q3",
+      "reviewer_id": "reviewer-r4",
+      "concern_type": "key_question",
+      "requested_evidence": "Provide a self-contained finite-action-groupoid CENN statement, proof chain, and verified reference identities.",
+      "available_paper_evidence": [
+        "TXT-0149",
+        "TXT-0192",
+        "TXT-0193",
+        "TXT-0195",
+        "THM-0018",
+        "THM-0019",
+        "THM-0021",
+        "TXT-0249",
+        "TXT-0250",
+        "TXT-0252",
+        "REF-ID-REF-021",
+        "REF-ID-REF-023",
+        "REF-ID-REF-024",
+        "REF-ID-REF-026",
+        "REF-ID-REF-027"
+      ],
+      "author_evidence_type": "cannot_answer_without_new_research",
+      "draft_answer": "The submitted evidence does not contain complete arrow-bundle generator definitions, a self-contained proof of the general CENN UAT, or verified identities for the central CENN references flagged in the author-visible catalog. Supplying those items would require new proof or citation research, which we cannot add in rebuttal. We can only identify the finite action-groupoid/OENN statements already present, and we will revise the manuscript to make the prior-work dependency explicit and confine the claimed contribution accordingly.",
+      "duplicate_concerns": [
+        "reviewer-r1-W3",
+        "reviewer-r1-Q3",
+        "reviewer-r2-W3",
+        "reviewer-r2-Q3",
+        "reviewer-r3-W2",
+        "reviewer-r3-Q3",
+        "reviewer-r4-W3"
+      ],
+      "commitments": [
+        "will: separate the finite action-groupoid OENN correspondence developed in this submission from broader CENN definitions and UAT results imported from prior work, and narrow the general-form wording"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r4-Q4",
+      "reviewer_id": "reviewer-r4",
+      "concern_type": "key_question",
+      "requested_evidence": "Identify genuinely order-specific results and compare them with verified higher-order GNN and sheaf universality results.",
+      "available_paper_evidence": [
+        "EQ-0005",
+        "TXT-0019",
+        "TXT-0061",
+        "THM-0011",
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0149",
+        "TXT-0258",
+        "TXT-0259"
+      ],
+      "author_evidence_type": "cannot_answer_without_new_research",
+      "draft_answer": "The submitted evidence supports a scope distinction but not a new verified theorem-by-theorem comparison with all closest finite-group or higher-order UATs. The full theorem approximates continuous G-equivariant maps for a finite group acting on a poset-indexed bundle; the order enters through invariant relations, locality, cover propagation, and sheaf structure, not through a stronger equivariance equation. A broader novelty comparison would require new literature research, so we will not manufacture it and will instead narrow the manuscript claims.",
+      "duplicate_concerns": [
+        "reviewer-r1-W1",
+        "reviewer-r1-Q1",
+        "reviewer-r2-W1",
+        "reviewer-r2-Q1",
+        "reviewer-r3-W1",
+        "reviewer-r3-Q1",
+        "reviewer-r4-W4"
+      ],
+      "commitments": [
+        "will: clarify that OENN input-output equivariance is finite-group equivariance on the total bundle, while the poset order supplies invariant incidence, masks, covers, pair-state communication, and sheaf restriction structure"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    },
+    {
+      "concern_id": "reviewer-r4-Q5",
+      "reviewer_id": "reviewer-r4",
+      "concern_type": "key_question",
+      "requested_evidence": "Provide parameter, peak-memory, runtime, and construction costs as functions of structural quantities.",
+      "available_paper_evidence": [
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0106",
+        "TXT-0345",
+        "TXT-0349"
+      ],
+      "author_evidence_type": "cannot_answer_without_new_research",
+      "draft_answer": "Only the submitted structural facts are available: source-labeled pair states replicate the total input dimension at each carrier and the exact compilation uses diameter-scale propagation plus walk-count rescaling. Exact parameter count, peak memory beyond the stated hidden width, runtime, orbit/stabilizer construction cost, and measured comparisons are not provided. Answering them would require new derivations, implementation, or experiments, so we cannot supply them as rebuttal evidence and will limit the practical claim.",
+      "duplicate_concerns": [
+        "reviewer-r1-W5",
+        "reviewer-r3-W5",
+        "reviewer-r3-Q4",
+        "reviewer-r4-W2"
+      ],
+      "commitments": [
+        "will: state that the pair-state universality result is existential and does not provide parameter, runtime, sample-complexity, optimization, or stability guarantees"
+      ],
+      "contradiction_risk": false,
+      "status": "published"
+    }
+  ]
+}

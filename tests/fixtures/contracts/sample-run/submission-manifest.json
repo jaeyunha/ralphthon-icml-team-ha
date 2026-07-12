@@ -1,0 +1,17 @@
+{
+  "submission_id": "sub_01fixture",
+  "title": "Anonymous Submission",
+  "venue": "ICML",
+  "year": 2026,
+  "track": "main",
+  "authors_visible": false,
+  "paper_path": "paper.pdf",
+  "supplement_paths": [],
+  "repository": {
+    "url": null,
+    "commit": null,
+    "officiality": "unknown"
+  },
+  "review_mode": "live_submission",
+  "consent_to_process": true
+}

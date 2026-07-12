@@ -1,0 +1,14 @@
+{
+  "finding_id": "CODE-LIVE-001",
+  "validator_type": "code",
+  "claim_id": "CLAIM-LIVE-1",
+  "status": "key_result_reproduced",
+  "severity_candidate": "none",
+  "paper_anchors": ["paper:live:claim:1"],
+  "method": "PostgreSQL-backed viewer integration fixture",
+  "observation": "The durable event and linked evidence are available to the live viewer.",
+  "limitations": "This fixture validates viewer transport rather than scientific content.",
+  "confirmation_paths": ["viewer-live-playwright"],
+  "confidence": 1.0,
+  "artifact_refs": ["artifact:validation-live-1"]
+}

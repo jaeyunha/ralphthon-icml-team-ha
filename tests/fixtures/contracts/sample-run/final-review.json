@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "reviewer_id": "R2",
+  "official_review_version": 1,
+  "final_scores": {
+    "soundness": 3,
+    "presentation": 3,
+    "significance": 3,
+    "originality": 3,
+    "overall": 5
+  },
+  "confidence": 4,
+  "final_justification": "The response clarifies intent but does not change the submitted theorem statement.",
+  "resolved_concerns": [],
+  "remaining_concerns": ["R2-W1"],
+  "discussion_refs": ["DISC-D001"],
+  "evidence_refs": ["SRC-108", "MATH-12", "DISC-D001"],
+  "frozen_at": "2026-07-12T16:00:00Z"
+}

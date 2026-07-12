@@ -1,0 +1,8 @@
+{
+  "agent_id": "validator-mathematics-planted",
+  "created_at": "2026-07-11T15:01:40.886657Z",
+  "identity_version": 1,
+  "role": "validator",
+  "role_instance_id": "mathematics",
+  "run_id": "math-planted-001"
+}

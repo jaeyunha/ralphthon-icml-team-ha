@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "reviewer_id": "reviewer-r1",
+  "summary": "The paper develops an equivariant operator family and proves a universal approximation result under explicit compactness assumptions.",
+  "strengths": [
+    {"text": "The central equivariance theorem states explicit assumptions and follows them through the construction.", "anchors": ["T-A1"]},
+    {"text": "The approximation result materially advances the formal understanding of the model class.", "anchors": ["T-A2"]}
+  ],
+  "weaknesses": [],
+  "scores": {"soundness": 4, "presentation": 4, "significance": 4, "originality": 3, "overall": 5},
+  "overall_judgment": {
+    "acceptance_case": {"text": "The paper gives a technically sound and significant formal result with explicit assumptions.", "anchors": ["T-A1", "T-A2"]},
+    "rejection_case": {"text": "The novelty case is narrower than the technical contribution because the operator family builds on established equivariance machinery.", "anchors": ["T-A1"]},
+    "dominant_case": "acceptance",
+    "dominance_rationale": "The verified theorem and approximation result establish a publishable contribution, while the bounded novelty limitation does not threaten correctness or significance.",
+    "significance_basis": {"text": "The approximation guarantee clarifies the expressive scope of a broadly relevant model class.", "anchors": ["T-A2"]}
+  },
+  "key_questions": [],
+  "limitations": "The review did not independently formalize the proof in a theorem prover.",
+  "confidence": 4,
+  "ethical_concerns": [],
+  "evidence_refs": []
+}

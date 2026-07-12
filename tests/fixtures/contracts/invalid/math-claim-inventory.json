@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "submission_id": "paper-1",
+  "claims": [{"id": "bad id", "anchor_id": "THM-0001", "statement": "Claim."}],
+  "counts": {"claims": -1, "equations": 0, "theorems": 0}
+}

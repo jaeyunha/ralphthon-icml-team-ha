@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "run_id": "run-fixture-001",
+  "agent_id": "reviewer-r2",
+  "role": "reviewer",
+  "phase": "followup",
+  "permissions": {
+    "own_private_state": "yes",
+    "paper": "yes",
+    "validation": "yes",
+    "other_reviews": "no-by-default",
+    "author_response": "own-thread",
+    "internal_discussion": "no"
+  },
+  "inputs": [
+    {
+      "category": "author_response",
+      "path": "agents/author/published/rebuttals/reviewer-r2.json",
+      "visibility": "own_thread"
+    },
+    {
+      "category": "own_private_state",
+      "path": "agents/reviewer-r2/concern-ledger.json",
+      "visibility": "full"
+    },
+    {
+      "category": "own_private_state",
+      "path": "agents/reviewer-r2/identity.json",
+      "visibility": "full"
+    },
+    {
+      "category": "own_private_state",
+      "path": "agents/reviewer-r2/literature-registry.json",
+      "visibility": "full"
+    },
+    {
+      "category": "own_private_state",
+      "path": "agents/reviewer-r2/phases/followup/state.json",
+      "visibility": "full"
+    },
+    {
+      "category": "own_private_state",
+      "path": "agents/reviewer-r2/published/official-review.json",
+      "visibility": "full"
+    },
+    {
+      "category": "own_private_state",
+      "path": "agents/reviewer-r2/question-ledger.json",
+      "visibility": "full"
+    },
+    {
+      "category": "own_private_state",
+      "path": "agents/reviewer-r2/role-state.json",
+      "visibility": "full"
+    },
+    {
+      "category": "own_private_state",
+      "path": "agents/reviewer-r2/score-history.json",
+      "visibility": "full"
+    },
+    {
+      "category": "paper",
+      "path": "shared/paper",
+      "visibility": "full"
+    },
+    {
+      "category": "persona",
+      "path": "agents/reviewer-r2/persona.json",
+      "visibility": "full"
+    },
+    {
+      "category": "phase_prompt",
+      "path": "roles/reviewer/phases/followup/PROMPT.md",
+      "visibility": "full"
+    },
+    {
+      "category": "policy",
+      "path": "shared/COMMON_AGENT_POLICY.md",
+      "visibility": "full"
+    },
+    {
+      "category": "role_prompt",
+      "path": "roles/reviewer/PROMPT.base.md",
+      "visibility": "full"
+    },
+    {
+      "category": "rubric",
+      "path": "shared/ICML_2026_REVIEW_RUBRIC.md",
+      "visibility": "full"
+    },
+    {
+      "category": "schema",
+      "path": "roles/reviewer/schemas/followup.schema.json",
+      "visibility": "full"
+    },
+    {
+      "category": "task_context",
+      "path": "agents/reviewer-r2/phases/followup/current-task-context.json",
+      "visibility": "full"
+    },
+    {
+      "category": "validation",
+      "path": "shared/validation",
+      "visibility": "full"
+    }
+  ],
+  "manifest_hash": "sha256:109379fb06a67ae708c31f42aa932d8a9e8632ad117d5b8ff5716774e377a139"
+}

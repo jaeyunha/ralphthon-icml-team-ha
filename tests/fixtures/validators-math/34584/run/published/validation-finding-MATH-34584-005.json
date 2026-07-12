@@ -1,0 +1,19 @@
+{
+  "artifact_refs": [
+    "phases/counterexample-search/artifacts/reynolds-c2-numerical.json"
+  ],
+  "claim_id": "EQ-016",
+  "confidence": 0.9,
+  "confirmation_paths": [],
+  "finding_id": "MATH-34584-005",
+  "limitations": "Bounded numerical support duplicates the same representative instance and is not a general proof.",
+  "method": "Exact rational and 80-digit boundary/adversarial replay of the C2 Reynolds instance",
+  "observation": "No counterexample was found in 65 exact and high-precision samples.",
+  "paper_anchors": [
+    "EQ-0016",
+    "THM-0004"
+  ],
+  "severity_candidate": "none",
+  "status": "supported_numerically",
+  "validator_type": "numerical_math"
+}

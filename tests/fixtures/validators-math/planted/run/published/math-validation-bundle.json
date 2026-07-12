@@ -1,0 +1,185 @@
+{
+  "agent_id": "validator-mathematics-planted",
+  "finding_count": 9,
+  "findings": [
+    {
+      "artifact_refs": [
+        "phases/assumption-audit/artifacts/hidden-assumption-audit.json"
+      ],
+      "claim_id": "CLAIM-HIDDEN",
+      "confidence": 0.99,
+      "confirmation_paths": [
+        "hidden-assumption-counterexample"
+      ],
+      "finding_id": "MATH-PLANTED-HIDDEN",
+      "limitations": "The audit checks the stated real-valued domain and the missing nonnegative restriction.",
+      "method": "Quantifier and domain audit",
+      "observation": "The statement omits required scope ['x >= 0'] or symbols [].",
+      "paper_anchors": [
+        "THM-HIDDEN"
+      ],
+      "severity_candidate": "major",
+      "status": "missing_assumption",
+      "validator_type": "exact_math"
+    },
+    {
+      "artifact_refs": [
+        "phases/symbolic-validation/artifacts/algebra-symbolic-primary.json"
+      ],
+      "claim_id": "CLAIM-ALG",
+      "confidence": 1.0,
+      "confirmation_paths": [
+        "algebra-numerical-confirm"
+      ],
+      "finding_id": "MATH-PLANTED-ALG",
+      "limitations": "Polynomial identity over real scalar variables.",
+      "method": "SymPy algebraic equivalence",
+      "observation": "Symbolic simplification produced nonzero difference 2*x*y.",
+      "paper_anchors": [
+        "EQ-ALG"
+      ],
+      "severity_candidate": "major",
+      "status": "counterexample_found",
+      "validator_type": "symbolic_math"
+    },
+    {
+      "artifact_refs": [
+        "phases/symbolic-validation/artifacts/correct-symbolic-lemma.json"
+      ],
+      "claim_id": "LEMMA-CORRECT",
+      "confidence": 1.0,
+      "confirmation_paths": [],
+      "finding_id": "MATH-PLANTED-CORRECT-SYMBOLIC",
+      "limitations": "The symbolic variable is treated as real, while the Lean path separately checks Nat.",
+      "method": "SymPy exact simplification",
+      "observation": "Symbolic simplification reduced the claimed difference to zero.",
+      "paper_anchors": [
+        "THM-CORRECT"
+      ],
+      "severity_candidate": "none",
+      "status": "verified_symbolically",
+      "validator_type": "symbolic_math"
+    },
+    {
+      "artifact_refs": [
+        "phases/symbolic-validation/artifacts/shape-check.json"
+      ],
+      "claim_id": "EQ-CODE",
+      "confidence": 1.0,
+      "confirmation_paths": [],
+      "finding_id": "MATH-PLANTED-SHAPE",
+      "limitations": "Checks dimensions only, not numerical values.",
+      "method": "Exact tensor shape propagation",
+      "observation": "All declared tensor operations and output dimensions are shape-consistent.",
+      "paper_anchors": [
+        "EQ-CODE-ANCHOR"
+      ],
+      "severity_candidate": "none",
+      "status": "verified_exactly",
+      "validator_type": "exact_math"
+    },
+    {
+      "artifact_refs": [
+        "phases/symbolic-validation/artifacts/equation-code-mismatch.json"
+      ],
+      "claim_id": "EQ-CODE",
+      "confidence": 1.0,
+      "confirmation_paths": [],
+      "finding_id": "MATH-PLANTED-CODE",
+      "limitations": "Fixture expression models a scalar implementation interface.",
+      "method": "Symbolic equation-to-code comparison with exact replay",
+      "observation": "Equation-to-code comparison found difference 2*x and counterexample {'x': '-2'}.",
+      "paper_anchors": [
+        "EQ-CODE-ANCHOR"
+      ],
+      "severity_candidate": "minor",
+      "status": "equation_code_mismatch",
+      "validator_type": "exact_math"
+    },
+    {
+      "artifact_refs": [
+        "phases/counterexample-search/artifacts/algebra-numerical-confirm.json"
+      ],
+      "claim_id": "CLAIM-ALG",
+      "confidence": 1.0,
+      "confirmation_paths": [],
+      "finding_id": "MATH-PLANTED-ALG-CONFIRM",
+      "limitations": "Bounded search is used only to confirm the symbolic defect.",
+      "method": "Exact rational boundary and adversarial search",
+      "observation": "Boundary/adversarial search found counterexample {'x': '-2', 'y': '-2'}.",
+      "paper_anchors": [
+        "EQ-ALG"
+      ],
+      "severity_candidate": "none",
+      "status": "counterexample_found",
+      "validator_type": "numerical_math"
+    },
+    {
+      "artifact_refs": [
+        "phases/counterexample-search/artifacts/hidden-assumption-counterexample.json"
+      ],
+      "claim_id": "CLAIM-HIDDEN",
+      "confidence": 1.0,
+      "confirmation_paths": [],
+      "finding_id": "MATH-PLANTED-HIDDEN-CONFIRM",
+      "limitations": "Confirms the omitted nonnegative assumption with a concrete real input.",
+      "method": "Exact boundary search over negative and nonnegative inputs",
+      "observation": "Boundary/adversarial search found counterexample {'x': '-3'}.",
+      "paper_anchors": [
+        "THM-HIDDEN"
+      ],
+      "severity_candidate": "none",
+      "status": "counterexample_found",
+      "validator_type": "numerical_math"
+    },
+    {
+      "artifact_refs": [
+        "phases/formalization/artifacts/correct-lean-lemma.json"
+      ],
+      "claim_id": "LEMMA-CORRECT",
+      "confidence": 1.0,
+      "confirmation_paths": [],
+      "finding_id": "MATH-PLANTED-CORRECT-LEAN",
+      "limitations": "Fixture lemma only.",
+      "method": "Lean 4 formalization, alignment audit, proof attempt, and pinned-container compilation",
+      "observation": "The aligned Lean formalization compiled in the pinned network-disabled container.",
+      "paper_anchors": [
+        "THM-CORRECT"
+      ],
+      "severity_candidate": "none",
+      "status": "verified_formally",
+      "validator_type": "formal_math"
+    },
+    {
+      "artifact_refs": [
+        "phases/formalization/artifacts/mismatched-lean-formalization.json"
+      ],
+      "claim_id": "THM-MISMATCH",
+      "confidence": 1.0,
+      "confirmation_paths": [],
+      "finding_id": "MATH-PLANTED-LEAN-MISMATCH",
+      "limitations": "Designed to prove that compilation cannot override a failed alignment audit.",
+      "method": "Lean 4 proof plus separate statement-alignment audit",
+      "observation": "The Lean artifact compiled, but the separate alignment audit found that it formalized a different statement.",
+      "paper_anchors": [
+        "THM-MISMATCH-ANCHOR"
+      ],
+      "severity_candidate": "minor",
+      "status": "statement_mismatch",
+      "validator_type": "formal_math"
+    }
+  ],
+  "phase_order": [
+    "claim-extraction",
+    "assumption-audit",
+    "symbolic-validation",
+    "counterexample-search",
+    "formalization",
+    "confirmation",
+    "bundle-publication"
+  ],
+  "published_at": "2026-07-11T15:01:43.150175Z",
+  "run_id": "math-planted-001",
+  "schema_version": 1,
+  "submission_id": "planted-math-defects"
+}

@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "reviewer_id": "reviewer-r1",
+  "official_review_version": 1,
+  "rebuttal_version": 1,
+  "concern_resolutions": [
+    {
+      "concern_id": "reviewer-r1-W1",
+      "status": "partially_resolved",
+      "response_evidence": [
+        "rebuttal-r1.json#/responses/0",
+        "rebuttal-r1.json#/responses/5"
+      ],
+      "paper_evidence": [
+        "EQ-0005",
+        "TXT-0019",
+        "THM-0011",
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0258",
+        "TXT-0259"
+      ],
+      "assessment": "The response directly confirms the concern's central distinction: OENN input-output equivariance is finite-group equivariance on the total bundle, while the order contributes invariant relations, locality, cover propagation, and sheaf structure. It also acknowledges that the submitted evidence does not establish a theorem-level separation from generic finite-group equivariant UATs, especially in the trivial-automorphism case, and commits to narrowing the framing.",
+      "remaining_gap": "The response supplies no verified theorem-by-theorem novelty separation from the closest finite-group equivariant literature. Narrowing removes the overclaim but does not establish the stronger originality and significance case requested in the original question.",
+      "score_effect": "Originality remains 2 and significance remains 2 because the missing comparative novelty result is explicitly acknowledged rather than supplied. Soundness benefits from the corrected scope, but this concern is only partially resolved."
+    },
+    {
+      "concern_id": "reviewer-r1-W2",
+      "status": "resolved",
+      "response_evidence": [
+        "rebuttal-r1.json#/responses/1",
+        "rebuttal-r1.json#/responses/6"
+      ],
+      "paper_evidence": [
+        "THM-0011",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0105",
+        "TXT-0106",
+        "TXT-0349"
+      ],
+      "assessment": "The response identifies the exact proved class as the full sheaf-indexed OENN with global orbital mixing and, under the stated connectivity conditions, its diameter-depth source-labeled pair-state local compilation. It expressly excludes conventional restriction/adjoint-based local sheaf diffusion from the universality claim and commits to narrowing the headline. This is the claim-narrowing remedy requested in the original weakness; a new theorem for conventional diffusion is not required once that broader claim is withdrawn.",
+      "remaining_gap": "No substantive theorem gap remains for the narrowed claim. The promised revision must consistently use the narrower architecture description and must not attribute universality to conventional local sheaf diffusion.",
+      "score_effect": "This resolution supports changing soundness from 2 to 3 because the response restores claim-to-theorem alignment for the sheaf UAT. It does not raise significance or originality because the proved universal class remains unusually broad and memory-intensive."
+    },
+    {
+      "concern_id": "reviewer-r1-W3",
+      "status": "partially_resolved",
+      "response_evidence": [
+        "rebuttal-r1.json#/responses/2",
+        "rebuttal-r1.json#/responses/7"
+      ],
+      "paper_evidence": [
+        "TXT-0149",
+        "TXT-0192",
+        "TXT-0193",
+        "TXT-0195",
+        "THM-0018",
+        "THM-0019",
+        "THM-0021",
+        "TXT-0249",
+        "TXT-0250",
+        "TXT-0252"
+      ],
+      "assessment": "The response gives a useful dependency boundary: Definition A.2 and Theorem A.3 are imported, while Proposition A.4, Lemma A.6, and Corollary A.7 constitute the submitted finite action-groupoid/OENN development. It also commits to treating the broad CENN material as background and narrowing the general-form wording.",
+      "remaining_gap": "The broad CENN definitions and UAT remain non-self-contained in the submitted manuscript, and the response supplies neither the missing generators and hypotheses nor a new proof. The concern is therefore reduced by the explicit novelty boundary but not fully removed until the contribution claims are actually narrowed and the imported dependency is clearly marked.",
+      "score_effect": "Presentation remains 3 because the self-containedness problem is acknowledged but not repaired in the response. Originality remains 2 because the reply identifies the local contribution boundary without establishing a broader literature-wide novelty claim."
+    },
+    {
+      "concern_id": "reviewer-r1-W4",
+      "status": "partially_resolved",
+      "response_evidence": [
+        "rebuttal-r1.json#/responses/3",
+        "rebuttal-r1.json#/responses/8"
+      ],
+      "paper_evidence": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281",
+        "STAT-BASELINE-001",
+        "STAT-LEAKAGE-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "STAT-MULTICOMP-001",
+        "STAT-BREADTH-001"
+      ],
+      "assessment": "The response accepts every cited protocol problem and explicitly withdraws support for the claims of substantial outperformance and improved generalization. That is an appropriate correction of claim scope and avoids defending an invalid comparison.",
+      "remaining_gap": "There is still no subject-disjoint, protocol-matched, multi-seed rerun, no uncertainty or multiplicity analysis, and no provenance-based explanation of the subject overlap. The experiment therefore remains unreliable as positive empirical evidence even though the unsupported claims are to be removed or sharply qualified.",
+      "score_effect": "The explicit withdrawal of the unsupported empirical claims contributes to changing soundness from 2 to 3, since the remaining formal claims no longer depend on this table. Significance remains 2 and overall remains 3 because no reliable empirical validation replaces the withdrawn claims."
+    },
+    {
+      "concern_id": "reviewer-r1-W5",
+      "status": "unresolved",
+      "response_evidence": [
+        "rebuttal-r1.json#/responses/4"
+      ],
+      "paper_evidence": [
+        "THM-0013",
+        "TXT-0071",
+        "TXT-0072",
+        "TXT-0106",
+        "TXT-0345",
+        "TXT-0349"
+      ],
+      "assessment": "The response accurately restates the construction's source-indexed memory, total-input hidden width per carrier, diameter-scale propagation, and walk-count rescaling, and it agrees that universality is only an existential result. This acknowledgement does not provide new efficiency evidence.",
+      "remaining_gap": "No parameter, runtime, sample-complexity, optimization, stability, or implementation analysis is supplied. The practical cost and usefulness of the local universal construction therefore remain unquantified exactly as in the original weakness.",
+      "score_effect": "Significance remains 2 because the practical relevance of the local construction is still unsupported. Soundness is not reduced by this unresolved concern because the original review already treated it as a limitation of practical significance, not a defect in the existential theorem."
+    }
+  ],
+  "scores": {
+    "soundness": 3,
+    "presentation": 3,
+    "significance": 2,
+    "originality": 2,
+    "overall": 3
+  },
+  "confidence": 4,
+  "score_change_rationale": "Soundness changes from 2 to 3 because the response precisely narrows the sheaf UAT to the class actually proved, separates the formal OENN results from imported broad CENN material, and withdraws the unsupported empirical outperformance and generalization claims; no rebuttal evidence identifies a defect in the core OENN theorems. Presentation remains 3 because the CENN section is still not self-contained in the submitted text and the promised restructuring is not shown. Significance remains 2 because the sheaf/local universal class has severe unquantified cost and the only empirical evidence cannot support performance or generalization. Originality remains 2 because the authors explicitly do not provide the requested theorem-level comparison establishing novelty over generic finite-group equivariant UATs. Overall remains 3: improved claim alignment raises soundness, but unresolved originality, significance, self-containedness, and empirical-evidence limitations still outweigh the theoretical strengths for acceptance. Confidence remains 4 because the response clarifies scope and dependencies but adds no new primary-source novelty verification, corrected experiment, or systems evidence that would justify confidence 5.",
+  "new_questions": [],
+  "summary": "The rebuttal is commendably direct: it accepts the finite-group nature of the symmetry, narrows the sheaf universality claim to the full or source-labeled pair-state OENN completion, identifies which CENN results are imported, and withdraws unsupported empirical performance claims. This materially improves claim-to-evidence alignment and raises soundness to 3. It does not establish the requested comparative novelty result, make the broad CENN development self-contained, replace the unreliable experiment, or quantify the local construction's cost. I therefore retain presentation 3, significance 2, originality 2, overall 3, and confidence 4.",
+  "evidence_refs": [
+    "rebuttal-r1.json#/responses/0",
+    "rebuttal-r1.json#/responses/1",
+    "rebuttal-r1.json#/responses/2",
+    "rebuttal-r1.json#/responses/3",
+    "rebuttal-r1.json#/responses/4",
+    "rebuttal-r1.json#/responses/5",
+    "rebuttal-r1.json#/responses/6",
+    "rebuttal-r1.json#/responses/7",
+    "rebuttal-r1.json#/responses/8",
+    "EQ-0005",
+    "TXT-0019",
+    "THM-0011",
+    "THM-0013",
+    "TXT-0071",
+    "TXT-0072",
+    "TXT-0105",
+    "TXT-0106",
+    "TXT-0149",
+    "TXT-0192",
+    "TXT-0193",
+    "TXT-0195",
+    "THM-0018",
+    "THM-0019",
+    "THM-0021",
+    "TXT-0249",
+    "TXT-0250",
+    "TXT-0252",
+    "TXT-0258",
+    "TXT-0259",
+    "TXT-0264",
+    "TAB-0004",
+    "TXT-0281",
+    "TXT-0345",
+    "TXT-0349",
+    "STAT-BASELINE-001",
+    "STAT-LEAKAGE-001",
+    "STAT-SEEDS-001",
+    "STAT-UNCERTAINTY-001",
+    "STAT-MULTICOMP-001",
+    "STAT-BREADTH-001"
+  ]
+}

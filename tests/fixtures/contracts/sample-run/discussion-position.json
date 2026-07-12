@@ -1,0 +1,10 @@
+{
+  "position_id": "POS-R2-D001-1",
+  "issue_id": "D-001",
+  "reviewer_id": "R2",
+  "round": 1,
+  "position": "The novelty is incremental but technically sound.",
+  "evidence_refs": ["SRC-108", "THM-2"],
+  "score_effect": "unchanged",
+  "published_at": "2026-07-12T15:00:00Z"
+}

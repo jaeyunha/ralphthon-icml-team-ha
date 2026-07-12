@@ -1,0 +1,18 @@
+{
+  "source_id": "SRC-108",
+  "title": "Verified title",
+  "authors": ["Anonymous Author"],
+  "first_public_date": "2025-10-12",
+  "source_type": "arxiv_preprint",
+  "canonical_uri": "arxiv:2510.12345",
+  "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+  "admissibility": "admissible_prior_work",
+  "retrieval_reason": "Potential predecessor to claim C1",
+  "supporting_passages": [
+    {
+      "anchor": "section:3.2",
+      "summary": "Related construction with a stronger assumption"
+    }
+  ],
+  "verification_status": "full_text_checked"
+}

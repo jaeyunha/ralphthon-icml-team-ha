@@ -1,0 +1,120 @@
+{
+  "checks": {
+    "distinct_seed_count": 1,
+    "effect_sizes_present": true,
+    "metric_definitions_present": true,
+    "run_count": 2,
+    "significance_tests_present": true
+  },
+  "findings": [
+    {
+      "claim_id": "CLAIM-008",
+      "confidence": 0.99,
+      "confirmation_paths": [
+        "sample-id overlap audit",
+        "independent split-provenance audit"
+      ],
+      "finding_id": "STAT-LEAKAGE-001",
+      "limitations": "Identifier overlap detects exact reuse but cannot detect near-duplicates without raw examples.",
+      "method": "Compared stable sample identifiers across training, validation, and test partitions and independently audited split provenance.",
+      "observation": "1 sample identifier(s) occur in both training and held-out data: ['subject-2'].",
+      "paper_anchors": [
+        "TXT-0264"
+      ],
+      "severity_candidate": "major",
+      "status": "statement_mismatch",
+      "validator_type": "statistics"
+    },
+    {
+      "claim_id": "CLAIM-008",
+      "confidence": 0.95,
+      "confirmation_paths": [
+        "run-record seed audit"
+      ],
+      "finding_id": "STAT-SEEDS-001",
+      "limitations": "Deterministic methods may not require seed variation, but that must be stated explicitly.",
+      "method": "Counted independent runs and distinct recorded random seeds.",
+      "observation": "The empirical claim is supported by fewer than two distinct recorded seeds.",
+      "paper_anchors": [
+        "TXT-0264"
+      ],
+      "severity_candidate": "minor",
+      "status": "partially_verified",
+      "validator_type": "statistics"
+    },
+    {
+      "claim_id": "CLAIM-008",
+      "confidence": 0.98,
+      "confirmation_paths": [
+        "uncertainty-field audit"
+      ],
+      "finding_id": "STAT-UNCERTAINTY-001",
+      "limitations": "The audit cannot reconstruct uncertainty without per-run values or sufficient statistics.",
+      "method": "Inspected run-level confidence intervals, standard errors, and error bars.",
+      "observation": "No uncertainty estimate accompanies the recorded result runs.",
+      "paper_anchors": [
+        "TXT-0264"
+      ],
+      "severity_candidate": "minor",
+      "status": "partially_verified",
+      "validator_type": "statistics"
+    },
+    {
+      "claim_id": "CLAIM-008",
+      "confidence": 0.94,
+      "confirmation_paths": [
+        "hypothesis-count audit"
+      ],
+      "finding_id": "STAT-MULTICOMP-001",
+      "limitations": "Exploratory analyses may intentionally omit correction if clearly labeled.",
+      "method": "Compared the declared hypothesis count with the recorded multiplicity correction.",
+      "observation": "8 comparisons are reported without a multiple-comparison correction.",
+      "paper_anchors": [
+        "TXT-0264"
+      ],
+      "severity_candidate": "minor",
+      "status": "partially_verified",
+      "validator_type": "statistics"
+    },
+    {
+      "claim_id": "CLAIM-008",
+      "confidence": 0.98,
+      "confirmation_paths": [
+        "resource-and-tuning parity audit",
+        "independent protocol comparison"
+      ],
+      "finding_id": "STAT-BASELINE-001",
+      "limitations": "Some budget differences may be scientifically justified, but the justification must be explicit and sensitivity-tested.",
+      "method": "Compared baseline and proposed-method compute budgets, tuning trials, data splits, and metric definitions; then independently checked the fixture protocol.",
+      "observation": "Baseline comparison is not like-for-like: TemporalCNN receives less than two-thirds of the proposed compute budget; TemporalCNN receives materially fewer tuning trials; TemporalCNN uses a different data split; TemporalCNN uses a different metric definition",
+      "paper_anchors": [
+        "TAB-0004",
+        "TXT-0264"
+      ],
+      "severity_candidate": "major",
+      "status": "statement_mismatch",
+      "validator_type": "statistics"
+    },
+    {
+      "claim_id": "CLAIM-008",
+      "confidence": 0.96,
+      "confirmation_paths": [
+        "claim/evidence scope comparison"
+      ],
+      "finding_id": "STAT-BREADTH-001",
+      "limitations": "This is a scope-alignment finding, not proof that the narrower empirical result is false.",
+      "method": "Compared each declared claim scope axis with the tested evidence scope and recorded robustness axes.",
+      "observation": "Claim breadth exceeds evidence breadth on: distribution_shift, hardware",
+      "paper_anchors": [
+        "TXT-0264"
+      ],
+      "severity_candidate": "minor",
+      "status": "partially_verified",
+      "validator_type": "statistics"
+    }
+  ],
+  "robustness_axes_recorded": [
+    "seeds"
+  ],
+  "validator": "statistics"
+}

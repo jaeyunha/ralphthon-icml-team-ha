@@ -1,0 +1,141 @@
+{
+  "concerns": [
+    {
+      "affected_claims": [
+        "CLAIM-005"
+      ],
+      "anchors": [
+        "EQ-0005",
+        "THM-0011",
+        "TXT-0106",
+        "TXT-0258"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "CODE-CROSS-001",
+        "STAT-BASELINE-001",
+        "STAT-BREADTH-001",
+        "STAT-LEAKAGE-001",
+        "STAT-MULTICOMP-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "THM-0011",
+        "THM-0013",
+        "THM-0018",
+        "TXT-0264"
+      ],
+      "id": "reviewer-r2-W1",
+      "severity": "major",
+      "status": "open",
+      "text": "The central notion called order-equivariance is, at the input-output level, ordinary equivariance for the finite-group representations on the total feature spaces: equation (2) contains no order or restriction map. Correspondingly, the full UAT uses only a global broadcast and stabilizer-equivariant approximation, and the stated sheaf-indexed consequence approximates all G-equivariant maps on total fibers rather than maps required to respect sheaf restrictions. Thus the theorem appears mathematically sound at its stated finite-group scope, but the advertised order-specific and sheaf-neural-network novelty is not established. This can be resolved by narrowing the claims and terminology, or by proving a universality result for a target class or architecture in which order or sheaf naturality is essential, together with a precise comparison to existing finite-group equivariant UATs."
+    },
+    {
+      "affected_claims": [
+        "CLAIM-005"
+      ],
+      "anchors": [
+        "TXT-0009",
+        "THM-0013",
+        "THM-0015",
+        "TXT-0082",
+        "TXT-0335"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "CODE-CROSS-001",
+        "STAT-BASELINE-001",
+        "STAT-BREADTH-001",
+        "STAT-LEAKAGE-001",
+        "STAT-MULTICOMP-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "THM-0011",
+        "THM-0013",
+        "THM-0018",
+        "TXT-0264"
+      ],
+      "id": "reviewer-r2-W2",
+      "severity": "major",
+      "status": "open",
+      "text": "Theorem 3.5 proves an information-propagation lower bound for architectures with at most L inter-site layers when a relevant source is farther than L. It does not prove that the defined relation-message-passing class is non-universal at unrestricted depth, nor that persistent source labels are necessary for universality. Moreover, the paper's orbit-wise relation-message-passing encoders can be richer than the additionally tied anonymous MPNN special case. Statements that anonymous aggregation is not universal in general and that a source-label-like mechanism is unavoidable therefore exceed the proved result. A precise unrestricted-depth architecture definition plus an indistinguishability counterexample would resolve this; otherwise the claims should be restricted to the established depth-versus-distance obstruction."
+    },
+    {
+      "affected_claims": [
+        "CLAIM-002",
+        "CLAIM-006"
+      ],
+      "anchors": [
+        "TXT-0192",
+        "THM-0018",
+        "THM-0021",
+        "TXT-0249"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "CODE-CROSS-001",
+        "STAT-BASELINE-001",
+        "STAT-BREADTH-001",
+        "STAT-LEAKAGE-001",
+        "STAT-MULTICOMP-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "THM-0011",
+        "THM-0013",
+        "THM-0018",
+        "TXT-0264"
+      ],
+      "id": "reviewer-r2-W3",
+      "severity": "major",
+      "status": "open",
+      "text": "The finite action-groupoid naturality equivalence is understandable, but the broader CENN claims are not self-contained. Definition A.2 delegates the arrow-bundle generators to external work, Theorem A.3 invokes standard CENN hypotheses without a complete formal statement or proof here, and Lemma A.6 relies on properties of the externally defined UAT construction to assert that the needed approximants can be chosen as OENN primitives. Consequently, the claims that CENN gives the general form and that its UAT yields the asserted finite realization cannot be independently verified from this submission. The paper should supply complete generator definitions, exact analytic hypotheses, and a self-contained proof dependency, or clearly demote these statements to background from prior work."
+    },
+    {
+      "affected_claims": [
+        "CLAIM-008",
+        "CLAIM-009"
+      ],
+      "anchors": [
+        "TXT-0264",
+        "TAB-0004",
+        "TXT-0281"
+      ],
+      "evidence_refs": [
+        "MATH-34584-001",
+        "MATH-34584-002",
+        "MATH-34584-003",
+        "MATH-34584-004",
+        "MATH-34584-005",
+        "CODE-CROSS-001",
+        "STAT-BASELINE-001",
+        "STAT-BREADTH-001",
+        "STAT-LEAKAGE-001",
+        "STAT-MULTICOMP-001",
+        "STAT-SEEDS-001",
+        "STAT-UNCERTAINTY-001",
+        "THM-0011",
+        "THM-0013",
+        "THM-0018",
+        "TXT-0264"
+      ],
+      "id": "reviewer-r2-W4",
+      "severity": "major",
+      "status": "open",
+      "text": "The empirical evidence does not support the stated generalization conclusion. The code validator reports that one recorded key result reproduces, but the statistical validator finds that the TemporalCNN comparison uses materially different compute and tuning budgets, a different split, and a different metric definition; it also identifies subject-2 in both training and held-out data. Fewer than two recorded seeds, absent uncertainty estimates, and uncorrected multiple comparisons add further uncertainty. Reproducing a recorded number does not resolve these design defects. The claims require a subject-disjoint common split, identical metric definitions, matched resource and tuning budgets, repeated seeds, uncertainty reporting, and an explicit multiplicity policy."
+    }
+  ],
+  "ledger_version": 1,
+  "official_review_version": 1,
+  "reviewer_id": "reviewer-r2"
+}
