@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import subprocess
 import time
 from dataclasses import asdict, dataclass
@@ -16,7 +17,6 @@ from engine.validators.sandbox import (
     SandboxUnavailable,
 )
 
-from .allowed_inputs import file_or_tree_sha256
 from .models import (
     TERMINATION_REASONS,
     ReproducibilityAudit,
@@ -38,15 +38,28 @@ class ReviewProfile:
     local_command_seconds: float = 3 * 60
 
     def __post_init__(self) -> None:
-        if min(
+        values = (
             self.total_seconds,
             self.preparation_seconds,
             self.evidence_reserve_seconds,
             self.cleanup_reserve_seconds,
             self.local_command_seconds,
-        ) <= 0 or self.max_research_commands < 1:
+        )
+        if min(values) <= 0 or self.max_research_commands < 1:
             raise ValueError("review profile limits must be positive")
-        if self.preparation_seconds + self.evidence_reserve_seconds + self.cleanup_reserve_seconds >= self.total_seconds:
+        if (
+            self.total_seconds > 9 * 60
+            or self.preparation_seconds > 2 * 60
+            or self.evidence_reserve_seconds > 60
+            or self.cleanup_reserve_seconds > 60
+            or self.local_command_seconds > 3 * 60
+            or self.max_research_commands > 3
+        ):
+            raise ValueError("review profile may only tighten fixed executor ceilings")
+        if (
+            self.preparation_seconds + self.evidence_reserve_seconds + self.cleanup_reserve_seconds
+            >= self.total_seconds
+        ):
             raise ValueError("review profile leaves no execution time")
 
 
@@ -69,7 +82,10 @@ class SharedDeadline:
 
     def command_can_start(self, timeout_seconds: float, clock: Callable[[], float]) -> bool:
         reserved = self.profile.evidence_reserve_seconds + self.profile.cleanup_reserve_seconds
-        return timeout_seconds <= self.profile.local_command_seconds and timeout_seconds <= self.remaining(clock) - reserved
+        return (
+            timeout_seconds <= self.profile.local_command_seconds
+            and timeout_seconds <= self.remaining(clock) - reserved
+        )
 
 
 @dataclass(frozen=True)
@@ -80,7 +96,11 @@ class ReproductionCommand:
     blocked_reason: TerminationReason | None = None
 
     def __post_init__(self) -> None:
-        if not self.name or not self.argv or any(not isinstance(item, str) or not item for item in self.argv):
+        if (
+            not self.name
+            or not self.argv
+            or any(not isinstance(item, str) or not item for item in self.argv)
+        ):
             raise ValueError("reproduction command requires a non-empty argv array")
         if self.timeout_seconds <= 0:
             raise ValueError("reproduction command timeout must be positive")
@@ -97,39 +117,76 @@ class RepositoryFreeze:
     provenance: str
 
 
-def freeze_repository(path: Path, provenance: str) -> RepositoryFreeze:
+def freeze_repository(
+    path: Path, provenance: str, *, timeout_seconds: float = 120.0
+) -> RepositoryFreeze:
     resolved = path.resolve()
     if not resolved.is_dir():
         raise ValueError(f"repository missing: {resolved}")
+    if timeout_seconds <= 0:
+        raise TimeoutError("repository freeze budget exhausted")
+    timeout = min(timeout_seconds, 120.0)
     commit_result = subprocess.run(
         ["git", "-C", str(resolved), "rev-parse", "HEAD"],
         check=False,
         capture_output=True,
         text=True,
+        timeout=timeout,
     )
     commit = commit_result.stdout.strip() if commit_result.returncode == 0 else None
-    license_path = resolved / "LICENSE"
-    license_hash = (
-        "sha256:" + hashlib.sha256(license_path.read_bytes()).hexdigest()
-        if license_path.is_file()
-        else None
+    tree_result = subprocess.run(
+        ["git", "-C", str(resolved), "ls-files", "-s", "-z"],
+        check=False,
+        capture_output=True,
+        timeout=timeout,
     )
+    if tree_result.returncode == 0:
+        tree_bytes = tree_result.stdout
+    else:
+        started = time.monotonic()
+        inventory = hashlib.sha256()
+        file_count = 0
+        byte_count = 0
+        for root, directories, files in os.walk(resolved):
+            directories.sort()
+            files.sort()
+            for name in files:
+                file_count += 1
+                candidate = Path(root) / name
+                size = candidate.stat().st_size
+                byte_count += size
+                if (
+                    file_count > 10_000
+                    or byte_count > 256 * 1024 * 1024
+                    or time.monotonic() - started > timeout
+                ):
+                    raise TimeoutError("repository freeze exceeded bounded inventory limits")
+                inventory.update(str(candidate.relative_to(resolved)).encode() + b"\0")
+                with candidate.open("rb") as source:
+                    for chunk in iter(lambda: source.read(1024 * 1024), b""):
+                        inventory.update(chunk)
+                        if time.monotonic() - started > timeout:
+                            raise TimeoutError("repository freeze budget exhausted")
+        tree_bytes = inventory.digest()
+    license_path = resolved / "LICENSE"
+    license_hash = None
+    if license_path.is_file() and license_path.stat().st_size <= 1024 * 1024:
+        license_hash = "sha256:" + hashlib.sha256(license_path.read_bytes()).hexdigest()
     return RepositoryFreeze(
         path=str(resolved),
         commit=commit,
-        tree_sha256=file_or_tree_sha256(resolved),
+        tree_sha256="sha256:" + hashlib.sha256(tree_bytes).hexdigest(),
         license_sha256=license_hash,
         provenance=provenance,
     )
 
 
 def _graduated_status(results: list[dict[str, object]]) -> VerificationStatus:
-    """Return only the strongest executed official evidence, never a claim-set result."""
+    """Return only execution evidence; command labels never prove paper claims."""
     executed = [result for result in results if result.get("status") not in {"not_started_budget"}]
     passed = [result for result in executed if result.get("status") == "passed"]
     if passed:
-        names = {str(result["name"]) for result in passed}
-        return "key_result_reproduced" if "key-result" in names else "partial_execution"
+        return "partial_execution"
     if any(result.get("status") == "sandbox_unavailable" for result in executed):
         return "not_executable"
     return "execution_failed" if executed else "artifacts_inspected"
@@ -159,7 +216,11 @@ class OfficialReproducer:
         hardware: dict[str, object],
     ) -> dict[str, object]:
         deadline = SharedDeadline.start(self.clock, self.profile)
-        frozen = freeze_repository(repository, provenance)
+        frozen = freeze_repository(
+            repository,
+            provenance,
+            timeout_seconds=min(self.profile.preparation_seconds, deadline.remaining(self.clock)),
+        )
         command_results: list[dict[str, object]] = []
         termination: TerminationReason = "completed_planned_probe"
 
@@ -218,7 +279,10 @@ class OfficialReproducer:
                     termination = "sandbox_unavailable"
                     break
                 command_results.append({"name": command.name, **result.to_dict()})
-                if deadline.remaining(self.clock) <= self.profile.evidence_reserve_seconds + self.profile.cleanup_reserve_seconds:
+                if (
+                    deadline.remaining(self.clock)
+                    <= self.profile.evidence_reserve_seconds + self.profile.cleanup_reserve_seconds
+                ):
                     termination = "budget_exhausted"
                     break
 
@@ -226,11 +290,7 @@ class OfficialReproducer:
         executed = [result for result in command_results if result.get("status") == "passed"]
         dimensions = VerificationDimensions(
             official_execution=verification_status,
-            claim_spot_check=(
-                "key_result_reproduced"
-                if any(result.get("name") == "key-result" and result.get("status") == "passed" for result in executed)
-                else "not_attempted"
-            ),
+            claim_spot_check="not_attempted",
             coverage=f"{len(executed)}/{len(commands)} planned probes executed",
         )
         audit = ReproducibilityAudit(
@@ -244,7 +304,12 @@ class OfficialReproducer:
             termination_reason=termination,
         )
         image_digest = next(
-            (result.get("image_digest") for result in command_results if result.get("image_digest")), None
+            (
+                result.get("image_digest")
+                for result in command_results
+                if result.get("image_digest")
+            ),
+            None,
         )
         return {
             "paper_id": paper_id,

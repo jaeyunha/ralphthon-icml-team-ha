@@ -133,11 +133,15 @@ class VesslBatchAdapter:
         argv = ["vesslctl", "job", "cancel", job_id]
         try:
             result = self.runner(argv, 10.0)
-            evidence.append({"argv": argv, "returncode": result.returncode, "purpose": "cancellation"})
+            evidence.append(
+                {"argv": argv, "returncode": result.returncode, "purpose": "cancellation"}
+            )
         except (OSError, subprocess.TimeoutExpired) as exc:
             evidence.append({"argv": argv, "error": str(exc), "purpose": "cancellation"})
 
-    def run(self, manifest: VesslProbeManifest, *, deadline: SharedDeadline | None = None) -> dict[str, object]:
+    def run(
+        self, manifest: VesslProbeManifest, *, deadline: SharedDeadline | None = None
+    ) -> dict[str, object]:
         """Submit and observe at most one preauthorized job without retrying any action."""
         evidence: list[dict[str, object]] = []
         input_evidence: list[dict[str, str]] = []
@@ -152,31 +156,59 @@ class VesslBatchAdapter:
                 "detail": detail,
             }
 
+        return refused(
+            "backend_isolation_unproven",
+            "real VESSL launch is disabled until terminal supervision, confirmed cancellation, staged input mounts, and authenticated metadata are independently enforced",
+        )
+
         if not manifest.preauthorized:
-            return refused("operator_approval_unavailable", "remote probe was not explicitly preauthorized")
+            return refused(
+                "operator_approval_unavailable", "remote probe was not explicitly preauthorized"
+            )
         if not manifest.reviewed_command_input_boundary:
-            return refused("backend_isolation_unproven", "manifest lacks a reviewed command/input boundary")
+            return refused(
+                "backend_isolation_unproven", "manifest lacks a reviewed command/input boundary"
+            )
         if manifest.estimated_cost_usd > self.policy.max_estimated_cost_usd:
-            return refused("cost_limit_exceeded", "estimated remote cost exceeds the policy ceiling")
+            return refused(
+                "cost_limit_exceeded", "estimated remote cost exceeds the policy ceiling"
+            )
         if self._jobs_started >= self.policy.max_jobs:
             return refused("budget_exhausted", "the one-job VESSL allowance is already consumed")
         if deadline is not None:
-            reserved = deadline.profile.evidence_reserve_seconds + deadline.profile.cleanup_reserve_seconds
+            reserved = (
+                deadline.profile.evidence_reserve_seconds + deadline.profile.cleanup_reserve_seconds
+            )
             if self.policy.remote_command_seconds > deadline.remaining(self.clock) - reserved:
-                return refused("budget_exhausted", "remote command cannot fit the shared deadline reserves")
+                return refused(
+                    "budget_exhausted", "remote command cannot fit the shared deadline reserves"
+                )
 
         for staged in manifest.inputs:
             if not staged.path.is_file() or self._input_digest(staged.path) != staged.sha256:
-                return refused("backend_isolation_unproven", f"staged input digest mismatch: {staged.name}")
-            input_evidence.append({"name": staged.name, "path": str(staged.path.resolve()), "sha256": staged.sha256})
+                return refused(
+                    "backend_isolation_unproven", f"staged input digest mismatch: {staged.name}"
+                )
+            input_evidence.append(
+                {"name": staged.name, "path": str(staged.path.resolve()), "sha256": staged.sha256}
+            )
 
         auth_argv = ["vesslctl", "auth", "status"]
         try:
             auth = self.runner(auth_argv, 10.0)
         except (OSError, subprocess.TimeoutExpired) as exc:
             evidence.append({"argv": auth_argv, "error": str(exc), "purpose": "auth"})
-            return refused("operator_approval_unavailable", "VESSL authentication could not be verified")
-        evidence.append({"argv": auth_argv, "returncode": auth.returncode, "stdout": auth.stdout, "purpose": "auth"})
+            return refused(
+                "operator_approval_unavailable", "VESSL authentication could not be verified"
+            )
+        evidence.append(
+            {
+                "argv": auth_argv,
+                "returncode": auth.returncode,
+                "stdout": auth.stdout,
+                "purpose": "auth",
+            }
+        )
         if auth.returncode != 0:
             return refused("operator_approval_unavailable", "VESSL authentication is not active")
 
@@ -184,27 +216,58 @@ class VesslBatchAdapter:
         try:
             image = self.runner(image_argv, 10.0)
         except (OSError, subprocess.TimeoutExpired) as exc:
-            evidence.append({"argv": image_argv, "error": str(exc), "purpose": "image_verification"})
-            return refused("backend_isolation_unproven", "digest-pinned VESSL image could not be verified")
-        evidence.append({"argv": image_argv, "returncode": image.returncode, "stdout": image.stdout, "purpose": "image_verification"})
+            evidence.append(
+                {"argv": image_argv, "error": str(exc), "purpose": "image_verification"}
+            )
+            return refused(
+                "backend_isolation_unproven", "digest-pinned VESSL image could not be verified"
+            )
+        evidence.append(
+            {
+                "argv": image_argv,
+                "returncode": image.returncode,
+                "stdout": image.stdout,
+                "purpose": "image_verification",
+            }
+        )
         if image.returncode != 0:
-            return refused("backend_isolation_unproven", "digest-pinned VESSL image is not pre-existing")
+            return refused(
+                "backend_isolation_unproven", "digest-pinned VESSL image is not pre-existing"
+            )
 
         create_argv = [
-            "vesslctl", "run", "--image", manifest.image, "--gpu", "1", "--timeout-seconds",
-            str(int(self.policy.remote_command_seconds)), "--", *manifest.argv,
+            "vesslctl",
+            "run",
+            "--image",
+            manifest.image,
+            "--gpu",
+            "1",
+            "--timeout-seconds",
+            str(int(self.policy.remote_command_seconds)),
+            "--",
+            *manifest.argv,
         ]
         try:
             created = self.runner(create_argv, 20.0)
         except (OSError, subprocess.TimeoutExpired) as exc:
             evidence.append({"argv": create_argv, "error": str(exc), "purpose": "submit"})
             return refused("scheduling_timeout", "VESSL submission did not complete")
-        evidence.append({"argv": create_argv, "returncode": created.returncode, "stdout": created.stdout, "stderr": created.stderr, "purpose": "submit"})
+        evidence.append(
+            {
+                "argv": create_argv,
+                "returncode": created.returncode,
+                "stdout": created.stdout,
+                "stderr": created.stderr,
+                "purpose": "submit",
+            }
+        )
         if created.returncode != 0:
             return refused("scheduling_timeout", "VESSL did not accept the batch job")
         job_id = self._job_id(created.stdout)
         if job_id is None:
-            return refused("backend_isolation_unproven", "VESSL submission did not return an auditable job id")
+            return refused(
+                "backend_isolation_unproven", "VESSL submission did not return an auditable job id"
+            )
         self._jobs_started += 1
 
         scheduled_at = self.clock()
@@ -217,12 +280,23 @@ class VesslBatchAdapter:
                 self._cancel(job_id, evidence)
                 return refused("scheduling_timeout", "VESSL scheduling poll failed")
             state = self._state(polled.stdout) if polled.returncode == 0 else "unknown"
-            evidence.append({"argv": poll_argv, "returncode": polled.returncode, "stdout": polled.stdout, "purpose": "schedule_poll"})
+            evidence.append(
+                {
+                    "argv": poll_argv,
+                    "returncode": polled.returncode,
+                    "stdout": polled.stdout,
+                    "purpose": "schedule_poll",
+                }
+            )
             if state in {"running", "completed", "succeeded", "failed", "cancelled"}:
                 return {
                     "backend": "vessl",
                     "status": state,
-                    "termination_reason": "completed_planned_probe" if state in {"completed", "succeeded"} else "scheduling_timeout" if state == "unknown" else "completed_planned_probe",
+                    "termination_reason": "completed_planned_probe"
+                    if state in {"completed", "succeeded"}
+                    else "scheduling_timeout"
+                    if state == "unknown"
+                    else "completed_planned_probe",
                     "job_id": job_id,
                     "command_slots_consumed": 1,
                     "manifest": {**asdict(manifest), "inputs": input_evidence},
@@ -230,7 +304,9 @@ class VesslBatchAdapter:
                     "evidence": evidence,
                     "inputs": input_evidence,
                 }
-            self.sleeper(min(5.0, max(0.0, self.policy.scheduling_seconds - (self.clock() - scheduled_at))))
+            self.sleeper(
+                min(5.0, max(0.0, self.policy.scheduling_seconds - (self.clock() - scheduled_at)))
+            )
 
         self._cancel(job_id, evidence)
         return {
