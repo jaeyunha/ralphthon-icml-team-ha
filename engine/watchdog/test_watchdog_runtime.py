@@ -94,6 +94,31 @@ h='sha256:'+hashlib.sha256(a.read_bytes()).hexdigest(); (p/'invocation-result.js
             self.assertEqual(json.loads((run / "agents/reviewer-r2/score-history.json").read_text())["entries"], [])
             self.assertEqual(json.loads((run / "agents/reviewer-r2/literature-registry.json").read_text())["entries"], [])
 
+    def test_opt_in_held_supervisor_releases_only_after_v2_execution_event(self):
+        with tempfile.TemporaryDirectory() as temp:
+            run = Path(temp); fake = run / "fake.py"
+            write_json(run / "run-config.json", {
+                "run_id": "held-v2", "initial_state": "AUTHOR_REBUTTAL",
+                "phase_runs": [{"agent_id": "author", "role": "author", "phase": "rebuttal", "gates": [], "held_supervisor_v2": True}],
+            })
+            runner(fake, """import hashlib,json,os,pathlib
+p=pathlib.Path(os.environ['WATCHDOG_PHASE_DIR']); trace=pathlib.Path(os.environ['AGENT_LOOP_V2_TRACE_DIR']); (p/'released').write_text(os.environ['AGENT_LOOP_INVOCATION_ID']); a=p/'artifacts'/'validated'/'rebuttal.json'; a.parent.mkdir(parents=True,exist_ok=True); a.write_text('{}'); h='sha256:'+hashlib.sha256(a.read_bytes()).hexdigest(); (p/'invocation-result.json').write_text(json.dumps({'status':'complete','validated':True,'artifact_hash':h}))
+""")
+            args = argparse.Namespace(run_dir=str(run), config=None, runner=str(fake), once=True, poll_seconds=0.02, heartbeat_timeout_seconds=300.0)
+            watchdog = Watchdog(args)
+            try:
+                watchdog.initialize()
+                watchdog.start(watchdog.phases[0])
+                watchdog.children[watchdog.phases[0]["key"]].wait(timeout=5)
+            finally:
+                watchdog.terminate_children()
+                shutil.rmtree(run / ".watchdog.lock", ignore_errors=True)
+            event = json.loads((run / "events-v2.ndjson").read_text())
+            self.assertEqual(event["type"], "author.rebuttal.execution_started")
+            self.assertTrue((run / "agents/author/phases/rebuttal/released").exists())
+            prepared = next((run / ".watchdog/held-supervisor-v2").glob("*/spawn_prepared.json"))
+            self.assertEqual(json.loads(prepared.read_text())["invocation_id"], event["payload"]["invocation_id"])
+
     def test_workspace_core_documents_match_frozen_schemas(self):
         with tempfile.TemporaryDirectory() as temp:
             run = Path(temp); fake = run / "fake.py"
@@ -234,7 +259,7 @@ a=p/'artifacts'/'validated'/'rebuttal.json'; a.parent.mkdir(parents=True,exist_o
             result = self.invoke(run, fake)
             self.assertEqual(result.returncode, 0, result.stderr)
             state = json.loads((run / "agents/author/phases/rebuttal/state.json").read_text())
-            self.assertEqual(state["attempt"], 2)
+            self.assertEqual(state["attempt"], 6)
             self.assertEqual(json.loads((run / "agents/author/identity.json").read_text())["agent_id"], "author")
 
     def test_no_progress_becomes_stalled(self):
@@ -242,9 +267,9 @@ a=p/'artifacts'/'validated'/'rebuttal.json'; a.parent.mkdir(parents=True,exist_o
             run = Path(temp); fake = run / "fake.py"
             write_json(run / "run-config.json", {
                 "initial_state": "AUTHOR_FINAL", "safety": {"no_progress_threshold": 2},
-                "phase_runs": [{"agent_id": "author", "role": "author", "phase": "final-followup", "gates": [], "requires_artifact": False}],
+                "phase_runs": [{"agent_id": "author", "role": "author", "phase": "final-followup", "gates": [], "completion_gates": ["never_satisfied"], "requires_artifact": False}],
             })
-            runner(fake, "import json,os,pathlib\np=pathlib.Path(os.environ['WATCHDOG_PHASE_DIR']); (p/'invocation-result.json').write_text(json.dumps({'status':'next','validated':False}))\n")
+            runner(fake, "import json,os,pathlib\np=pathlib.Path(os.environ['WATCHDOG_PHASE_DIR']); (p/'invocation-result.json').write_text(json.dumps({'status':'complete','validated':False}))\n")
             result = self.invoke(run, fake)
             self.assertEqual(result.returncode, 2)
             self.assertEqual(json.loads((run / ".watchdog/status.json").read_text())["status"], "STALLED")
@@ -262,7 +287,7 @@ a=p/'artifacts'/'validated'/'rebuttal.json'; a.parent.mkdir(parents=True,exist_o
             self.assertEqual(json.loads((phase / "state.json").read_text())["status"], "completed")
             self.assertEqual(json.loads((run / ".watchdog/status.json").read_text())["status"], "SUCCESS")
             self.assert_schema(phase / "invocation-result.json", "invocation-result")
-            self.assertEqual(json.loads((phase / "current-task-context.json").read_text())["attempt"], 1)
+            self.assertEqual(json.loads((phase / "current-task-context.json").read_text())["attempt"], 4)
 
     def test_complete_watchdog_run_tree_validates(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -298,7 +323,7 @@ result={'schema_version':1,'agent_id':'reviewer-r1','role':'reviewer','phase':'i
             result = subprocess.run([str(WATCHDOG), "--run-dir", str(run), "--poll-seconds", "0.02"], text=True, capture_output=True, timeout=10)
             self.assertEqual(result.returncode, 0, result.stderr)
             phase = run / "agents/author/phases/final-followup"
-            self.assertEqual(json.loads((phase / "state.json").read_text())["attempt"], 2)
+            self.assertEqual(json.loads((phase / "state.json").read_text())["attempt"], 5)
             budget = json.loads((run / ".watchdog/run-budget.json").read_text())
             self.assertEqual(budget["restart_counts"], {})
             self.assertFalse((phase / "reopen-feedback.txt").exists())

@@ -5,6 +5,9 @@ from __future__ import annotations
 import argparse, datetime as dt, fnmatch, hashlib, json, os, re, shutil, signal, subprocess, sys, time, uuid
 from pathlib import Path
 from typing import Any
+if str(Path(__file__).resolve().parents[2]) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from engine.loops.held_supervisor import HeldSupervisor
 
 UTC = dt.timezone.utc
 TERMINAL = {"SUCCESS", "INCOMPLETE", "STALLED", "BLOCKED", "FAILED", "TIME_EXHAUSTED", "BUDGET_EXHAUSTED", "POLICY_BLOCKED"}
@@ -271,6 +274,39 @@ class Watchdog:
         validate_schema(self.control / "status.json", self.repo / "packages/schemas/schemas/watchdog-status.schema.json")
         validate_schema(self.control / "run-budget.json", self.repo / "packages/schemas/schemas/run-budget.schema.json")
         for p in self.phases: self.initialize_phase(p)
+        for p in self.phases: self.recover_held_supervisor(p)
+
+    def recover_held_supervisor(self, p: dict[str, Any]) -> None:
+        if not p.get("held_supervisor_v2") or self.state(p).get("status") == "running":
+            return
+        attempt = int(self.state(p).get("attempt", 0)) + 1
+        command, additions = self.runner_command(p)
+        env = os.environ.copy(); env.update(additions); env["WATCHDOG_ATTEMPT"] = str(attempt)
+        supervisor = HeldSupervisor(
+            self.control / "held-supervisor-v2", self.run_id,
+            {"agent_id": p["agent_id"], "role": p["role"], "phase": p["phase"]}, attempt, command,
+            cwd=self.workspace(p), env=env, event_log=self.run / "events-v2.ndjson",
+        )
+        if not supervisor.held_path.exists():
+            return
+        if not supervisor.event_present():
+            if supervisor.cancel_marker_only():
+                self.state_write(p, status="pending", attempt=attempt, pid=None, reason="held marker cancelled before execution_started", failure_category="held_marker_cancelled")
+            return
+        child = supervisor.spawn()
+        if child is None:
+            if supervisor.gate_path.exists():
+                self.failure(p, "held_supervisor_child_exit")
+            return
+        try:
+            supervisor.wait_held(); supervisor.release()
+        except Exception:
+            self.failure(p, "held_supervisor_recovery_failed")
+            return
+        self.children[p["key"]] = child
+        self.state_write(p, status="running", attempt=attempt, pid=child.pid, heartbeat_at=stamp(), started_at=stamp(), reason=None, failure_category=None, reopen_category=None, reopen_reason=None, next_eligible_at=None)
+        role = load(self.workspace(p) / "role-state.json", {}) or {}; role.update(current_phase=p["phase"], status="running"); save(self.workspace(p) / "role-state.json", role)
+        self.update_task_status(p, "in_progress", attempt=attempt)
         self.event(None, "started", {"pid": os.getpid()})
 
     def normalized_tasks(self, p: dict[str, Any], source: Any) -> dict[str, Any]:
@@ -532,6 +568,36 @@ class Watchdog:
         state = self.state(p); attempt = int(state.get("attempt", 0)) + 1
         command, additions = self.runner_command(p)
         env = os.environ.copy(); env.update(additions); env["WATCHDOG_ATTEMPT"] = str(attempt)
+        if p.get("held_supervisor_v2"):
+            if p.get("sandbox_capability") is False or p.get("broker_capability") is False:
+                self.failure(p, "held_supervisor_capability_unsupported", False)
+                return
+            supervisor = HeldSupervisor(
+                self.control / "held-supervisor-v2", self.run_id,
+                {"agent_id": p["agent_id"], "role": p["role"], "phase": p["phase"]}, attempt, command,
+                cwd=self.workspace(p), env=env, event_log=self.run / "events-v2.ndjson",
+            )
+            trace_dir = (self.run / "invocations" / supervisor.invocation_id / "attempts" / str(attempt)).resolve()
+            supervisor.env.update({"AGENT_LOOP_V2_TRACE_DIR": str(trace_dir), "AGENT_LOOP_INVOCATION_ID": supervisor.invocation_id, "AGENT_LOOP_INVOCATION_ATTEMPT": str(attempt)})
+            child = supervisor.spawn()
+            try:
+                supervisor.wait_held()
+                supervisor.release()
+            except Exception:
+                supervisor.cancel_marker_only()
+                if child is not None:
+                    try: child.wait(timeout=1)
+                    except subprocess.TimeoutExpired: child.terminate()
+                self.failure(p, "held_supervisor_start_failed")
+                return
+            if child is None:
+                self.failure(p, "held_supervisor_unavailable")
+                return
+            self.children[p["key"]] = child
+            self.state_write(p, status="running", attempt=attempt, pid=child.pid, heartbeat_at=stamp(), started_at=stamp(), reason=None, failure_category=None, reopen_category=None, reopen_reason=None, next_eligible_at=None)
+            role = load(self.workspace(p) / "role-state.json", {}) or {}; role.update(current_phase=p["phase"], status="running"); save(self.workspace(p) / "role-state.json", role)
+            self.update_task_status(p, "in_progress", attempt=attempt)
+            return
         child = subprocess.Popen(command, cwd=self.workspace(p), env=env, start_new_session=True); self.children[p["key"]] = child
         self.state_write(p, status="running", attempt=attempt, pid=child.pid, heartbeat_at=stamp(), started_at=stamp(), reason=None, failure_category=None, reopen_category=None, reopen_reason=None, next_eligible_at=None)
         role = load(self.workspace(p) / "role-state.json", {}) or {}; role.update(current_phase=p["phase"], status="running"); save(self.workspace(p) / "role-state.json", role)
@@ -585,13 +651,24 @@ class Watchdog:
         discussion = p["phase"] in {"discussion", "discussion-moderation"}
         if discussion: budget["discussion_rounds"][p["key"]] = int(budget["discussion_rounds"].get(p["key"], 0)) + 1
         self.budget_write(budget); no_progress = budget["no_progress_counts"].get(p["key"], 0)
-        if no_progress >= int(budget["limits"]["no_progress_threshold"]): self.update_task_status(p, "blocked", "validated artifact hash did not advance")
-        if no_progress >= int(budget["limits"]["no_progress_threshold"]): self.state_write(p, status="stalled", reason="validated artifact hash did not advance", failure_category="no_progress", last_promise=promise.upper() if promise in {"next", "complete", "blocked"} else None, no_progress_count=no_progress, pid=None); role = load(self.workspace(p) / "role-state.json", {}) or {}; role["status"] = "stalled"; save(self.workspace(p) / "role-state.json", role); self.event(p, "stalled", {"reason": "no_progress"}); self.status_write("STALLED", p["key"], "STALLED"); return
         if discussion and promise == "next" and budget["discussion_rounds"][p["key"]] >= int(budget["limits"]["max_discussion_rounds"]):
             self.update_task_status(p, "blocked", "discussion round ceiling reached")
             self.state_write(p, status="blocked", reason="discussion round ceiling reached", failure_category="discussion_round_ceiling", last_promise="NEXT", pid=None); role = load(self.workspace(p) / "role-state.json", {}) or {}; role["status"] = "blocked"; save(self.workspace(p) / "role-state.json", role); self.event(p, "discussion_rounds_exhausted"); self.status_write("INCOMPLETE", f"{p['key']}:discussion_round_ceiling"); return
         if promise == "next":
             had_task, next_task = self.complete_and_advance_task(p)
+            if had_task:
+                budget["no_progress_counts"][p["key"]] = 0
+                self.budget_write(budget)
+                no_progress = 0
+            elif no_progress >= int(budget["limits"]["no_progress_threshold"]):
+                self.update_task_status(p, "blocked", "validated artifact hash did not advance")
+                self.state_write(p, status="stalled", reason="validated artifact hash did not advance", failure_category="no_progress", last_promise="NEXT", no_progress_count=no_progress, pid=None)
+                role = load(self.workspace(p) / "role-state.json", {}) or {}
+                role["status"] = "stalled"
+                save(self.workspace(p) / "role-state.json", role)
+                self.event(p, "stalled", {"reason": "no_progress"})
+                self.status_write("STALLED", p["key"], "STALLED")
+                return
             if had_task and next_task is None:
                 reason = "NEXT promised but the phase task queue is exhausted"
                 self.state_write(p, status="blocked", reason=reason, failure_category="task_queue_exhausted", last_promise="NEXT", pid=None, last_artifact_hash=current, no_progress_count=no_progress)
@@ -605,9 +682,31 @@ class Watchdog:
             missing = [str(gate) for gate in p.get("completion_gates", []) if not self.gate(gate, p)]
             if missing:
                 reason = "missing completion gates: " + ", ".join(missing)
+                if no_progress >= int(budget["limits"]["no_progress_threshold"]):
+                    self.update_task_status(p, "blocked", "validated artifact hash did not advance")
+                    self.state_write(p, status="stalled", reason="validated artifact hash did not advance", failure_category="no_progress", last_promise="COMPLETE", no_progress_count=no_progress, pid=None)
+                    role = load(self.workspace(p) / "role-state.json", {}) or {}
+                    role["status"] = "stalled"
+                    save(self.workspace(p) / "role-state.json", role)
+                    self.event(p, "stalled", {"reason": "no_progress"})
+                    self.status_write("STALLED", p["key"], "STALLED")
+                    return
                 self.update_task_status(p, "pending", reason)
                 self.state_write(p, status="pending", reason=reason, reopen_category="completion_gate", reopen_reason=reason, last_promise="COMPLETE", pid=None); role = load(self.workspace(p) / "role-state.json", {}) or {}; role["status"] = "pending"; save(self.workspace(p) / "role-state.json", role); self.event(p, "completion_gate_refused", {"missing": missing}); return
             had_task, next_task = self.complete_and_advance_task(p)
+            if had_task:
+                budget["no_progress_counts"][p["key"]] = 0
+                self.budget_write(budget)
+                no_progress = 0
+            elif no_progress >= int(budget["limits"]["no_progress_threshold"]):
+                self.update_task_status(p, "blocked", "validated artifact hash did not advance")
+                self.state_write(p, status="stalled", reason="validated artifact hash did not advance", failure_category="no_progress", last_promise="COMPLETE", no_progress_count=no_progress, pid=None)
+                role = load(self.workspace(p) / "role-state.json", {}) or {}
+                role["status"] = "stalled"
+                save(self.workspace(p) / "role-state.json", role)
+                self.event(p, "stalled", {"reason": "no_progress"})
+                self.status_write("STALLED", p["key"], "STALLED")
+                return
             if had_task and next_task is not None:
                 reason = f"phase completion refused while queued task {next_task} remains"
                 self.state_write(p, status="pending", reason=reason, reopen_category="task_queue", reopen_reason=reason, last_promise="COMPLETE", pid=None, current_task=next_task, last_artifact_hash=current, no_progress_count=no_progress)

@@ -130,6 +130,13 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+V2_TRACE_DIR=${AGENT_LOOP_V2_TRACE_DIR:-}
+V2_INVOCATION_ID=${AGENT_LOOP_INVOCATION_ID:-}
+V2_INVOCATION_ATTEMPT=${AGENT_LOOP_INVOCATION_ATTEMPT:-}
+V2_CAUSATION_EVENT_ID=${AGENT_LOOP_CAUSATION_EVENT_ID:-}
+V2_EXECUTION_STARTED_EVENT_ID=${AGENT_LOOP_EXECUTION_STARTED_EVENT_ID:-}
+V2_TRACE_ENABLED=0
+
 command -v python3 >/dev/null 2>&1 || die "python3 is required for the contract fallbacks"
 
 [[ -n "$AGENT_ID" ]] || die "--agent-id is required"
@@ -142,6 +149,12 @@ command -v python3 >/dev/null 2>&1 || die "python3 is required for the contract 
 [[ "$TIMEOUT_SECONDS" =~ ^[1-9][0-9]*$ ]] || die "--timeout must be a positive integer"
 [[ "$HEARTBEAT_INTERVAL" =~ ^[1-9][0-9]*$ ]] || die "--heartbeat-interval must be a positive integer"
 [[ "$KILL_GRACE_SECONDS" =~ ^[0-9]+$ ]] || die "--kill-grace must be a non-negative integer"
+if [[ -n "$V2_TRACE_DIR$V2_INVOCATION_ID$V2_INVOCATION_ATTEMPT$V2_CAUSATION_EVENT_ID$V2_EXECUTION_STARTED_EVENT_ID" ]]; then
+  [[ -n "$V2_TRACE_DIR" && -n "$V2_INVOCATION_ID" && -n "$V2_INVOCATION_ATTEMPT" ]] || die "v2 invocation tracing requires AGENT_LOOP_V2_TRACE_DIR, AGENT_LOOP_INVOCATION_ID, and AGENT_LOOP_INVOCATION_ATTEMPT"
+  [[ "$V2_INVOCATION_ATTEMPT" =~ ^[1-9][0-9]*$ ]] || die "AGENT_LOOP_INVOCATION_ATTEMPT must be a positive integer"
+  V2_TRACE_ENABLED=1
+fi
+
 
 REPO_ROOT=${REPO_ROOT:-$(pwd)}
 RUN_ROOT=${AGENT_LOOP_RUN_ROOT:-${WATCHDOG_RUN_DIR:-"$(dirname "$(dirname "$WORKSPACE")")"}}
@@ -160,6 +173,7 @@ HEARTBEAT_PATH=${AGENT_LOOP_HEARTBEAT_PATH:-"$WORKSPACE/heartbeat"}
 ACCESS_LOG_PATH=${AGENT_LOOP_ACCESS_LOG:-"$PHASE_DIR/accessed-paths.log"}
 STDOUT_PATH=${AGENT_LOOP_STDOUT_PATH:-"$PHASE_DIR/stdout.log"}
 STDERR_PATH=${AGENT_LOOP_STDERR_PATH:-"$PHASE_DIR/stderr.log"}
+
 
 mkdir -p "$WORKSPACE" "$PHASE_DIR" "$(dirname "$ARTIFACT")" \
   "$(dirname "$MANIFEST_PATH")" "$(dirname "$RESULT_PATH")" \
@@ -187,6 +201,8 @@ PHASE_DIR=$(canonical_path "$PHASE_DIR")
 MANIFEST_PATH=$(canonical_path "$MANIFEST_PATH")
 RESULT_PATH=$(canonical_path "$RESULT_PATH")
 REOPEN_FEEDBACK_PATH=$(canonical_path "$REOPEN_FEEDBACK_PATH")
+REOPEN_FEEDBACK_INPUT_PATH="$REOPEN_FEEDBACK_PATH"
+
 HEARTBEAT_PATH=$(canonical_path "$HEARTBEAT_PATH")
 ACCESS_LOG_PATH=$(canonical_path "$ACCESS_LOG_PATH")
 STDOUT_PATH=$(canonical_path "$STDOUT_PATH")
@@ -247,16 +263,37 @@ if [[ ${#ALLOW_PATHS[@]} -gt 0 ]]; then
   done
   ALLOW_PATHS=("${NORMALIZED_ALLOWS[@]}")
 fi
+if [[ $V2_TRACE_ENABLED -eq 1 ]]; then
+  TRACE_HELPER="$REPO_ROOT/engine/loops/invocation_trace.py"
+  [[ -f "$TRACE_HELPER" ]] || die "v2 invocation trace helper not found: $TRACE_HELPER"
+  V2_TRACE_DIR=$(canonical_path "$V2_TRACE_DIR")
+  TRACE_STARTED_AT=$(python3 "$TRACE_HELPER" begin --trace-dir "$V2_TRACE_DIR" --invocation-id "$V2_INVOCATION_ID" --attempt "$V2_INVOCATION_ATTEMPT" --causation-event-id "$V2_CAUSATION_EVENT_ID" --execution-started-event-id "$V2_EXECUTION_STARTED_EVENT_ID") || die "could not initialize immutable v2 invocation trace"
+  TRACE_MANIFEST_PATH="$V2_TRACE_DIR/allowed-inputs.json"
+  TRACE_PROMPT_PATH="$V2_TRACE_DIR/prompt.txt"
+  TRACE_STDOUT_PATH="$V2_TRACE_DIR/stdout.log"
+  TRACE_STDERR_PATH="$V2_TRACE_DIR/stderr.log"
+  export AGENT_LOOP_TRACE_COMPLETED_AT="$TRACE_STARTED_AT"
+
+
+else
+  TRACE_STARTED_AT=""
+fi
+
 
 TMP_ROOT=$(mktemp -d "${TMPDIR:-/tmp}/agent-loop.XXXXXX")
 CHILD_PID=""
 HEARTBEAT_PID=""
 TIMER_PID=""
 TIMED_OUT_MARKER="$TMP_ROOT/timed-out"
-PROMPT_PATH="$TMP_ROOT/prompt.txt"
+PROMPT_PATH=${PROMPT_PATH:-"$TMP_ROOT/prompt.txt"}
+
 VALIDATOR_OUTPUT="$TMP_ROOT/validator-output.txt"
 PARSED_PROMISE="$TMP_ROOT/promise.json"
 ALLOW_LIST="$TMP_ROOT/allow-list.txt"
+if [[ $V2_TRACE_ENABLED -eq 1 ]]; then
+  MANIFEST_PATH="$TMP_ROOT/allowed-inputs.json"
+fi
+
 
 cleanup() {
   [[ -n "$HEARTBEAT_PID" ]] && kill "$HEARTBEAT_PID" 2>/dev/null || true
@@ -311,7 +348,8 @@ data = {
     "allowed_input_manifest_hash": manifest_hash,
     "artifact_path": artifact,
     "artifact_hash": artifact_hash or None,
-    "completed_at": datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
+    "completed_at": os.environ.get("AGENT_LOOP_TRACE_COMPLETED_AT") or datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
+
 }
 temporary = path + ".tmp." + str(os.getpid())
 with open(temporary, "w", encoding="utf-8") as handle:
@@ -319,7 +357,27 @@ with open(temporary, "w", encoding="utf-8") as handle:
     handle.write("\n")
 os.replace(temporary, path)
 PY
+  trace_finish "$status"
+
 }
+trace_snapshot() {
+  local name=$1 source=$2
+  [[ $V2_TRACE_ENABLED -eq 1 ]] || return 0
+  python3 "$TRACE_HELPER" snapshot --trace-dir "$V2_TRACE_DIR" --name "$name" --source "$source" --allow-missing
+}
+
+trace_finish() {
+  trace_snapshot "stdout.log" "$STDOUT_PATH"
+  trace_snapshot "stderr.log" "$STDERR_PATH"
+
+  local status=$1
+  [[ $V2_TRACE_ENABLED -eq 1 ]] || return 0
+  trace_snapshot "candidate-artifact" "$ARTIFACT"
+  trace_snapshot "validation-feedback.txt" "$VALIDATOR_OUTPUT"
+  trace_snapshot "invocation-result.json" "$RESULT_PATH"
+  python3 "$TRACE_HELPER" finalize --trace-dir "$V2_TRACE_DIR" --status "$status"
+}
+
 
 reopen() {
   local feedback=$1 exit_code=${2:-$EXIT_REOPEN}
@@ -376,7 +434,7 @@ data = {
     "agent_id": agent_id,
     "role": role,
     "phase": phase,
-    "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
+    "generated_at": os.environ.get("AGENT_LOOP_TRACE_COMPLETED_AT") or datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
     "paths": paths,
     "allowed_inputs": [{"path": path, "access": "read"} for path in paths],
 }
@@ -419,6 +477,19 @@ PY
 )
 [[ -n "$MANIFEST_HASH" ]] || MANIFEST_HASH="sha256:$(sha256_file "$MANIFEST_PATH")"
 atomic_text "$MANIFEST_PATH.sha256" "$MANIFEST_HASH"
+if [[ $V2_TRACE_ENABLED -eq 1 ]]; then
+  trace_snapshot "allowed-inputs.json" "$MANIFEST_PATH"
+  trace_snapshot "task-context.snapshot" "$TASK_CONTEXT"
+  if [[ -f "$V2_TRACE_DIR/reopen-feedback.snapshot" ]]; then
+    REOPEN_FEEDBACK_INPUT_PATH="$V2_TRACE_DIR/reopen-feedback.snapshot"
+  fi
+  trace_snapshot "reopen-feedback.snapshot" "$REOPEN_FEEDBACK_INPUT_PATH"
+
+  MANIFEST_PATH="$TRACE_MANIFEST_PATH"
+fi
+
+
+
 
 append_prompt_file() {
   local title=$1 path=$2
@@ -439,7 +510,7 @@ if [[ ${#LEDGERS[@]} -gt 0 ]]; then
   done
 fi
 append_prompt_file "ALLOWED INPUT MANIFEST (sha256: ${MANIFEST_HASH#sha256:})" "$MANIFEST_PATH"
-[[ -s "$REOPEN_FEEDBACK_PATH" ]] && append_prompt_file "EXACT REOPEN FEEDBACK" "$REOPEN_FEEDBACK_PATH"
+[[ -s "$REOPEN_FEEDBACK_INPUT_PATH" ]] && append_prompt_file "EXACT REOPEN FEEDBACK" "$REOPEN_FEEDBACK_INPUT_PATH"
 append_prompt_file "CURRENT SINGLE WORK ITEM" "$TASK_CONTEXT"
 append_prompt_file "REQUIRED OUTPUT SCHEMA" "$OUTPUT_SCHEMA"
 printf '\n\nWrite the artifact only to: %s\n' "$ARTIFACT" >> "$PROMPT_PATH"
@@ -457,7 +528,16 @@ PY
 then
   die "internal prompt composition attempted to include PRD.md"
 fi
+if [[ $V2_TRACE_ENABLED -eq 1 ]]; then
+  trace_snapshot "prompt.txt" "$PROMPT_PATH"
+  PROMPT_PATH="$TRACE_PROMPT_PATH"
+fi
 
+
+if [[ $V2_TRACE_ENABLED -eq 1 ]]; then
+  STDOUT_PATH="$TMP_ROOT/stdout.log"
+  STDERR_PATH="$TMP_ROOT/stderr.log"
+fi
 : > "$STDOUT_PATH"
 : > "$STDERR_PATH"
 : > "$ACCESS_LOG_PATH"
@@ -514,6 +594,9 @@ export RALPH_OUTPUT_ARTIFACT="$ARTIFACT"
 export RALPH_OUTPUT_SCHEMA="$OUTPUT_SCHEMA"
 export RALPH_TASK_CONTEXT="$TASK_CONTEXT"
 export RALPH_ACCESSED_PATHS_LOG="$ACCESS_LOG_PATH"
+if [[ $V2_TRACE_ENABLED -eq 1 ]]; then
+  export AGENT_LOOP_TRACE_COMPLETED_AT="$TRACE_STARTED_AT"
+fi
 
 heartbeat_once
 (
@@ -546,6 +629,12 @@ HEARTBEAT_PID=""
 TIMER_PID=""
 CHILD_PID=""
 heartbeat_once
+if [[ $V2_TRACE_ENABLED -eq 1 ]]; then
+  trace_snapshot "stdout.log" "$STDOUT_PATH"
+  trace_snapshot "stderr.log" "$STDERR_PATH"
+  STDOUT_PATH="$TRACE_STDOUT_PATH"
+  STDERR_PATH="$TRACE_STDERR_PATH"
+fi
 
 if [[ -f "$TIMED_OUT_MARKER" ]]; then
   write_result "time_exhausted" "" "agent invocation exceeded ${TIMEOUT_SECONDS}s" "$EXIT_TIMEOUT" ""
