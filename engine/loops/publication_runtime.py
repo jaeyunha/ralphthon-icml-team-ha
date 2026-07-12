@@ -202,6 +202,8 @@ class PublicationRuntime:
             if self._registry_tuple(observed) != expected_registry:
                 return self._freeze(paths, prepared, "projected_registry_mismatch")
 
+            if not self._promote_destination(prepared, paths, destination_path):
+                return self._freeze(paths, prepared, "destination_promotion_mismatch")
             terminal = self._append_terminal(prepared, receipt, event, expected_registry)
             return self._result("settled", prepared, receipt, event, terminal=terminal)
         except PublicationRuntimeError as error:
@@ -212,6 +214,7 @@ class PublicationRuntime:
         root = self.journal_root / "publications" / safe_id
         return {
             "prepared": root / "prepared.json",
+            "payload": root / "payload.bin",
             "receipt": root / "receipt.json",
             "frozen": root / "frozen.json",
         }
@@ -257,37 +260,20 @@ class PublicationRuntime:
         source = bytes.fromhex(prepared["source_hex"])
         if sha256_bytes(source) != prepared["source_hash"]:
             raise PublicationRuntimeError("prepared source hash is invalid")
-        staging = destination.with_name(
-            f".{destination.name}.{hashlib.sha256(prepared['publication_id'].encode()).hexdigest()}.staging"
-        )
         destination.parent.mkdir(parents=True, exist_ok=True)
+        payload = paths["payload"]
+        try:
+            _write_exclusive(payload, source, "private publication payload")
+        except PublicationRuntimeError:
+            return None
+        _fsync_regular(payload, "private publication payload")
+        if (
+            sha256_bytes(_read_regular(payload, "private publication payload"))
+            != prepared["source_hash"]
+        ):
+            return None
         if destination.exists() or destination.is_symlink():
             if _read_regular(destination, "publication destination") != source:
-                return None
-            _fsync_regular(destination, "publication destination")
-            _fsync_parent(destination)
-            if (
-                sha256_bytes(_read_regular(destination, "publication destination"))
-                != prepared["source_hash"]
-            ):
-                return None
-        else:
-            try:
-                _write_exclusive(staging, source, "publication staging copy")
-            except PublicationRuntimeError:
-                return None
-            _fsync_regular(staging, "publication staging copy")
-            if (
-                sha256_bytes(_read_regular(staging, "publication staging copy"))
-                != prepared["source_hash"]
-            ):
-                return None
-            os.replace(staging, destination)
-            _fsync_parent(destination)
-            if (
-                sha256_bytes(_read_regular(destination, "publication destination"))
-                != prepared["source_hash"]
-            ):
                 return None
         content = {
             "schema_version": 2,
@@ -307,6 +293,26 @@ class PublicationRuntime:
         except PublicationRuntimeError:
             return None
         return _load_json(paths["receipt"], "publication receipt")
+
+    def _promote_destination(
+        self, prepared: dict[str, Any], paths: dict[str, Path], destination: Path
+    ) -> bool:
+        source = _read_regular(paths["payload"], "private publication payload")
+        if sha256_bytes(source) != prepared["source_hash"]:
+            return False
+        if destination.exists() or destination.is_symlink():
+            return _read_regular(destination, "publication destination") == source
+        staging = destination.with_name(
+            f".{destination.name}.{hashlib.sha256(prepared['publication_id'].encode()).hexdigest()}.staging"
+        )
+        try:
+            _write_exclusive(staging, source, "publication staging copy")
+        except PublicationRuntimeError:
+            return False
+        _fsync_regular(staging, "publication staging copy")
+        os.replace(staging, destination)
+        _fsync_parent(destination)
+        return _read_regular(destination, "publication destination") == source
 
     def _append_committed(
         self, prepared: dict[str, Any], receipt: dict[str, Any]

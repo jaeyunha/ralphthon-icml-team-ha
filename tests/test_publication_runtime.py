@@ -82,7 +82,7 @@ def test_publication_is_receipted_before_event_and_terminal_after_exact_projecti
     assert waiting["status"] == "awaiting_projection"
     assert waiting["grants"] == 0
     assert waiting["viewer_visible"] is False
-    assert target.read_bytes() == b"exact artifact\x00bytes"
+    assert not target.exists()
     assert "event_hash" not in waiting["receipt"]
     assert len(authority.calls) == 1
 
@@ -92,6 +92,7 @@ def test_publication_is_receipted_before_event_and_terminal_after_exact_projecti
 
     assert settled["status"] == "settled"
     assert settled["grants"] == 1
+    assert target.read_bytes() == b"exact artifact\x00bytes"
     assert [call["type"] for call in authority.calls] == [
         "publication.artifact.committed",
         "publication.artifact.settled",
@@ -114,7 +115,7 @@ def test_retry_reconciles_append_crashes_without_duplicate_or_grant(
     assert recovered["status"] == "awaiting_projection"
     assert recovered["grants"] == 0
     assert len(authority.calls) == 1
-    assert target.read_bytes() == b"exact artifact\x00bytes"
+    assert not target.exists()
 
 
 def test_byte_and_projection_conflicts_freeze_without_visibility(tmp_path: Path) -> None:

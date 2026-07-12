@@ -15,6 +15,13 @@
       "when": 1783834296824,
       "tag": "0001_execution_provenance_validation_and_threads",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1783840000000,
+      "tag": "0002_quarantine_before_projection",
+      "breakpoints": true
     }
   ]
 }

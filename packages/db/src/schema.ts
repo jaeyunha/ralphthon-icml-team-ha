@@ -440,7 +440,7 @@ export const projectionBatches = pgTable(
 export const projectionQuarantine = pgTable(
   "projection_quarantine",
   {
-    runId: text("run_id").notNull().references(() => runs.id, { onDelete: "cascade" }),
+    runId: text("run_id").notNull(),
     source: text("source").notNull(),
     sourceOffset: bigint("source_offset", { mode: "number" }).notNull(),
     sourceEventHash: text("source_event_hash").notNull(),
