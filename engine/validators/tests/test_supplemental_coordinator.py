@@ -65,10 +65,10 @@ def _request(coordinator: SupplementalTestCoordinator) -> dict[str, object]:
         environment={"MODE": "test"},
         budget={
             "max_cpu_millis": 1000,
-            "max_memory_bytes": 1024,
+            "max_memory_bytes": 32 * 1024 * 1024,
             "max_pids": 8,
             "max_wall_time_ms": 1000,
-            "max_workspace_bytes": 1024,
+            "max_workspace_bytes": 1024 * 1024,
         },
         requested_at="2026-07-12T00:00:00Z",
     )
@@ -119,10 +119,10 @@ def test_request_identity_retries_exactly_and_conflicts_on_changed_content(tmp_p
             environment={"MODE": "test"},
             budget={
                 "max_cpu_millis": 1000,
-                "max_memory_bytes": 1024,
+                "max_memory_bytes": 32 * 1024 * 1024,
                 "max_pids": 8,
                 "max_wall_time_ms": 1000,
-                "max_workspace_bytes": 1024,
+                "max_workspace_bytes": 1024 * 1024,
             },
             requested_at="2026-07-12T00:00:00Z",
         )
@@ -154,6 +154,10 @@ def test_executes_once_and_receipt_binds_exact_invocation_and_raw_output(tmp_pat
     receipt = _execute(coordinator, source, request)
     assert len(sandbox.calls) == 1
     assert sandbox.calls[0].policy_version == 2
+    assert sandbox.calls[0].limits.memory_mb == 32
+    assert sandbox.calls[0].limits.workspace_mb == 1
+    assert sandbox.calls[0].limits.pids == 8
+    assert sandbox.calls[0].limits.timeout_seconds == 1
     assert receipt["argv_hash"] == request["argv_hash"]
     assert receipt["env_hash"] == request["env_hash"]
     assert receipt["source_hash"] == SOURCE_HASH

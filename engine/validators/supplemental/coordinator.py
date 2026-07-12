@@ -17,6 +17,7 @@ from typing import Any, Mapping, Protocol
 from engine.validators.sandbox import (
     DockerSandbox,
     ReadOnlyInput,
+    SandboxLimits,
     SandboxRequest,
     SandboxUnavailable,
 )
@@ -235,6 +236,13 @@ class SupplementalTestCoordinator:
             argv=tuple(normalized_argv),
             inputs=(ReadOnlyInput("source", Path(source)),),
             environment=normalized_env,
+            limits=SandboxLimits(
+                cpus=request["max_cpu_millis"] / request["max_wall_time_ms"],
+                memory_mb=request["max_memory_bytes"] // (1024 * 1024),
+                workspace_mb=request["max_workspace_bytes"] // (1024 * 1024),
+                pids=request["max_pids"],
+                timeout_seconds=request["max_wall_time_ms"] / 1000,
+            ),
             policy_version=2,
         )
         try:
@@ -599,4 +607,10 @@ class SupplementalTestCoordinator:
             if not isinstance(value, int) or isinstance(value, bool) or value <= 0:
                 raise SupplementalTestError(f"{key} must be a positive integer")
             result[key] = value
+        if result["max_memory_bytes"] < 16 * 1024 * 1024:
+            raise SupplementalTestError("max_memory_bytes must allow the 16 MiB sandbox minimum")
+        if result["max_workspace_bytes"] < 1024 * 1024:
+            raise SupplementalTestError("max_workspace_bytes must allow the 1 MiB sandbox minimum")
+        if result["max_pids"] < 2:
+            raise SupplementalTestError("max_pids must be at least 2")
         return result

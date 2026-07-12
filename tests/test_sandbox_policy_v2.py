@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -55,6 +56,21 @@ def test_v2_command_is_pull_never_and_hardened(tmp_path: Path) -> None:
     assert ["--security-opt", "no-new-privileges"] == command[
         command.index("--security-opt") : command.index("--security-opt") + 2
     ]
+
+
+def test_pinned_image_digest_verifies_repo_digest_membership() -> None:
+    class FakeDocker(DockerSandbox):
+        def __init__(self, stdout: str) -> None:
+            super().__init__("docker")
+            self.stdout = stdout
+
+        def _run_control(self, argv, timeout=20.0):
+            return SimpleNamespace(returncode=0, stdout=self.stdout, stderr="")
+
+    expected = "sha256:" + "a" * 64
+    image = f"example.invalid/validator@{expected}"
+    assert FakeDocker(f'["example.invalid/validator@{expected}"]').image_digest(image) == expected
+    assert FakeDocker("[]").image_digest(image) is None
 
 
 def test_container_identity_and_source_hash_are_deterministic(tmp_path: Path) -> None:

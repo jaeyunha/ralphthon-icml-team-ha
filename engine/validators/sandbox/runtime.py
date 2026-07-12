@@ -158,6 +158,22 @@ class DockerSandbox:
         }
 
     def image_digest(self, image: str) -> str | None:
+        if "@sha256:" in image:
+            expected = image.rsplit("@", 1)[1]
+            result = self._run_control(
+                ["image", "inspect", image, "--format", "{{json .RepoDigests}}"]
+            )
+            if result.returncode != 0:
+                return None
+            try:
+                repo_digests = json.loads(result.stdout)
+            except json.JSONDecodeError:
+                return None
+            if not isinstance(repo_digests, list) or not any(
+                isinstance(item, str) and item.endswith(f"@{expected}") for item in repo_digests
+            ):
+                return None
+            return expected
         result = self._run_control(["image", "inspect", image, "--format", "{{.Id}}"])
         digest = result.stdout.strip()
         return digest if result.returncode == 0 and digest else None
