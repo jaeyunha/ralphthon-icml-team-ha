@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "agent_id": "validator-mathematics-paper-1",
+  "findings": ["MATH-001"]
+}

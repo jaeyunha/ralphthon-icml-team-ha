@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "checked_findings": 2,
+  "high_impact_negative_findings": ["MATH-001"],
+  "status": "passed"
+}

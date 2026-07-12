@@ -1,0 +1,9 @@
+{
+  "bundle_version": 1,
+  "submission_id": "paper-1",
+  "frozen_at": "2026-07-11T15:00:00Z",
+  "source_lanes": ["g2-mathematics"],
+  "findings": [],
+  "conflicts": [{"claim_id": "CLAIM-1", "finding_ids": ["A", "B"], "statuses": ["verified_exactly", "statement_mismatch"], "resolution": "averaged"}],
+  "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+}

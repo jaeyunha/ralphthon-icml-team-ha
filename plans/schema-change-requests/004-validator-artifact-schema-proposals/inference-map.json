@@ -1,0 +1,41 @@
+{
+  "mapping_version": 1,
+  "coverage_targets": [
+    {"path_regex": "^tests/fixtures/validators-math/[^/]+/run/.*\\.json$"},
+    {"path_regex": "^tests/fixtures/validators-statref/frozen-validation-bundle\\.json$"}
+  ],
+  "rules": [
+    {"path_regex": "^tests/fixtures/validators-math/[^/]+/run/identity\\.json$", "schema": "identity.schema.json", "source": "shared"},
+    {"path_regex": "^tests/fixtures/validators-math/[^/]+/run/role-state\\.json$", "schema": "role-state.schema.json", "source": "shared"},
+    {"path_regex": "^tests/fixtures/validators-math/[^/]+/run/finding-ledger\\.json$", "schema": "math-finding-ledger.schema.json", "source": "proposal"},
+    {"path_regex": "^tests/fixtures/validators-math/[^/]+/run/phases/[^/]+/allowed-inputs\\.json$", "schema": "allowed-inputs.schema.json", "source": "shared"},
+    {"path_regex": "^tests/fixtures/validators-math/[^/]+/run/phases/[^/]+/state\\.json$", "schema": "phase-state.schema.json", "source": "shared"},
+    {"path_regex": "^tests/fixtures/validators-math/[^/]+/run/(?:phases/claim-extraction/artifacts|published)/claim-inventory\\.json$", "schema": "math-claim-inventory.schema.json", "source": "proposal"},
+    {"path_regex": "^tests/fixtures/validators-math/[^/]+/run/phases/(?:assumption-audit|symbolic-validation|counterexample-search)/artifacts/[^/]+\\.json$", "schema": "math-tool-evidence.schema.json", "source": "proposal"},
+    {"path_regex": "^tests/fixtures/validators-math/[^/]+/run/phases/formalization/artifacts/[^/]+\\.json$", "schema": "math-formal-proof-result.schema.json", "source": "proposal"},
+    {"path_regex": "^tests/fixtures/validators-math/[^/]+/run/phases/confirmation/artifacts/confirmation-report\\.json$", "schema": "math-confirmation-report.schema.json", "source": "proposal"},
+    {"path_regex": "^tests/fixtures/validators-math/[^/]+/run/(?:phases/bundle-publication/artifacts|published)/math-validation-bundle\\.json$", "schema": "math-validation-bundle.schema.json", "source": "proposal"},
+    {"path_regex": "^tests/fixtures/validators-math/[^/]+/run/published/validation-finding-[^/]+\\.json$", "schema": "validation-finding.schema.json", "source": "shared"},
+    {"path_regex": "^tests/fixtures/validators-statref/frozen-validation-bundle\\.json$", "schema": "validation-bundle.schema.json", "source": "proposal"}
+  ],
+  "promotion_filename_aliases": {
+    "math-claim-inventory*.json": "math-claim-inventory.schema.json",
+    "math-tool-evidence*.json": "math-tool-evidence.schema.json",
+    "math-formal-proof-result*.json": "math-formal-proof-result.schema.json",
+    "math-confirmation-report*.json": "math-confirmation-report.schema.json",
+    "math-finding-ledger*.json": "math-finding-ledger.schema.json",
+    "math-validation-bundle*.json": "math-validation-bundle.schema.json",
+    "validation-bundle*.json": "validation-bundle.schema.json"
+  },
+  "legacy_path_aliases": {
+    "finding-ledger.json": "math-finding-ledger.schema.json",
+    "claim-inventory.json": "math-claim-inventory.schema.json",
+    "confirmation-report.json": "math-confirmation-report.schema.json",
+    "math-validation-bundle.json": "math-validation-bundle.schema.json",
+    "frozen-validation-bundle.json": "validation-bundle.schema.json",
+    "phases/assumption-audit/artifacts/*.json": "math-tool-evidence.schema.json",
+    "phases/symbolic-validation/artifacts/*.json": "math-tool-evidence.schema.json",
+    "phases/counterexample-search/artifacts/*.json": "math-tool-evidence.schema.json",
+    "phases/formalization/artifacts/*.json": "math-formal-proof-result.schema.json"
+  }
+}

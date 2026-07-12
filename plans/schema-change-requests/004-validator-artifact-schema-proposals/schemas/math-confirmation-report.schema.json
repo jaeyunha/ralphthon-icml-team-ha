@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/math-confirmation-report.schema.json",
+  "title": "MathematicalConfirmationReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "checked_findings", "high_impact_negative_findings", "status"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "checked_findings": {"type": "integer", "minimum": 0},
+    "high_impact_negative_findings": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"},
+      "uniqueItems": true
+    },
+    "status": {"const": "passed"}
+  }
+}

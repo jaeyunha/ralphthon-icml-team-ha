@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "run_id": "math-paper-1",
+  "agent_id": "validator-mathematics-paper-1",
+  "submission_id": "paper-1",
+  "finding_count": 0,
+  "findings": [],
+  "phase_order": ["bundle-publication"],
+  "published_at": "not-a-time"
+}

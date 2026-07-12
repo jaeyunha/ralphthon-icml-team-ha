@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/math-tool-evidence.schema.json",
+  "title": "MathematicalToolEvidence",
+  "oneOf": [
+    {"$ref": "#/$defs/assumption_audit"},
+    {"$ref": "#/$defs/symbolic_identity"},
+    {"$ref": "#/$defs/symbolic_gradient"},
+    {"$ref": "#/$defs/smt"},
+    {"$ref": "#/$defs/shape"},
+    {"$ref": "#/$defs/equation_code"},
+    {"$ref": "#/$defs/numerical"}
+  ],
+  "$defs": {
+    "string_map": {
+      "type": "object",
+      "propertyNames": {"type": "string", "minLength": 1},
+      "additionalProperties": {"type": "string"}
+    },
+    "shape_dims": {
+      "type": "array",
+      "items": {"oneOf": [{"type": "integer", "minimum": 0}, {"type": "string", "minLength": 1}]}
+    },
+    "assumption_audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["complete", "missing_required_phrases", "undefined_symbols"],
+      "properties": {
+        "complete": {"type": "boolean"},
+        "missing_required_phrases": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "undefined_symbols": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"complete": {"const": true}}, "required": ["complete"]},
+          "then": {"properties": {"missing_required_phrases": {"type": "array", "maxItems": 0}, "undefined_symbols": {"type": "array", "maxItems": 0}}},
+          "else": {"anyOf": [{"properties": {"missing_required_phrases": {"type": "array", "minItems": 1}}}, {"properties": {"undefined_symbols": {"type": "array", "minItems": 1}}}]}
+        }
+      ]
+    },
+    "symbolic_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["equivalent", "left", "right", "simplified_difference", "tool"],
+      "properties": {
+        "equivalent": {"type": "boolean"},
+        "left": {"type": "string", "minLength": 1},
+        "right": {"type": "string", "minLength": 1},
+        "simplified_difference": {"type": "string", "minLength": 1},
+        "tool": {"type": "string", "pattern": "^sympy-[0-9]+\\.[0-9]+\\.[0-9]+$"}
+      },
+      "allOf": [{"if": {"properties": {"equivalent": {"const": true}}, "required": ["equivalent"]}, "then": {"properties": {"simplified_difference": {"const": "0"}}}}]
+    },
+    "symbolic_gradient": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["equivalent", "actual_gradient", "expected_gradient", "simplified_differences", "tool"],
+      "properties": {
+        "equivalent": {"type": "boolean"},
+        "actual_gradient": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+        "expected_gradient": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+        "simplified_differences": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+        "tool": {"type": "string", "pattern": "^sympy-[0-9]+\\.[0-9]+\\.[0-9]+$"}
+      }
+    },
+    "smt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["result", "counterexample", "tool"],
+      "properties": {
+        "result": {"enum": ["sat", "unsat", "unknown"]},
+        "counterexample": {"oneOf": [{"$ref": "#/$defs/string_map"}, {"type": "null"}]},
+        "tool": {"type": "string", "pattern": "^z3-[0-9]+\\.[0-9]+\\.[0-9]+$"}
+      },
+      "allOf": [
+        {"if": {"properties": {"result": {"const": "sat"}}, "required": ["result"]}, "then": {"properties": {"counterexample": {"$ref": "#/$defs/string_map"}}}},
+        {"if": {"properties": {"result": {"const": "unsat"}}, "required": ["result"]}, "then": {"properties": {"counterexample": {"type": "null"}}}}
+      ]
+    },
+    "shape": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["valid", "inferred_shapes", "errors"],
+      "properties": {
+        "valid": {"type": "boolean"},
+        "inferred_shapes": {"type": "object", "propertyNames": {"type": "string", "minLength": 1}, "additionalProperties": {"$ref": "#/$defs/shape_dims"}},
+        "errors": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      },
+      "allOf": [{"if": {"properties": {"valid": {"const": true}}, "required": ["valid"]}, "then": {"properties": {"errors": {"type": "array", "maxItems": 0}}}, "else": {"properties": {"errors": {"type": "array", "minItems": 1}}}}]
+    },
+    "equation_code": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["conformant", "simplified_difference", "counterexample", "g1_artifact_ref"],
+      "properties": {
+        "conformant": {"type": "boolean"},
+        "simplified_difference": {"type": "string", "minLength": 1},
+        "counterexample": {"oneOf": [{"$ref": "#/$defs/string_map"}, {"type": "null"}]},
+        "samples_checked": {"type": "integer", "minimum": 1},
+        "interval_residual": {"type": "string", "minLength": 1},
+        "g1_artifact_ref": {"type": ["string", "null"], "minLength": 1}
+      },
+      "allOf": [
+        {"if": {"properties": {"conformant": {"const": true}}, "required": ["conformant"]}, "then": {"properties": {"simplified_difference": {"const": "0"}, "counterexample": {"type": "null"}}}},
+        {"if": {"properties": {"conformant": {"const": false}}, "required": ["conformant"]}, "then": {"required": ["samples_checked", "interval_residual"], "properties": {"samples_checked": {"type": "integer", "minimum": 1}, "interval_residual": {"type": "string", "minLength": 1}, "counterexample": {"$ref": "#/$defs/string_map"}}}}
+      ]
+    },
+    "numerical": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["counterexample", "samples_checked", "interval_residual", "methods"],
+      "properties": {
+        "counterexample": {"oneOf": [{"$ref": "#/$defs/string_map"}, {"type": "null"}]},
+        "samples_checked": {"type": "integer", "minimum": 0},
+        "interval_residual": {"type": "string", "minLength": 1},
+        "left_value": {"type": "string", "minLength": 1},
+        "right_value": {"type": "string", "minLength": 1},
+        "methods": {
+          "type": "array",
+          "prefixItems": [
+            {"const": "exact-rational-grid"},
+            {"const": "80-digit-evaluation"},
+            {"const": "interval-arithmetic-enclosure"},
+            {"const": "deterministic-property-sweep"},
+            {"const": "exhaustive-small-cases"},
+            {"const": "boundary-and-adversarial-points"}
+          ],
+          "items": false,
+          "minItems": 6,
+          "maxItems": 6
+        }
+      },
+      "allOf": [
+        {"if": {"properties": {"counterexample": {"type": "null"}}, "required": ["counterexample"]}, "then": {"properties": {"left_value": false, "right_value": false}}, "else": {"required": ["left_value", "right_value"], "properties": {"left_value": {"type": "string", "minLength": 1}, "right_value": {"type": "string", "minLength": 1}}}}
+      ]
+    }
+  }
+}

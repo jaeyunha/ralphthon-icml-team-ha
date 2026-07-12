@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "submission_id": "paper-1",
+  "claims": [{"id": "THEOREM-001", "anchor_id": "THM-0001", "statement": "For every n, n + 0 = n.", "page": 3}],
+  "counts": {"claims": 0, "equations": 0, "theorems": 1}
+}

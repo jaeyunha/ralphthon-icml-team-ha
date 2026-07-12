@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/math-validation-bundle.schema.json",
+  "title": "MathematicalValidationBundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "agent_id", "submission_id", "finding_count", "findings", "phase_order", "published_at"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "run_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"},
+    "agent_id": {"type": "string", "pattern": "^validator-mathematics-[A-Za-z0-9][A-Za-z0-9._-]*$"},
+    "submission_id": {"type": "string", "minLength": 1},
+    "finding_count": {"type": "integer", "minimum": 0},
+    "findings": {"type": "array", "items": {"$ref": "https://ralph-review.dev/schemas/validation-finding.schema.json"}},
+    "phase_order": {"const": ["claim-extraction", "assumption-audit", "symbolic-validation", "counterexample-search", "formalization", "confirmation", "bundle-publication"]},
+    "published_at": {"type": "string", "format": "date-time"}
+  }
+}

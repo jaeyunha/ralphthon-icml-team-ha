@@ -1,0 +1,18 @@
+{
+  "claim_id": "LEMMA-001",
+  "paper_anchors": ["THM-0001"],
+  "formalization_sha256": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "toolchain_image": "leanprovercommunity/lean4@sha256:2222222222222222222222222222222222222222222222222222222222222222",
+  "toolchain_version": "4.10.0",
+  "statement_alignment_checked": true,
+  "statement_alignment": "aligned",
+  "statement_alignment_evidence": "Claimed alignment.",
+  "proof_attempted": true,
+  "proof_compiled": false,
+  "proof_validity": "accepted",
+  "formalization_fidelity": "aligned",
+  "compiler_stdout": "",
+  "compiler_stderr": "compile failed",
+  "compiler_exit_code": 1,
+  "protocol_note": "Lean proof accepted does not imply that the paper theorem was verified."
+}
