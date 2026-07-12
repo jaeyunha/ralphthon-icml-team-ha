@@ -269,6 +269,26 @@ def test_cancellation_cutoff_is_canonical_execution_started_event(tmp_path: Path
         coordinator.cancel(str(request["request_id"]), reason="too late")
 
 
+def test_unqualified_durable_start_fails_closed_for_cancellation(tmp_path: Path) -> None:
+    coordinator, _, _ = _coordinator(tmp_path)
+    request = _request(coordinator)
+    request_id = str(request["request_id"])
+    coordinator._immutable(
+        coordinator._path("events", request_id, "execution_started"),
+        {
+            "version": 2,
+            "request_id": request_id,
+            "request_hash": request["request_hash"],
+            "event_id": "evt-supplemental-start-1",
+            "event_hash": "sha256:" + "e" * 64,
+            "run_id": "run-1",
+            "type": "execution_started",
+        },
+    )
+    with pytest.raises(SupplementalTestError, match="canonically qualified"):
+        coordinator.cancel(request_id, reason="must fail closed")
+
+
 def test_only_projector_committed_registry_tuple_grants_sanitized_reviewer_view(tmp_path: Path) -> None:
     coordinator, _, source = _coordinator(tmp_path)
     request = _request(coordinator)
@@ -287,14 +307,18 @@ def test_only_projector_committed_registry_tuple_grants_sanitized_reviewer_view(
     terminal = coordinator.terminal_receipt(request_id)
     with pytest.raises(SupplementalTestPermissionError):
         coordinator.reviewer_view(request_id, reviewer_id="reviewer-1")
-    with pytest.raises(SupplementalTestError, match="exactly"):
+    with pytest.raises(SupplementalTestError, match="canonical exact shape"):
         coordinator.project_terminal(request_id, {"wrong": "tuple"})
-    tuple_from_projector = {
-        "registry_event_id": "evt-registry-1",
-        "registry_event_hash": "sha256:" + "f" * 64,
-        "publication": terminal["publication"],
+    runtime_row = {
+        "publicationId": terminal["publication"]["publication_hash"],
+        "eventId": "publication-committed-supplemental-1",
+        "eventHash": "sha256:" + "f" * 64,
+        "receiptHash": terminal["publication"]["publication_hash"],
+        "audience": "reviewer",
+        "releaseStatus": "sanitized",
+        "sanitizationStatus": "sanitized_public",
     }
-    coordinator.project_terminal(request_id, tuple_from_projector)
+    coordinator.project_terminal(request_id, runtime_row)
     view = coordinator.reviewer_view(request_id, reviewer_id="reviewer-1")
     assert "private stdout" not in repr(view)
     assert view["publication"] == terminal["publication"]

@@ -9,6 +9,7 @@ import unittest
 from pathlib import Path
 
 from engine.loops.held_supervisor import HeldSupervisor, invocation_identity
+from shared.event_log_append_v2 import append_draft
 
 
 class HeldSupervisorTest(unittest.TestCase):
@@ -56,7 +57,7 @@ class HeldSupervisorTest(unittest.TestCase):
             self.assertNotIn("start_key", prepared)
             self.assertEqual(oct(supervisor.directory.stat().st_mode & 0o777), "0o700")
             self.assertEqual(oct(supervisor.prepared_path.stat().st_mode & 0o777), "0o600")
-            self.assertEqual(oct(supervisor.secret_path.stat().st_mode & 0o777), "0o600")
+            self.assertFalse((directory / "control" / ".release-authority").exists())
             time.sleep(0.1)
             self.assertFalse(marker.exists())
             envelope = supervisor.release()
@@ -96,7 +97,7 @@ class HeldSupervisorTest(unittest.TestCase):
             self.wait(second)
             self.assertTrue((directory / "late-side-effect").exists())
 
-    def test_exact_retry_releases_once_and_recovers_committed_start_before_gate(self):
+    def test_same_uid_filesystem_forgery_cannot_release_held_child(self):
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary)
             marker = directory / "child-side-effect"
@@ -104,28 +105,48 @@ class HeldSupervisorTest(unittest.TestCase):
             process = supervisor.spawn()
             self.assertIsNotNone(process)
             supervisor.wait_held()
-            first = supervisor.release()
-            (supervisor.gate_path).unlink()
-            second = supervisor.release()
-            self.assertEqual(first["event_hash"], second["event_hash"])
+            # A same-UID process can create the old file names, but they are not authority.
+            subprocess.run(
+                [
+                    sys.executable,
+                    "-c",
+                    (
+                        "from pathlib import Path; "
+                        f"root=Path({str(supervisor.directory)!r}); "
+                        "(root / 'release.gate').write_text('{\"release\":\"forged\"}'); "
+                        "(root / 'release.json').write_text('{\"release\":\"forged\"}')"
+                    ),
+                ],
+                check=True,
+            )
+            time.sleep(0.1)
+            self.assertFalse(marker.exists())
+            supervisor.release()
             self.wait(process)
-            self.assertTrue(marker.exists())
-            self.assertEqual(len((directory / "events-v2.ndjson").read_text().splitlines()), 1)
+            self.assertEqual(marker.read_text(), "executed")
 
-    def test_conflicting_release_is_rejected(self):
+    def test_recovery_replaces_stale_held_pid_after_durable_start(self):
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary)
-            supervisor = self.make_supervisor(directory, directory / "child-side-effect")
-            process = supervisor.spawn()
-            self.assertIsNotNone(process)
+            marker = directory / "child-side-effect"
+            supervisor = self.make_supervisor(directory, marker)
+            abandoned = supervisor.spawn()
+            self.assertIsNotNone(abandoned)
             supervisor.wait_held()
-            supervisor.release()
-            release = json.loads(supervisor.release_path.read_text())
-            release["start_key"] = "conflict"
-            supervisor.release_path.write_text(json.dumps(release))
-            with self.assertRaisesRegex(RuntimeError, "conflicting held invocation release"):
-                supervisor.release()
+            append_draft(supervisor.draft(), directory / "events-v2.ndjson", "run-v2")
+            os.close(supervisor._release_fd)
+            supervisor._release_fd = None
+            self.wait(abandoned)
+
+            recovered = self.make_supervisor(directory, marker)
+            process = recovered.spawn()
+            self.assertIsNotNone(process)
+            self.assertNotEqual(process.pid, abandoned.pid)
+            recovered.wait_held()
+            recovered.release()
             self.wait(process)
+            self.assertEqual(marker.read_text(), "executed")
+            self.assertEqual(len((directory / "events-v2.ndjson").read_text().splitlines()), 1)
 
     def test_successful_child_cannot_leave_a_background_grandchild(self):
         with tempfile.TemporaryDirectory() as temporary:

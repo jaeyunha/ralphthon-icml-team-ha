@@ -1,5 +1,8 @@
+import { Database } from "bun:sqlite";
 import { createHash } from "node:crypto";
-import { open, stat } from "node:fs/promises";
+import { open, stat, mkdtemp, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 
 import type { EventDurableTipV2, EventEnvelopeV2, ProjectorEvent } from "./event-contract";
 import { assertEventDurableTipV2, assertEventEnvelopeV2 } from "./event-contract";
@@ -47,6 +50,24 @@ export interface VerifiedReplayRecordV2 {
 export interface VerifiedReplayV2 {
   records: readonly VerifiedReplayRecordV2[];
   durableTip: EventDurableTipV2;
+}
+
+export interface ReplayBatchLimitsV2 {
+  maxRecords?: number;
+  maxBytes?: number;
+  validateRecord?(record: VerifiedReplayRecordV2): void;
+}
+
+const DEFAULT_MAX_RECORDS = 256;
+const DEFAULT_MAX_BYTES = 1_048_576;
+const READ_BUFFER_BYTES = 65_536;
+
+function positiveSafeInteger(value: number | undefined, name: string, fallback: number): number {
+  if (value === undefined) return fallback;
+  if (!Number.isSafeInteger(value) || value < 1) {
+    throw new ReplayVerificationError(`${name} must be a positive safe integer`);
+  }
+  return value;
 }
 
 function assertSafeOffset(value: number, name: string): void {
@@ -109,20 +130,8 @@ function parseRecord(line: Buffer, offset: number): EventEnvelopeV2 {
   return parsed;
 }
 
-function validateCursorAnchor(anchor: V2CursorAnchor | undefined, records: readonly VerifiedReplayRecordV2[]): void {
-  if (anchor === undefined) return;
-  assertSafeOffset(anchor.byteOffset, "cursor byteOffset");
-  if (!Number.isSafeInteger(anchor.lastSequence) || anchor.lastSequence < 0) {
-    throw new ReplayVerificationError("cursor lastSequence must be a non-negative safe integer");
-  }
-  if (anchor.byteOffset === 0) {
-    if (anchor.lastSequence !== 0 || anchor.lastEventId !== undefined || anchor.lastEventHash !== undefined) {
-      throw new ReplayVerificationError("genesis cursor anchor must have no last event");
-    }
-    return;
-  }
-  const record = records.find(({ endOffset }) => endOffset === anchor.byteOffset);
-  if (record === undefined) throw new ReplayVerificationError("cursor byteOffset is not a verified record boundary");
+function validateCursorRecord(anchor: V2CursorAnchor | undefined, record: VerifiedReplayRecordV2): void {
+  if (anchor === undefined || anchor.byteOffset === 0 || record.endOffset !== anchor.byteOffset) return;
   if (record.raw.sequence !== anchor.lastSequence || record.raw.event_id !== anchor.lastEventId) {
     throw new ReplayVerificationError("cursor sequence or event ID does not match its verified anchor");
   }
@@ -131,12 +140,13 @@ function validateCursorAnchor(anchor: V2CursorAnchor | undefined, records: reado
   }
 }
 
-/** Verifies every canonical record from genesis through the immutable durable tip. */
+/** Verifies the captured prefix from genesis while retaining only one bounded suffix batch. */
 export async function verifyReplayV2(
   eventLogPath: string,
   runId: string,
   durableTip: EventDurableTipV2,
   cursor?: V2CursorAnchor,
+  limits: ReplayBatchLimitsV2 = {},
 ): Promise<VerifiedReplayV2> {
   try {
     assertEventDurableTipV2(durableTip);
@@ -144,8 +154,17 @@ export async function verifyReplayV2(
     throw new ReplayVerificationError("invalid durable tip", { cause: error });
   }
   assertSafeOffset(durableTip.end_offset, "durable tip end_offset");
-  if (cursor !== undefined && cursor.byteOffset > durableTip.end_offset) {
-    throw new ReplayVerificationError("cursor is beyond the captured durable tip");
+  const maxRecords = positiveSafeInteger(limits.maxRecords, "maxRecords", DEFAULT_MAX_RECORDS);
+  const maxBytes = positiveSafeInteger(limits.maxBytes, "maxBytes", DEFAULT_MAX_BYTES);
+  if (cursor !== undefined) {
+    assertSafeOffset(cursor.byteOffset, "cursor byteOffset");
+    if (!Number.isSafeInteger(cursor.lastSequence) || cursor.lastSequence < 0) {
+      throw new ReplayVerificationError("cursor lastSequence must be a non-negative safe integer");
+    }
+    if (cursor.byteOffset > durableTip.end_offset) throw new ReplayVerificationError("cursor is beyond the captured durable tip");
+    if (cursor.byteOffset === 0 && (cursor.lastSequence !== 0 || cursor.lastEventId !== undefined || cursor.lastEventHash !== undefined)) {
+      throw new ReplayVerificationError("genesis cursor anchor must have no last event");
+    }
   }
 
   let before;
@@ -158,30 +177,111 @@ export async function verifyReplayV2(
     throw new ReplayVerificationError("event log does not match the captured durable tip");
   }
 
-  const bytes = Buffer.alloc(durableTip.end_offset);
   let handle;
   try {
     handle = await open(eventLogPath, "r");
   } catch (error) {
     throw new ReplayTransportError("captured v2 event log could not be opened", { cause: error });
   }
+  const records: VerifiedReplayRecordV2[] = [];
+  let verifierDirectory: string | undefined;
+  let verifierDb: Database | undefined;
+  let previousHash = V2_GENESIS_HASH;
+  let sequence = 0;
+  let anchorFound = cursor?.byteOffset === 0;
+  let retainedBytes = 0;
+  let lastByte: number | undefined;
   try {
+    verifierDirectory = await mkdtemp(join(tmpdir(), "ralphthon-replay-v2-"));
+    verifierDb = new Database(join(verifierDirectory, "identities.sqlite"));
+    verifierDb.run("CREATE TABLE identities (value TEXT PRIMARY KEY)");
     const opened = await handle.stat();
     if (opened.dev !== durableTip.log_dev || opened.ino !== durableTip.log_ino || opened.size < durableTip.end_offset) {
       throw new ReplayVerificationError("opened event log does not match the captured durable tip");
     }
-    let read = 0;
-    while (read < bytes.length) {
-      const result = await handle.read(bytes, read, bytes.length - read, read);
-      if (result.bytesRead === 0) throw new ReplayVerificationError("event log changed while reading captured tip");
-      read += result.bytesRead;
+    const readBuffer = Buffer.allocUnsafe(READ_BUFFER_BYTES);
+    let readOffset = 0;
+    let available = 0;
+    let index = 0;
+    let offset = 0;
+    const nextLine = async (): Promise<{ line: Buffer; startOffset: number; endOffset: number } | undefined> => {
+      const chunks: Buffer[] = [];
+      let length = 0;
+      const startOffset = offset;
+      for (;;) {
+        if (index === available) {
+          if (readOffset >= durableTip.end_offset) {
+            if (length === 0) return undefined;
+            throw new ReplayVerificationError("captured durable tip ends with an incomplete record");
+          }
+          const requested = Math.min(readBuffer.length, durableTip.end_offset - readOffset);
+          const result = await handle.read(readBuffer, 0, requested, readOffset);
+          if (result.bytesRead === 0) throw new ReplayVerificationError("event log changed while reading captured tip");
+          readOffset += result.bytesRead;
+          available = result.bytesRead;
+          index = 0;
+        }
+        const newline = readBuffer.indexOf(0x0a, index, available);
+        const end = newline === -1 ? available : newline;
+        const segment = readBuffer.subarray(index, end);
+        length += segment.length;
+        if (length > maxBytes) throw new ReplayVerificationError(`v2 record at byte ${startOffset} exceeds maxBytes`);
+        if (newline !== -1) {
+          chunks.push(segment);
+          index = newline + 1;
+          offset += segment.length + 1;
+          lastByte = 0x0a;
+          return { line: chunks.length === 1 ? chunks[0]! : Buffer.concat(chunks, length), startOffset, endOffset: offset };
+        }
+        if (segment.length > 0) chunks.push(Buffer.from(segment));
+        offset += segment.length;
+        index = available;
+      }
+    };
+
+    for (let item = await nextLine(); item !== undefined; item = await nextLine()) {
+      if (item.line.length === 0) throw new ReplayVerificationError(`blank v2 record at byte ${item.startOffset}`);
+      const raw = parseRecord(item.line, item.startOffset);
+      const expectedSequence = sequence + 1;
+      if (raw.run_id !== runId) throw new ReplayVerificationError(`record ${raw.event_id} belongs to another run`);
+      if (raw.sequence !== expectedSequence) throw new ReplayVerificationError(`non-contiguous sequence at record ${expectedSequence}`);
+      if (raw.previous_event_hash !== previousHash) throw new ReplayVerificationError(`previous hash mismatch at sequence ${raw.sequence}`);
+      if (raw.event_hash !== eventHash(raw)) throw new ReplayVerificationError(`event hash mismatch at sequence ${raw.sequence}`);
+      const eventIdentity = `event:${raw.event_id}`;
+      const keyIdentity = `key:${raw.idempotency_key}`;
+      if (verifierDb.query("SELECT 1 FROM identities WHERE value = ?").get(eventIdentity) !== null
+        || verifierDb.query("SELECT 1 FROM identities WHERE value = ?").get(keyIdentity) !== null) {
+        throw new ReplayVerificationError(`duplicate identity at sequence ${raw.sequence}`);
+      }
+      if (raw.causation_event_id !== undefined
+        && verifierDb.query("SELECT 1 FROM identities WHERE value = ?").get(`event:${raw.causation_event_id}`) === null) {
+        throw new ReplayVerificationError(`event ${raw.event_id} has an unresolved or non-prior causal event ${raw.causation_event_id}`);
+      }
+      const record = { raw, event: eventEnvelopeV2Adapter.normalize(raw), startOffset: item.startOffset, endOffset: item.endOffset };
+      validateCursorRecord(cursor, record);
+      if (cursor?.byteOffset === item.endOffset) anchorFound = true;
+      try {
+        limits.validateRecord?.(record);
+      } catch (error) {
+        throw new ReplayVerificationError(`deterministic record validation failed at byte ${record.startOffset}`, { cause: error });
+      }
+      verifierDb.run("INSERT INTO identities (value) VALUES (?)", [eventIdentity]);
+      verifierDb.run("INSERT INTO identities (value) VALUES (?)", [keyIdentity]);
+      previousHash = raw.event_hash;
+      sequence = expectedSequence;
+      const recordBytes = item.endOffset - item.startOffset;
+      if (item.startOffset >= (cursor?.byteOffset ?? 0) && (records.length === 0 || (records.length < maxRecords && retainedBytes + recordBytes <= maxBytes))) {
+        records.push(record);
+        retainedBytes += recordBytes;
+      }
     }
+    if (durableTip.end_offset > 0 && lastByte !== 0x0a) throw new ReplayVerificationError("captured durable tip ends with an incomplete record");
+    if (sequence !== durableTip.last_sequence || previousHash !== durableTip.last_event_hash) {
+      throw new ReplayVerificationError("captured durable tip does not match the verified chain");
+    }
+    if (cursor !== undefined && !anchorFound) throw new ReplayVerificationError("cursor byteOffset is not a verified record boundary");
     const readComplete = await handle.stat();
-    if (
-      readComplete.dev !== durableTip.log_dev
-      || readComplete.ino !== durableTip.log_ino
-      || readComplete.size < durableTip.end_offset
-    ) {
+    if (readComplete.dev !== durableTip.log_dev || readComplete.ino !== durableTip.log_ino || readComplete.size < durableTip.end_offset) {
       throw new ReplayVerificationError("opened event log changed while reading captured tip");
     }
   } catch (error) {
@@ -189,6 +289,8 @@ export async function verifyReplayV2(
     throw new ReplayTransportError("captured v2 event log could not be read", { cause: error });
   } finally {
     await handle.close();
+    verifierDb?.close();
+    if (verifierDirectory !== undefined) await rm(verifierDirectory, { recursive: true, force: true });
   }
   let after;
   try {
@@ -199,36 +301,5 @@ export async function verifyReplayV2(
   if (after.dev !== durableTip.log_dev || after.ino !== durableTip.log_ino || after.size < durableTip.end_offset) {
     throw new ReplayVerificationError("event log changed while reading captured tip");
   }
-
-  if (bytes.length > 0 && bytes[bytes.length - 1] !== 0x0a) {
-    throw new ReplayVerificationError("captured durable tip ends with an incomplete record");
-  }
-  const records: VerifiedReplayRecordV2[] = [];
-  const seenIds = new Set<string>();
-  const seenKeys = new Set<string>();
-  let startOffset = 0;
-  let previousHash = V2_GENESIS_HASH;
-  for (let endOffset = bytes.indexOf(0x0a, startOffset); endOffset >= 0; endOffset = bytes.indexOf(0x0a, startOffset)) {
-    if (endOffset === startOffset) throw new ReplayVerificationError(`blank v2 record at byte ${startOffset}`);
-    const raw = parseRecord(bytes.subarray(startOffset, endOffset), startOffset);
-    const expectedSequence = records.length + 1;
-    if (raw.run_id !== runId) throw new ReplayVerificationError(`record ${raw.event_id} belongs to another run`);
-    if (raw.sequence !== expectedSequence) throw new ReplayVerificationError(`non-contiguous sequence at record ${expectedSequence}`);
-    if (raw.previous_event_hash !== previousHash) throw new ReplayVerificationError(`previous hash mismatch at sequence ${raw.sequence}`);
-    if (raw.event_hash !== eventHash(raw)) throw new ReplayVerificationError(`event hash mismatch at sequence ${raw.sequence}`);
-    if (seenIds.has(raw.event_id) || seenKeys.has(raw.idempotency_key)) {
-      throw new ReplayVerificationError(`duplicate identity at sequence ${raw.sequence}`);
-    }
-    seenIds.add(raw.event_id);
-    seenKeys.add(raw.idempotency_key);
-    previousHash = raw.event_hash;
-    const nextOffset = endOffset + 1;
-    records.push({ raw, event: eventEnvelopeV2Adapter.normalize(raw), startOffset, endOffset: nextOffset });
-    startOffset = nextOffset;
-  }
-  if (records.length !== durableTip.last_sequence || previousHash !== durableTip.last_event_hash) {
-    throw new ReplayVerificationError("captured durable tip does not match the verified chain");
-  }
-  validateCursorAnchor(cursor, records);
   return { records, durableTip };
 }

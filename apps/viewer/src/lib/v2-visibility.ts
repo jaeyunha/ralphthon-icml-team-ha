@@ -11,6 +11,74 @@ export interface AuthenticatedAudiencePrincipal {
   };
 }
 
+/** Exact row shape returned by the v2 `committed_publications` projection. */
+export interface CommittedPublicationRegistryRow {
+  readonly run_id: string;
+  readonly publication_id: string;
+  readonly event_id: string;
+  readonly event_hash: string;
+  readonly receipt_hash: string;
+  readonly content_hash: string;
+  readonly sanitization_receipt_hash: string | null;
+  readonly audience: string;
+  readonly release_status: string;
+  readonly sanitization_status: string;
+}
+
+export function projectedGrantFromCommittedPublicationRow(
+  row: CommittedPublicationRegistryRow,
+): ProjectedPublicationGrant | null {
+  if (!safeIdentifier(row.run_id) || !safeIdentifier(row.publication_id) || !safeIdentifier(row.event_id)
+    || !isHash(row.event_hash) || !isHash(row.receipt_hash) || !isHash(row.content_hash)
+    || !isAudience(row.audience) || !safeIdentifier(row.release_status)
+    || (row.sanitization_receipt_hash !== null && !isHash(row.sanitization_receipt_hash))
+    || (row.audience === "public" && (row.sanitization_status !== "sanitized_public" || row.sanitization_receipt_hash === null))
+    || (row.audience !== "public" && row.sanitization_status !== "private")) return null;
+  return {
+    runId: row.run_id,
+    publicationId: row.publication_id,
+    eventId: row.event_id,
+    eventHash: row.event_hash,
+    receiptHash: row.receipt_hash,
+    contentHash: row.content_hash,
+    audience: row.audience,
+    release: row.release_status,
+    sanitizationReceiptHash: row.sanitization_receipt_hash,
+  };
+}
+
+/** Production adapter for authenticated viewer sessions backed by committed projection rows. */
+export class CommittedPublicationRegistryAdapter implements ProjectorPublicationRegistryAdapter {
+  readonly authority = "projector-v2" as const;
+  private readonly grants: readonly ProjectedPublicationGrant[];
+
+  constructor(
+    rows: readonly CommittedPublicationRegistryRow[],
+    private readonly authenticate: (principal: AuthenticatedAudiencePrincipal, audience: PublicationAudience) => void,
+  ) {
+    this.grants = rows.flatMap((row) => {
+      const grant = projectedGrantFromCommittedPublicationRow(row);
+      return grant === null ? [] : [grant];
+    });
+  }
+
+  findExact(request: PublicationVisibilityRequest): readonly ProjectedPublicationGrant[] {
+    return this.grants.filter((grant) => sameGrant(grant, request));
+  }
+
+  assertAuthenticatedPrincipal(principal: AuthenticatedAudiencePrincipal, audience: PublicationAudience): void {
+    this.authenticate(principal, audience);
+  }
+
+  assertTrustedSanitizationReceipt(grant: ProjectedPublicationGrant): void {
+    if (grant.audience !== "public" || grant.sanitizationReceiptHash === null
+      || !this.grants.some((candidate) => sameGrant(candidate, grant)
+        && candidate.sanitizationReceiptHash === grant.sanitizationReceiptHash)) {
+      throw new Error("sanitization receipt is not bound to a committed public publication");
+    }
+  }
+}
+
 export interface ProjectedPublicationGrant {
   readonly runId: string;
   readonly publicationId: string;
@@ -147,6 +215,10 @@ function validPrincipal(principal: AuthenticatedAudiencePrincipal): boolean {
 
 function isHash(value: string): value is Sha256 {
   return /^sha256:[0-9a-f]{64}$/.test(value);
+}
+
+function isAudience(value: string): value is PublicationAudience {
+  return value === "reviewer" || value === "author" || value === "committee" || value === "public";
 }
 
 function safeIdentifier(value: string): boolean {

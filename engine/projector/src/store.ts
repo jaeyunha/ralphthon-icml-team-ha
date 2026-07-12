@@ -35,6 +35,8 @@ export interface PublicationRegistryRowV2 {
   eventId: string;
   eventHash: string;
   receiptHash: string;
+  contentHash: string;
+  sanitizationReceiptHash: string | null;
   audience: string;
   releaseStatus: string;
   sanitizationStatus: string;

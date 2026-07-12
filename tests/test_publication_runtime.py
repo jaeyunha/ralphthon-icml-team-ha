@@ -61,13 +61,13 @@ def registry_for(result: dict[str, object]) -> dict[str, object]:
     event = result["event"]
     assert isinstance(prepared, dict) and isinstance(receipt, dict) and isinstance(event, dict)
     return {
-        "run_id": prepared["run_id"],
-        "publication_id": prepared["publication_id"],
-        "event_hash": event["event_hash"],
-        "receipt_hash": receipt["receipt_hash"],
+        "publicationId": prepared["publication_id"],
+        "eventId": event["event_id"],
+        "eventHash": event["event_hash"],
+        "receiptHash": receipt["receipt_hash"],
         "audience": prepared["audience"],
-        "release": prepared["release"],
-        "sanitized_public": prepared["sanitized_public"],
+        "releaseStatus": prepared["release"],
+        "sanitizationStatus": "sanitized_public" if prepared["sanitized_public"] else "private",
     }
 
 
@@ -129,7 +129,7 @@ def test_byte_and_projection_conflicts_freeze_without_visibility(tmp_path: Path)
     assert publication.publish(**request(target))["grants"] == 0
 
     other_target = tmp_path / "other"
-    projected, _ = runtime(tmp_path / "second", {"run_id": "run-1", "publication_id": "pub-1"})
+    projected, _ = runtime(tmp_path / "second", {"publicationId": "pub-1", "eventId": "event-1"})
     frozen = projected.publish(**request(other_target))
     assert frozen["status"] == "frozen"
     assert frozen["grants"] == 0

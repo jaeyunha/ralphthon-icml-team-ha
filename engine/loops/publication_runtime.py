@@ -17,7 +17,7 @@ from typing import Any, Callable, Mapping
 from shared.canonical_jcs import CanonicalJsonError, canonicalize_bytes
 from shared.event_log_append_v2 import append_draft
 
-RegistryLookup = Callable[[str, str], Mapping[str, Any] | tuple[Any, ...] | None]
+RegistryLookup = Callable[[str, str], Mapping[str, Any] | None]
 AppendAuthority = Callable[[Mapping[str, Any], str | os.PathLike[str], str], Mapping[str, Any]]
 
 
@@ -184,27 +184,19 @@ class PublicationRuntime:
                 return self._freeze(paths, prepared, "destination_bytes_mismatch")
 
             event = self._append_committed(prepared, receipt)
-            expected_registry = (
-                run_id,
-                publication_id,
-                event["event_hash"],
-                receipt["receipt_hash"],
-                audience,
-                release,
-                sanitized_public,
-            )
+            expected_registry = self._expected_runtime_row(prepared, receipt, event)
             try:
                 observed = self.registry_lookup(run_id, publication_id)
             except (OSError, TimeoutError):
                 observed = None
             if observed is None:
                 return self._result("awaiting_projection", prepared, receipt, event)
-            if self._registry_tuple(observed) != expected_registry:
+            if not isinstance(observed, Mapping) or self._runtime_row(observed) != expected_registry:
                 return self._freeze(paths, prepared, "projected_registry_mismatch")
-
             if not self._promote_destination(prepared, paths, destination_path):
                 return self._freeze(paths, prepared, "destination_promotion_mismatch")
             terminal = self._append_terminal(prepared, receipt, event, expected_registry)
+            return self._result("settled", prepared, receipt, event, terminal=terminal)
             return self._result("settled", prepared, receipt, event, terminal=terminal)
         except PublicationRuntimeError as error:
             return self._freeze(paths, prepared, str(error))
@@ -358,9 +350,9 @@ class PublicationRuntime:
         prepared: dict[str, Any],
         receipt: dict[str, Any],
         event: dict[str, Any],
-        registry: tuple[Any, ...],
+        registry: Mapping[str, str],
     ) -> dict[str, Any]:
-        registry_hash = sha256_json(list(registry))
+        registry_hash = sha256_json(dict(registry))
         identity = hashlib.sha256(
             canonical_bytes(
                 {"publication_id": prepared["publication_id"], "registry_hash": registry_hash}
@@ -407,21 +399,35 @@ class PublicationRuntime:
         return {"status": "frozen", "grants": 0, "viewer_visible": False, "reason": reason}
 
     @staticmethod
-    def _registry_tuple(value: Mapping[str, Any] | tuple[Any, ...]) -> tuple[Any, ...]:
-        if isinstance(value, tuple):
-            return value
-        return tuple(
-            value.get(name)
-            for name in (
-                "run_id",
-                "publication_id",
-                "event_hash",
-                "receipt_hash",
-                "audience",
-                "release",
-                "sanitized_public",
-            )
+    def _runtime_row(value: Mapping[str, Any]) -> dict[str, str] | None:
+        fields = (
+            "publicationId",
+            "eventId",
+            "eventHash",
+            "receiptHash",
+            "audience",
+            "releaseStatus",
+            "sanitizationStatus",
         )
+        if set(value) != set(fields) or any(not isinstance(value.get(name), str) or not value[name] for name in fields):
+            return None
+        if value["sanitizationStatus"] not in {"sanitized_public", "private"}:
+            return None
+        return {name: value[name] for name in fields}
+
+    @staticmethod
+    def _expected_runtime_row(
+        prepared: Mapping[str, Any], receipt: Mapping[str, Any], event: Mapping[str, Any]
+    ) -> dict[str, str]:
+        return {
+            "publicationId": prepared["publication_id"],
+            "eventId": event["event_id"],
+            "eventHash": event["event_hash"],
+            "receiptHash": receipt["receipt_hash"],
+            "audience": prepared["audience"],
+            "releaseStatus": prepared["release"],
+            "sanitizationStatus": "sanitized_public" if prepared["sanitized_public"] else "private",
+        }
 
     @staticmethod
     def _result(

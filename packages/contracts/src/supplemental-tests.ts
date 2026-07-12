@@ -77,6 +77,7 @@ export interface SupplementalTestExecutionReceiptContent {
   readonly sandbox: SupplementalTestSandbox;
   readonly execution_started_event_id: string;
   readonly execution_started_event_hash: Sha256;
+  readonly execution_started_event_type: "supplemental.execution_started";
   readonly status: SupplementalTestExecutionStatus;
   readonly stdout_hash: Sha256;
   readonly stderr_hash: Sha256;
@@ -111,6 +112,7 @@ export interface SupplementalTestPublicationContent {
   readonly execution_hash: Sha256;
   readonly execution_started_event_id: string;
   readonly execution_started_event_hash: Sha256;
+  readonly execution_started_event_type: "supplemental.execution_started";
   readonly assessment_hashes: readonly [Sha256, Sha256];
   readonly status: "published_terminal";
 }
@@ -126,6 +128,7 @@ export interface SupplementalTestTerminalRetryEvidence {
   readonly publication_hash: Sha256;
   readonly execution_started_event_id: string;
   readonly execution_started_event_hash: Sha256;
+  readonly execution_started_event_type: "supplemental.execution_started";
   readonly terminal_event_id: string;
   readonly terminal_event_hash: Sha256;
 }
@@ -191,7 +194,7 @@ export function assertSupplementalTestExecutionReceipt(
 ): void {
   assertRequest(request);
   assertAuthorization(authorization, request);
-  assertClosed(receipt, ["version", "request_id", "request_hash", "authorization_hash", "source_hash", "image_digest", "argv", "argv_hash", "env", "env_hash", "sandbox", "execution_started_event_id", "execution_started_event_hash", "status", "stdout_hash", "stderr_hash", "output_hash", "execution_hash"], "execution receipt");
+  assertClosed(receipt, ["version", "request_id", "request_hash", "authorization_hash", "source_hash", "image_digest", "argv", "argv_hash", "env", "env_hash", "sandbox", "execution_started_event_id", "execution_started_event_hash", "execution_started_event_type", "status", "stdout_hash", "stderr_hash", "output_hash", "execution_hash"], "execution receipt");
   const content = withoutHash(receipt, "execution_hash");
   if (receipt.execution_hash !== hashSupplementalTestExecutionReceipt(content)) throw new SupplementalTestContractError("execution receipt hash mismatch");
   if (receipt.request_id !== request.request_id || receipt.request_hash !== request.request_hash || receipt.authorization_hash !== authorization.authorization_hash) throw new SupplementalTestContractError("execution receipt is bound to another request or authorization");
@@ -200,6 +203,7 @@ export function assertSupplementalTestExecutionReceipt(
   if (!receipt.argv.every((argument) => typeof argument === "string") || !Object.entries(receipt.env).every(([key, value]) => key.length > 0 && typeof value === "string")) throw new SupplementalTestContractError("execution argv and environment must contain only non-empty string keys and string values");
   assertIdentifier(receipt.execution_started_event_id, "execution_started_event_id");
   assertHash(receipt.execution_started_event_hash, "execution_started_event_hash");
+  if (receipt.execution_started_event_type !== "supplemental.execution_started") throw new SupplementalTestContractError("execution receipt lacks the qualified execution-start event type");
   if (!isExecutionStatus(receipt.status)) throw new SupplementalTestContractError("invalid execution status");
   assertHash(receipt.stdout_hash, "stdout_hash"); assertHash(receipt.stderr_hash, "stderr_hash"); assertHash(receipt.output_hash, "output_hash");
   assertSandbox(receipt.sandbox, request);
@@ -221,17 +225,17 @@ export function assertSupplementalTestAssessments(receipt: SupplementalTestExecu
 
 export function assertSupplementalTestPublication(request: SupplementalTestRequest, authorization: SupplementalTestAuthorization, receipt: SupplementalTestExecutionReceipt, assessments: readonly SupplementalTestAssessment[], publication: SupplementalTestPublication): void {
   assertNoPrivateField(publication, "publication");
-  assertClosed(publication, ["version", "request_id", "parent_review_id", "reviewer_id", "request_hash", "authorization_hash", "execution_hash", "execution_started_event_id", "execution_started_event_hash", "assessment_hashes", "status", "publication_hash"], "publication");
+  assertClosed(publication, ["version", "request_id", "parent_review_id", "reviewer_id", "request_hash", "authorization_hash", "execution_hash", "execution_started_event_id", "execution_started_event_hash", "execution_started_event_type", "assessment_hashes", "status", "publication_hash"], "publication");
   assertSupplementalTestExecutionReceipt(request, authorization, receipt); assertSupplementalTestAssessments(receipt, assessments);
   const content = withoutHash(publication, "publication_hash");
   if (publication.publication_hash !== hashSupplementalTestPublication(content)) throw new SupplementalTestContractError("publication hash mismatch");
-  if (publication.request_id !== request.request_id || publication.parent_review_id !== request.parent_review_id || publication.reviewer_id !== request.reviewer_id || publication.request_hash !== request.request_hash || publication.authorization_hash !== authorization.authorization_hash || publication.execution_hash !== receipt.execution_hash || publication.execution_started_event_id !== receipt.execution_started_event_id || publication.execution_started_event_hash !== receipt.execution_started_event_hash || publication.status !== "published_terminal") throw new SupplementalTestContractError("publication is not bound to its terminal parent artifacts");
+  if (publication.request_id !== request.request_id || publication.parent_review_id !== request.parent_review_id || publication.reviewer_id !== request.reviewer_id || publication.request_hash !== request.request_hash || publication.authorization_hash !== authorization.authorization_hash || publication.execution_hash !== receipt.execution_hash || publication.execution_started_event_id !== receipt.execution_started_event_id || publication.execution_started_event_hash !== receipt.execution_started_event_hash || publication.execution_started_event_type !== receipt.execution_started_event_type || publication.status !== "published_terminal") throw new SupplementalTestContractError("publication is not bound to its terminal parent artifacts");
   const expected = assessments.map((assessment) => assessment.assessment_hash).sort(compareExact);
   if (canonicalJson(publication.assessment_hashes) !== canonicalJson(expected)) throw new SupplementalTestContractError("publication assessment hashes must exactly match sorted assessments");
 }
 
 export function canCancelSupplementalTest(events: readonly { readonly type: string; readonly event_id?: string; readonly event_hash?: string }[]): boolean {
-  return !events.some((event) => event.type === "execution_started" && typeof event.event_id === "string" && typeof event.event_hash === "string" && isSha256(event.event_hash));
+  return !events.some((event) => event.type === "supplemental.execution_started" && typeof event.event_id === "string" && event.event_id.length > 0 && typeof event.event_hash === "string" && isSha256(event.event_hash));
 }
 
 export function assertReviewerSupplementalTestConsumption(publication: SupplementalTestPublication, registry: SupplementalTestTerminalRegistryAdapter, consumer: { readonly role: "reviewer"; readonly reviewer_id: string }): void {
@@ -241,9 +245,10 @@ export function assertReviewerSupplementalTestConsumption(publication: Supplemen
   let evidence: SupplementalTestTerminalRetryEvidence | null;
   try { evidence = registry.loadTerminalRetryEvidence(publication); if (evidence !== null) registry.assertAuthenticatedTerminalRetry(evidence); } catch { throw new SupplementalTestContractError("terminal retry evidence is not projector authenticated"); }
   if (evidence === null) throw new SupplementalTestContractError("publication has no terminal retry evidence");
-  assertClosed(evidence, ["version", "request_hash", "execution_hash", "publication_hash", "execution_started_event_id", "execution_started_event_hash", "terminal_event_id", "terminal_event_hash"], "terminal retry evidence");
-  if (evidence.version !== 1 || evidence.request_hash !== publication.request_hash || evidence.execution_hash !== publication.execution_hash || evidence.publication_hash !== publication.publication_hash || evidence.execution_started_event_id !== publication.execution_started_event_id || evidence.execution_started_event_hash !== publication.execution_started_event_hash) throw new SupplementalTestContractError("terminal retry evidence is not bound to publication");
+  assertClosed(evidence, ["version", "request_hash", "execution_hash", "publication_hash", "execution_started_event_id", "execution_started_event_hash", "execution_started_event_type", "terminal_event_id", "terminal_event_hash"], "terminal retry evidence");
+  if (evidence.version !== 1 || evidence.request_hash !== publication.request_hash || evidence.execution_hash !== publication.execution_hash || evidence.publication_hash !== publication.publication_hash || evidence.execution_started_event_id !== publication.execution_started_event_id || evidence.execution_started_event_hash !== publication.execution_started_event_hash || evidence.execution_started_event_type !== publication.execution_started_event_type) throw new SupplementalTestContractError("terminal retry evidence is not bound to publication");
   assertIdentifier(evidence.execution_started_event_id, "execution_started_event_id"); assertIdentifier(evidence.terminal_event_id, "terminal_event_id"); assertHash(evidence.execution_started_event_hash, "execution_started_event_hash"); assertHash(evidence.terminal_event_hash, "terminal_event_hash");
+  if (evidence.execution_started_event_type !== "supplemental.execution_started") throw new SupplementalTestContractError("terminal retry evidence lacks the qualified execution-start event type");
 }
 
 export function canAuthorViewSupplementalTest(publication: SupplementalTestPublication | null, registry: SupplementalTestTerminalRegistryAdapter | null): boolean {

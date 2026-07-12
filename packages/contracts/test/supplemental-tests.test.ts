@@ -87,6 +87,7 @@ function receipt(value = request(), auth = authorization(value)): SupplementalTe
     },
     execution_started_event_id: "execution-start-1",
     execution_started_event_hash: hash("6"),
+    execution_started_event_type: "supplemental.execution_started" as const,
     status: "succeeded" as const,
     stdout_hash: hash("3"),
     stderr_hash: hash("4"),
@@ -125,6 +126,7 @@ function publication(
     execution_hash: execution.execution_hash,
     execution_started_event_id: execution.execution_started_event_id,
     execution_started_event_hash: execution.execution_started_event_hash,
+    execution_started_event_type: execution.execution_started_event_type,
     assessment_hashes: results.map((result) => result.assessment_hash).sort() as [Sha256, Sha256],
     status: "published_terminal" as const,
   };
@@ -142,6 +144,7 @@ function terminalRegistry(
     publication_hash: publication.publication_hash,
     execution_started_event_id: publication.execution_started_event_id,
     execution_started_event_hash: publication.execution_started_event_hash,
+    execution_started_event_type: publication.execution_started_event_type,
     terminal_event_id: "terminal-event-1",
     terminal_event_hash: hash("7"),
   };
@@ -207,9 +210,10 @@ describe("reviewer-requested supplemental tests", () => {
     ).toThrow(SupplementalTestContractError);
   });
 
-  test("cancellation cutoff depends only on execution_started", () => {
+  test("cancellation cutoff requires the exact qualified execution_started evidence", () => {
     expect(canCancelSupplementalTest([{ type: "child_created" }, { type: "cancelled" }])).toBe(true);
-    expect(canCancelSupplementalTest([{ type: "execution_started", event_id: "execution-start-1", event_hash: hash("6") }, { type: "cancelled" }])).toBe(false);
+    expect(canCancelSupplementalTest([{ type: "execution_started", event_id: "execution-start-1", event_hash: hash("6") }])).toBe(true);
+    expect(canCancelSupplementalTest([{ type: "supplemental.execution_started", event_id: "execution-start-1", event_hash: hash("6") }])).toBe(false);
   });
 
   test("never leaks the private child and gates reviewer consumption on exact terminal projection", () => {

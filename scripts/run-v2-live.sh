@@ -2,7 +2,7 @@
 set -Eeuo pipefail
 
 usage() {
-  printf '%s\n' 'Usage: run-v2-live.sh --run-id ID --run-dir DIR --config FILE --database-url URL --allowed-event-types FILE --ack-live-v2'
+  printf '%s\n' 'Usage: run-v2-live.sh --run-id ID --run-dir DIR --config FILE --database-url URL --allowed-event-types FILE [--skip-migrate] [--projector-db-connections N] --ack-live-v2'
 }
 
 RUN_ID=
@@ -11,6 +11,8 @@ CONFIG=
 DATABASE_URL_VALUE=
 ALLOWED_EVENT_TYPES=
 ACK=0
+MIGRATE=1
+PROJECTOR_DB_CONNECTIONS=2
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --run-id) RUN_ID=${2:?}; shift 2 ;;
@@ -18,6 +20,8 @@ while [[ $# -gt 0 ]]; do
     --config) CONFIG=${2:?}; shift 2 ;;
     --database-url) DATABASE_URL_VALUE=${2:?}; shift 2 ;;
     --allowed-event-types) ALLOWED_EVENT_TYPES=${2:?}; shift 2 ;;
+    --skip-migrate) MIGRATE=0; shift ;;
+    --projector-db-connections) PROJECTOR_DB_CONNECTIONS=${2:?}; shift 2 ;;
     --ack-live-v2) ACK=1; shift ;;
     -h|--help) usage; exit 0 ;;
     *) usage >&2; exit 2 ;;
@@ -26,6 +30,7 @@ done
 
 [[ $ACK -eq 1 ]] || { printf '%s\n' 'error: live v2 execution requires --ack-live-v2' >&2; exit 2; }
 [[ -n $RUN_ID && -n $RUN_DIR && -n $CONFIG && -n $DATABASE_URL_VALUE && -n $ALLOWED_EVENT_TYPES ]] || { usage >&2; exit 2; }
+[[ $PROJECTOR_DB_CONNECTIONS =~ ^[1-9][0-9]*$ && $PROJECTOR_DB_CONNECTIONS -le 6 ]] || { printf '%s\n' 'error: --projector-db-connections must be an integer from 1 through 6' >&2; exit 2; }
 command -v bun >/dev/null || { printf '%s\n' 'error: bun is required' >&2; exit 127; }
 command -v python3 >/dev/null || { printf '%s\n' 'error: python3 is required' >&2; exit 127; }
 command -v docker >/dev/null || { printf '%s\n' 'error: Docker is required for live v2 execution' >&2; exit 127; }
@@ -131,7 +136,9 @@ else:
 PY
 
 docker info >/dev/null
-DATABASE_URL="$DATABASE_URL_VALUE" bun run --cwd "$REPO_ROOT/packages/db" db:migrate
+if [[ $MIGRATE -eq 1 ]]; then
+  DATABASE_URL="$DATABASE_URL_VALUE" bun run --cwd "$REPO_ROOT/packages/db" db:migrate
+fi
 
 WATCHDOG="$REPO_ROOT/engine/watchdog/committee-watchdog.sh"
 EVENT_LOG="$RUN_DIR/events-v2.ndjson"
@@ -155,13 +162,13 @@ trap 'cleanup 143' TERM
 
 while kill -0 "$WATCHDOG_PID" 2>/dev/null; do
   if [[ -e $EVENT_LOG ]]; then
-    bun run "$REPO_ROOT/engine/projector/src/run-projector-v2.ts" --run-id "$RUN_ID" --event-log "$EVENT_LOG" --database-url "$DATABASE_URL_VALUE" --allowed-event-types "$ALLOWED_EVENT_TYPES" --ack-live-v2
+    bun run "$REPO_ROOT/engine/projector/src/run-projector-v2.ts" --run-id "$RUN_ID" --event-log "$EVENT_LOG" --database-url "$DATABASE_URL_VALUE" --database-max-connections "$PROJECTOR_DB_CONNECTIONS" --allowed-event-types "$ALLOWED_EVENT_TYPES" --ack-live-v2
   fi
   sleep 0.1
 done
 if wait "$WATCHDOG_PID"; then WATCHDOG_STATUS=0; else WATCHDOG_STATUS=$?; fi
 if [[ -e $EVENT_LOG ]]; then
-  bun run "$REPO_ROOT/engine/projector/src/run-projector-v2.ts" --run-id "$RUN_ID" --event-log "$EVENT_LOG" --database-url "$DATABASE_URL_VALUE" --allowed-event-types "$ALLOWED_EVENT_TYPES" --ack-live-v2
+  bun run "$REPO_ROOT/engine/projector/src/run-projector-v2.ts" --run-id "$RUN_ID" --event-log "$EVENT_LOG" --database-url "$DATABASE_URL_VALUE" --database-max-connections "$PROJECTOR_DB_CONNECTIONS" --allowed-event-types "$ALLOWED_EVENT_TYPES" --ack-live-v2
 fi
 trap - EXIT INT TERM
 exit "$WATCHDOG_STATUS"

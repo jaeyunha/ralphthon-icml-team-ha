@@ -12,6 +12,16 @@ if str(Path(__file__).resolve().parents[2]) not in sys.path:
 from engine.loops.held_supervisor import HeldSupervisor
 
 UTC = dt.timezone.utc
+
+SHA256 = re.compile(r"^sha256:[0-9a-f]{64}$")
+PROJECTED_PUBLICATION_FIELDS = frozenset({
+    "run_id", "publication_id", "event_id", "event_hash", "receipt_hash", "content_hash",
+    "sanitization_receipt_hash", "audience", "release_status", "sanitization_status",
+})
+PROJECTED_PUBLICATION_GATES = frozenset({
+    "official_review_published", "associated_rebuttal_published", "personas_proposed",
+    "official_reviews_published", "reviewer_followups_published",
+})
 TERMINAL = {
     "SUCCESS",
     "INCOMPLETE",
@@ -279,6 +289,8 @@ class Watchdog:
             "facts",
             "safety",
             "run_state_gates",
+            "database_url",
+            "projected_publication_gates",
         }
         phase_fields = {
             "agent_id",
@@ -316,6 +328,7 @@ class Watchdog:
             "response_matrix",
             "publication_paths",
             "publish_path",
+            "projected_publication_gates",
         }
         value = {key: item for key, item in self.config.items() if key in top_level}
         value.update(schema_version=1, run_id=self.run_id, runner=str(self.runner))
@@ -687,13 +700,12 @@ class Watchdog:
                 )
             return
         child = supervisor.spawn()
-        if not supervisor.gate_path.exists():
-            try:
-                supervisor.wait_held()
-                supervisor.release()
-            except Exception as exc:
-                raise RuntimeError("sealed held invocation cannot restore release gate") from exc
-        held = supervisor.wait_held() if supervisor.held_path.exists() else {}
+        try:
+            supervisor.wait_held()
+            supervisor.release()
+        except Exception as exc:
+            raise RuntimeError("sealed held invocation cannot restore canonical release") from exc
+        held = supervisor.wait_held()
         pid = int(held.get("supervisor_pid") or 0)
         if child is not None:
             self.children[p["key"]] = child
@@ -999,11 +1011,64 @@ class Watchdog:
                 self.repo / "packages/schemas/schemas/literature-registry.schema.json",
             )
 
+    def legacy_v1_authorization(self) -> bool:
+        return self.run_config.get("schema_version") == 1 or (
+            self.config_path != self.run / "watchdog-config.json" and self.config.get("schema_version") == 1
+        )
+
+    def projected_publication_rows(self) -> list[dict[str, Any]]:
+        database_url = self.config.get("database_url") or self.run_config.get("database_url") or os.getenv("DATABASE_URL")
+        if not isinstance(database_url, str) or not database_url:
+            return []
+        run_id = self.run_id.replace("'", "''")
+        query = (
+            "SELECT COALESCE(json_agg(row_to_json(publication)), '[]'::json)::text "
+            "FROM (SELECT run_id, publication_id, event_id, event_hash, receipt_hash, content_hash, "
+            "sanitization_receipt_hash, audience, release_status, sanitization_status "
+            f"FROM committed_publications WHERE run_id = '{run_id}') AS publication"
+        )
+        try:
+            result = subprocess.run(
+                ["psql", database_url, "-X", "-q", "-t", "-A", "-c", query],
+                text=True, capture_output=True, timeout=5, check=False,
+            )
+            rows = json.loads(result.stdout) if result.returncode == 0 else []
+        except (FileNotFoundError, subprocess.TimeoutExpired, json.JSONDecodeError):
+            return []
+        return rows if isinstance(rows, list) and all(isinstance(row, dict) for row in rows) else []
+
+    def projected_publication_gate(self, expected: Any) -> bool:
+        if not isinstance(expected, dict) or set(expected) != PROJECTED_PUBLICATION_FIELDS:
+            return False
+        sanitization_receipt = expected.get("sanitization_receipt_hash")
+        if (
+            expected.get("run_id") != self.run_id
+            or not all(isinstance(expected.get(field), str) and expected[field] for field in PROJECTED_PUBLICATION_FIELDS - {"sanitization_receipt_hash"})
+            or (sanitization_receipt is not None and (not isinstance(sanitization_receipt, str) or not SHA256.fullmatch(sanitization_receipt)))
+            or not all(SHA256.fullmatch(expected[field]) for field in ("event_hash", "receipt_hash", "content_hash"))
+            or expected["audience"] not in {"reviewer", "author", "committee", "public"}
+            or expected["sanitization_status"] not in {"private", "sanitized_public"}
+            or ((expected["audience"] == "public") != (expected["sanitization_status"] == "sanitized_public" and sanitization_receipt is not None))
+        ):
+            return False
+        return any(row == expected for row in self.projected_publication_rows())
+
+    def projected_gate_requirements(self, name: str, p: dict[str, Any]) -> list[dict[str, Any]]:
+        configured = p.get("projected_publication_gates", self.config.get("projected_publication_gates", {}))
+        if not isinstance(configured, dict):
+            return []
+        requirements = configured.get(name, [])
+        if isinstance(requirements, dict):
+            requirements = [requirements]
+        return requirements if isinstance(requirements, list) and all(isinstance(item, dict) for item in requirements) else []
+
     def gate(self, item: Any, p: dict[str, Any]) -> bool:
         if isinstance(item, dict):
+            if item.get("type") == "projected_committed_publication":
+                return self.projected_publication_gate(item.get("tuple"))
             path = self.run / str(item.get("path", ""))
             if item.get("type") == "file_exists":
-                return path.exists()
+                return self.legacy_v1_authorization() and path.exists()
             if item.get("type") == "json_equals":
                 value = load(path, {})
                 for part in str(item.get("field", "")).split("."):
@@ -1013,6 +1078,9 @@ class Watchdog:
                 return self.event_seen(str(item.get("pattern", "*")))
             return False
         name = str(item)
+        if name in PROJECTED_PUBLICATION_GATES:
+            requirements = self.projected_gate_requirements(name, p)
+            return bool(requirements) and all(self.projected_publication_gate(expected) for expected in requirements)
         facts = self.config.get("facts", {})
         if (
             facts.get(name) is True
@@ -1020,23 +1088,11 @@ class Watchdog:
             or (self.run / "gates" / f"{name}.ready").exists()
         ):
             return True
-        ws = self.workspace(p)
         special = {
             "persona_frozen": (self.run / f"frozen/personas/{p['agent_id']}.json").exists()
             or (self.run / "frozen/personas.json").exists(),
             "paper_frozen": (self.run / "frozen/paper.json").exists(),
-            "official_review_published": (ws / "published/official-review.json").exists(),
-            "associated_rebuttal_published": any(
-                (self.run / "agents").glob(f"*/published/rebuttal-{p['agent_id']}.json")
-            ),
             "initial_review_frozen": (self.run / "frozen/initial-review.json").exists(),
-            "personas_proposed": (self.run / "published/personas.json").exists(),
-            "official_reviews_published": any(
-                (self.run / "agents").glob("*/published/official-review.json")
-            ),
-            "reviewer_followups_published": any(
-                (self.run / "agents").glob("*/published/reviewer-followup.json")
-            ),
         }
         return special.get(name, False)
 

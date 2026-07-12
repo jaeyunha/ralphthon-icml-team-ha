@@ -49,6 +49,25 @@ describe("v2 proof-oriented replay", () => {
     expect(replay.records.at(-1)?.endOffset).toBe(first.durable_tip.end_offset);
   });
 
+  test("retains only a bounded verified suffix while preserving the captured tip", async () => {
+    const { eventLogPath, emitter } = await setup();
+    await emitter.emit(draft("evt-1"));
+    await emitter.emit(draft("evt-2"));
+    const tip = (await emitter.emit(draft("evt-3"))).durable_tip;
+
+    const first = await verifyReplayV2(eventLogPath, "run-v2", tip, undefined, { maxRecords: 2, maxBytes: 1_048_576 });
+    expect(first.records.map((record) => record.raw.event_id)).toEqual(["evt-1", "evt-2"]);
+
+    const last = first.records.at(-1)!;
+    const second = await verifyReplayV2(eventLogPath, "run-v2", tip, {
+      byteOffset: last.endOffset,
+      lastSequence: last.raw.sequence,
+      lastEventId: last.raw.event_id,
+      lastEventHash: last.raw.event_hash,
+    }, { maxRecords: 2, maxBytes: 1_048_576 });
+    expect(second.records.map((record) => record.raw.event_id)).toEqual(["evt-3"]);
+  });
+
   test("rejects a cursor that does not anchor the verified event", async () => {
     const { eventLogPath, emitter } = await setup();
     const result = await emitter.emit(draft("evt-1"));

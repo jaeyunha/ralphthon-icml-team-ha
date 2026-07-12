@@ -407,23 +407,28 @@ class PostgresTransactionV2 implements ProjectionTransactionV2 {
       const metadata = { projection_batch_id: batch.batchId };
       const inserted = await this.client.query<{ event_hash: string }>(
         `INSERT INTO committed_publications
-           (run_id, publication_id, event_id, event_hash, receipt_hash, audience, release_status, sanitization_status, metadata)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) ON CONFLICT DO NOTHING RETURNING event_hash`,
-        [batch.runId, row.publicationId, row.eventId, row.eventHash, row.receiptHash, row.audience,
-          row.releaseStatus, row.sanitizationStatus, metadata],
+           (run_id, publication_id, event_id, event_hash, receipt_hash, content_hash, sanitization_receipt_hash,
+            audience, release_status, sanitization_status, metadata)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) ON CONFLICT DO NOTHING RETURNING event_hash`,
+        [batch.runId, row.publicationId, row.eventId, row.eventHash, row.receiptHash, row.contentHash,
+          row.sanitizationReceiptHash, row.audience, row.releaseStatus, row.sanitizationStatus, metadata],
       );
       if (inserted.rowCount === 1) continue;
       const existing = await this.client.query<{
-        event_id: string; event_hash: string; receipt_hash: string; audience: string;
+        event_id: string; event_hash: string; receipt_hash: string; content_hash: string;
+        sanitization_receipt_hash: string | null; audience: string;
         release_status: string; sanitization_status: string; metadata: Record<string, unknown>;
       }>(
-        `SELECT event_id, event_hash, receipt_hash, audience, release_status, sanitization_status, metadata
+        `SELECT event_id, event_hash, receipt_hash, content_hash, sanitization_receipt_hash, audience,
+                release_status, sanitization_status, metadata
            FROM committed_publications WHERE run_id = $1 AND publication_id = $2`,
         [batch.runId, row.publicationId],
       );
       const committed = existing.rows[0];
       if (existing.rows.length !== 1 || committed === undefined || committed.event_id !== row.eventId
           || committed.event_hash !== row.eventHash || committed.receipt_hash !== row.receiptHash
+          || committed.content_hash !== row.contentHash
+          || committed.sanitization_receipt_hash !== row.sanitizationReceiptHash
           || committed.audience !== row.audience || committed.release_status !== row.releaseStatus
           || committed.sanitization_status !== row.sanitizationStatus
           || committed.metadata?.projection_batch_id !== batch.batchId) {

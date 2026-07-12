@@ -123,6 +123,7 @@ async function replayOnce(sql: postgres.Sql, input: Args, eventLog: string, tabl
     eventLog,
     databaseUrl,
     allowedEventTypes: input.allowedEventTypes,
+    databaseMaxConnections: 2,
     migrate: false,
   });
   if (result.status !== "committed") throw new Error(`rebuild projection did not commit: ${JSON.stringify(result)}`);

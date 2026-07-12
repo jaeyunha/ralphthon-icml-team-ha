@@ -203,9 +203,9 @@ class SupplementalTestCoordinator:
         return record
 
     def cancel(self, request_id: str, *, reason: str) -> dict[str, Any]:
-        """Cancel only before durable execution_started has been recorded."""
-        self._request(request_id)
-        if self._path("events", request_id, "execution_started").exists():
+        """Cancel only before a qualified durable execution_started envelope exists."""
+        request = self._request(request_id)
+        if self._has_durable_execution_started(request):
             raise SupplementalTestError("cannot cancel after execution_started")
         return self._limitation(request_id, "cancelled", reason)
 
@@ -213,7 +213,8 @@ class SupplementalTestCoordinator:
         """Record a non-judgmental terminal limitation without executing code."""
         if state not in _LIMITATION_STATES or state == "cancelled":
             raise SupplementalTestError("invalid limitation state")
-        if self._path("events", request_id, "execution_started").exists():
+        request = self._request(request_id)
+        if self._has_durable_execution_started(request):
             raise SupplementalTestError("limitation must be recorded before execution_started")
         return self._limitation(request_id, state, reason)
 
@@ -328,26 +329,41 @@ class SupplementalTestCoordinator:
         return self._load(path)
 
     def project_terminal(
-        self, request_id: str, committed_registry_tuple: Mapping[str, Any]
+        self, request_id: str, projector_runtime_row: Mapping[str, Any]
     ) -> dict[str, Any]:
-        """Accept only an externally committed, exact sanitized registry projection."""
+        """Persist only the exact projector-authenticated runtime publication row."""
         terminal = self.terminal_receipt(request_id)
         if terminal.get("terminal_state") != "assessed":
             raise SupplementalTestError("only assessed terminal receipts can be projected")
-        supplied = dict(committed_registry_tuple)
-        required = {"registry_event_id", "registry_event_hash", "publication"}
-        if set(supplied) != required or supplied["publication"] != terminal["publication"]:
-            raise SupplementalTestError(
-                "committed registry tuple does not exactly match terminal receipt"
-            )
-        _require_text(supplied["registry_event_id"], "registry_event_id")
-        _require_hash(supplied["registry_event_hash"], "registry_event_hash")
+        publication = terminal.get("publication")
+        if not isinstance(publication, dict):
+            raise SupplementalTestError("assessed terminal receipt has no publication")
+        supplied = dict(projector_runtime_row)
+        required = {
+            "publicationId", "eventId", "eventHash", "receiptHash", "audience",
+            "releaseStatus", "sanitizationStatus",
+        }
+        if set(supplied) != required:
+            raise SupplementalTestError("projector runtime row must have the canonical exact shape")
+        if (
+            supplied["publicationId"] != publication["publication_hash"]
+            or supplied["receiptHash"] != publication["publication_hash"]
+            or not isinstance(supplied["eventId"], str)
+            or not supplied["eventId"]
+            or not isinstance(supplied["audience"], str)
+            or not supplied["audience"]
+            or not isinstance(supplied["releaseStatus"], str)
+            or not supplied["releaseStatus"]
+            or supplied["sanitizationStatus"] != "sanitized_public"
+        ):
+            raise SupplementalTestError("projector runtime row is not bound to sanitized terminal publication")
+        _require_hash(supplied["eventHash"], "eventHash")
         projection = {
             "version": 2,
             "request_id": request_id,
-            "committed_registry_tuple": supplied,
+            "projector_runtime_row": supplied,
             "projection_hash": sha256(
-                {"version": 2, "request_id": request_id, "committed_registry_tuple": supplied}
+                {"version": 2, "request_id": request_id, "projector_runtime_row": supplied}
             ),
         }
         self._immutable(self._path("projections", request_id), projection)
@@ -368,7 +384,7 @@ class SupplementalTestCoordinator:
         # This is intentionally a new, sanitized object rather than the private records.
         return {
             "request_id": request_id,
-            "publication": self._load(projection)["committed_registry_tuple"]["publication"],
+            "publication": terminal["publication"],
             "terminal_state": terminal["terminal_state"],
         }
 
@@ -504,6 +520,7 @@ class SupplementalTestCoordinator:
                 "artifact_hashes": artifact_hashes,
             }
         )
+        event = self._load(self._path("events", request["request_id"], "execution_started"))
         content = {
             "version": 1,
             "request_id": request["request_id"],
@@ -516,13 +533,9 @@ class SupplementalTestCoordinator:
             "env": environment,
             "env_hash": request["env_hash"],
             "sandbox": sandbox,
-            "execution_started_event": "execution_started",
-            "execution_started_event_id": self._load(
-                self._path("events", request["request_id"], "execution_started")
-            )["event_id"],
-            "execution_started_event_hash": self._load(
-                self._path("events", request["request_id"], "execution_started")
-            )["event_hash"],
+            "execution_started_event_id": event["event_id"],
+            "execution_started_event_hash": event["event_hash"],
+            "execution_started_event_type": event["type"],
             "status": status,
             "stdout_hash": stdout_hash,
             "stderr_hash": stderr_hash,
@@ -577,6 +590,9 @@ class SupplementalTestCoordinator:
             "request_hash": request["request_hash"],
             "authorization_hash": authorization["authorization_hash"],
             "execution_hash": receipt["execution_hash"],
+            "execution_started_event_id": receipt["execution_started_event_id"],
+            "execution_started_event_hash": receipt["execution_started_event_hash"],
+            "execution_started_event_type": receipt["execution_started_event_type"],
             "assessment_hashes": hashes,
             "status": "published_terminal",
         }
@@ -610,9 +626,12 @@ class SupplementalTestCoordinator:
             raise SupplementalTestError("assessment requires an execution receipt")
         receipt = self._load(path)
         event = self._load(self._path("events", request_id, "execution_started"))
-        if receipt.get("execution_started_event_id") != event.get("event_id") or receipt.get(
-            "execution_started_event_hash"
-        ) != event.get("event_hash"):
+        if (
+            receipt.get("execution_started_event_id") != event.get("event_id")
+            or receipt.get("execution_started_event_hash") != event.get("event_hash")
+            or receipt.get("execution_started_event_type") != event.get("type")
+            or event.get("type") != "supplemental.execution_started"
+        ):
             raise SupplementalTestError(
                 "execution receipt is not bound to exact canonical execution-start event"
             )
@@ -647,6 +666,25 @@ class SupplementalTestCoordinator:
             "run_id": event["run_id"],
             "type": event["type"],
         }
+
+    def _has_durable_execution_started(self, request: Mapping[str, Any]) -> bool:
+        path = self._path("events", str(request["request_id"]), "execution_started")
+        if not path.exists():
+            return False
+        event = self._load(path)
+        if set(event) != {"version", "request_id", "request_hash", "event_id", "event_hash", "run_id", "type"}:
+            raise SupplementalTestError("durable execution-start artifact has an invalid shape")
+        if (
+            event["version"] != 2
+            or event["request_id"] != request["request_id"]
+            or event["request_hash"] != request["request_hash"]
+            or event["run_id"] != request["parent_review_id"]
+            or event["type"] != "supplemental.execution_started"
+        ):
+            raise SupplementalTestError("durable execution-start artifact is not canonically qualified")
+        _require_text(event["event_id"], "execution_started_event_id")
+        _require_hash(event["event_hash"], "execution_started_event_hash")
+        return True
 
     def _path(self, category: str, request_id: str, leaf: str | None = None) -> Path:
         _require_text(request_id, "request_id")

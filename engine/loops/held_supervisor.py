@@ -7,7 +7,7 @@ import argparse
 import hashlib
 import json
 import os
-import secrets
+import select
 import signal
 import stat
 import subprocess
@@ -194,11 +194,9 @@ class HeldSupervisor:
         self.directory = root / self.invocation_id
         self.prepared_path = self.directory / "spawn_prepared.json"
         self.held_path = self.directory / "held.json"
-        self.release_path = self.directory / "release.json"
-        self.gate_path = self.directory / "release.gate"
         self.cancelled_path = self.directory / "cancelled.json"
-        self.secret_path = root / ".release-authority" / f"{self.invocation_id}.json"
         self.process: subprocess.Popen[Any] | None = None
+        self._release_fd: int | None = None
 
     def identity_record(self) -> dict[str, Any]:
         return {
@@ -227,49 +225,40 @@ class HeldSupervisor:
             if any(existing.get(key) != value for key, value in expected.items()):
                 raise RuntimeError("prepared invocation conflicts with immutable identity")
             return existing
-        authority = _load(self.secret_path)
-        if authority is None:
-            authority = {
-                "invocation_id": self.invocation_id,
-                "grant_key": secrets.token_urlsafe(32),
-                "start_key": secrets.token_urlsafe(32),
-            }
-            _save(self.secret_path, authority)
-        prepared = {**expected, "cwd": self.cwd, "env": self.env, "owner_pid": os.getpid()}
+        prepared = {**expected, "cwd": self.cwd, "env": self.env}
         _save(self.prepared_path, prepared)
         return prepared
 
-    def _authority(self) -> dict[str, Any]:
-        authority = _load(self.secret_path)
-        if (
-            authority is None
-            or authority.get("invocation_id") != self.invocation_id
-            or not isinstance(authority.get("grant_key"), str)
-            or not isinstance(authority.get("start_key"), str)
-        ):
-            raise RuntimeError("missing or invalid private release authority")
-        return authority
-
     def spawn(self) -> subprocess.Popen[Any] | None:
         self.prepare()
-        if self.cancelled_path.exists() or self.gate_path.exists():
+        if self.cancelled_path.exists():
             return None
-        held = _load(self.held_path)
-        if held and _alive(held.get("supervisor_pid")):
+        if self.process is not None and self.process.poll() is None:
             return self.process
-        self.process = subprocess.Popen(
-            [
-                sys.executable,
-                str(Path(__file__).resolve()),
-                "--serve",
-                str(self.prepared_path),
-                "--authority",
-                str(self.secret_path),
-            ],
-            cwd=self.cwd,
-            start_new_session=True,
-            close_fds=True,
-        )
+        if self._release_fd is not None:
+            os.close(self._release_fd)
+            self._release_fd = None
+        read_fd, self._release_fd = os.pipe()
+        os.set_inheritable(read_fd, True)
+        try:
+            self.process = subprocess.Popen(
+                [
+                    sys.executable,
+                    str(Path(__file__).resolve()),
+                    "--serve",
+                    str(self.prepared_path),
+                    "--release-fd",
+                    str(read_fd),
+                    "--parent-pid",
+                    str(os.getpid()),
+                ],
+                cwd=self.cwd,
+                start_new_session=True,
+                close_fds=True,
+                pass_fds=(read_fd,),
+            )
+        finally:
+            os.close(read_fd)
         return self.process
 
     def wait_held(self, timeout: float = 5.0) -> dict[str, Any]:
@@ -303,16 +292,9 @@ class HeldSupervisor:
         self.prepare()
         if self.cancelled_path.exists():
             raise RuntimeError("held invocation was cancelled before durable execution_started")
-        authority, held = self._authority(), self.wait_held()
-        authority_hash = _hash(
-            {
-                "invocation_id": self.invocation_id,
-                "grant_key": authority["grant_key"],
-                "start_key": authority["start_key"],
-            }
-        )
-        if held.get("authority_hash") != authority_hash:
-            raise RuntimeError("held marker does not authenticate private authority")
+        held = self.wait_held()
+        if held.get("invocation_id") != self.invocation_id:
+            raise RuntimeError("held marker conflicts with invocation identity")
         result = append_draft(self.draft(), self.event_log, self.run_id)
         envelope = result.get("envelope")
         if (
@@ -320,17 +302,12 @@ class HeldSupervisor:
             or {key: envelope.get(key) for key in self.draft()} != self.draft()
         ):
             raise RuntimeError("event authority returned a non-exact execution_started envelope")
-        expected = {
-            "invocation_id": self.invocation_id,
-            "authority_hash": authority_hash,
-            "event_hash": envelope.get("event_hash"),
-        }
-        for path, label in ((self.release_path, "release"), (self.gate_path, "gate")):
-            current = _load(path)
-            if current is not None and current != expected:
-                raise RuntimeError(f"conflicting held invocation {label}")
-            if current is None:
-                _save(path, expected)
+        if self._release_fd is not None:
+            try:
+                os.write(self._release_fd, b"release\n")
+            finally:
+                os.close(self._release_fd)
+                self._release_fd = None
         return envelope
 
     def event_present(self) -> bool:
@@ -344,17 +321,13 @@ class HeldSupervisor:
             return False
 
     def sealed(self) -> bool:
-        return self.event_present() or self.release_path.exists() or self.gate_path.exists()
+        return self.event_present()
 
     def cancel_marker_only(self, reason: str = "recovery_before_execution_started") -> bool:
         if not self.held_path.exists() or self.sealed() or self.cancelled_path.exists():
             return False
-        held = _load(self.held_path) or {}
-        if _alive(held.get("supervisor_pid")):
-            try:
-                os.killpg(int(held["supervisor_pid"]), signal.SIGTERM)
-            except (OSError, ProcessLookupError):
-                pass
+        if self.process is not None and self.process.poll() is None:
+            _terminate_process_group(self.process)
         _save(self.cancelled_path, {"invocation_id": self.invocation_id, "reason": reason})
         return True
 
@@ -374,38 +347,21 @@ def _terminate_process_group(child: subprocess.Popen[Any]) -> None:
         child.wait(timeout=2)
 
 
-def _serve(prepared_path: Path, authority_path: Path) -> int:
-    prepared, authority = _load(prepared_path), _load(authority_path)
-    if (
-        prepared is None
-        or authority is None
-        or authority.get("invocation_id") != prepared.get("invocation_id")
-    ):
+
+def _serve(prepared_path: Path, release_fd: int, parent_pid: int) -> int:
+    prepared = _load(prepared_path)
+    if prepared is None or not isinstance(prepared.get("invocation_id"), str):
         return 2
-    directory = prepared_path.parent
-    held_path, gate_path = directory / "held.json", directory / "release.gate"
-    held = {
-        "invocation_id": prepared["invocation_id"],
-        "authority_hash": _hash(
-            {
-                "invocation_id": prepared["invocation_id"],
-                "grant_key": authority["grant_key"],
-                "start_key": authority["start_key"],
-            }
-        ),
-        "supervisor_pid": os.getpid(),
-    }
-    _save(held_path, held)
-    owner_pid = prepared.get("owner_pid")
-    while True:
-        gate = _load(gate_path)
-        if gate is not None:
-            if all(gate.get(key) == held[key] for key in ("invocation_id", "authority_hash")):
-                break
-            return 3
-        if owner_pid and not _alive(owner_pid):
+    _save(
+        prepared_path.parent / "held.json",
+        {"invocation_id": prepared["invocation_id"], "supervisor_pid": os.getpid()},
+    )
+    try:
+        readable, _, _ = select.select([release_fd], [], [])
+        if not readable or os.read(release_fd, 64) != b"release\n":
             return 0
-        time.sleep(0.02)
+    finally:
+        os.close(release_fd)
     child: subprocess.Popen[Any] | None = None
 
     def stop(_signum: int, _frame: Any) -> None:
@@ -423,7 +379,7 @@ def _serve(prepared_path: Path, authority_path: Path) -> int:
         close_fds=True,
     )
     while child.poll() is None:
-        if owner_pid and not _alive(owner_pid):
+        if os.getppid() != parent_pid:
             _terminate_process_group(child)
             return 0
         time.sleep(0.05)
@@ -434,9 +390,10 @@ def _serve(prepared_path: Path, authority_path: Path) -> int:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--serve", type=Path, required=True)
-    parser.add_argument("--authority", type=Path, required=True)
+    parser.add_argument("--release-fd", type=int, required=True)
+    parser.add_argument("--parent-pid", type=int, required=True)
     args = parser.parse_args(argv)
-    return _serve(args.serve, args.authority)
+    return _serve(args.serve, args.release_fd, args.parent_pid)
 
 
 if __name__ == "__main__":
