@@ -1,0 +1,11 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://ralph-review.dev/roles/author/schemas/final-followup.schema.json",
+  "type":"object","additionalProperties":false,
+  "required":["version","reviewer_id","reviewer_followup_version","prior_rebuttal_version","responses","evidence_refs","commitments_carried","limitations_carried","published_at"],
+  "properties":{
+    "version":{"const":1},"reviewer_id":{"type":"string","minLength":1},"reviewer_followup_version":{"const":1},"prior_rebuttal_version":{"type":"integer","minimum":1},
+    "responses":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["question_id","response_label","response","evidence_refs"],"properties":{"question_id":{"type":"string","minLength":1},"response_label":{"enum":["already_in_paper","clarification","submitted_additional_evidence","limitation_acknowledged","planned_revision","cannot_answer_without_new_research"]},"response":{"type":"string","minLength":1},"evidence_refs":{"type":"array","items":{"type":"string"}}}}},
+    "evidence_refs":{"type":"array","items":{"type":"string"}},"commitments_carried":{"type":"array","items":{"type":"string"}},"limitations_carried":{"type":"array","items":{"type":"string"}},"published_at":{"type":"string","format":"date-time"}
+  }
+}

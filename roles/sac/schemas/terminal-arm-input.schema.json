@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/roles/sac/terminal-arm-input.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "campaign_id", "arm_cohort_id", "slots"],
+  "properties": {
+    "version": {"const": 1},
+    "campaign_id": {"type": "string", "minLength": 1},
+    "arm_cohort_id": {"type": "string", "minLength": 1},
+    "slots": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["paper_slot", "paper_id", "status", "meta_review", "meta_review_ref", "meta_review_hash", "validation"],
+            "properties": {
+              "paper_slot": {"type": "integer", "minimum": 1, "maximum": 7},
+              "paper_id": {"type": "string", "minLength": 1},
+              "status": {"const": "meta_review"},
+              "meta_review": {"type": "object"},
+              "meta_review_ref": {"type": "string", "minLength": 1},
+              "meta_review_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+              "validation": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["passed", "schema_id", "validator_id", "validated_at"],
+                "properties": {
+                  "passed": {"const": true},
+                  "schema_id": {"type": "string", "minLength": 1},
+                  "validator_id": {"type": "string", "minLength": 1},
+                  "validated_at": {"type": "string", "format": "date-time"}
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["paper_slot", "paper_id", "status", "failure"],
+            "properties": {
+              "paper_slot": {"type": "integer", "minimum": 1, "maximum": 7},
+              "paper_id": {"type": "string", "minLength": 1},
+              "status": {"const": "paper_failure"},
+              "failure": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["code", "stage", "message", "occurred_at", "evidence_refs"],
+                "properties": {
+                  "code": {"type": "string", "minLength": 1},
+                  "stage": {"type": "string", "minLength": 1},
+                  "message": {"type": "string", "minLength": 1},
+                  "occurred_at": {"type": "string", "format": "date-time"},
+                  "evidence_refs": {"type": "array", "items": {"type": "string"}}
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

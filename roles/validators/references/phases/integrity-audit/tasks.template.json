@@ -1,0 +1,1 @@
+{"version":1,"role":"validator-references","phase":"integrity-audit","tasks":[{"id":"audit-integrity","title":"Audit citation integrity ledger","status":"pending","depends_on":[],"completion_predicate":"The ledger is internally consistent and all major negatives have two confirmation paths."}]}

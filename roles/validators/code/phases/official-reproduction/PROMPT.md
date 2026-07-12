@@ -1,0 +1,1 @@
+Freeze the official artifact and execute the current static reproduction command through the hardened sandbox. Record provenance, license, image, command, hardware, datasets, logs, hashes, result, and limitation. Do not run repository code on the host or claim an unavailable central result was reproduced.

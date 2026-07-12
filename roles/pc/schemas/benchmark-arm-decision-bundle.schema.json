@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/roles/pc/benchmark-arm-decision-bundle.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "campaign_id", "arm_cohort_id", "pc_id", "status", "decisions", "sac_bundle_hash", "finalized_at", "bundle_hash"],
+  "properties": {
+    "version": {"const": 1},
+    "campaign_id": {"type": "string"},
+    "arm_cohort_id": {"type": "string"},
+    "pc_id": {"type": "string"},
+    "status": {"enum": ["finalized", "failed"]},
+    "decisions": {"type": "array", "minItems": 7, "maxItems": 7, "items": {"$ref": "benchmark-pc-decision.schema.json"}},
+    "sac_bundle_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "finalized_at": {"type": "string", "format": "date-time"},
+    "bundle_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

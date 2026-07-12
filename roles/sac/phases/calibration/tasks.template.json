@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "current_task_id": null,
+  "tasks": [
+    {"id": "calibrate-seven-terminal-slots", "type": "sac-calibration", "status": "pending", "description": "Calibrate exactly seven terminal AC meta-review or paper-failure slots.", "inputs": ["arm/terminal-meta-review-input.json"], "output_path": "published/calibration-bundle.json", "completion_predicate": "Seven ordered slots and bounded revision history are terminal and valid.", "retry_feedback": null, "attempt_count": 0, "blocked_reason": null, "completed_at": null}
+  ]
+}

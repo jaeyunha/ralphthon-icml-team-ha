@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "role": "validator_mathematics",
+  "phase": "claim-extraction",
+  "tasks": [
+    {"id": "inventory-math-claims", "title": "Inventory anchored mathematical claims", "status": "pending", "depends_on": [], "completion_predicate": "Every equation, theorem, assumption, definition, dependency, complexity claim, convergence claim, and statistical derivation in scope has a stable dossier identity and resolving anchor."},
+    {"id": "publish-claim-inventory", "title": "Validate and publish claim inventory", "status": "pending", "depends_on": ["inventory-math-claims"], "completion_predicate": "The claim inventory validates, contains no duplicate IDs or acceptance judgments, and is owned by the persistent coordinator."}
+  ]
+}

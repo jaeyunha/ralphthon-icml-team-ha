@@ -1,0 +1,1 @@
+Calibrate all seven terminal arm slots. Preserve failed paper rows. Check coverage, justified disagreement, borderline consistency, handled quality problems, and explanation quality. Affirm or request one bounded defect-scoped revision; otherwise emit the typed arm failure. Do not create emergency reviewers.

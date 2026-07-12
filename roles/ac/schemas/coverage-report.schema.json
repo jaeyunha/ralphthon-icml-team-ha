@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/roles/ac/coverage-report.schema.json",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "version",
+    "ac_id",
+    "arm_cohort_id",
+    "paper_slot",
+    "paper_id",
+    "reviewer_ids",
+    "assignments",
+    "passed",
+    "nonredundant",
+    "no_fifth_reviewer"
+  ],
+  "properties": {
+    "version": {"const": 1},
+    "ac_id": {"type": "string", "minLength": 1},
+    "arm_cohort_id": {"type": "string", "minLength": 1},
+    "paper_slot": {"type": "integer", "minimum": 1, "maximum": 7},
+    "paper_id": {"type": "string", "minLength": 1},
+    "reviewer_ids": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "assignments": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["reviewer_id", "audit_targets"],
+        "properties": {
+          "reviewer_id": {"type": "string", "minLength": 1},
+          "audit_targets": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    },
+    "passed": {"const": true},
+    "nonredundant": {"const": true},
+    "no_fifth_reviewer": {"const": true}
+  }
+}

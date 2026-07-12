@@ -1,0 +1,9 @@
+{
+  "phase": "clean-room-reimplementation",
+  "tasks": [
+    {"id": "verify-manifest", "predicate": "all inputs allowed and hashes match"},
+    {"id": "implement", "predicate": "independent implementation exists"},
+    {"id": "self-test", "predicate": "sandboxed self-tests recorded"},
+    {"id": "freeze", "predicate": "implementation tree hash published before comparison"}
+  ]
+}

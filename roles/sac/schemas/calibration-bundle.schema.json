@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/roles/sac/calibration-bundle.schema.json",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["version", "campaign_id", "arm_cohort_id", "sac_id", "status", "slots", "completed_at"],
+  "properties": {
+    "version": {"const": 1},
+    "campaign_id": {"type": "string", "minLength": 1},
+    "arm_cohort_id": {"type": "string", "minLength": 1},
+    "sac_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["calibrated", "failed"]},
+    "slots": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "type": "object",
+        "required": ["paper_slot", "paper_id", "status"],
+        "properties": {
+          "paper_slot": {"type": "integer", "minimum": 1, "maximum": 7},
+          "paper_id": {"type": "string", "minLength": 1},
+          "status": {"enum": ["calibrated", "failed"]}
+        }
+      }
+    },
+    "terminal_failure_code": {"type": "string"},
+    "completed_at": {"type": "string", "format": "date-time"}
+  }
+}

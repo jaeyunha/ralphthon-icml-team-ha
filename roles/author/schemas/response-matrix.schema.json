@@ -1,0 +1,6 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://ralph-review.dev/roles/author/schemas/response-matrix.schema.json",
+  "type":"object","additionalProperties":false,"required":["version","author_id","rows"],
+  "properties":{"version":{"type":"integer","minimum":1},"author_id":{"type":"string","minLength":1},"rows":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["concern_id","reviewer_id","concern_type","requested_evidence","available_paper_evidence","author_evidence_type","draft_answer","duplicate_concerns","commitments","contradiction_risk","status"],"properties":{"concern_id":{"type":"string"},"reviewer_id":{"type":"string"},"concern_type":{"type":"string"},"requested_evidence":{"type":"string"},"available_paper_evidence":{"type":"array","items":{"type":"string"}},"author_evidence_type":{"enum":["already_in_paper","clarification","submitted_additional_evidence","limitation_acknowledged","planned_revision","cannot_answer_without_new_research"]},"draft_answer":{"type":"string"},"duplicate_concerns":{"type":"array","items":{"type":"string"}},"commitments":{"type":"array","items":{"type":"string"}},"contradiction_risk":{"type":"boolean"},"status":{"enum":["pending","drafting","ready","published","unresolved"]}}}}}
+}

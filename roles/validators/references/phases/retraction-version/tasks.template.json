@@ -1,0 +1,1 @@
+{"version":1,"role":"validator-references","phase":"retraction-version","tasks":[{"id":"check-publication-status","title":"Check retraction and version status","status":"pending","depends_on":[],"completion_predicate":"Every targeted source has a frozen publication status or explicit unknown state."}]}

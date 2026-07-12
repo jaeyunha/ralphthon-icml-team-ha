@@ -1,0 +1,1 @@
+Draft one reviewer-thread response using only listed evidence. Cover each weakness and key question. Use an allowed response label, attach exact evidence references, and mark unsupported requests `cannot_answer_without_new_research`. Do not publish, invent evidence, attack the reviewer, or make commitments beyond the assigned matrix rows.

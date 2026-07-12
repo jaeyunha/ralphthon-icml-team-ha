@@ -1,0 +1,8 @@
+{
+  "phase": "bundle-publication",
+  "tasks": [
+    {"id": "assemble", "predicate": "all freeze, execution, finding, and limitation records included"},
+    {"id": "verify", "predicate": "schema/hash/anchor/no-score gates pass"},
+    {"id": "publish", "predicate": "immutable bundle atomically published by persistent identity"}
+  ]
+}

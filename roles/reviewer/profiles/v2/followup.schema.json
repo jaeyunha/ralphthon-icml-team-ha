@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/roles/reviewer/profiles/v2/followup.schema.json",
+  "title": "CalibrationV2ReviewerFollowup",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "reviewer_id", "official_review_version", "rebuttal_version", "concern_resolutions", "scores", "confidence", "score_change_rationale", "new_questions", "summary", "evidence_refs"],
+  "properties": {
+    "version": {"const": 1},
+    "reviewer_id": {"type": "string", "minLength": 1},
+    "official_review_version": {"const": 1},
+    "rebuttal_version": {"type": "integer", "minimum": 1},
+    "concern_resolutions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/concernResolution"}
+    },
+    "scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["soundness", "presentation", "significance", "originality", "overall"],
+      "properties": {
+        "soundness": {"type": "integer", "minimum": 1, "maximum": 4},
+        "presentation": {"type": "integer", "minimum": 1, "maximum": 4},
+        "significance": {"type": "integer", "minimum": 1, "maximum": 4},
+        "originality": {"type": "integer", "minimum": 1, "maximum": 4},
+        "overall": {"type": "integer", "minimum": 1, "maximum": 6}
+      }
+    },
+    "confidence": {"type": "integer", "minimum": 1, "maximum": 5},
+    "score_change_rationale": {"type": "string", "minLength": 1},
+    "new_questions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/newQuestion"}
+    },
+    "summary": {"type": "string"},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "concernResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["concern_id", "status", "response_evidence", "assessment", "remaining_gap", "score_effect"],
+      "properties": {
+        "concern_id": {"type": "string", "minLength": 1},
+        "status": {"enum": ["resolved", "partially_resolved", "unresolved", "invalidated_by_response"]},
+        "response_evidence": {"type": "array", "items": {"type": "string"}},
+        "paper_evidence": {"type": "array", "items": {"type": "string"}},
+        "assessment": {"type": "string", "minLength": 1},
+        "remaining_gap": {"type": "string"},
+        "score_effect": {"type": "string", "minLength": 1},
+        "new_question_id": {"type": "string", "minLength": 1},
+        "no_new_question_reason": {"type": "string", "minLength": 1}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"status": {"enum": ["partially_resolved", "unresolved"]}}, "required": ["status"]},
+          "then": {
+            "oneOf": [
+              {"required": ["new_question_id"], "not": {"required": ["no_new_question_reason"]}},
+              {"required": ["no_new_question_reason"], "not": {"required": ["new_question_id"]}}
+            ]
+          },
+          "else": {
+            "not": {
+              "anyOf": [
+                {"required": ["new_question_id"]},
+                {"required": ["no_new_question_reason"]}
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "newQuestion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "concern_id", "question", "answer_induced_by", "decision_relevance"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "concern_id": {"type": "string", "minLength": 1},
+        "question": {"type": "string", "minLength": 1},
+        "answer_induced_by": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "decision_relevance": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "phase": "reviewer-coverage",
+  "current_task_id": null,
+  "tasks": [
+    {"id": "validate-fixed-panel", "type": "coverage-report", "status": "pending", "description": "Validate exactly four nonredundant reviewer assignments against dossier evidence needs.", "inputs": ["shared/paper-dossier.json", "agents/reviewers/personas.json"], "output_path": "coverage-report.json", "completion_predicate": "Coverage report passes the fixed four-reviewer gate.", "retry_feedback": null, "attempt_count": 0, "blocked_reason": null, "completed_at": null}
+  ]
+}

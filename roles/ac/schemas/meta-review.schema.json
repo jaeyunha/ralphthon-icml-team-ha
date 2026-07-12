@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/roles/ac/meta-review.schema.json",
+  "title": "AreaChairMetaReview",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "ac_id", "main_contribution", "agreed_strengths", "decisive_concerns", "rebuttal_effect", "remaining_issues", "reviewer_disagreement", "validation_evidence", "recommendation", "confidence", "constructive_next_steps", "evidence_refs", "published_at"],
+  "properties": {
+    "version": {"const": 1},
+    "ac_id": {"type": "string", "minLength": 1},
+    "main_contribution": {"type": "string", "minLength": 1},
+    "agreed_strengths": {"type": "array", "items": {"type": "string"}},
+    "decisive_concerns": {"type": "array", "items": {"type": "string"}},
+    "rebuttal_effect": {"type": "string", "minLength": 1},
+    "remaining_issues": {"type": "array", "items": {"type": "string"}},
+    "reviewer_disagreement": {"type": "string", "minLength": 1},
+    "validation_evidence": {"type": "string", "minLength": 1},
+    "recommendation": {"enum": ["accept", "reject"]},
+    "confidence": {"type": "integer", "minimum": 1, "maximum": 5},
+    "constructive_next_steps": {"type": "array", "items": {"type": "string"}},
+    "evidence_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "published_at": {"type": "string", "format": "date-time"}
+  }
+}

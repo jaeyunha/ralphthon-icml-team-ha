@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "phase": "final-followup",
+  "current_task_id": null,
+  "tasks": [
+    {"id":"inventory-new-questions","type":"analysis","status":"pending","description":"Inventory only newly raised reviewer follow-up questions.","inputs":["published/reviewer-followups"],"output_path":"phases/final-followup/artifacts/new-questions.json","completion_predicate":"Every new question has a stable thread-local ID and no old issue is added.","retry_feedback":null,"attempt_count":0,"blocked_reason":null,"completed_at":null},
+    {"id":"draft-final-responses","type":"analysis","status":"pending","description":"Draft evidence-bounded answers for applicable reviewer threads.","inputs":["phases/final-followup/artifacts/new-questions.json","published/rebuttals","commitments.json"],"output_path":"phases/final-followup/artifacts/drafts","completion_predicate":"Each new question is answered or honestly unresolved with evidence references.","retry_feedback":null,"attempt_count":0,"blocked_reason":null,"completed_at":null},
+    {"id":"carry-consistency-state","type":"quality-gate","status":"pending","description":"Carry commitments and limitations and reject contradictions with rebuttals.","inputs":["commitments.json","phases/final-followup/artifacts/drafts"],"output_path":"phases/final-followup/artifacts/checker-result.json","completion_predicate":"No commitment or limitation is dropped and no prior response is contradicted.","retry_feedback":null,"attempt_count":0,"blocked_reason":null,"completed_at":null},
+    {"id":"publish-final-followups","type":"publication","status":"pending","description":"Publish one final response per applicable reviewer as the same coordinator.","inputs":["phases/final-followup/artifacts"],"output_path":"published/final-followups","completion_predicate":"All applicable final follow-ups are schema-valid, immutable, and coordinator-published.","retry_feedback":null,"attempt_count":0,"blocked_reason":null,"completed_at":null}
+  ]
+}

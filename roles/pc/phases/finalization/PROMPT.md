@@ -1,0 +1,1 @@
+Finalize all seven SAC slots. Preserve failed rows and their codes. For each valid row, affirm or explicitly override to accept/reject with evidence and unresolved dissent. Publish slot decisions first and the arm bundle second. Do not emit Spotlight semantics.

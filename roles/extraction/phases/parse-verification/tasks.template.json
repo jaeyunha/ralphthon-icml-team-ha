@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "role": "extraction",
+  "phase": "parse-verification",
+  "tasks": [
+    {
+      "id": "validate-bundle-structure",
+      "title": "Validate canonical bundle structure",
+      "status": "pending",
+      "depends_on": [],
+      "completion_predicate": "All required bundle entries exist, parse successfully, and refer only to frozen-source or declared asset paths."
+    },
+    {
+      "id": "resolve-inline-anchors",
+      "title": "Resolve every inline anchor",
+      "status": "pending",
+      "depends_on": ["validate-bundle-structure"],
+      "completion_predicate": "Every inline anchor in paper.md resolves exactly once through anchors.json with valid provenance and zero unresolved anchors."
+    },
+    {
+      "id": "verify-headings-and-text",
+      "title": "Verify headings and sampled text",
+      "status": "pending",
+      "depends_on": ["resolve-inline-anchors"],
+      "completion_predicate": "Heading completeness and representative text-overlap checks cover the paper and record their sampling rationale and findings."
+    },
+    {
+      "id": "verify-structured-content",
+      "title": "Verify equations tables and figures",
+      "status": "pending",
+      "depends_on": ["resolve-inline-anchors"],
+      "completion_predicate": "Representative equations, theorems, tables, figures, captions, citations, and assets are checked against the PDF with discrepancies classified."
+    },
+    {
+      "id": "audit-uncertainty-and-injection",
+      "title": "Audit uncertainty and suspicious content",
+      "status": "pending",
+      "depends_on": ["verify-headings-and-text", "verify-structured-content"],
+      "completion_predicate": "Low-confidence regions and suspicious instruction-like passages are anchored, preserved, and accurately reflected in extraction findings."
+    },
+    {
+      "id": "publish-verification-gate",
+      "title": "Publish parse verification gate",
+      "status": "pending",
+      "depends_on": ["audit-uncertainty-and-injection"],
+      "completion_predicate": "A validated parse-verification-report.json identifies the verified bundle, records all checks and limitations, reports zero unresolved anchors, and has passed status."
+    }
+  ]
+}

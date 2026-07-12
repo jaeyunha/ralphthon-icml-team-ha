@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/roles/reviewer/schemas/score-history.schema.json",
+  "title": "ScoreHistory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["history_id", "reviewer_id", "version", "append_only", "entries"],
+  "properties": {
+    "history_id": {"type": "string", "minLength": 1},
+    "reviewer_id": {"type": "string", "minLength": 1},
+    "version": {"type": "integer", "minimum": 1},
+    "append_only": {"const": true},
+    "prior_version_hash": {"type": ["string", "null"], "pattern": "^sha256:[a-f0-9]{64}$"},
+    "entries": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["entry_id", "recorded_at", "phase", "scores", "confidence", "rationale", "entry_hash"], "properties": {"entry_id": {"type": "string"}, "recorded_at": {"type": "string", "format": "date-time"}, "phase": {"enum": ["initial_review", "followup", "discussion", "final_justification"]}, "scores": {"type": "object", "additionalProperties": false, "required": ["soundness", "presentation", "significance", "originality", "overall"], "properties": {"soundness": {"type": "integer", "minimum": 1, "maximum": 4}, "presentation": {"type": "integer", "minimum": 1, "maximum": 4}, "significance": {"type": "integer", "minimum": 1, "maximum": 4}, "originality": {"type": "integer", "minimum": 1, "maximum": 4}, "overall": {"type": "integer", "minimum": 1, "maximum": 6}}}, "confidence": {"type": "integer", "minimum": 1, "maximum": 5}, "rationale": {"type": "string", "minLength": 1}, "previous_entry_hash": {"type": ["string", "null"], "pattern": "^sha256:[a-f0-9]{64}$"}, "entry_hash": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}}}}
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "role": "extraction",
+  "phase": "dossier",
+  "tasks": [
+    {
+      "id": "inventory-contributions",
+      "title": "Inventory stated contributions",
+      "status": "pending",
+      "depends_on": [],
+      "completion_predicate": "The dossier contains stable, anchored contribution items and explicitly records any ambiguity in stated contributions."
+    },
+    {
+      "id": "map-claims-and-methods",
+      "title": "Map claims methods and dependencies",
+      "status": "pending",
+      "depends_on": ["inventory-contributions"],
+      "completion_predicate": "Major claims, supporting items, methods, dependencies, scope, and centrality are anchored and cross-reference existing dossier IDs."
+    },
+    {
+      "id": "inventory-theory",
+      "title": "Inventory equations theorems and assumptions",
+      "status": "pending",
+      "depends_on": ["map-claims-and-methods"],
+      "completion_predicate": "Equation, theorem, and assumption inventories are anchored and theorem-to-assumption relationships resolve."
+    },
+    {
+      "id": "inventory-experiments",
+      "title": "Inventory experiments and reported results",
+      "status": "pending",
+      "depends_on": ["map-claims-and-methods"],
+      "completion_predicate": "Experiments, datasets, splits, baselines, metrics, and reported results are anchored with internally resolvable relationships."
+    },
+    {
+      "id": "inventory-reproducibility-and-references",
+      "title": "Inventory reproducibility and references",
+      "status": "pending",
+      "depends_on": ["inventory-theory", "inventory-experiments"],
+      "completion_predicate": "Reproducibility materials and reference entries are present, anchored, and limited to the verified bundle."
+    },
+    {
+      "id": "inventory-limitations-and-risks",
+      "title": "Inventory limitations risks and ambiguities",
+      "status": "pending",
+      "depends_on": ["inventory-reproducibility-and-references"],
+      "completion_predicate": "Limitations, ethical-risk triggers, ambiguities, missing information, and empty-category explanations are explicit and anchored where paper-derived."
+    },
+    {
+      "id": "publish-paper-dossier",
+      "title": "Validate and publish paper dossier",
+      "status": "pending",
+      "depends_on": ["inventory-limitations-and-risks"],
+      "completion_predicate": "A validated paper-dossier.json identifies the verified bundle, contains every required inventory, resolves all anchors and cross-references, and makes no acceptance judgment."
+    }
+  ]
+}

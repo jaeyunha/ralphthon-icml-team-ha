@@ -1,0 +1,1 @@
+{"version":1,"role":"validator-statistics","phase":"confirmation","tasks":[{"id":"confirm-major-findings","title":"Confirm high-impact findings","status":"pending","depends_on":[],"completion_predicate":"Every major or critical negative has two distinct confirmation paths or is withheld."}]}

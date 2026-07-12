@@ -1,0 +1,1 @@
+{"version":1,"role":"validator-statistics","phase":"data-integrity","tasks":[{"id":"audit-splits","title":"Audit split integrity and leakage","status":"pending","depends_on":[],"completion_predicate":"All observed overlaps are anchored and major findings have two confirmation paths."}]}

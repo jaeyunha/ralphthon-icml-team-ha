@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "role": "validator_mathematics",
+  "phase": "assumption-audit",
+  "tasks": [
+    {"id": "audit-definitions-and-quantifiers", "title": "Audit definitions quantifiers and scope", "status": "pending", "depends_on": [], "completion_predicate": "Undefined symbols, quantifiers, theorem/proof scope, and stated assumptions are explicitly checked for each central claim."},
+    {"id": "audit-dependencies-and-boundaries", "title": "Audit dependencies and boundary cases", "status": "pending", "depends_on": ["audit-definitions-and-quantifiers"], "completion_predicate": "Circular dependencies, unsupported generalization, and material boundary cases are checked with anchored evidence."}
+  ]
+}

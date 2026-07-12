@@ -1,0 +1,1 @@
+Publish only validated code-validation evidence. Check hashes, anchors, finding schemas, phase lineage, separate reproducibility fields, and the no-score invariant. Preserve the coordinator identity and prior immutable artifacts; version corrections rather than overwriting them.

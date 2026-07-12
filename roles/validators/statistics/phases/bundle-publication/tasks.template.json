@@ -1,0 +1,1 @@
+{"version":1,"role":"validator-statistics","phase":"bundle-publication","tasks":[{"id":"publish-findings","title":"Validate and publish findings","status":"pending","depends_on":[],"completion_predicate":"The immutable finding ledger is schema-valid, anchored, limitation-bearing, and score-free."}]}

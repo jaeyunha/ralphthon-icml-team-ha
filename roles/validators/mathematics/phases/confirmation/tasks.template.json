@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "role": "validator_mathematics",
+  "phase": "confirmation",
+  "tasks": [
+    {"id": "resolve-confirmation-graph", "title": "Resolve independent confirmation paths", "status": "pending", "depends_on": [], "completion_predicate": "Every cited confirmation path resolves to completed retained evidence and is methodologically independent of the primary result."},
+    {"id": "enforce-severity-gate", "title": "Enforce high impact severity gate", "status": "pending", "depends_on": ["resolve-confirmation-graph"], "completion_predicate": "No major or critical negative finding remains without an independent confirmation path."}
+  ]
+}

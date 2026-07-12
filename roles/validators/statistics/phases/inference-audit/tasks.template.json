@@ -1,0 +1,1 @@
+{"version":1,"role":"validator-statistics","phase":"inference-audit","tasks":[{"id":"audit-inference","title":"Audit statistical inference","status":"pending","depends_on":[],"completion_predicate":"Seeds, uncertainty, tests, effects, multiplicity, and metric semantics are recorded."}]}

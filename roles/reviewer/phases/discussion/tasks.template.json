@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "phase": "discussion",
+  "current_task_id": null,
+  "tasks": [
+    {"id": "issue-position", "type": "discussion-position", "status": "pending", "description": "Answer one AC-created issue using the permitted published record.", "inputs": ["agents/reviewers/published", "agents/author/published", "shared/validation", "discussion/issues"], "output_path": "phases/discussion/artifacts/position.json", "completion_predicate": "One evidence-grounded issue-specific position passes schema validation.", "retry_feedback": null, "attempt_count": 0, "blocked_reason": null, "completed_at": null}
+  ]
+}

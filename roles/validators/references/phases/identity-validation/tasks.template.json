@@ -1,0 +1,1 @@
+{"version":1,"role":"validator-references","phase":"identity-validation","tasks":[{"id":"validate-identities","title":"Validate reference identities","status":"pending","depends_on":[],"completion_predicate":"Each reference has a frozen identity status backed by broker evidence or a typed unresolved reason."}]}

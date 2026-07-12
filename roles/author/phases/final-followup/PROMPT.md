@@ -1,0 +1,1 @@
+Answer only the `new_questions` in the reviewer follow-up. Do not reopen settled issues unless the new question requires it. Carry every prior commitment and admitted limitation verbatim, attach allowed evidence, and publish only as the persistent Author Coordinator.

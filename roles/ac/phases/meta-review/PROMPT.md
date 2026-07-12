@@ -1,0 +1,1 @@
+Synthesize the full permitted record into the ten-section meta-review. Explain why evidence and reviewer expertise support the direct binary recommendation. Preserve unresolved dissent and answer the strongest opposing case. Never average scores.

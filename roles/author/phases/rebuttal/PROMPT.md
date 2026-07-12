@@ -1,0 +1,1 @@
+For the current official review, build or update response-matrix rows for every weakness and key question. Merge transient drafts only after checking evidence references, truthfulness, professional tone, duplicate concerns, and commitments against all other threads. Publish only as the persistent coordinator. A request requiring new evidence must be acknowledged, not fabricated.

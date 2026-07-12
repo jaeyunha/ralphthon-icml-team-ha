@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "role": "validator_mathematics",
+  "phase": "counterexample-search",
+  "tasks": [
+    {"id": "define-search-domains", "title": "Define bounded search domains", "status": "pending", "depends_on": [], "completion_predicate": "Every searched variable has a grounded domain, precision, tolerance, and boundary rationale."},
+    {"id": "search-and-minimize", "title": "Search and minimize counterexamples", "status": "pending", "depends_on": ["define-search-domains"], "completion_predicate": "Exact, high-precision, exhaustive-small, boundary, property, and adversarial paths run where applicable and every failure is reproducible."}
+  ]
+}

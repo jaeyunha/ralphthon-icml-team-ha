@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "phase": "followup",
+  "current_task_id": null,
+  "tasks": [
+    {"id": "classify-concern-resolution", "type": "analysis", "status": "pending", "description": "Classify every official concern against the associated rebuttal evidence.", "inputs": ["published/official-review.json", "concern-ledger.json", "agents/author/published/rebuttals/{agent_id}.json"], "output_path": "phases/followup/artifacts/concern-resolutions.json", "completion_predicate": "Every original concern has one allowed resolution status.", "retry_feedback": null, "attempt_count": 0, "blocked_reason": null, "completed_at": null},
+    {"id": "followup-score-review", "type": "analysis", "status": "pending", "description": "Explain all changed and unchanged scores without moving goalposts.", "inputs": ["score-history.json", "phases/followup/artifacts/concern-resolutions.json"], "output_path": "phases/followup/artifacts/score-review.json", "completion_predicate": "Score rationale is complete and append-only update is prepared.", "retry_feedback": null, "attempt_count": 0, "blocked_reason": null, "completed_at": null},
+    {"id": "followup-assembly", "type": "publication", "status": "pending", "description": "Publish reviewer follow-up version 1 and update persistent ledgers.", "inputs": ["phases/followup/artifacts"], "output_path": "phases/followup/artifacts/followup.json", "completion_predicate": "Follow-up schema and ledger consistency gates pass.", "retry_feedback": null, "attempt_count": 0, "blocked_reason": null, "completed_at": null}
+  ]
+}

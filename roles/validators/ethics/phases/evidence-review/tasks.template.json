@@ -1,0 +1,1 @@
+{"version":1,"role":"validator-ethics","phase":"evidence-review","tasks":[{"id":"review-context","title":"Review trigger evidence context","status":"pending","depends_on":[],"completion_predicate":"Each trigger has limitations, context, and required confirmation recorded."}]}

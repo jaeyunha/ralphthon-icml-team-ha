@@ -1,0 +1,1 @@
+{"version":1,"role":"validator-ethics","phase":"bundle-publication","tasks":[{"id":"publish-ethics-findings","title":"Publish ethics evidence and flag","status":"pending","depends_on":[],"completion_predicate":"Findings are schema-valid and the report makes no misconduct or score determination."}]}

@@ -1,0 +1,1 @@
+Use only the manifest-declared paper, supplement, algorithm/equation, and environment evidence. Independently implement and test the current component inside the sandbox. Do not inspect any official or third-party implementation. Freeze the tree before requesting comparison access.

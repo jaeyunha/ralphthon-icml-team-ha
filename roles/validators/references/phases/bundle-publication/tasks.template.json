@@ -1,0 +1,1 @@
+{"version":1,"role":"validator-references","phase":"bundle-publication","tasks":[{"id":"publish-reference-findings","title":"Publish reference findings","status":"pending","depends_on":[],"completion_predicate":"The immutable reference ledger is schema-valid, broker-grounded, and score-free."}]}

@@ -1,0 +1,9 @@
+{
+  "phase": "conformance-comparison",
+  "tasks": [
+    {"id": "load-freezes", "predicate": "all four frozen comparison inputs identified"},
+    {"id": "compare", "predicate": "declared fields compared across all inputs"},
+    {"id": "confirm", "predicate": "material negatives have confirmation or explicit limitation"},
+    {"id": "validate-findings", "predicate": "schema and no-score gates pass"}
+  ]
+}

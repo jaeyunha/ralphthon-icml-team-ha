@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "phase": "final-justification",
+  "current_task_id": null,
+  "tasks": [
+    {"id": "final-concern-reconciliation", "type": "analysis", "status": "pending", "description": "Reconcile final concern states against follow-up and discussion evidence.", "inputs": ["concern-ledger.json", "published/reviewer-followup.json", "published/discussion-positions"], "output_path": "phases/final-justification/artifacts/concern-reconciliation.json", "completion_predicate": "Every original concern is resolved or explicitly remains.", "retry_feedback": null, "attempt_count": 0, "blocked_reason": null, "completed_at": null},
+    {"id": "final-review-freeze", "type": "publication", "status": "pending", "description": "Publish immutable final review version 1 with reasoned final scores.", "inputs": ["published/official-review.json", "score-history.json", "phases/final-justification/artifacts/concern-reconciliation.json"], "output_path": "phases/final-justification/artifacts/final-review.json", "completion_predicate": "Final-review schema passes and immutable publication succeeds.", "retry_feedback": null, "attempt_count": 0, "blocked_reason": null, "completed_at": null}
+  ]
+}

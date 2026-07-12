@@ -1,0 +1,1 @@
+Audit the proposed four-reviewer panel against dossier claims and evidence needs. Reject duplicates, decision bias, shared blind spots, uncovered central claims, and any fifth-reviewer proposal. Publish the coverage report with explicit assignments.

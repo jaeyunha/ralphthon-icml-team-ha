@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "phase": "finalization",
+  "current_task_id": null,
+  "tasks": [
+    {"id": "finalize-seven-binary-decisions", "type": "pc-finalization", "status": "pending", "description": "Publish seven benchmark accept, reject, or failed slot decisions and the arm bundle.", "inputs": ["agents/sac/published/calibration-bundle.json"], "output_path": "published/arm-decision-bundle.json", "completion_predicate": "Seven immutable slot artifacts precede one valid no-Spotlight arm bundle.", "retry_feedback": null, "attempt_count": 0, "blocked_reason": null, "completed_at": null}
+  ]
+}

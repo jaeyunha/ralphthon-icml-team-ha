@@ -1,0 +1,7 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://ralph-review.dev/roles/author/schemas/thread.schema.json",
+  "type":"object","additionalProperties":false,
+  "required":["thread_version","submission_id","author_id","review","rebuttal","reviewer_followup","author_final_followup","events"],
+  "properties":{"thread_version":{"const":1},"submission_id":{"type":"string"},"author_id":{"type":"string"},"review":{"type":"object"},"rebuttal":{"type":"object"},"reviewer_followup":{"type":"object"},"author_final_followup":{"type":"object"},"events":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["sequence_id","event_type","actor_id","published_at","artifact_ref"],"properties":{"sequence_id":{"type":"integer","minimum":1},"event_type":{"type":"string"},"actor_id":{"type":"string"},"published_at":{"type":"string","format":"date-time"},"artifact_ref":{"type":"string"}}}}}
+}

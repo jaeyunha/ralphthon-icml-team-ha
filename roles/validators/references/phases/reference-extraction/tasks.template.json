@@ -1,0 +1,1 @@
+{"version":1,"role":"validator-references","phase":"reference-extraction","tasks":[{"id":"extract-references","title":"Extract bibliography identities","status":"pending","depends_on":[],"completion_predicate":"Every bibliography item has a stable ID, anchor, and conservative lookup metadata."}]}

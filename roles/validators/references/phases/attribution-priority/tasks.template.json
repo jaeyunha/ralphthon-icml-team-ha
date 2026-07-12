@@ -1,0 +1,1 @@
+{"version":1,"role":"validator-references","phase":"attribution-priority","tasks":[{"id":"audit-attribution","title":"Audit attribution and priority","status":"pending","depends_on":[],"completion_predicate":"Attribution findings cite verified source content and dates without inferring misconduct."}]}

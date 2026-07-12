@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/roles/ac/review-quality.schema.json",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["version", "ac_id", "paper_id", "reviewer_ids", "assessments", "quality_flags"],
+  "properties": {
+    "version": {"const": 1},
+    "ac_id": {"type": "string", "minLength": 1},
+    "paper_id": {"type": "string", "minLength": 1},
+    "reviewer_ids": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "assessments": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["reviewer_id", "checks"],
+        "properties": {
+          "reviewer_id": {"type": "string", "minLength": 1},
+          "checks": {
+            "type": "object",
+            "required": ["anchoring", "rubric_completeness", "independence", "admissibility"],
+            "properties": {
+              "anchoring": {"type": "boolean"},
+              "rubric_completeness": {"type": "boolean"},
+              "independence": {"type": "boolean"},
+              "admissibility": {"type": "boolean"}
+            }
+          }
+        }
+      }
+    },
+    "quality_flags": {"type": "array", "items": {"type": "string"}}
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "phase": "official-reproduction",
+  "tasks": [
+    {"id": "freeze-artifact", "predicate": "commit/tree/license/provenance recorded"},
+    {"id": "build-environment", "predicate": "isolated image digest and install log recorded"},
+    {"id": "run-tests", "predicate": "test command sandbox result recorded"},
+    {"id": "run-smoke", "predicate": "smoke command sandbox result recorded"},
+    {"id": "run-feasible-results", "predicate": "each feasible central result attempted or typed not_executable"}
+  ]
+}

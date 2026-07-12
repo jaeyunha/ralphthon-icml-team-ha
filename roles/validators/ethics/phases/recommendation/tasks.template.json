@@ -1,0 +1,1 @@
+{"version":1,"role":"validator-ethics","phase":"recommendation","tasks":[{"id":"set-review-flag","title":"Set ethics review flag","status":"pending","depends_on":[],"completion_predicate":"The flag follows the evidence and misconduct_determination is null."}]}

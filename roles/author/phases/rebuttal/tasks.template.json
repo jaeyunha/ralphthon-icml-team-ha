@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "phase": "rebuttal",
+  "current_task_id": null,
+  "tasks": [
+    {"id":"subscribe-official-reviews","type":"coordination","status":"pending","description":"Wake on each immutable official review publication.","inputs":["review-inbox.json"],"output_path":"phases/rebuttal/artifacts/subscription-state.json","completion_predicate":"Every official review is queued exactly once in arrival order.","retry_feedback":null,"attempt_count":0,"blocked_reason":null,"completed_at":null},
+    {"id":"draft-review-threads","type":"analysis","status":"pending","description":"Run transient non-publishing response workers for available review threads.","inputs":["published/official-reviews","response-matrix.json"],"output_path":"phases/rebuttal/workers","completion_predicate":"Each worker draft is thread-bound, evidence-referenced, transient, and non-publishing.","retry_feedback":null,"attempt_count":0,"blocked_reason":null,"completed_at":null},
+    {"id":"merge-response-matrix","type":"analysis","status":"pending","description":"Merge all weaknesses and questions into the coordinator-owned response matrix.","inputs":["phases/rebuttal/workers","response-matrix.json"],"output_path":"phases/rebuttal/artifacts/response-matrix.json","completion_predicate":"Every official weakness and key question has one response row and duplicate concerns are linked.","retry_feedback":null,"attempt_count":0,"blocked_reason":null,"completed_at":null},
+    {"id":"truthfulness-consistency-gate","type":"quality-gate","status":"pending","description":"Reject invented evidence, attacks, worker publication, and cross-thread contradictions.","inputs":["phases/rebuttal/artifacts/response-matrix.json","commitments.json"],"output_path":"phases/rebuttal/artifacts/checker-result.json","completion_predicate":"Checker passes every thread and all coordinator commitments are consistent.","retry_feedback":null,"attempt_count":0,"blocked_reason":null,"completed_at":null},
+    {"id":"publish-rebuttals","type":"publication","status":"pending","description":"Publish one immutable rebuttal per official review as the persistent coordinator.","inputs":["phases/rebuttal/artifacts"],"output_path":"published/rebuttals","completion_predicate":"All review threads have schema-valid published rebuttals and are settled.","retry_feedback":null,"attempt_count":0,"blocked_reason":null,"completed_at":null}
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "phase": "review-quality-check",
+  "current_task_id": null,
+  "tasks": [
+    {"id": "check-four-reviews", "type": "review-quality", "status": "pending", "description": "Assess all four covered official reviews against quality and independence gates.", "inputs": ["coverage-report.json", "agents/reviewers/published/official-reviews", "shared/validation"], "output_path": "review-quality.json", "completion_predicate": "Every covered reviewer has one complete quality assessment.", "retry_feedback": null, "attempt_count": 0, "blocked_reason": null, "completed_at": null}
+  ]
+}

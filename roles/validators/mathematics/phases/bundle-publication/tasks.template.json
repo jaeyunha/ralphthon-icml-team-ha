@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "role": "validator_mathematics",
+  "phase": "bundle-publication",
+  "tasks": [
+    {"id": "validate-finding-ledger", "title": "Validate final finding ledger", "status": "pending", "depends_on": [], "completion_predicate": "Every finding is frozen-schema valid, anchored, tool-grounded, limitation-aware, and confirmation-complete."},
+    {"id": "publish-math-bundle", "title": "Publish immutable math bundle", "status": "pending", "depends_on": ["validate-finding-ledger"], "completion_predicate": "The immutable bundle identifies the persistent coordinator and ordered completed phases and contains no review score or recommendation."}
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "criterion_rubric": {
+    "source_path": "shared/ICML_2026_REVIEW_RUBRIC.md",
+    "sha256": "sha256:623b78197d62f37d27a9b7f666eb19b02454e636ed7d2613e1c7ed04caa93048"
+  },
+  "profiles": {
+    "v1": {
+      "bundle_hash": "sha256:6bd29370e95d7d9a749f7b501559a92be15d27569a96c4dac4d38b1d00dd457e",
+      "entries": [
+        {
+          "logical_path": "engine/loops/persona-compiler/persona_compiler.py",
+          "source_path": "engine/loops/persona-compiler/persona_compiler.py",
+          "sha256": "sha256:824f87834dea7c920567ed085b2342984de24b534702a643bfd5dfd05b7e384f",
+          "size_bytes": 22244
+        },
+        {
+          "logical_path": "roles/reviewer/PROMPT.base.md",
+          "source_path": "roles/reviewer/PROMPT.base.md",
+          "sha256": "sha256:1f128fdf3fe47c868d51661faead6e2a787884f462da1e2832fcaf2eacd87d87",
+          "size_bytes": 1797
+        },
+        {
+          "logical_path": "roles/reviewer/checker.py",
+          "source_path": "roles/reviewer/checker.py",
+          "sha256": "sha256:2777272975f247fd9678f7bc7fc49ceb4b65c8b29d53c92913521f0e25197d0b",
+          "size_bytes": 7825
+        },
+        {
+          "logical_path": "roles/reviewer/phases/followup/PROMPT.md",
+          "source_path": "roles/reviewer/phases/followup/PROMPT.md",
+          "sha256": "sha256:25bd992fb8fd824b26cb675ac6e24120217759a516948753cef3fbd6518f59cf",
+          "size_bytes": 628
+        },
+        {
+          "logical_path": "roles/reviewer/phases/followup/schema.json",
+          "source_path": "roles/reviewer/schemas/followup.schema.json",
+          "sha256": "sha256:00e5b707695097480d2acce5706772ed65f661db39a4d5fe08db85a3cbcddf35",
+          "size_bytes": 1493
+        },
+        {
+          "logical_path": "roles/reviewer/phases/initial-review/PROMPT.md",
+          "source_path": "roles/reviewer/phases/initial-review/PROMPT.md",
+          "sha256": "sha256:cacaa84ba7bb77df042eab3c1986fa95b1159e5d8980d9c5b47ddc697ae07651",
+          "size_bytes": 1180
+        },
+        {
+          "logical_path": "roles/reviewer/phases/initial-review/schema.json",
+          "source_path": "roles/reviewer/schemas/initial-review.schema.json",
+          "sha256": "sha256:98ed6c266f7dbdcabc4740e2cbeffc18929372b7694bd216f5de2d5399a86f63",
+          "size_bytes": 3311
+        }
+      ]
+    },
+    "v2": {
+      "bundle_hash": "sha256:a4e4a1a21bb8359175cb5c8ca88fda7c0b63c23ca7dc8bd30b45addf2c4b7b64",
+      "entries": [
+        {
+          "logical_path": "engine/loops/persona-compiler/persona_compiler.py",
+          "source_path": "engine/loops/persona-compiler/v2_persona_compiler.py",
+          "sha256": "sha256:5bded7881f066f8d103527259da7163dd1bd6c45cdcfb09d9507a086f29a1c01",
+          "size_bytes": 14458
+        },
+        {
+          "logical_path": "roles/reviewer/PROMPT.base.md",
+          "source_path": "roles/reviewer/profiles/v2/PROMPT.base.md",
+          "sha256": "sha256:c7959da71dea0b6b8344996e222c6323db282d4c80fb389a236cb7356bcae3d4",
+          "size_bytes": 2900
+        },
+        {
+          "logical_path": "roles/reviewer/checker.py",
+          "source_path": "roles/reviewer/profiles/v2/checker.py",
+          "sha256": "sha256:981ee444199ae6919c135c91b41d0e5937f0953b33aa8073768844794278b512",
+          "size_bytes": 7374
+        },
+        {
+          "logical_path": "roles/reviewer/phases/followup/PROMPT.md",
+          "source_path": "roles/reviewer/profiles/v2/followup.PROMPT.md",
+          "sha256": "sha256:77af768848185f9331db8598a99809db5044432cddbc37e2b39bdf8a99dda3ae",
+          "size_bytes": 1304
+        },
+        {
+          "logical_path": "roles/reviewer/phases/followup/schema.json",
+          "source_path": "roles/reviewer/profiles/v2/followup.schema.json",
+          "sha256": "sha256:0016a3281b2e365aa0368b051e6936a2b5897046fb55487abe4be8a7643ff786",
+          "size_bytes": 3713
+        },
+        {
+          "logical_path": "roles/reviewer/phases/initial-review/PROMPT.md",
+          "source_path": "roles/reviewer/profiles/v2/initial-review.PROMPT.md",
+          "sha256": "sha256:0577646b5598b7b21ffbc6648da6c153389a81d1d1b79b3cd78809cda48e6b62",
+          "size_bytes": 1575
+        },
+        {
+          "logical_path": "roles/reviewer/phases/initial-review/schema.json",
+          "source_path": "roles/reviewer/profiles/v2/initial-review.schema.json",
+          "sha256": "sha256:7e387f0b46b3c767736952cbe7e2f67ef6856d58bf90bac7d5aeac7224822a0c",
+          "size_bytes": 4849
+        }
+      ]
+    }
+  }
+}

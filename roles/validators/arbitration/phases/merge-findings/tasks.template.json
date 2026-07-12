@@ -1,0 +1,1 @@
+{"version":1,"role":"validator-arbitration","phase":"merge-findings","tasks":[{"id":"validate-and-merge","title":"Validate and merge lane findings","status":"pending","depends_on":[],"completion_predicate":"All findings validate, IDs are unique, and lane evidence is unchanged."}]}

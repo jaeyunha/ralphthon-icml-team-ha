@@ -1,0 +1,1 @@
+{"version":1,"role":"validator-statistics","phase":"planning","tasks":[{"id":"map-claims","title":"Map empirical claims to checks","status":"pending","depends_on":[],"completion_predicate":"Every selected claim has anchors and an explicit statistical audit plan."}]}

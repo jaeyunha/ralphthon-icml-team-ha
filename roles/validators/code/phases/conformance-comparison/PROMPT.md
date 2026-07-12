@@ -1,0 +1,1 @@
+Compare the paper specification, official source, frozen clean-room implementation, and observed sandbox behavior for the current claim. Classify each mismatch, preserve uncertainty, attach paper anchors and artifact references, and require a second path for high-impact negatives. Do not score the paper.

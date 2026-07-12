@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "role": "validator_mathematics",
+  "phase": "formalization",
+  "tasks": [
+    {"id": "formalize-and-align", "title": "Formalize and audit statement alignment", "status": "pending", "depends_on": [], "completion_predicate": "Lean source, paper semantics, formal semantics, and independent alignment evidence are retained before proof status is interpreted."},
+    {"id": "compile-pinned-lean", "title": "Compile in pinned Lean container", "status": "pending", "depends_on": ["formalize-and-align"], "completion_predicate": "The proof is attempted in the pinned network-disabled container and proof validity is reported separately from formalization fidelity."}
+  ]
+}

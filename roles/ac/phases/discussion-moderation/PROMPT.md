@@ -1,0 +1,1 @@
+Moderate targeted evidence questions, not group chat. Prevent moving goalposts, require each named reviewer to answer independently, summarize agreement and disagreement, and close or narrow once. Preserve irreducible dissent and record termination facts.

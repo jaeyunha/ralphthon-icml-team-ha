@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "role": "validator_mathematics",
+  "phase": "symbolic-validation",
+  "tasks": [
+    {"id": "run-symbolic-and-smt", "title": "Run symbolic and SMT checks", "status": "pending", "depends_on": [], "completion_predicate": "Applicable algebra, calculus, matrix, probability, satisfiability, implication, invariant, and finite-domain checks retain versioned machine evidence."},
+    {"id": "run-shape-and-code-alignment", "title": "Run shape and equation code checks", "status": "pending", "depends_on": ["run-symbolic-and-smt"], "completion_predicate": "Applicable dimensions and permitted implementation expressions are compared with explicit interface assumptions and anchored results."}
+  ]
+}

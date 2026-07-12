@@ -1,0 +1,7 @@
+{
+  "role": "validators/code",
+  "canonical_schemas": {
+    "finding": "packages/schemas/schemas/validation-finding.schema.json"
+  },
+  "policy": "Canonical contracts are frozen; this role validates against them without copying or modifying them. Reproduction reports and freeze records are internal evidence artifacts, not cross-lane contracts."
+}

@@ -1,0 +1,1 @@
+{"version":1,"role":"validator-references","phase":"rebuttal-recheck","tasks":[{"id":"recheck-challenges","title":"Recheck challenged findings","status":"pending","depends_on":[],"completion_predicate":"Every challenge has a fresh evidence inspection and an explicit upheld, revised, or withdrawn result."}]}

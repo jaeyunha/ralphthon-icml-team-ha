@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "phase": "meta-review",
+  "current_task_id": null,
+  "tasks": [
+    {"id": "publish-meta-review", "type": "meta-review", "status": "pending", "description": "Publish the evidence-grounded ten-section binary AC recommendation.", "inputs": ["issue-ledger.json", "expertise-weights.json", "agents/reviewers/published/final-justifications", "agents/author/published", "shared/validation"], "output_path": "published/meta-review.json", "completion_predicate": "Meta-review passes dissent, evidence, opposition, and no-averaging gates.", "retry_feedback": null, "attempt_count": 0, "blocked_reason": null, "completed_at": null}
+  ]
+}

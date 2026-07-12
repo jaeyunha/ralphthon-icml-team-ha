@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "phase": "discussion-moderation",
+  "current_task_id": null,
+  "tasks": [
+    {"id": "moderate-targeted-issues", "type": "discussion-issue", "status": "pending", "description": "Open and settle bounded issue-specific reviewer rounds.", "inputs": ["review-quality.json", "agents/reviewers/published", "agents/author/published", "shared/validation"], "output_path": "issue-ledger.json", "completion_predicate": "All decisive issues and termination predicates are terminal.", "retry_feedback": null, "attempt_count": 0, "blocked_reason": null, "completed_at": null}
+  ]
+}
