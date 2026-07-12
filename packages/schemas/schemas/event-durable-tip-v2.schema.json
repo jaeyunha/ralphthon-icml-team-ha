@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/event-durable-tip-v2.schema.json",
+  "title": "EventDurableTipV2",
+  "description": "Immutable same-lock capture of the durable canonical v2 event-log prefix.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "log_dev", "log_ino", "end_offset", "last_sequence", "last_event_hash"],
+  "properties": {
+    "schema_version": {"const": 2},
+    "log_dev": {"type": "integer", "minimum": 0},
+    "log_ino": {"type": "integer", "minimum": 0},
+    "end_offset": {"type": "integer", "minimum": 0},
+    "last_sequence": {"type": "integer", "minimum": 0},
+    "last_event_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"last_sequence": {"const": 0}}, "required": ["last_sequence"]},
+      "then": {
+        "properties": {
+          "end_offset": {"type": "integer", "const": 0},
+          "last_event_hash": {"type": "string", "const": "sha256:0000000000000000000000000000000000000000000000000000000000000000"}
+        }
+      },
+      "else": {"properties": {"end_offset": {"type": "integer", "minimum": 1}}}
+    }
+  ]
+}

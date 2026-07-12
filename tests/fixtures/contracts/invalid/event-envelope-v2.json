@@ -1,0 +1,13 @@
+{
+  "schema_version": 2,
+  "event_id": "evt-invalid",
+  "idempotency_key": "idem-invalid",
+  "run_id": "run-invalid",
+  "sequence": 1,
+  "previous_event_hash": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "event_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "occurred_at": "2026-07-12T00:00:00Z",
+  "type": "reviewer.followup.completed",
+  "actor": {"agent_id": "reviewer-r1", "role": "reviewer", "phase": "followup"},
+  "payload": {}
+}

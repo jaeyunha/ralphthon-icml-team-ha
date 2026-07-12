@@ -3,11 +3,41 @@ import { dirname } from "node:path";
 
 import type {
   EventContractAdapter,
+  EventDurableTipV2,
+  EventEnvelopeV2,
   ProjectorEvent,
   SequenceAllocator,
 } from "./event-contract";
+import {
+  assertEventDurableTipV2,
+  assertEventEnvelopeV2,
+} from "./event-contract";
 import { withEventLogGuard } from "./event-log-guard";
 
+
+export const eventEnvelopeV2Adapter: EventContractAdapter<EventEnvelopeV2> = {
+  normalize(event) {
+    assertEventEnvelopeV2(event);
+    return {
+      id: event.event_id,
+      runId: event.run_id,
+      sequence: event.sequence,
+      type: event.type,
+      occurredAt: event.occurred_at,
+      agentId: event.actor.agent_id,
+      actorRole: event.actor.role,
+      phase: event.actor.phase,
+      payload: event.payload,
+      ...(event.artifact_id === undefined ? {} : { artifactId: event.artifact_id }),
+      ...(event.causation_event_id === undefined
+        ? {}
+        : { causationEventId: event.causation_event_id }),
+    };
+  },
+  withSequence() {
+    throw new EventLogError("v2 sequence allocation is owned by the Python append authority");
+  },
+};
 export interface NdjsonRecord<TEvent extends object> {
   raw: TEvent;
   event: ProjectorEvent;
@@ -215,5 +245,67 @@ export async function readNdjsonBatch<TEvent extends object>(
     nextOffset,
     fileSize,
     hasIncompleteLine: nextOffset < fileSize,
+  };
+}
+
+/**
+ * Reads only records known durable at a captured Python-authority tip. Later
+ * appends are deliberately invisible to this snapshot.
+ */
+export async function readNdjsonBatchV2(
+  path: string,
+  byteOffset: number,
+  durableTip: EventDurableTipV2,
+  maxBytes = 1024 * 1024,
+): Promise<NdjsonBatch<EventEnvelopeV2>> {
+  assertEventDurableTipV2(durableTip);
+  let current;
+  try {
+    current = await stat(path);
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") {
+      throw new EventLogError(`v2 event log is missing for captured durable tip: ${path}`, {
+        cause: error,
+      });
+    }
+    throw error;
+  }
+  if (current.dev !== durableTip.log_dev || current.ino !== durableTip.log_ino) {
+    throw new EventLogError("v2 event log identity differs from the captured durable tip");
+  }
+  if (current.size < durableTip.end_offset) {
+    throw new EventLogError("v2 event log is shorter than the captured durable tip");
+  }
+  if (!Number.isSafeInteger(byteOffset) || byteOffset < 0 || byteOffset > durableTip.end_offset) {
+    throw new EventLogError("v2 byteOffset must be within the captured durable tip");
+  }
+  if (byteOffset === durableTip.end_offset) {
+    return {
+      records: [],
+      nextOffset: byteOffset,
+      fileSize: durableTip.end_offset,
+      hasIncompleteLine: false,
+    };
+  }
+
+  const batch = await readNdjsonBatch(
+    path,
+    byteOffset,
+    eventEnvelopeV2Adapter,
+    Math.min(maxBytes, durableTip.end_offset - byteOffset),
+  );
+  const afterRead = await stat(path);
+  if (
+    afterRead.dev !== durableTip.log_dev ||
+    afterRead.ino !== durableTip.log_ino ||
+    afterRead.size < durableTip.end_offset ||
+    batch.fileSize < durableTip.end_offset
+  ) {
+    throw new EventLogError("v2 event log changed while reading the captured durable tip");
+  }
+  return {
+    ...batch,
+    fileSize: durableTip.end_offset,
+    hasIncompleteLine: batch.nextOffset < durableTip.end_offset,
   };
 }

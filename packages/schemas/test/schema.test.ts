@@ -121,7 +121,8 @@ describe("schema inventory", () => {
       "calibration-followup-v2.schema.json",
       "calibration-official-review-v2.schema.json", "claim.schema.json", "concern-ledger.schema.json",
       "concern-resolution.schema.json", "decision.schema.json", "discussion-issue.schema.json",
-      "discussion-position.schema.json", "event-envelope.schema.json", "evidence-packet.schema.json",
+      "discussion-position.schema.json", "event-durable-tip-v2.schema.json", "event-envelope-v2.schema.json",
+      "event-envelope.schema.json", "event-semantic-draft-v2.schema.json", "evidence-packet.schema.json",
       "extraction-fixture-contract.schema.json", "extraction-fixture-manifest.schema.json", "extraction-report.schema.json",
       "final-review.schema.json", "followup.schema.json", "freeze-record.schema.json", "identity.schema.json",
       "invocation-result.schema.json", "literature-registry.schema.json", "math-claim-inventory.schema.json",
@@ -223,6 +224,51 @@ describe("contract invariants", () => {
     expect(validates("event-envelope", event)).toBe(true);
     expect(validates("event-envelope", { ...event, type: "score.changed" })).toBe(false);
     expect(validates("event-envelope", { ...event, sequence: 0 })).toBe(false);
+  });
+
+  test("separates v2 semantic drafts, canonical envelopes, and durable tips", () => {
+    const draft = {
+      schema_version: 2,
+      event_id: "evt-1",
+      idempotency_key: "idem-1",
+      run_id: "run-1",
+      occurred_at: "2026-07-11T18:42:12Z",
+      type: "reviewer.followup.score_changed",
+      actor: { agent_id: "reviewer-r2", role: "reviewer", phase: "followup" },
+      payload: {},
+    };
+    const zeroHash = `sha256:${"0".repeat(64)}`;
+    const eventHash = `sha256:${"a".repeat(64)}`;
+    const envelope = {
+      ...draft,
+      sequence: 1,
+      previous_event_hash: zeroHash,
+      event_hash: eventHash,
+    };
+
+    expect(validates("event-semantic-draft-v2", draft)).toBe(true);
+    expect(validates("event-semantic-draft-v2", envelope)).toBe(false);
+    expect(validates("event-envelope-v2", envelope)).toBe(true);
+    expect(validates("event-envelope-v2", { ...envelope, previous_event_hash: eventHash })).toBe(false);
+    expect(validates("event-envelope-v2", { ...envelope, event_hash: "sha256:UPPERCASE" })).toBe(false);
+    expect(validates("event-envelope", envelope)).toBe(false);
+
+    const durableTip = {
+      schema_version: 2,
+      log_dev: 1,
+      log_ino: 2,
+      end_offset: 1,
+      last_sequence: 1,
+      last_event_hash: eventHash,
+    };
+    expect(validates("event-durable-tip-v2", durableTip)).toBe(true);
+    expect(validates("event-durable-tip-v2", { ...durableTip, end_offset: 0 })).toBe(false);
+    expect(validates("event-durable-tip-v2", {
+      ...durableTip,
+      end_offset: 0,
+      last_sequence: 0,
+      last_event_hash: zeroHash,
+    })).toBe(true);
   });
 
   test("supports the exact run modes and safe reviewer panel bounds", () => {

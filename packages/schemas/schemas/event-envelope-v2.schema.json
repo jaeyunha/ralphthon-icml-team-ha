@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ralph-review.dev/schemas/event-envelope-v2.schema.json",
+  "title": "EventEnvelopeV2",
+  "description": "Canonical hash-chained v2 event envelope. The append authority derives and commits chronology.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "event_id", "idempotency_key", "run_id", "sequence", "previous_event_hash", "event_hash", "occurred_at", "type", "actor", "payload"],
+  "properties": {
+    "schema_version": {"const": 2},
+    "event_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"},
+    "idempotency_key": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"},
+    "run_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"},
+    "sequence": {"type": "integer", "minimum": 1},
+    "previous_event_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "event_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "occurred_at": {"type": "string", "format": "date-time"},
+    "type": {"type": "string", "pattern": "^[a-z][a-z0-9_]*\\.[a-z][a-z0-9_]*\\.[a-z][a-z0-9_]*$"},
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["agent_id", "role", "phase"],
+      "properties": {
+        "agent_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"},
+        "role": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"},
+        "phase": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"}
+      }
+    },
+    "payload": {"type": "object"},
+    "artifact_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"},
+    "causation_event_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"sequence": {"const": 1}}, "required": ["sequence"]},
+      "then": {"properties": {"previous_event_hash": {"const": "sha256:0000000000000000000000000000000000000000000000000000000000000000"}}},
+      "else": {"properties": {"previous_event_hash": {"not": {"const": "sha256:0000000000000000000000000000000000000000000000000000000000000000"}}}}
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": 2,
+  "log_dev": 1,
+  "log_ino": 2,
+  "end_offset": 0,
+  "last_sequence": 1,
+  "last_event_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

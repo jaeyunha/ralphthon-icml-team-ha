@@ -83,6 +83,45 @@ def normalize_schema_name(value: str, schemas: dict[str, dict[str, Any]]) -> str
     return candidate
 
 
+V2_EVENT_LOG_NAME = "events.ndjson"
+V2_DURABLE_TIP_SUFFIX = ".durable-tip.json"
+V2_EVENT_SCHEMA = "event-envelope-v2.schema.json"
+V2_DURABLE_TIP_SCHEMA = "event-durable-tip-v2.schema.json"
+
+
+def compatibility_schema_name(
+    path: Path,
+    schemas: dict[str, dict[str, Any]],
+    compat: str | None,
+) -> str | None:
+    """Return an explicit schema route, or None to retain legacy inference."""
+    if compat not in {"v2", "dual"}:
+        return None
+    if path.name == V2_EVENT_LOG_NAME:
+        if compat == "v2":
+            return normalize_schema_name(V2_EVENT_SCHEMA, schemas)
+        return None
+    if path.name == f"{V2_EVENT_LOG_NAME}{V2_DURABLE_TIP_SUFFIX}":
+        return normalize_schema_name(V2_DURABLE_TIP_SCHEMA, schemas)
+    return None
+
+
+def document_schema_name(
+    path: Path,
+    document: Any,
+    schema_name: str | None,
+    schemas: dict[str, dict[str, Any]],
+    compat: str | None,
+) -> str:
+    if compat == "dual" and path.name == V2_EVENT_LOG_NAME:
+        if isinstance(document, dict) and document.get("schema_version") == 2:
+            return normalize_schema_name(V2_EVENT_SCHEMA, schemas)
+        return normalize_schema_name("event-envelope.schema.json", schemas)
+    if schema_name is None:
+        raise ValueError(f"cannot infer schema for artifact {path}")
+    return schema_name
+
+
 def runtime_schema_name(
     path: Path,
     run_dir: Path,
@@ -240,6 +279,7 @@ def validate_run(
     run_dir: Path,
     schemas: dict[str, dict[str, Any]],
     registry: Registry,
+    compat: str | None = None,
 ) -> tuple[list[str], int, Counter[str]]:
     errors: list[str] = []
     validated_documents = 0
@@ -265,13 +305,14 @@ def validate_run(
     for path in paths:
         relative = path.relative_to(run_dir).as_posix()
         try:
+            explicit_schema_name = compatibility_schema_name(path, schemas, compat)
             if manifest is None:
-                schema_name = infer_schema_name(path, schemas, run_dir)
+                schema_name = explicit_schema_name or infer_schema_name(path, schemas, run_dir)
             else:
                 entry = manifest.get(relative)
                 if entry is None:
                     continue
-                schema_name = entry["schema"]
+                schema_name = explicit_schema_name or entry["schema"]
                 actual_hash = sha256(path)
                 if actual_hash != entry["sha256"]:
                     errors.append(
@@ -282,33 +323,52 @@ def validate_run(
             errors.append(f"{relative}: {error}")
             continue
 
-        validator = Draft202012Validator(
-            schemas[schema_name],
-            registry=registry,
-            format_checker=FormatChecker(),
-        )
-        used_schemas[schema_name] += 1
+        validators: dict[str, Draft202012Validator] = {}
+        path_schema_names: set[str] = set()
         for label, document in documents:
+            try:
+                document_schema = document_schema_name(
+                    path,
+                    document,
+                    schema_name,
+                    schemas,
+                    compat,
+                )
+            except ValueError as error:
+                errors.append(f"{label}: {error}")
+                continue
+            validator = validators.setdefault(
+                document_schema,
+                Draft202012Validator(
+                    schemas[document_schema],
+                    registry=registry,
+                    format_checker=FormatChecker(),
+                ),
+            )
+            path_schema_names.add(document_schema)
             validated_documents += 1
             document_errors = sorted(validator.iter_errors(document), key=lambda item: list(item.absolute_path))
             errors.extend(
-                f"{label} [{schema_name}] {format_validation_error(error)}"
+                f"{label} [{document_schema}] {format_validation_error(error)}"
                 for error in document_errors
             )
-            if schema_name == "event-envelope.schema.json" and isinstance(document, dict):
+            if document_schema in {"event-envelope.schema.json", V2_EVENT_SCHEMA} and isinstance(document, dict):
                 events.append(document)
+        used_schemas.update(path_schema_names)
 
     sequences: set[tuple[Any, Any]] = set()
     event_ids: set[Any] = set()
     for event in events:
         sequence_key = (event.get("run_id"), event.get("sequence"))
-        if sequence_key in sequences:
-            errors.append(f"duplicate event (run_id, sequence): {sequence_key!r}")
-        sequences.add(sequence_key)
+        if None not in sequence_key:
+            if sequence_key in sequences:
+                errors.append(f"duplicate event (run_id, sequence): {sequence_key!r}")
+            sequences.add(sequence_key)
         event_id = event.get("event_id")
-        if event_id in event_ids:
-            errors.append(f"duplicate event_id: {event_id!r}")
-        event_ids.add(event_id)
+        if event_id is not None:
+            if event_id in event_ids:
+                errors.append(f"duplicate event_id: {event_id!r}")
+            event_ids.add(event_id)
 
     return errors, validated_documents, used_schemas
 
@@ -375,6 +435,7 @@ def check_fixtures(
 def usage() -> None:
     print(
         "usage: scripts/validate-run.sh RUN_DIR\n"
+        "       scripts/validate-run.sh --compat {v1|v2|dual} RUN_DIR\n"
         "       scripts/validate-run.sh --check-fixtures [FIXTURE_ROOT]",
         file=sys.stderr,
     )
@@ -383,6 +444,14 @@ def usage() -> None:
 def main() -> int:
     repo_root = Path(sys.argv[1]).resolve()
     args = sys.argv[2:]
+    compat: str | None = None
+    if args[:1] == ["--compat"]:
+        if len(args) != 3 or args[1] not in {"v1", "v2", "dual"}:
+            usage()
+            return 2
+        compat = args[1]
+        args = args[2:]
+
     schema_dir = Path(
         os.environ.get("RALPH_SCHEMA_DIR", repo_root / "packages" / "schemas" / "schemas")
     ).resolve()
@@ -394,18 +463,27 @@ def main() -> int:
         return 2
 
     if args and args[0] == "--check-fixtures":
+        if compat is not None:
+            usage()
+            return 2
+
         if len(args) > 2:
             usage()
             return 2
         fixture_root = Path(args[1] if len(args) == 2 else "tests/fixtures/contracts").resolve()
-        errors, validated = check_fixtures(fixture_root, schemas, registry)
+        legacy_schemas = {
+            name: schema
+            for name, schema in schemas.items()
+            if not name.endswith("-v2.schema.json")
+        }
+        errors, validated = check_fixtures(fixture_root, legacy_schemas, registry)
         if errors:
             for error in errors:
                 fail(error)
             return 1
         print(
             f"fixture check passed: {validated} valid documents, "
-            f"{len(schemas)} invalid fixtures, mutation detected"
+            f"{len(legacy_schemas)} invalid fixtures, mutation detected"
         )
         return 0
 
@@ -413,7 +491,7 @@ def main() -> int:
         usage()
         return 2
     run_dir = Path(args[0]).resolve()
-    errors, validated, _ = validate_run(run_dir, schemas, registry)
+    errors, validated, _ = validate_run(run_dir, schemas, registry, compat)
     if errors:
         for error in errors:
             fail(error)

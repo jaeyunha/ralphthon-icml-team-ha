@@ -493,6 +493,35 @@ export type DiscussionPosition = {
   "score_effect": "unchanged" | "raised" | "lowered" | "pending";
 };
 
+export type EventDurableTipV2 = {
+  "end_offset": number;
+  "last_event_hash": string;
+  "last_sequence": number;
+  "log_dev": number;
+  "log_ino": number;
+  "schema_version": 2;
+};
+
+export type EventEnvelopeV2 = {
+  "actor": {
+    "agent_id": string;
+    "phase": string;
+    "role": string;
+  };
+  "artifact_id"?: string;
+  "causation_event_id"?: string;
+  "event_hash": string;
+  "event_id": string;
+  "idempotency_key": string;
+  "occurred_at": string;
+  "payload": Record<string, unknown>;
+  "previous_event_hash": string;
+  "run_id": string;
+  "schema_version": 2;
+  "sequence": number;
+  "type": string;
+};
+
 export type EventEnvelope = {
   "actor": {
     "agent_id": string;
@@ -506,6 +535,23 @@ export type EventEnvelope = {
   "payload": Record<string, unknown>;
   "run_id": string;
   "sequence": number;
+  "type": string;
+};
+
+export type EventSemanticDraftV2 = {
+  "actor": {
+    "agent_id": string;
+    "phase": string;
+    "role": string;
+  };
+  "artifact_id"?: string;
+  "causation_event_id"?: string;
+  "event_id": string;
+  "idempotency_key": string;
+  "occurred_at": string;
+  "payload": Record<string, unknown>;
+  "run_id": string;
+  "schema_version": 2;
   "type": string;
 };
 
