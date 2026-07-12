@@ -131,7 +131,7 @@ describe("schema inventory", () => {
       "official-review.schema.json", "paper-dossier.schema.json", "parse-verification-report.schema.json",
       "persona.schema.json", "phase-state.schema.json", "phase-tasks.schema.json", "question-ledger.schema.json",
       "rebuttal.schema.json", "response-matrix.schema.json", "role-state.schema.json", "run-budget.schema.json",
-      "run-config.schema.json", "run-state.schema.json", "score-history.schema.json", "submission-manifest.schema.json",
+      "run-config.schema.json", "run-state.schema.json", "score-history.schema.json", "semantic-coverage-ledger.schema.json", "submission-manifest.schema.json",
       "table-asset.schema.json", "task-context.schema.json", "terminal-arm-input.schema.json",
       "validation-bundle.schema.json", "validation-finding.schema.json",
       "watchdog-config.schema.json", "watchdog-status.schema.json",

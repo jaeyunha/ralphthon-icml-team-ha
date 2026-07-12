@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "run_id": "run-coverage-1",
+  "frozen_input_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+  "extraction_anchor_catalog_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "dossier_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+  "inventory": {"page_count": 1, "section_ids": ["SEC-0001"], "supplements": []},
+  "units": [{
+    "unit_id": "page:1",
+    "kind": "page",
+    "source_ref": "paper.pdf#page=1",
+    "extraction_anchor_ids": ["TXT-0001"],
+    "dossier_claim_ids": [],
+    "applicable_validator_lanes": [],
+    "validator_assignments": [],
+    "evidence_refs": [],
+    "terminal_disposition": "unverified_justified",
+    "disposition_reason": "No substantive claim appears on the title page.",
+    "legacy_unverifiable": false,
+    "unit_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+  }],
+  "ledger_hash": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+}

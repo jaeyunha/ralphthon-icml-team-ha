@@ -6,8 +6,8 @@ Only hash-verified `paper`, `supplement`, `algorithm`, `equations`, and `environ
 
 ## Work
 
-Implement the stated algorithm independently in the sandbox workspace, run self-tests, and freeze the implementation tree before any comparison input becomes visible. Log sandbox-local dependency installation as events.
+Within the remaining shared executor budget, implement only the smallest claim-critical component that can be independently self-tested. Do not start a complete reimplementation, large dependency build, training run, or remote GPU job that cannot finish before the deadline. Freeze any implementation tree before comparison input becomes visible and log sandbox-local dependency installation as events.
 
 ## Completion
 
-A deterministic implementation tree hash, self-test result, environment manifest, and `independently_reimplemented` or typed failure status exist. The freeze predates comparison access.
+A deterministic implementation tree hash, self-test result, environment manifest, and `independently_reimplemented` or typed failure status exist when implementation was feasible. Otherwise the phase records termination reason `budget_exhausted`, the strongest prior verification status, and the exact deferred scope. Any freeze predates comparison access.

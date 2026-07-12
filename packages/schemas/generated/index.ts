@@ -1197,6 +1197,24 @@ export type ScoreHistory = {
   "version": number;
 };
 
+export type SemanticCoverageLedger = {
+  "dossier_hash": unknown;
+  "extraction_anchor_catalog_hash": unknown;
+  "frozen_input_hash": unknown;
+  "inventory": {
+    "page_count": number;
+    "section_ids": Array<string>;
+    "supplements": Array<{
+      "content_hash": unknown;
+      "supplement_id": string;
+    }>;
+  };
+  "ledger_hash": unknown;
+  "run_id": string;
+  "schema_version": 1;
+  "units": Array<unknown>;
+};
+
 export type SubmissionManifest = {
   "authors_visible": boolean;
   "consent_to_process": true;

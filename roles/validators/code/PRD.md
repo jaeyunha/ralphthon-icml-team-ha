@@ -13,4 +13,6 @@ Produce evidence-grounded code, clean-room, conformance, and reproducibility fin
 
 ## Non-negotiable controls
 
-Research code runs only through the approved Docker sandbox as uid 65532 with no network, read-only inputs, isolated quota-limited workspace, no capabilities, default seccomp, memory/CPU/PID limits, and a hard timeout. Failures use typed statuses; no inspection-only or host-execution fallback is permitted.
+Research code runs only through an approved execution backend. The hardened Docker sandbox is the default and runs as uid 65532 with no network, read-only inputs, an isolated quota-limited workspace, no capabilities, default seccomp, memory/CPU/PID limits, and a hard timeout. A bounded VESSL batch job may be used only for an explicitly justified GPU requirement and only under `EXECUTION_POLICY.md`; it is never a sandbox bypass. Failures use typed statuses; no inspection-only or host-execution fallback is permitted.
+
+The default 30-minute paper-review profile gives the executor a hard nine-minute wall-clock budget. It prioritizes static verification, cached-environment import/build checks, one minimal execution probe, and at most one bounded claim spot-check. Full training, full-dataset evaluation, sweeps, repeated seeds, and large environment builds are deferred rather than allowed to consume the review deadline.

@@ -10,6 +10,7 @@ export * from "./gates";
 export * from "./hashing";
 export * from "./phase-machines";
 export * from "./publication-protocol";
+export * from "./semantic-coverage-gates";
 export * from "./supplemental-tests";
 export * from "./validator-applicability";
 export * from "./workflow-binding";

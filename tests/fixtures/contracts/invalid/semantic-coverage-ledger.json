@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "run_id": "run-coverage-1",
+  "frozen_input_hash": "not-a-hash",
+  "extraction_anchor_catalog_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "dossier_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+  "inventory": {"page_count": 2, "section_ids": [], "supplements": []},
+  "units": [],
+  "ledger_hash": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+}

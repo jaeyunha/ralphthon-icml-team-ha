@@ -1,10 +1,12 @@
 {
   "phase": "official-reproduction",
   "tasks": [
+    {"id": "apply-fast-profile", "predicate": "nine-minute wall clock, command/download/cloud limits, and stop deadline recorded"},
     {"id": "freeze-artifact", "predicate": "commit/tree/license/provenance recorded"},
-    {"id": "build-environment", "predicate": "isolated image digest and install log recorded"},
-    {"id": "run-tests", "predicate": "test command sandbox result recorded"},
-    {"id": "run-smoke", "predicate": "smoke command sandbox result recorded"},
-    {"id": "run-feasible-results", "predicate": "each feasible central result attempted or typed not_executable"}
+    {"id": "triage-resources", "predicate": "dataset/checkpoint/GPU needs and local-or-VESSL backend decision recorded"},
+    {"id": "prepare-environment", "predicate": "cached/pre-existing image and bounded import/build result or typed limitation recorded"},
+    {"id": "run-minimal-probe", "predicate": "one bounded smoke result or typed not_executable recorded"},
+    {"id": "spot-check-claim", "predicate": "one feasible bounded claim checked or deferred with explicit limitation"},
+    {"id": "capture-and-cleanup", "predicate": "logs/hashes/resource use/cost/termination and backend cleanup recorded"}
   ]
 }

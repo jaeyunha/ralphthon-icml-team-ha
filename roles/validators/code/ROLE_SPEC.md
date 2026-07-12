@@ -16,11 +16,21 @@
 
 ## Execution invariants
 
-- All research code executes in `engine.validators.sandbox.DockerSandbox`; host execution is prohibited.
+- All research code executes through an approved backend; host execution is prohibited. Read and enforce `EXECUTION_POLICY.md` before planning commands.
+- `engine.validators.sandbox.DockerSandbox` is the default backend. A VESSL batch job is permitted only for a recorded GPU escalation reason and under the fast-profile scheduling, runtime, cost, evidence, and cleanup limits.
 - The boundary requires Docker rootless mode on native Linux or Docker Desktop's VM boundary on macOS, plus a non-root container user.
 - Network is disabled, host environment and credentials are not forwarded, inputs are read-only, workspace is isolated and quota-limited, rootfs is read-only, and CPU/memory/PID/time controls are mandatory.
+- Do not assume VESSL provides the same no-network boundary. Unreviewed repository code remains local unless equivalent isolation is demonstrated. VESSL jobs use no organization secrets, no host credentials, and no persistent workspace.
 - Standard output/error, exact argv, image digest, hardware, durations, exit status, and hashes are recorded.
-- Missing runtime support produces `sandbox_unavailable` in the phase result; missing executable artifacts produce `not_executable`; neither is silently downgraded to inspection.
+- Missing runtime support produces `sandbox_unavailable` in the phase result; missing executable artifacts produce `not_executable`; neither is silently downgraded to inspection. Budget expiry records termination reason `budget_exhausted` while preserving the strongest verification status actually reached.
+
+## Fast-review budget
+
+- The default executor wall clock is nine minutes inside the 30-minute end-to-end paper review.
+- Environment preparation is capped at two minutes; at most three research commands may run for at most three minutes each; retries are prohibited; total downloads are capped at 1 GiB.
+- Reserve final time for evidence capture and cleanup. Do not begin a command that cannot finish within the remaining budget.
+- Prohibit full training, full-dataset evaluation, sweeps, repeated seeds, large native/CUDA builds, and open-ended debugging.
+- A VESSL escalation waits at most 90 seconds for scheduling, runs at most one five-minute job, requests one GPU by default, and costs at most USD 1 unless the run manifest explicitly authorizes otherwise.
 
 ## Finding and audit invariants
 
