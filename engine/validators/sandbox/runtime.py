@@ -3,17 +3,21 @@ from __future__ import annotations
 import hashlib
 import json
 import platform
+import re
 import shutil
+import stat
 import subprocess
 import time
-import uuid
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
-from typing import Sequence
+from typing import Literal, Sequence
 
 
 class SandboxUnavailable(RuntimeError):
     """Raised when the required hardened Docker boundary is unavailable."""
+
+
+_DIGEST_PINNED_IMAGE = re.compile(r"^[^@\s]+@sha256:[0-9a-f]{64}$")
 
 
 @dataclass(frozen=True)
@@ -39,6 +43,11 @@ class ReadOnlyInput:
     def __post_init__(self) -> None:
         if not self.name.replace("-", "").replace("_", "").isalnum():
             raise ValueError(f"unsafe input name: {self.name!r}")
+        source_lstat = self.source.lstat()
+        if stat.S_ISLNK(source_lstat.st_mode):
+            raise ValueError(f"sandbox input cannot be a symbolic link: {self.source}")
+        if stat.S_ISREG(source_lstat.st_mode) and source_lstat.st_nlink != 1:
+            raise ValueError(f"sandbox input must be a unique regular file: {self.source}")
         source = self.source.resolve()
         if not source.exists():
             raise FileNotFoundError(source)
@@ -57,10 +66,15 @@ class SandboxRequest:
     workdir: str = "/workspace"
     limits: SandboxLimits = field(default_factory=SandboxLimits)
     environment: dict[str, str] = field(default_factory=dict)
+    policy_version: Literal[1, 2] = 1
 
     def __post_init__(self) -> None:
         if not self.image or not self.argv:
             raise ValueError("image and argv are required")
+        if self.policy_version not in {1, 2}:
+            raise ValueError("unsupported sandbox policy version")
+        if self.policy_version == 2 and not _DIGEST_PINNED_IMAGE.fullmatch(self.image):
+            raise ValueError("v2 sandbox images must be pinned by sha256 digest")
         allowed_workdirs = {"/workspace", *(item.target for item in self.inputs)}
         if self.workdir not in allowed_workdirs:
             raise ValueError(
@@ -154,6 +168,8 @@ class DockerSandbox:
             self.docker,
             "run",
             "--rm",
+            "--pull",
+            "never",
             "--name",
             name,
             "--network",
@@ -198,7 +214,8 @@ class DockerSandbox:
 
     def run(self, request: SandboxRequest) -> SandboxResult:
         profile = self.security_profile()
-        name = f"ralph-validator-{uuid.uuid4().hex[:12]}"
+        input_hashes_before = {item.name: _hash_path(item.source) for item in request.inputs}
+        name = _container_name(request, input_hashes_before)
         command = self.build_command(request, name)
         started = time.monotonic()
         process = subprocess.Popen(
@@ -217,11 +234,27 @@ class DockerSandbox:
             self._run_control(["rm", "-f", name], timeout=10.0)
         duration = time.monotonic() - started
         exit_code = process.returncode
-        status = "timeout" if timed_out else "passed" if exit_code == 0 else "failed"
+        input_hashes_after = {item.name: _hash_path(item.source) for item in request.inputs}
+        inputs_unchanged = input_hashes_before == input_hashes_after
+        status = (
+            "input_mutated"
+            if not inputs_unchanged
+            else "timeout"
+            if timed_out
+            else "passed"
+            if exit_code == 0
+            else "failed"
+        )
         stdout_hash = "sha256:" + hashlib.sha256(stdout.encode()).hexdigest()
         stderr_hash = "sha256:" + hashlib.sha256(stderr.encode()).hexdigest()
         controls: dict[str, object] = {
             **profile,
+            "policy_version": request.policy_version,
+            "pull_policy": "never",
+            "deterministic_container_name": name,
+            "input_hashes_before": input_hashes_before,
+            "input_hashes_after": input_hashes_after,
+            "inputs_unchanged": inputs_unchanged,
             "container_user": "65532:65532",
             "network": "none",
             "root_filesystem": "read_only",
@@ -250,3 +283,50 @@ class DockerSandbox:
             controls=controls,
             artifact_hashes={"stdout": stdout_hash, "stderr": stderr_hash},
         )
+
+
+def _container_name(request: SandboxRequest, input_hashes: dict[str, str]) -> str:
+    identity = {
+        "image": request.image,
+        "argv": request.argv,
+        "inputs": sorted(input_hashes.items()),
+        "workdir": request.workdir,
+        "limits": asdict(request.limits),
+        "environment": {key: request.environment[key] for key in sorted(request.environment)},
+        "policy_version": request.policy_version,
+    }
+    return (
+        "ralph-validator-"
+        + hashlib.sha256(
+            json.dumps(identity, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()[:16]
+    )
+
+
+def _hash_path(path: Path) -> str:
+    digest = hashlib.sha256()
+    original = path.lstat()
+    if stat.S_ISLNK(original.st_mode):
+        raise ValueError(f"sandbox input contains a symbolic link: {path}")
+    if stat.S_ISREG(original.st_mode) and original.st_nlink != 1:
+        raise ValueError(f"sandbox input is not a unique regular file: {path}")
+    base = path.resolve()
+    paths = [base] if base.is_file() else sorted(base.rglob("*"))
+    for member in paths:
+        details = member.lstat()
+        if stat.S_ISLNK(details.st_mode):
+            raise ValueError(f"sandbox input contains a symbolic link: {member}")
+        if member.is_dir():
+            continue
+        if not stat.S_ISREG(details.st_mode) or details.st_nlink != 1:
+            raise ValueError(f"sandbox input is not a unique regular file: {member}")
+        relative = member.name if base.is_file() else member.relative_to(base).as_posix()
+        data = member.read_bytes()
+        digest.update(relative.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(str(stat.S_IMODE(details.st_mode)).encode("ascii"))
+        digest.update(b"\0")
+        digest.update(str(len(data)).encode("ascii"))
+        digest.update(b"\0")
+        digest.update(data)
+    return "sha256:" + digest.hexdigest()
