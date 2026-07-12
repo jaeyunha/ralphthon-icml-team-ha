@@ -1,0 +1,27 @@
+{
+  "name": "@ralphthon/projector",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "ralph-emit-event": "./src/emit-event.ts",
+    "ralph-projector": "./src/run-projector.ts"
+  },
+  "scripts": {
+    "projector:run": "bun run src/run-projector.ts",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ralph-review/contracts": "workspace:*",
+    "@ralph-review/schemas": "workspace:*",
+    "@ralphthon/db": "workspace:*",
+    "ajv": "8.17.1",
+    "ajv-formats": "3.0.1",
+    "postgres": "^3.4.7"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.19",
+    "typescript": "^5.9.2"
+  }
+}

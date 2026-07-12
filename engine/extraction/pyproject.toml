@@ -1,0 +1,9 @@
+[project]
+name = "ralphthon-extraction"
+version = "0.1.0"
+description = "Canonical Docling extraction, parse verification, and paper dossier tooling"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.uv]
+package = false

@@ -1,0 +1,78 @@
+"""Stage A retrospective benchmark foundations.
+
+No module in this package performs model generation or reads historical outcomes.
+"""
+
+from .custody import (
+    CapabilityDecision,
+    CapabilityKind,
+    CapabilityRequest,
+    CustodyStateMachine,
+    Principal,
+    PrincipalKind,
+    RevealPrerequisites,
+    RevealState,
+    SterileRootPolicy,
+)
+from .metering import (
+    JobEvent,
+    JobEventKind,
+    LedgerKey,
+    LedgerKind,
+    MeteringLedger,
+    ModelSnapshot,
+    ProviderUsageRecord,
+    RateCard,
+    ReconciliationReport,
+    RuntimeSettings,
+)
+from .provenance import (
+    HISTORICAL_CUTOFF,
+    ArtifactKind,
+    ArtifactProvenance,
+    ArtifactStatus,
+    BrokerSnapshot,
+    CandidatePaper,
+    EvidencePacket,
+    IntendedSlot,
+    ReplacementAllocator,
+    RuntimeEvidenceLedger,
+    SourceUniverse,
+    sha256_bytes,
+    sha256_file,
+)
+
+__all__ = [
+    "HISTORICAL_CUTOFF",
+    "ArtifactKind",
+    "ArtifactProvenance",
+    "ArtifactStatus",
+    "BrokerSnapshot",
+    "CandidatePaper",
+    "CapabilityDecision",
+    "CapabilityKind",
+    "CapabilityRequest",
+    "CustodyStateMachine",
+    "EvidencePacket",
+    "IntendedSlot",
+    "JobEvent",
+    "JobEventKind",
+    "LedgerKey",
+    "LedgerKind",
+    "MeteringLedger",
+    "ModelSnapshot",
+    "Principal",
+    "PrincipalKind",
+    "ProviderUsageRecord",
+    "RateCard",
+    "ReconciliationReport",
+    "ReplacementAllocator",
+    "RevealPrerequisites",
+    "RevealState",
+    "RuntimeEvidenceLedger",
+    "RuntimeSettings",
+    "SourceUniverse",
+    "SterileRootPolicy",
+    "sha256_bytes",
+    "sha256_file",
+]
