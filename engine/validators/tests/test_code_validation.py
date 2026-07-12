@@ -2,15 +2,21 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import hashlib
+import subprocess
 
 import pytest
 
 from engine.validators.code import (
     CodeValidationCoordinator,
     ConformanceInput,
-    ValidationFinding,
     OfficialReproducer,
     ReproductionCommand,
+    ReviewProfile,
+    StagedInput,
+    ValidationFinding,
+    VesslBatchAdapter,
+    VesslProbeManifest,
     compare_conformance,
     freeze_clean_room_implementation,
     load_clean_room_manifest,
@@ -241,3 +247,164 @@ def test_reproduction_reports_sandbox_unavailable_without_fallback(tmp_path: Pat
     assert report["commands"][0]["status"] == "sandbox_unavailable"
     assert report["reproducibility_audit"]["verification_status"] == "not_executable"
     assert report["commands"][0]["stderr"] == "rootless_docker_required"
+
+
+class _PassedResult:
+    def __init__(self, name: str) -> None:
+        self.name = name
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "status": "passed",
+            "exit_code": 0,
+            "timed_out": False,
+            "stdout": self.name,
+            "stderr": "",
+            "image": "local@sha256:" + "a" * 64,
+            "image_digest": "sha256:" + "a" * 64,
+            "artifact_hashes": {},
+            "controls": {},
+        }
+
+
+class _RecordingSandbox:
+    def __init__(self, clock=None, advance: float = 0) -> None:
+        self.requests = []
+        self.clock = clock
+        self.advance = advance
+
+    def run(self, request):
+        self.requests.append(request)
+        if self.clock is not None:
+            self.clock.value += self.advance
+        return _PassedResult(request.argv[0])
+
+
+class _Clock:
+    def __init__(self, value: float = 0) -> None:
+        self.value = value
+
+    def __call__(self) -> float:
+        return self.value
+
+
+def _repository(tmp_path: Path) -> Path:
+    repository = tmp_path / "repository"
+    repository.mkdir()
+    (repository / "LICENSE").write_text("MIT", encoding="utf-8")
+    (repository / "model.py").write_text("VALUE = 1\n", encoding="utf-8")
+    return repository
+
+
+def test_reproduction_enforces_command_cap_and_never_upgrades_subset_to_full(tmp_path: Path) -> None:
+    clock = _Clock()
+    sandbox = _RecordingSandbox(clock)
+    report = OfficialReproducer(
+        sandbox=sandbox,
+        clock=clock,
+        profile=ReviewProfile(total_seconds=600, preparation_seconds=10, evidence_reserve_seconds=30, cleanup_reserve_seconds=30),
+    ).run(
+        paper_id="test", repository=_repository(tmp_path), provenance="fixture", image="local",
+        commands=[ReproductionCommand(name=f"probe-{index}", argv=("python",)) for index in range(4)],
+        documentation_scale=1, hardware={},
+    )
+    assert len(sandbox.requests) == 3
+    assert report["reproducibility_audit"]["termination_reason"] == "command_limit_reached"
+    assert report["reproducibility_audit"]["verification_status"] == "partial_execution"
+    assert report["reproducibility_audit"]["verification_status"] != "full_claim_set_reproduced"
+
+
+def test_reproduction_preserves_best_result_when_deadline_exhausts(tmp_path: Path) -> None:
+    clock = _Clock()
+    sandbox = _RecordingSandbox(clock, advance=450)
+    report = OfficialReproducer(
+        sandbox=sandbox,
+        clock=clock,
+        profile=ReviewProfile(total_seconds=540, preparation_seconds=120, evidence_reserve_seconds=60, cleanup_reserve_seconds=60),
+    ).run(
+        paper_id="test", repository=_repository(tmp_path), provenance="fixture", image="local",
+        commands=[ReproductionCommand(name="key-result", argv=("python",)), ReproductionCommand(name="later", argv=("python",))],
+        documentation_scale=1, hardware={},
+    )
+    assert len(sandbox.requests) == 1
+    assert report["reproducibility_audit"]["termination_reason"] == "budget_exhausted"
+    assert report["reproducibility_audit"]["verification_status"] == "key_result_reproduced"
+    assert report["reproducibility_audit"]["verification_dimensions"]["clean_room"] == "not_attempted"
+
+
+def test_reproduction_refuses_command_that_cannot_fit_shared_deadline(tmp_path: Path) -> None:
+    clock = _Clock()
+    sandbox = _RecordingSandbox(clock)
+    report = OfficialReproducer(sandbox=sandbox, clock=clock).run(
+        paper_id="test", repository=_repository(tmp_path), provenance="fixture", image="local",
+        commands=[ReproductionCommand(name="too-long", argv=("python",), timeout_seconds=181)],
+        documentation_scale=1, hardware={},
+    )
+    assert not sandbox.requests
+    assert report["commands"][0]["status"] == "not_started_budget"
+    assert report["reproducibility_audit"]["termination_reason"] == "budget_exhausted"
+
+
+def _manifest(tmp_path: Path, **overrides: object) -> VesslProbeManifest:
+    source = tmp_path / "input.txt"
+    source.write_text("frozen", encoding="utf-8")
+    values: dict[str, object] = {
+        "preauthorized": True,
+        "image": "registry.example/review@sha256:" + "a" * 64,
+        "argv": ("python", "probe.py"),
+        "inputs": (StagedInput("dataset", source, "sha256:" + hashlib.sha256(source.read_bytes()).hexdigest()),),
+        "estimated_cost_usd": 1.0,
+        "reviewed_command_input_boundary": True,
+    }
+    values.update(overrides)
+    return VesslProbeManifest(**values)
+
+
+def test_vessl_refuses_unapproved_unisolated_or_over_cost_without_cloud_calls(tmp_path: Path) -> None:
+    calls: list[list[str]] = []
+
+    def runner(argv: list[str], timeout: float) -> subprocess.CompletedProcess[str]:
+        calls.append(argv)
+        return subprocess.CompletedProcess(argv, 0, "", "")
+
+    adapter = VesslBatchAdapter(runner=runner)
+    assert adapter.run(_manifest(tmp_path, preauthorized=False))["termination_reason"] == "operator_approval_unavailable"
+    assert adapter.run(_manifest(tmp_path, reviewed_command_input_boundary=False))["termination_reason"] == "backend_isolation_unproven"
+    assert adapter.run(_manifest(tmp_path, estimated_cost_usd=1.01))["termination_reason"] == "cost_limit_exceeded"
+    assert calls == []
+
+
+def test_vessl_requires_live_auth_before_submit(tmp_path: Path) -> None:
+    calls: list[list[str]] = []
+
+    def runner(argv: list[str], timeout: float) -> subprocess.CompletedProcess[str]:
+        calls.append(argv)
+        return subprocess.CompletedProcess(argv, 1, "", "expired")
+
+    result = VesslBatchAdapter(runner=runner).run(_manifest(tmp_path))
+    assert result["termination_reason"] == "operator_approval_unavailable"
+    assert calls == [["vesslctl", "auth", "status"]]
+
+
+def test_vessl_auth_scheduling_cancellation_and_evidence(tmp_path: Path) -> None:
+    clock = _Clock()
+    calls: list[list[str]] = []
+
+    def sleeper(seconds: float) -> None:
+        clock.value += seconds
+
+    def runner(argv: list[str], timeout: float) -> subprocess.CompletedProcess[str]:
+        calls.append(argv)
+        if argv[:3] == ["vesslctl", "auth", "status"]:
+            return subprocess.CompletedProcess(argv, 0, "authenticated", "")
+        if argv[:2] == ["vesslctl", "run"]:
+            return subprocess.CompletedProcess(argv, 0, '{"id": "job-1"}', "")
+        if argv[:3] == ["vesslctl", "job", "get"]:
+            return subprocess.CompletedProcess(argv, 0, '{"status": "pending"}', "")
+        return subprocess.CompletedProcess(argv, 0, "", "")
+
+    result = VesslBatchAdapter(runner=runner, clock=clock, sleeper=sleeper).run(_manifest(tmp_path))
+    assert result["termination_reason"] == "scheduling_timeout"
+    assert result["status"] == "cancelled"
+    assert any(call[:3] == ["vesslctl", "job", "cancel"] for call in calls)
+    assert result["evidence"] and result["inputs"][0]["sha256"].startswith("sha256:")

@@ -16,6 +16,8 @@ from .dossier import (
 )
 from .extract import extract_pdf
 from .parse_verification import verify_bundle
+from .coverage_ledger import build_coverage_ledger, verify_coverage_ledger
+
 
 
 @dataclass
@@ -287,3 +289,85 @@ def test_dossier_anchor_validator_reports_missing_and_unknown() -> None:
         "<missing>",
         "TXT-9999",
     ]
+
+
+def _coverage_anchors() -> dict[str, dict[str, object]]:
+    return {
+        "TXT-0001": {
+            "anchor_id": "TXT-0001",
+            "page": 1,
+            "bbox": [0, 0, 1, 1],
+        },
+        "TXT-0002": {
+            "anchor_id": "TXT-0002",
+            "page": 2,
+            "bbox": [0, 0, 1, 1],
+        },
+    }
+
+
+def test_coverage_ledger_reports_an_omitted_substantive_page() -> None:
+    ledger = build_coverage_ledger(
+        {"TXT-0001": _coverage_anchors()["TXT-0001"]},
+        source_text_by_page={1: "represented", 2: "omitted"},
+        inline_anchor_ids=["TXT-0001"],
+    )
+
+    assert ledger["status"] == "incomplete"
+    assert ledger["gaps"]["missing_page_coverage"] == [2]
+
+
+def test_coverage_ledger_reports_orphan_dossier_records() -> None:
+    anchors = _coverage_anchors()
+    dossier = {"claims": [{"id": "CLAIM-001", "anchor_id": "TXT-9999"}]}
+    ledger = build_coverage_ledger(
+        anchors,
+        source_text_by_page={1: "represented", 2: "represented"},
+        dossier=dossier,
+        inline_anchor_ids=list(anchors),
+    )
+
+    assert ledger["status"] == "incomplete"
+    assert ledger["gaps"]["unresolved_dossier_records"] == ["claims[0]"]
+
+
+def test_coverage_ledger_is_deterministic_and_complete_when_all_records_are_covered() -> None:
+    anchors = _coverage_anchors()
+    dossier = {
+        "claims": [{"id": "CLAIM-001", "anchor_id": "TXT-0001"}],
+        "contributions": [{"id": "CONTRIB-001", "anchor_ids": ["TXT-0001", "TXT-0002"]}],
+    }
+    first = build_coverage_ledger(
+        anchors,
+        source_text_by_page={2: "second", 1: "first"},
+        dossier=dossier,
+        inline_anchor_ids=list(anchors),
+    )
+    second = build_coverage_ledger(
+        anchors,
+        source_text_by_page={1: "first", 2: "second"},
+        dossier=dossier,
+        inline_anchor_ids=list(reversed(list(anchors))),
+    )
+
+    assert first["status"] == "complete"
+    assert first["ledger_hash"] == second["ledger_hash"]
+
+
+def test_coverage_ledger_detects_mutation_after_verification() -> None:
+    anchors = _coverage_anchors()
+    ledger = build_coverage_ledger(
+        anchors,
+        source_text_by_page={1: "first", 2: "second"},
+        inline_anchor_ids=list(anchors),
+    )
+    ledger["pages"][0]["anchor_ids"] = []
+
+    verification = verify_coverage_ledger(
+        ledger,
+        anchors,
+        source_text_by_page={1: "first", 2: "second"},
+        inline_anchor_ids=list(anchors),
+    )
+    assert verification["status"] == "incomplete"
+    assert not verification["hash_valid"]

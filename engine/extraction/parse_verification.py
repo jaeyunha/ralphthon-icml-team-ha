@@ -11,6 +11,8 @@ from pathlib import Path
 from typing import Any
 
 from .extract import ANCHOR_RE
+from .coverage_ledger import build_coverage_ledger, verify_coverage_ledger
+
 
 TOKEN_RE = re.compile(r"[A-Za-z0-9]+")
 REQUIRED_FILES = ("paper.md", "anchors.json", "extraction-report.json")
@@ -70,6 +72,17 @@ def verify_bundle(
         if item["status"] == "checked" and item["overlap"] < minimum_overlap
     ]
 
+    coverage_ledger = build_coverage_ledger(
+        anchors,
+        source_text_by_page=source_text_by_page,
+        inline_anchor_ids=inline_ids,
+    )
+    coverage = verify_coverage_ledger(
+        coverage_ledger,
+        anchors,
+        source_text_by_page=source_text_by_page,
+        inline_anchor_ids=inline_ids,
+    )
     checks = [
         _check(
             "inline_anchor_resolution",
@@ -98,6 +111,13 @@ def verify_bundle(
             "failed_anchor_ids": samples if source_text_by_page is None else overlap_failures,
             "reason": "source_text_by_page_required" if source_text_by_page is None else None,
         },
+        _check(
+            "coverage_ledger",
+            coverage["status"] == "complete",
+            ledger_hash=coverage["ledger_hash"],
+            counts=coverage["counts"],
+            gaps=coverage["gaps"],
+        ),
     ]
     failed_checks = [check["name"] for check in checks if check["status"] == "failed"]
     verification: dict[str, Any] = {
@@ -109,12 +129,17 @@ def verify_bundle(
         "unresolved_anchor_ids": unresolved,
         "unresolved_anchor_count": len(unresolved),
         "orphan_anchor_ids": orphaned,
+        "coverage_ledger": coverage_ledger,
+        "coverage_ledger_hash": coverage["ledger_hash"],
+        "coverage_status": coverage["status"],
     }
     if update_report:
         report["parse_verification"] = {
             "status": verification["status"],
             "report_path": "parse-verification-report.json",
             "unresolved_anchor_count": verification["unresolved_anchor_count"],
+            "coverage_status": verification["coverage_status"],
+            "coverage_ledger_hash": verification["coverage_ledger_hash"],
         }
         _write_json(root / "extraction-report.json", report)
     verification["verified_bundle"] = bundle_identity(root)
