@@ -1,0 +1,38 @@
+{
+  "name": "viewer",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test tests/route-policy.unit.test.ts tests/route-table.test.ts src/lib",
+    "test:routes": "bun test tests/route-table.test.ts",
+    "test:e2e": "playwright test",
+    "check": "bun run typecheck && bun run test && bun run build"
+  },
+  "dependencies": {
+    "@ralph-review/contracts": "workspace:*",
+    "@ralph-review/schemas": "workspace:*",
+    "@ralphthon/db": "workspace:*",
+    "@swc/helpers": "0.5.15",
+    "ajv": "8.17.1",
+    "ajv-formats": "3.0.1",
+    "next": "16.2.10",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "@types/bun": "^1.3.14",
+    "@types/node": "26.1.1",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "bun": ">=1.2.0",
+    "node": ">=20.9.0"
+  }
+}
