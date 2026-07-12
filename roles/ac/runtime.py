@@ -186,7 +186,11 @@ def assert_path_access(workspace: Path, requested_key: str) -> None:
 
     identity = read_json(workspace / "identity.json")
     path = PurePosixPath(requested_key)
-    if path.is_absolute() or ".." in path.parts or any(part in DENIED_PATH_PARTS for part in path.parts):
+    if (
+        path.is_absolute()
+        or ".." in path.parts
+        or any(part in DENIED_PATH_PARTS for part in path.parts)
+    ):
         raise PermissionError("AC capability denies sensitive or non-normalized path")
     allowed_prefix = PurePosixPath(
         f"campaigns/{identity['campaign_id']}/arms/{identity['arm_cohort_id']}"
@@ -199,7 +203,9 @@ def _state_for_phase(workspace: Path, expected_phase: str) -> tuple[Path, dict[s
     state_path = workspace / "role-state.json"
     state = read_json(state_path)
     if state.get("current_phase") != expected_phase:
-        raise ValueError(f"AC artifact belongs to {expected_phase}, not {state.get('current_phase')}")
+        raise ValueError(
+            f"AC artifact belongs to {expected_phase}, not {state.get('current_phase')}"
+        )
     return state_path, state
 
 
@@ -212,9 +218,9 @@ def record_coverage_report(workspace: Path, report: dict[str, Any]) -> dict[str,
     if len(set(map(str, reviewer_ids))) != REQUIRED_REVIEWER_COUNT:
         raise ValueError("reviewer coverage requires four unique reviewer identities")
     assignments = report.get("assignments")
-    if not isinstance(assignments, list) or {item.get("reviewer_id") for item in assignments} != set(
-        reviewer_ids
-    ):
+    if not isinstance(assignments, list) or {
+        item.get("reviewer_id") for item in assignments
+    } != set(reviewer_ids):
         raise ValueError("coverage assignments must cover the exact four-reviewer panel")
     if not report.get("passed") or not report.get("nonredundant"):
         raise ValueError("reviewer coverage gate did not pass")
@@ -350,7 +356,10 @@ def record_issue_position(
         raise ValueError("positions can only be added to an open issue")
     if reviewer_id not in issue["expected_respondents"]:
         raise ValueError("reviewer was not named for this issue")
-    if any(item["reviewer_id"] == reviewer_id and item["round"] == issue["round"] for item in issue["positions"]):
+    if any(
+        item["reviewer_id"] == reviewer_id and item["round"] == issue["round"]
+        for item in issue["positions"]
+    ):
         raise ValueError("reviewer already answered this issue round")
     issue["positions"].append(
         {
@@ -378,7 +387,9 @@ def summarize_issue(
     ledger_path = workspace / "issue-ledger.json"
     ledger = read_json(ledger_path)
     issue = _find_issue(ledger, issue_id)
-    respondents = {item["reviewer_id"] for item in issue["positions"] if item["round"] == issue["round"]}
+    respondents = {
+        item["reviewer_id"] for item in issue["positions"] if item["round"] == issue["round"]
+    }
     if respondents != set(issue["expected_respondents"]):
         raise ValueError("AC cannot summarize before every named reviewer answers independently")
     if not summary:
@@ -428,11 +439,7 @@ def record_termination_facts(
     )
     no_unanswered = all(
         issue["status"] != "open"
-        or {
-            item["reviewer_id"]
-            for item in issue["positions"]
-            if item["round"] == issue["round"]
-        }
+        or {item["reviewer_id"] for item in issue["positions"] if item["round"] == issue["round"]}
         == set(issue["expected_respondents"])
         for issue in ledger["issues"]
     )
@@ -505,9 +512,15 @@ def publish_meta_review(workspace: Path, meta_review: dict[str, Any]) -> Path:
 
 def mark_phase_completed(workspace: Path, phase: str) -> None:
     state_path, state = _state_for_phase(workspace, phase)
-    if phase == "reviewer-coverage" and read_json(workspace / "coverage-report.json").get("version") != 1:
+    if (
+        phase == "reviewer-coverage"
+        and read_json(workspace / "coverage-report.json").get("version") != 1
+    ):
         raise ValueError("reviewer coverage artifact is not published")
-    if phase == "review-quality-check" and read_json(workspace / "review-quality.json").get("version") != 1:
+    if (
+        phase == "review-quality-check"
+        and read_json(workspace / "review-quality.json").get("version") != 1
+    ):
         raise ValueError("review quality artifact is not published")
     if phase == "discussion-moderation":
         facts = read_json(workspace / "issue-ledger.json").get("termination_facts")
@@ -550,3 +563,312 @@ def _sync_issue_version(workspace: Path, version: int) -> None:
     state = read_json(workspace / "role-state.json")
     state["issue_ledger_version"] = version
     atomic_json(workspace / "role-state.json", state)
+
+
+# Explicit v2 APIs.  They deliberately use a separate ledger so that the
+# original discussion APIs and their on-disk contract remain unchanged.
+_DISCUSSION_V2_LEDGER = "discussion-v2-ledger.json"
+
+
+def _canonical_event_v2(event: dict[str, Any], *, run_id: str, event_type: str) -> dict[str, Any]:
+    if not isinstance(event, dict):
+        raise ValueError("canonical event identity is required")
+    event_id = event.get("event_id")
+    sequence = event.get("sequence")
+    event_hash = event.get("event_hash")
+    if not isinstance(event_id, str) or not event_id:
+        raise ValueError("canonical event ID is required")
+    if not isinstance(sequence, int) or isinstance(sequence, bool) or sequence < 1:
+        raise ValueError("canonical event sequence is required")
+    if not isinstance(event_hash, str) or not event_hash:
+        raise ValueError("canonical event hash is required")
+    if event.get("run_id", run_id) != run_id:
+        raise ValueError("canonical event belongs to another run")
+    return {
+        "run_id": run_id,
+        "event_id": event_id,
+        "sequence": sequence,
+        "event_hash": event_hash,
+        "type": event_type,
+    }
+
+
+def _discussion_v2_path(workspace: Path) -> Path:
+    return workspace / _DISCUSSION_V2_LEDGER
+
+
+def _load_discussion_v2(workspace: Path) -> dict[str, Any]:
+    path = _discussion_v2_path(workspace)
+    if path.exists():
+        return read_json(path)
+    return {
+        "schema_version": 2,
+        "run_id": read_json(workspace / "identity.json")["run_id"],
+        "events": [],
+    }
+
+
+def _append_discussion_v2_event(workspace: Path, event: dict[str, Any]) -> dict[str, Any]:
+    path = _discussion_v2_path(workspace)
+    ledger = _load_discussion_v2(workspace)
+    if ledger["run_id"] != event["run_id"]:
+        raise ValueError("discussion ledger belongs to another run")
+    duplicate = next(
+        (item for item in ledger["events"] if item["event_id"] == event["event_id"]), None
+    )
+    if duplicate is not None:
+        if duplicate != event:
+            raise ValueError("conflicting canonical-event retry")
+        return deepcopy(event)
+    if any(item["sequence"] == event["sequence"] for item in ledger["events"]):
+        raise ValueError("canonical event sequence is already recorded")
+    ledger["events"].append(deepcopy(event))
+    atomic_json(path, ledger)
+    return deepcopy(event)
+
+
+def discussion_thread_version_id_v2(run_id: str, issue_id: str, event_id: str) -> str:
+    """Derive a thread version from authority-owned immutable event identity."""
+    _identifier(run_id, "run_id")
+    _identifier(issue_id, "issue_id")
+    _identifier(event_id, "canonical event ID")
+    return sha256({"run_id": run_id, "issue_id": issue_id, "event_id": event_id})
+
+
+def open_issue_v2(
+    workspace: Path,
+    *,
+    issue_id: str,
+    expected_reviewer_ids: list[str],
+    canonical_event: dict[str, Any],
+) -> dict[str, Any]:
+    """Record an AC issue only after the canonical authority identifies it."""
+    _state_for_phase(workspace, "discussion-moderation")
+    _identifier(issue_id, "issue_id")
+    reviewers = sorted(set(expected_reviewer_ids))
+    if (
+        not reviewers
+        or len(reviewers) != len(expected_reviewer_ids)
+        or any(not isinstance(item, str) or not item for item in reviewers)
+    ):
+        raise ValueError("issue requires unique named reviewers")
+    identity = read_json(workspace / "identity.json")
+    event = _canonical_event_v2(
+        canonical_event, run_id=identity["run_id"], event_type="ac.discussion.issue_opened"
+    )
+    event.update({"issue_id": issue_id, "expected_reviewer_ids": reviewers})
+    existing = next(
+        (
+            item
+            for item in _load_discussion_v2(workspace)["events"]
+            if item["event_id"] == event["event_id"]
+        ),
+        None,
+    )
+    if existing is not None:
+        if existing != event:
+            raise ValueError("conflicting canonical-event retry")
+        return deepcopy(event)
+    replay = replay_discussion_v2_events(_load_discussion_v2(workspace)["events"])
+    if any(item["issue_id"] == issue_id for item in replay["issues"]):
+        raise ValueError("discussion issue ID already exists")
+    return _append_discussion_v2_event(workspace, event)
+
+
+def open_thread_version_v2(
+    workspace: Path,
+    *,
+    issue_id: str,
+    prior_version_id: str | None,
+    canonical_event: dict[str, Any],
+) -> dict[str, Any]:
+    """Open one of at most two immutable versions with the exact predecessor."""
+    _state_for_phase(workspace, "discussion-moderation")
+    identity = read_json(workspace / "identity.json")
+    event = _canonical_event_v2(
+        canonical_event, run_id=identity["run_id"], event_type="ac.discussion.thread_version_opened"
+    )
+    existing = next(
+        (
+            item
+            for item in _load_discussion_v2(workspace)["events"]
+            if item["event_id"] == event["event_id"]
+        ),
+        None,
+    )
+    if existing is not None:
+        if existing != {
+            **event,
+            "issue_id": issue_id,
+            "round": existing.get("round"),
+            "prior_version_id": prior_version_id,
+        }:
+            raise ValueError("conflicting canonical-event retry")
+        return deepcopy(existing)
+    replay = replay_discussion_v2_events(_load_discussion_v2(workspace)["events"])
+    issue = next((item for item in replay["issues"] if item["issue_id"] == issue_id), None)
+    if issue is None:
+        raise ValueError("unknown discussion issue")
+    versions = [item for item in replay["versions"] if item["issue_id"] == issue_id]
+    if len(versions) >= 2:
+        raise ValueError("discussion issue already has two thread versions")
+    expected_prior = versions[-1]["version_id"] if versions else None
+    if prior_version_id != expected_prior:
+        raise ValueError("thread version has an invalid predecessor")
+    event.update(
+        {"issue_id": issue_id, "round": len(versions) + 1, "prior_version_id": prior_version_id}
+    )
+    return _append_discussion_v2_event(workspace, event)
+
+
+def replay_discussion_v2(workspace: Path) -> dict[str, Any]:
+    """Return the deterministic, canonical-sequence replay of this AC's v2 log."""
+    return replay_discussion_v2_events(_load_discussion_v2(workspace)["events"])
+
+
+def replay_discussion_v2_events(events: list[dict[str, Any]]) -> dict[str, Any]:
+    if not events:
+        return {"run_id": None, "issues": [], "versions": [], "positions": [], "score_history": []}
+    ordered = sorted(events, key=lambda item: item.get("sequence", -1))
+    run_id = ordered[0].get("run_id")
+    if not isinstance(run_id, str) or not run_id:
+        raise ValueError("canonical discussion event run ID is required")
+    issues: dict[str, dict[str, Any]] = {}
+    versions: dict[str, dict[str, Any]] = {}
+    current: dict[str, dict[str, Any]] = {}
+    positions: list[dict[str, Any]] = []
+    score_history: list[dict[str, Any]] = []
+    event_ids: set[str] = set()
+    sequences: set[int] = set()
+    for raw in ordered:
+        _canonical_event_v2(raw, run_id=run_id, event_type=raw.get("type", ""))
+        event = deepcopy(raw)
+        if event["event_id"] in event_ids or event["sequence"] in sequences:
+            raise ValueError("duplicate canonical discussion event identity")
+        event_ids.add(event["event_id"])
+        sequences.add(event["sequence"])
+        kind = event["type"]
+        if kind == "ac.discussion.issue_opened":
+            issue_id = event.get("issue_id")
+            reviewers = event.get("expected_reviewer_ids")
+            if (
+                not isinstance(issue_id, str)
+                or not issue_id
+                or issue_id in issues
+                or not isinstance(reviewers, list)
+                or not reviewers
+                or len(set(reviewers)) != len(reviewers)
+            ):
+                raise ValueError("invalid discussion issue event")
+            issues[issue_id] = {
+                "run_id": run_id,
+                "issue_id": issue_id,
+                "opened_event_id": event["event_id"],
+                "opened_sequence": event["sequence"],
+                "expected_reviewer_ids": list(reviewers),
+            }
+        elif kind == "ac.discussion.thread_version_opened":
+            issue_id = event.get("issue_id")
+            if issue_id not in issues:
+                raise ValueError("unknown discussion issue")
+            prior = current.get(issue_id)
+            round_number = event.get("round")
+            if round_number not in (1, 2) or round_number != (prior["round"] if prior else 0) + 1:
+                raise ValueError("thread version round is invalid")
+            if event.get("prior_version_id") != (prior["version_id"] if prior else None):
+                raise ValueError("thread version has an invalid predecessor")
+            version_id = discussion_thread_version_id_v2(run_id, issue_id, event["event_id"])
+            version = {
+                "version_id": version_id,
+                "run_id": run_id,
+                "issue_id": issue_id,
+                "round": round_number,
+                "event_id": event["event_id"],
+                "event_sequence": event["sequence"],
+                "prior_version_id": event.get("prior_version_id"),
+            }
+            versions[version_id] = version
+            current[issue_id] = version
+        elif kind == "reviewer.discussion.position_published":
+            issue_id, version_id, reviewer_id = (
+                event.get("issue_id"),
+                event.get("version_id"),
+                event.get("reviewer_id"),
+            )
+            if issue_id not in issues:
+                raise ValueError("unknown discussion issue")
+            if version_id not in versions or versions[version_id]["issue_id"] != issue_id:
+                raise ValueError("unknown discussion thread version")
+            if reviewer_id not in issues[issue_id]["expected_reviewer_ids"]:
+                raise ValueError("reviewer was not named for this issue")
+            if (
+                not isinstance(event.get("position"), str)
+                or not event["position"]
+                or not isinstance(event.get("evidence_refs"), list)
+                or len(set(event["evidence_refs"])) != len(event["evidence_refs"])
+            ):
+                raise ValueError("invalid issue-specific position")
+            score_update = event.get("score_update")
+            if score_update is not None:
+                required = {
+                    "history_id",
+                    "entry_id",
+                    "previous_score",
+                    "next_score",
+                    "rationale",
+                    "issue_id",
+                    "version_id",
+                    "causation_event_id",
+                }
+                if (
+                    not isinstance(score_update, dict)
+                    or set(score_update) != required
+                    or score_update["issue_id"] != issue_id
+                    or score_update["version_id"] != version_id
+                    or score_update["causation_event_id"] != event["event_id"]
+                ):
+                    raise ValueError("invalid causal score update")
+            stale = current[issue_id]["version_id"] != version_id
+            position_id = sha256(
+                {
+                    "run_id": run_id,
+                    "issue_id": issue_id,
+                    "version_id": version_id,
+                    "reviewer_id": reviewer_id,
+                    "event_id": event["event_id"],
+                }
+            )
+            position = {
+                "position_id": position_id,
+                "run_id": run_id,
+                "issue_id": issue_id,
+                "version_id": version_id,
+                "reviewer_id": reviewer_id,
+                "event_id": event["event_id"],
+                "event_sequence": event["sequence"],
+                "position": event["position"],
+                "evidence_refs": list(event["evidence_refs"]),
+                "score_effect": event.get("score_effect"),
+                "status": "rejected_stale" if stale else "accepted",
+                "rejection_reason": "stale_thread_version" if stale else None,
+                "score_update": deepcopy(score_update),
+            }
+            positions.append(position)
+            if score_update is not None:
+                score_history.append(
+                    {
+                        **deepcopy(score_update),
+                        "reviewer_id": reviewer_id,
+                        "position_id": position_id,
+                        "score_event_id": event["event_id"],
+                    }
+                )
+        else:
+            raise ValueError("unconstrained group-chat event is forbidden")
+    return {
+        "run_id": run_id,
+        "issues": list(issues.values()),
+        "versions": list(versions.values()),
+        "positions": positions,
+        "score_history": score_history,
+    }

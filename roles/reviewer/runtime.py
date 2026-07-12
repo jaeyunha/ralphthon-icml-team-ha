@@ -19,7 +19,9 @@ def utc_now() -> str:
 
 
 def canonical_bytes(value: Any) -> bytes:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode(
+        "utf-8"
+    )
 
 
 def sha256(value: Any) -> str:
@@ -37,14 +39,20 @@ def atomic_json(path: Path, value: Any) -> None:
     os.replace(temporary, path)
 
 
-def initialize_workspace(workspace: Path, run_id: str, agent_id: str, persona: dict[str, Any]) -> None:
+def initialize_workspace(
+    workspace: Path, run_id: str, agent_id: str, persona: dict[str, Any]
+) -> None:
     """Initialize once, or verify that a restart reloads the same logical identity."""
     workspace.mkdir(parents=True, exist_ok=True)
     identity_path = workspace / "identity.json"
     persona_path = workspace / "persona.json"
     if identity_path.exists():
         identity = read_json(identity_path)
-        if identity["agent_id"] != agent_id or identity["run_id"] != run_id or identity["role"] != "reviewer":
+        if (
+            identity["agent_id"] != agent_id
+            or identity["run_id"] != run_id
+            or identity["role"] != "reviewer"
+        ):
             raise ValueError("logical reviewer identity mismatch on restart")
         if read_json(persona_path) != persona:
             raise ValueError("frozen reviewer persona changed on restart")
@@ -81,17 +89,37 @@ def initialize_workspace(workspace: Path, run_id: str, agent_id: str, persona: d
     )
     atomic_json(
         workspace / "concern-ledger.json",
-        {"ledger_version": 1, "reviewer_id": agent_id, "official_review_version": 1, "concerns": []},
+        {
+            "ledger_version": 1,
+            "reviewer_id": agent_id,
+            "official_review_version": 1,
+            "concerns": [],
+        },
     )
-    atomic_json(workspace / "question-ledger.json", {"ledger_version": 1, "reviewer_id": agent_id, "questions": []})
+    atomic_json(
+        workspace / "question-ledger.json",
+        {"ledger_version": 1, "reviewer_id": agent_id, "questions": []},
+    )
     atomic_json(
         workspace / "score-history.json",
-        {"history_id": f"{agent_id}-scores", "reviewer_id": agent_id, "version": 1, "append_only": True, "prior_version_hash": None, "entries": []},
+        {
+            "history_id": f"{agent_id}-scores",
+            "reviewer_id": agent_id,
+            "version": 1,
+            "append_only": True,
+            "prior_version_hash": None,
+            "entries": [],
+        },
     )
-    atomic_json(workspace / "literature-registry.json", {"schema_version": 1, "agent_id": agent_id, "version": 1, "entries": []})
+    atomic_json(
+        workspace / "literature-registry.json",
+        {"schema_version": 1, "agent_id": agent_id, "version": 1, "entries": []},
+    )
 
 
-def assert_continuity(workspace: Path, expected_agent_id: str, expected_persona: dict[str, Any]) -> None:
+def assert_continuity(
+    workspace: Path, expected_agent_id: str, expected_persona: dict[str, Any]
+) -> None:
     identity = read_json(workspace / "identity.json")
     state = read_json(workspace / "role-state.json")
     if identity["agent_id"] != expected_agent_id or state["agent_id"] != expected_agent_id:
@@ -153,10 +181,16 @@ def next_task(tasks_path: Path) -> dict[str, Any] | None:
     return deepcopy(task)
 
 
-def finish_task(tasks_path: Path, task_id: str, *, passed: bool, feedback: str | None = None) -> None:
+def finish_task(
+    tasks_path: Path, task_id: str, *, passed: bool, feedback: str | None = None
+) -> None:
     queue = read_json(tasks_path)
     current = next((item for item in queue["tasks"] if item["id"] == task_id), None)
-    if current is None or current["status"] != "in_progress" or queue.get("current_task_id") != task_id:
+    if (
+        current is None
+        or current["status"] != "in_progress"
+        or queue.get("current_task_id") != task_id
+    ):
         raise ValueError("only the single current task can be completed or reopened")
     if passed:
         current["status"] = "completed"
@@ -175,7 +209,9 @@ def publish_immutable(source: Path, destination: Path) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
     if destination.exists():
         if destination.read_bytes() != value:
-            raise ValueError(f"immutable artifact already published with different bytes: {destination}")
+            raise ValueError(
+                f"immutable artifact already published with different bytes: {destination}"
+            )
         return
     flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL
     descriptor = os.open(destination, flags, 0o644)
@@ -226,7 +262,11 @@ def append_score_history(
 
 
 def assert_manifest_visibility(manifest: dict[str, Any], phase: str, agent_id: str) -> None:
-    if manifest["role"] != "reviewer" or manifest["phase"] != phase or manifest["agent_id"] != agent_id:
+    if (
+        manifest["role"] != "reviewer"
+        or manifest["phase"] != phase
+        or manifest["agent_id"] != agent_id
+    ):
         raise ValueError("manifest does not belong to this reviewer phase")
     categories = {item["category"] for item in manifest["inputs"]}
     paths = {item["path"] for item in manifest["inputs"]}
@@ -234,10 +274,13 @@ def assert_manifest_visibility(manifest: dict[str, Any], phase: str, agent_id: s
         raise ValueError("design-time PRD leaked into reviewer prompt")
     if phase in {"initial-review", "followup"} and "other_reviews" in categories:
         raise ValueError(f"{phase} cannot read another reviewer's artifacts")
-    if phase == "initial-review" and ("author_response" in categories or "internal_discussion" in categories):
+    if phase == "initial-review" and (
+        "author_response" in categories or "internal_discussion" in categories
+    ):
         raise ValueError("initial-review visibility exceeds the phase contract")
     if phase == "followup" and f"agents/author/published/rebuttals/{agent_id}.json" not in paths:
         raise ValueError("followup manifest omits the reviewer's own rebuttal thread")
+
 
 PROFILE_IDS = {"v1", "v2"}
 
@@ -351,3 +394,132 @@ def profile_surface_path(
     if entry is None:
         raise ValueError(f"profile {profile_id} has no surface {logical_path}")
     return repo_root / entry["source_path"]
+
+
+# Explicit v2 API: it appends authority-issued events to the AC-owned
+# discussion ledger and never assigns an event ID, sequence, or hash itself.
+def publish_discussion_position_v2(
+    workspace: Path,
+    *,
+    discussion_ledger_path: Path,
+    issue_id: str,
+    version_id: str,
+    position: str,
+    evidence_refs: list[str],
+    score_effect: str,
+    canonical_event: dict[str, Any],
+    score_update: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Publish one immutable, issue/version-bound reviewer position.
+
+    The shared ledger is authoritative for replay; the reviewer-local receipt
+    retains the full causal score history across restarts.
+    """
+    if not isinstance(canonical_event, dict):
+        raise ValueError("canonical event identity is required")
+    identity = read_json(workspace / "identity.json")
+    event_id = canonical_event.get("event_id")
+    sequence = canonical_event.get("sequence")
+    event_hash = canonical_event.get("event_hash")
+    if (
+        not isinstance(event_id, str)
+        or not event_id
+        or not isinstance(sequence, int)
+        or isinstance(sequence, bool)
+        or sequence < 1
+        or not isinstance(event_hash, str)
+        or not event_hash
+    ):
+        raise ValueError("canonical event ID, sequence, and hash are required")
+    if canonical_event.get("run_id", identity["run_id"]) != identity["run_id"]:
+        raise ValueError("canonical event belongs to another run")
+    if (
+        not isinstance(issue_id, str)
+        or not issue_id
+        or not isinstance(version_id, str)
+        or not version_id
+    ):
+        raise ValueError("issue and thread version are required")
+    if not isinstance(position, str) or not position:
+        raise ValueError("issue-specific position is required")
+    if len(set(evidence_refs)) != len(evidence_refs) or any(
+        not isinstance(ref, str) or not ref for ref in evidence_refs
+    ):
+        raise ValueError("evidence references must be unique non-empty strings")
+    if score_effect not in {"unchanged", "raised", "lowered", "pending"}:
+        raise ValueError("invalid score effect")
+    if score_update is not None:
+        required = {
+            "history_id",
+            "entry_id",
+            "previous_score",
+            "next_score",
+            "rationale",
+            "issue_id",
+            "version_id",
+            "causation_event_id",
+        }
+        if (
+            set(score_update) != required
+            or score_update["issue_id"] != issue_id
+            or score_update["version_id"] != version_id
+            or score_update["causation_event_id"] != event_id
+        ):
+            raise ValueError("score update is not causally bound to this position")
+    if not discussion_ledger_path.exists():
+        raise ValueError("unknown discussion issue or version")
+    ledger = read_json(discussion_ledger_path)
+    if ledger.get("schema_version") != 2 or ledger.get("run_id") != identity["run_id"]:
+        raise ValueError("discussion ledger belongs to another run")
+    event = {
+        "run_id": identity["run_id"],
+        "event_id": event_id,
+        "sequence": sequence,
+        "event_hash": event_hash,
+        "type": "reviewer.discussion.position_published",
+        "issue_id": issue_id,
+        "version_id": version_id,
+        "reviewer_id": identity["agent_id"],
+        "position": position,
+        "evidence_refs": list(evidence_refs),
+        "score_effect": score_effect,
+        "score_update": deepcopy(score_update),
+    }
+    duplicate = next((item for item in ledger["events"] if item.get("event_id") == event_id), None)
+    if duplicate is not None:
+        if duplicate != event:
+            raise ValueError("conflicting canonical-event retry")
+        return deepcopy(event)
+    if any(item.get("sequence") == sequence for item in ledger["events"]):
+        raise ValueError("canonical event sequence is already recorded")
+    # Replaying with the proposed event rejects unknown issues/versions and any
+    # attempt to use this API as unconstrained discussion.
+    from roles.ac.runtime import replay_discussion_v2_events
+
+    replay_discussion_v2_events([*ledger["events"], event])
+    ledger["events"].append(event)
+    atomic_json(discussion_ledger_path, ledger)
+    receipt_path = workspace / "discussion-v2-score-history.json"
+    receipt = (
+        read_json(receipt_path)
+        if receipt_path.exists()
+        else {
+            "schema_version": 2,
+            "reviewer_id": identity["agent_id"],
+            "run_id": identity["run_id"],
+            "entries": [],
+        }
+    )
+    if receipt["reviewer_id"] != identity["agent_id"] or receipt["run_id"] != identity["run_id"]:
+        raise ValueError("discussion score receipt belongs to another reviewer")
+    if score_update is not None:
+        receipt["entries"].append(
+            {
+                **deepcopy(score_update),
+                "event_id": event_id,
+                "issue_id": issue_id,
+                "version_id": version_id,
+            }
+        )
+        atomic_json(receipt_path, receipt)
+    return deepcopy(event)
