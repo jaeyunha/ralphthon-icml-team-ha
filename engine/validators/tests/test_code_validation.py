@@ -404,7 +404,7 @@ def test_review_profile_rejects_any_loosened_ceiling() -> None:
         ReviewProfile(local_command_seconds=181)
 
 
-def test_vessl_is_disabled_without_any_cloud_call(tmp_path: Path) -> None:
+def test_vessl_requires_explicit_unsafe_acceptance(tmp_path: Path) -> None:
     calls: list[list[str]] = []
 
     def runner(argv: list[str], timeout: float) -> subprocess.CompletedProcess[str]:
@@ -412,7 +412,31 @@ def test_vessl_is_disabled_without_any_cloud_call(tmp_path: Path) -> None:
         return subprocess.CompletedProcess(argv, 0, "", "")
 
     result = VesslBatchAdapter(runner=runner).run(_manifest(tmp_path))
-    assert result["termination_reason"] == "backend_isolation_unproven"
+    assert result["termination_reason"] == "operator_approval_unavailable"
     assert result["status"] == "not_started"
-    assert "disabled" in str(result["detail"])
+    assert result["evidence_trust"] == "unverified_remote_execution"
     assert calls == []
+
+
+def test_vessl_unsafe_mode_submits_and_labels_unverified_evidence(tmp_path: Path) -> None:
+    calls: list[list[str]] = []
+
+    def runner(argv: list[str], timeout: float) -> subprocess.CompletedProcess[str]:
+        calls.append(argv)
+        if argv[:3] == ["vesslctl", "auth", "status"]:
+            return subprocess.CompletedProcess(argv, 0, "authenticated", "")
+        if argv[:3] == ["vesslctl", "image", "inspect"]:
+            return subprocess.CompletedProcess(argv, 0, '{"digest":"sha256:' + "a" * 64 + '"}', "")
+        if argv[:2] == ["vesslctl", "run"]:
+            return subprocess.CompletedProcess(argv, 0, '{"job_id":"job-1"}', "")
+        if argv[:3] == ["vesslctl", "job", "get"]:
+            return subprocess.CompletedProcess(argv, 0, '{"status":"running"}', "")
+        raise AssertionError(argv)
+
+    result = VesslBatchAdapter(runner=runner).run(
+        _manifest(tmp_path, accept_unverified_remote_execution=True)
+    )
+    assert result["status"] == "running"
+    assert result["evidence_trust"] == "unverified_remote_execution"
+    assert result["command_slots_consumed"] == 1
+    assert any(call[:2] == ["vesslctl", "run"] for call in calls)

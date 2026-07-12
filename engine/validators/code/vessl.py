@@ -43,6 +43,7 @@ class VesslProbeManifest:
     inputs: tuple[StagedInput, ...]
     estimated_cost_usd: float
     reviewed_command_input_boundary: bool
+    accept_unverified_remote_execution: bool = False
     gpu_count: int = 1
 
     def __post_init__(self) -> None:
@@ -151,15 +152,18 @@ class VesslBatchAdapter:
                 "backend": "vessl",
                 "termination_reason": reason,
                 "status": "not_started",
+                "evidence_trust": "unverified_remote_execution",
                 "evidence": evidence,
                 "inputs": input_evidence,
                 "detail": detail,
+                "limitation_code": "unverified_remote_execution",
             }
 
-        return refused(
-            "backend_isolation_unproven",
-            "real VESSL launch is disabled until terminal supervision, confirmed cancellation, staged input mounts, and authenticated metadata are independently enforced",
-        )
+        if not manifest.accept_unverified_remote_execution:
+            return refused(
+                "operator_approval_unavailable",
+                "unsafe VESSL execution requires explicit acceptance of unverified remote execution",
+            )
 
         if not manifest.preauthorized:
             return refused(
@@ -291,6 +295,10 @@ class VesslBatchAdapter:
             if state in {"running", "completed", "succeeded", "failed", "cancelled"}:
                 return {
                     "backend": "vessl",
+                    "evidence_trust": "unverified_remote_execution",
+                    "limitations": [
+                        "remote terminal supervision, final evidence capture, input mounting, approval binding, and confirmed cancellation are not guaranteed"
+                    ],
                     "status": state,
                     "termination_reason": "completed_planned_probe"
                     if state in {"completed", "succeeded"}
@@ -311,6 +319,10 @@ class VesslBatchAdapter:
         self._cancel(job_id, evidence)
         return {
             "backend": "vessl",
+            "evidence_trust": "unverified_remote_execution",
+            "limitations": [
+                "remote cancellation is requested but not terminally confirmed"
+            ],
             "status": "cancelled",
             "termination_reason": "scheduling_timeout",
             "job_id": job_id,
