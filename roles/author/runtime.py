@@ -284,6 +284,58 @@ def publish_author_artifact(
     return destination
 
 
+def publish_author_artifact_v2(
+    workspace: Path,
+    *,
+    runtime: Any,
+    run_id: str,
+    publication_id: str,
+    publisher_id: str,
+    audience: str,
+    release: str,
+    sanitized_public: bool,
+    source_bytes: bytes,
+    invocation_root: Path,
+    invocation_evidence: dict[str, str | Path],
+    destination: str | Path,
+    phase: str,
+) -> dict[str, Any]:
+    """Explicit v2 publication path; it never falls back to the legacy publisher."""
+
+    from engine.loops.invocation_manifest import (
+        finalize_invocation_manifest,
+        reopen_invocation_manifest,
+    )
+    from engine.loops.publication_runtime import PublicationRuntime, sha256_bytes
+
+    identity = read_json(workspace / "identity.json")
+    expected = {"agent_id": publisher_id, "run_id": run_id, "role": "author"}
+    if any(identity.get(key) != value for key, value in expected.items()):
+        raise PermissionError("only the persistent author coordinator can publish v2 artifacts")
+    assert_continuity(workspace, publisher_id)
+    if phase not in PHASES:
+        raise ValueError(f"unknown author phase: {phase}")
+    if not isinstance(runtime, PublicationRuntime):
+        raise TypeError("runtime must be a PublicationRuntime")
+
+    finalized = finalize_invocation_manifest(invocation_root, invocation_evidence)
+    reopened = reopen_invocation_manifest(invocation_root)
+    if reopened != finalized:
+        raise ValueError("finalized invocation manifest could not be reopened exactly")
+    return runtime.publish(
+        run_id=run_id,
+        publication_id=publication_id,
+        publisher_id=publisher_id,
+        audience=audience,
+        release=release,
+        sanitized_public=sanitized_public,
+        source_bytes=source_bytes,
+        invocation_manifest_hash=sha256_bytes(reopened.canonical_bytes),
+        destination=destination,
+        actor={"agent_id": publisher_id, "role": "author", "phase": phase},
+    )
+
+
 def mark_phase_completed(workspace: Path, phase: str) -> None:
     state_path = workspace / "role-state.json"
     state = read_json(state_path)
