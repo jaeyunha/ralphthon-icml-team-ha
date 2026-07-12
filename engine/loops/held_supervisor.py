@@ -240,6 +240,21 @@ class HeldSupervisor:
         return True
 
 
+def _terminate_process_group(child: subprocess.Popen[Any]) -> None:
+    try:
+        os.killpg(child.pid, signal.SIGTERM)
+    except ProcessLookupError:
+        return
+    try:
+        child.wait(timeout=2)
+    except subprocess.TimeoutExpired:
+        try:
+            os.killpg(child.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        child.wait(timeout=2)
+
+
 def _serve(prepared_path: Path) -> int:
     prepared = _load(prepared_path)
     if prepared is None:
@@ -273,14 +288,15 @@ def _serve(prepared_path: Path) -> int:
     )
     while child.poll() is None:
         if owner_pid and not _alive(owner_pid):
-            child.terminate()
-            try:
-                child.wait(timeout=2)
-            except subprocess.TimeoutExpired:
-                child.kill()
+            _terminate_process_group(child)
             return 0
         time.sleep(0.05)
-    return int(child.returncode or 0)
+    return_code = int(child.returncode or 0)
+    try:
+        os.killpg(child.pid, signal.SIGTERM)
+    except ProcessLookupError:
+        pass
+    return return_code
 
 
 def main(argv: list[str] | None = None) -> int:

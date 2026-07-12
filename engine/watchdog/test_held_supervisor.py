@@ -115,6 +115,44 @@ class HeldSupervisorTest(unittest.TestCase):
                 supervisor.release()
             self.wait(process)
 
+    def test_successful_child_cannot_leave_a_background_grandchild(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            pid_path = directory / "grandchild.pid"
+            command = [
+                sys.executable,
+                "-c",
+                (
+                    "import subprocess; from pathlib import Path; "
+                    f"child=subprocess.Popen(['sleep','30']); Path({str(pid_path)!r}).write_text(str(child.pid))"
+                ),
+            ]
+            supervisor = HeldSupervisor(
+                directory / "control",
+                "run-v2",
+                {"agent_id": "author", "role": "author", "phase": "rebuttal"},
+                1,
+                command,
+                cwd=directory,
+                env=dict(os.environ),
+                event_log=directory / "events-v2.ndjson",
+            )
+            process = supervisor.spawn()
+            self.assertIsNotNone(process)
+            supervisor.wait_held()
+            supervisor.release()
+            self.wait(process)
+            grandchild_pid = int(pid_path.read_text())
+            deadline = time.monotonic() + 2
+            while time.monotonic() < deadline:
+                try:
+                    os.kill(grandchild_pid, 0)
+                except ProcessLookupError:
+                    break
+                time.sleep(0.02)
+            else:
+                self.fail("held supervisor left a background grandchild running")
+
 
 if __name__ == "__main__":
     unittest.main()
